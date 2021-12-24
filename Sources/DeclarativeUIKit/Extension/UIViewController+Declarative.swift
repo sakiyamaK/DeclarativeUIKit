@@ -2,7 +2,8 @@ import UIKit.UIStackView
 import UIKit.UIViewController
 
 public extension UIViewController {
-    func build(isSafeArea: Bool = true, isScrollEnabled: Bool = true, _ view: UIView) {
+    func build(isSafeArea: Bool = true, isScrollEnabled: Bool = true, @SingleUIViewBuilder _ builder: () -> UIView?) {
+        guard let view = builder() else { return }
         self.view.subviews.forEach { $0.removeFromSuperview() }
         let scrollView = UIScrollView()
         scrollView.isScrollEnabled = isScrollEnabled

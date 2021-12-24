@@ -2,7 +2,7 @@ import UIKit.UIView
 
 public extension UIView {
 
-    func edgesConstraints(_ view: UIView, isSafeArea: Bool = true) {
+    public func edgesConstraints(_ view: UIView, isSafeArea: Bool = true) {
         view.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(view)
         let constraints: [NSLayoutConstraint]
@@ -29,7 +29,7 @@ public extension UIView {
         NSLayoutConstraint.activate(constraints)
     }
 
-    static func spacer(width: CGFloat? = nil, height: CGFloat? = nil, backgroundColor: UIColor? = nil) -> Self {
+    public static func spacer(width: CGFloat? = nil, height: CGFloat? = nil, backgroundColor: UIColor? = nil) -> Self {
         .build {
             $0.isUserInteractionEnabled = false
             if let width = width {
@@ -44,14 +44,14 @@ public extension UIView {
         }
     }
 
-    static func build(_ setup: ((Self) -> Void)) -> Self {
+    public static func build(_ setup: ((Self) -> Void)) -> Self {
         let view = Self()
         view.translatesAutoresizingMaskIntoConstraints = false
         setup(view)
         return view
     }
 
-    var heightConstraint: CGFloat? {
+    public var heightConstraint: CGFloat? {
         get {
             nil
         }
@@ -61,7 +61,7 @@ public extension UIView {
         }
     }
 
-    var widthConstraint: CGFloat? {
+    public var widthConstraint: CGFloat? {
         get {
             nil
         }
@@ -72,7 +72,7 @@ public extension UIView {
     }
 
     @discardableResult
-    func circle(radius: CGFloat) -> Self {
+    public func circle(radius: CGFloat) -> Self {
         self.layer.cornerRadius = radius
         self.clipsToBounds = true
         return self

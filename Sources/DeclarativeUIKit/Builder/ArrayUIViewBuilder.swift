@@ -2,31 +2,53 @@ import UIKit.UIView
 
 @resultBuilder
 public enum ArrayUIViewBuilder {
-    typealias Component = [Expression]
-    typealias Expression = UIView
+    public typealias Component = [Expression]
+    public typealias Expression = UIView
 
-    static func buildExpression(_ element: Expression) -> Component {
+    public static func buildExpression(_ element: Expression) -> Component {
         return [element]
     }
 
-    static func buildOptional(_ component: Component?) -> Component {
+    public static func buildOptional(_ component: Component?) -> Component {
         guard let component = component else { return [] }
         return component
     }
 
-    static func buildEither(first component: Component) -> Component {
+    public static func buildEither(first component: Component) -> Component {
         return component
     }
 
-    static func buildEither(second component: Component) -> Component {
+    public static func buildEither(second component: Component) -> Component {
         return component
     }
 
-    static func buildArray(_ components: [Component]) -> Component {
+    public static func buildArray(_ components: [Component]) -> Component {
         return Array(components.joined())
     }
 
-    static func buildBlock(_ components: Component...) -> Component {
+    public static func buildBlock(_ components: Component...) -> Component {
         return Array(components.joined())
+    }
+}
+
+@resultBuilder
+public enum SingleUIViewBuilder {
+    public typealias Component = Expression
+    public typealias Expression = UIView
+
+    public static func buildExpression(_ element: Expression) -> Component {
+        return element
+    }
+
+    public static func buildEither(first component: Component) -> Component {
+        return component
+    }
+
+    public static func buildEither(second component: Component) -> Component {
+        return component
+    }
+
+    public static func buildBlock(_ component: Component) -> Component {
+        return component
     }
 }

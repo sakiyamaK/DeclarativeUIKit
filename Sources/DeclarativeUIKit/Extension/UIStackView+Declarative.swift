@@ -8,6 +8,7 @@ public extension UIStackView {
             stackView.axis = axis
             stackView.alignment = alignment
             stackView.distribution = distribution
+            stackView.spacing = spacing
             builder().compactMap { $0 }.forEach {
                 stackView.addArrangedSubview($0)
             }
