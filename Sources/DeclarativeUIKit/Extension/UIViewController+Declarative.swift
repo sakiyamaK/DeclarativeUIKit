@@ -2,22 +2,37 @@ import UIKit.UIStackView
 import UIKit.UIViewController
 
 public extension UIViewController {
-    func build(isSafeArea: Bool = true, isScrollEnabled: Bool = true, @SingleUIViewBuilder _ builder: () -> UIView?) {
-        guard let view = builder() else { return }
+    func build(
+        safeAreas: TopLeadingBottomTrailingSafeArea,
+        priorities: TopLeadingBottomTrailingPriority,
+        @SingleUIViewBuilder _ builder: () -> UIView
+    ) {
+        let view = builder()
         self.view.subviews.forEach { $0.removeFromSuperview() }
-        let scrollView = UIScrollView()
-        scrollView.isScrollEnabled = isScrollEnabled
-        self.view.edgesConstraints(scrollView, isSafeArea: isSafeArea)
-        scrollView.addSubview(view)
-        let height = view.heightAnchor.constraint(equalTo: scrollView.frameLayoutGuide.heightAnchor)
-        height.priority = .init(rawValue: 1)
-        NSLayoutConstraint.activate([
-            view.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
-            view.leftAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leftAnchor),
-            scrollView.contentLayoutGuide.rightAnchor.constraint(equalTo: view.rightAnchor),
-            scrollView.contentLayoutGuide.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            view.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor),
-            height
-        ])
+        self.view.edgesConstraints(view, safeAreas: safeAreas, priorities: priorities)
+    }
+    
+    func build(
+        priorities: TopLeadingBottomTrailingPriority,
+        @SingleUIViewBuilder _ builder: () -> UIView
+    ) {
+        self.build(safeAreas: .init(), priorities: priorities, builder)
+    }
+
+    func build(
+        safeAreas: TopLeadingBottomTrailingSafeArea,
+        @SingleUIViewBuilder _ builder: () -> UIView
+    ) {
+        self.build(safeAreas: safeAreas, priorities: .init(), builder)
+    }
+
+    func build(
+        @SingleUIViewBuilder _ builder: () -> UIView
+    ) {
+        self.build(safeAreas: .init(), priorities: .init(), builder)
+    }
+    
+    func getView(tag: Int) -> UIView? {
+        self.view.getView(tag: tag)
     }
 }

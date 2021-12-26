@@ -1,7 +1,13 @@
 import UIKit.UIStackView
 
 public extension UIStackView {
-    static func stack(axis: NSLayoutConstraint.Axis = .vertical, alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> UIStackView {
+    static func stack(
+        axis: NSLayoutConstraint.Axis = .vertical,
+        alignment: Alignment = .fill,
+        distribution: Distribution = .fill,
+        spacing: CGFloat = 0.0,
+        @ArrayUIViewBuilder _ builder: () -> [UIView?]
+    ) -> UIStackView {
         UIStackView.build {
             guard let stackView = $0 as? UIStackView else { return }
             stackView.backgroundColor = .clear
