@@ -1,14 +1,14 @@
 //
-//  ViewController.swift
+//  SimpleViewController.swift
 //  DeclarativeUIKitDemo
 //
-//  Created by sakiyamaK on 2021/12/25.
+//  Created by sakiyamaK on 2021/12/27.
 //
 
 import UIKit
 import DeclarativeUIKit
 
-final class DeclarativeViewController: UIViewController {
+final class SimpleViewController: UIViewController {
     
     enum ViewTag: Int {
         case button = 1
@@ -18,20 +18,29 @@ final class DeclarativeViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         
-        let header = {
+        let Border = {
+            UIView.spacer().height(0.5).backgroundColor(.gray)
+        }
+        let MarginView = {
+            UIView.spacer().height(20).backgroundColor(.lightGray)
+        }
+
+        let Header = { (title: String) -> UIView in
             UIStackView.vertical {
                 UILabel {
-                    //レイアウト以外の設定は既存の通り手続的に書ける
                     guard let label = $0 as? UILabel else { return }
-                    label.text = "Declative UIKit"
+                    label.text = title
                     label.textColor = .black
                     label.textAlignment = .center
+                    label.numberOfLines = 0
                     label.font = UIFont.systemFont(ofSize: 30)
                 }
+                UIView.spacer().height(10)
+                Border()
             }
         }
         
-        let scrollBlocksView = {
+        let ScrollBlocksView = {
             UIScrollView.horizontal(margin: .init(top: 20, left: 10, bottom: 20, right: 10)) {
                 UIStackView.horizontal(distribution: .fill) {
                     UIView()
@@ -48,7 +57,7 @@ final class DeclarativeViewController: UIViewController {
                         .border(color: .blue, width: 10)
                     UIView()
                         .size(width: 100, height: 100)
-                        .backgroundColor(.systemCyan)
+                        .backgroundColor(.systemRed)
                         .transform(.init(rotationAngle: 45.0/360 * Double.pi))
                     UIView {
                         $0.heightConstraint = 100
@@ -60,7 +69,7 @@ final class DeclarativeViewController: UIViewController {
             .showsScrollIndicator(false)
         }
         
-        let centeringView = {
+        let CenteringView = {
             UIStackView.horizontal {
                 UIStackView.vertical {
                     UIImageView {
@@ -89,13 +98,13 @@ final class DeclarativeViewController: UIViewController {
             .alignment(.center)
         }
         
-        let zStackView = {
+        let ZStackView = {
             UIStackView.horizontal {
                 UIImageView {
                     guard let imageView = $0 as? UIImageView else { return }
                     imageView.image = UIImage.init(systemName: "square.and.arrow.down")
                 }
-                .size(width: 200, height: 200)
+                .height(200)
                 .contentMode(.scaleAspectFit)
                 .zStack(margin: .init(top: 70, left: 10, bottom: 0, right: 10)) {
                     UILabel {
@@ -106,40 +115,33 @@ final class DeclarativeViewController: UIViewController {
                         label.font = UIFont.boldSystemFont(ofSize: 30)
                     }
                 }
-                
             }.alignment(.center)
         }
-        
-        let border = {
-            UIView.spacer().height(0.5).backgroundColor(.gray)
-        }
-        
+                
         self.declarate {
             UIScrollView.vertical {
                 UIStackView.vertical {
-                    header()
+                    Header("UIViewの設定")
+                    UIView.spacer().height(20)
+                    ScrollBlocksView()
+                    UIView.spacer().height(20)
+                    MarginView()
                     UIView.spacer().height(10)
-                    border()
+                    Header("レイアウト以外の設定は手続的にする")
                     UIView.spacer().height(20)
-                    scrollBlocksView()
+                    CenteringView()
                     UIView.spacer().height(20)
-                    border()
-                    UIView.spacer().height(20)
-                    centeringView()
-                    UIView.spacer().height(20)
-                    border()
-                    UIView.spacer().height(20)
-                    zStackView()
-                    UIView.spacer().height(20)
-                    border()
+                    MarginView()
                     UIView.spacer().height(10)
+                    Header("Z方向の設定")
+                    ZStackView()
                 }
             }
         }
     }
 }
 
-@objc private extension DeclarativeViewController {
+@objc private extension SimpleViewController {
     func tapButton(_ sender: UIButton) {
         print("ボタンをタップしたね")
         if let button = self.getView(tag: ViewTag.button.rawValue) as? UIButton {
@@ -148,31 +150,25 @@ final class DeclarativeViewController: UIViewController {
     }
 }
 
-
 import SwiftUI
 
-struct DeclarativeViewController_Wrapper: UIViewControllerRepresentable {
-    // プレビュー用のデータを返すスタブ
-//    var presenter: PresenterStub
-
+struct SimpleViewController_Wrapper: UIViewControllerRepresentable {
+    typealias ViewController = SimpleViewController
     // 初期化メソッド
-    func makeUIViewController(context: Context) -> DeclarativeViewController {
-        let vc = DeclarativeViewController()
-//        vc.presenter = presenter
-//        presenter.view = vc
+    func makeUIViewController(context: Context) -> ViewController {
+        let vc = ViewController()
         return vc
     }
 
-    // SwiftUI側から更新がかかったときに呼ばれるメソッド
-    func updateUIViewController(_ vc: DeclarativeViewController, context: Context) {
-        // 更新用のメソッド
-//        presenter.didPushFetchButton()
+    // 更新用のメソッド
+    func updateUIViewController(_ vc: ViewController, context: Context) {
     }
 }
-struct DeclarativeViewController_Previews: PreviewProvider {
+
+struct SimpleViewController_Previews: PreviewProvider {
   static var previews: some View {
       Group {
-          DeclarativeViewController_Wrapper()
+          SimpleViewController_Wrapper()
       }
   }
 }

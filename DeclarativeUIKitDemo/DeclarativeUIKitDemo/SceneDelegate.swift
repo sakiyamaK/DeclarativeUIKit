@@ -7,6 +7,12 @@
 
 import UIKit
 
+extension UIViewController {
+    var withNavigationController: UINavigationController {
+        UINavigationController(rootViewController: self)
+    }
+}
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -17,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         self.window = window
         
-        let vc = DeclarativeViewController()
+        let vc = RootViewController().withNavigationController
         window.rootViewController = vc
         window.makeKeyAndVisible()
     }

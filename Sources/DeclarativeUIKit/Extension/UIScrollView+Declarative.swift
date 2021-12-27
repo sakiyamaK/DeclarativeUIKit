@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by sakiyamaK on 2021/12/26.
-//
-
 import UIKit.UIScrollView
 
 public extension UIScrollView {

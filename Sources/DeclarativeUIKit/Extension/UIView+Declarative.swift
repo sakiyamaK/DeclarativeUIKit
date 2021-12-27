@@ -1,5 +1,4 @@
 import UIKit.UIView
-import UIKit
 
 public struct TopLeadingBottomTrailingSafeArea {
     var top: Bool = true
@@ -23,6 +22,18 @@ public extension UIView {
         imperative(self)
     }
     
+    func declarate(
+        priorities: TopLeadingBottomTrailingPriority,
+        @SingleUIViewBuilder _ builder: () -> UIView) {
+        let view = builder()
+        self.subviews.forEach { $0.removeFromSuperview() }
+            self.edgesConstraints(view, safeAreas: .init(), priorities: priorities)
+    }
+    
+    func declarate(@SingleUIViewBuilder _ builder: () -> UIView) {
+        self.declarate(priorities: .init(), builder)
+    }
+
     static func spacer() -> UIView {
         UIView {
             $0.isUserInteractionEnabled = false

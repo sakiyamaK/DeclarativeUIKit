@@ -1,4 +1,3 @@
-import UIKit.UIStackView
 import UIKit.UIViewController
 
 public extension UIViewController {

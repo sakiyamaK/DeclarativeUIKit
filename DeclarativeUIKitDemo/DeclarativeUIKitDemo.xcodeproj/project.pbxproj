@@ -9,21 +9,27 @@
 /* Begin PBXBuildFile section */
 		B601AB1127761CA600B57E0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B601AB1027761CA600B57E0F /* AppDelegate.swift */; };
 		B601AB1327761CA600B57E0F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B601AB1227761CA600B57E0F /* SceneDelegate.swift */; };
-		B601AB1527761CA600B57E0F /* DeclarativeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B601AB1427761CA600B57E0F /* DeclarativeViewController.swift */; };
+		B601AB1527761CA600B57E0F /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B601AB1427761CA600B57E0F /* RootViewController.swift */; };
 		B601AB1A27761CA800B57E0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B601AB1927761CA800B57E0F /* Assets.xcassets */; };
 		B601AB1D27761CA800B57E0F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B601AB1B27761CA800B57E0F /* LaunchScreen.storyboard */; };
 		B601AB2727761D4600B57E0F /* DeclarativeUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = B601AB2627761D4600B57E0F /* DeclarativeUIKit */; };
+		B6D0CEBA277983C700031EDB /* SimpleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D0CEB9277983C700031EDB /* SimpleViewController.swift */; };
+		B6D0CEBD2779AF5F00031EDB /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D0CEBC2779AF5F00031EDB /* CollectionViewController.swift */; };
+		B6D0CEBF2779CE9800031EDB /* CustomCellCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D0CEBE2779CE9800031EDB /* CustomCellCollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B601AB0D27761CA600B57E0F /* DeclarativeUIKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeclarativeUIKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B601AB1027761CA600B57E0F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B601AB1227761CA600B57E0F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B601AB1427761CA600B57E0F /* DeclarativeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeclarativeViewController.swift; sourceTree = "<group>"; };
+		B601AB1427761CA600B57E0F /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		B601AB1927761CA800B57E0F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B601AB1C27761CA800B57E0F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B601AB1E27761CA800B57E0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B601AB2427761CFB00B57E0F /* DeclarativeUIKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DeclarativeUIKit; path = ..; sourceTree = "<group>"; };
+		B6D0CEB9277983C700031EDB /* SimpleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleViewController.swift; sourceTree = "<group>"; };
+		B6D0CEBC2779AF5F00031EDB /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
+		B6D0CEBE2779CE9800031EDB /* CustomCellCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCellCollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,12 +65,15 @@
 		B601AB0F27761CA600B57E0F /* DeclarativeUIKitDemo */ = {
 			isa = PBXGroup;
 			children = (
+				B601AB1E27761CA800B57E0F /* Info.plist */,
 				B601AB1027761CA600B57E0F /* AppDelegate.swift */,
+				B601AB1427761CA600B57E0F /* RootViewController.swift */,
 				B601AB1227761CA600B57E0F /* SceneDelegate.swift */,
-				B601AB1427761CA600B57E0F /* DeclarativeViewController.swift */,
+				B6D0CEB9277983C700031EDB /* SimpleViewController.swift */,
 				B601AB1927761CA800B57E0F /* Assets.xcassets */,
 				B601AB1B27761CA800B57E0F /* LaunchScreen.storyboard */,
-				B601AB1E27761CA800B57E0F /* Info.plist */,
+				B6D0CEBC2779AF5F00031EDB /* CollectionViewController.swift */,
+				B6D0CEBE2779CE9800031EDB /* CustomCellCollectionViewController.swift */,
 			);
 			path = DeclarativeUIKitDemo;
 			sourceTree = "<group>";
@@ -149,9 +158,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B601AB1527761CA600B57E0F /* DeclarativeViewController.swift in Sources */,
+				B601AB1527761CA600B57E0F /* RootViewController.swift in Sources */,
+				B6D0CEBF2779CE9800031EDB /* CustomCellCollectionViewController.swift in Sources */,
 				B601AB1127761CA600B57E0F /* AppDelegate.swift in Sources */,
+				B6D0CEBA277983C700031EDB /* SimpleViewController.swift in Sources */,
 				B601AB1327761CA600B57E0F /* SceneDelegate.swift in Sources */,
+				B6D0CEBD2779AF5F00031EDB /* CollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,7 +232,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -275,7 +287,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
