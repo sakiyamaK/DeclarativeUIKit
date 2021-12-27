@@ -11,7 +11,7 @@ public extension UIScrollView {
     
     static private func create(
         axis: NSLayoutConstraint.Axis = .vertical,
-        showsScrollIndicator: Bool = true,
+        margin: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
         @SingleUIViewBuilder _ builder: () -> UIView
     ) -> UIScrollView {
         let scrollView = UIScrollView()
@@ -19,26 +19,20 @@ public extension UIScrollView {
         view.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(view)
         
-        let height = view.heightAnchor.constraint(equalTo: scrollView.frameLayoutGuide.heightAnchor)
-        let width = view.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor)
+        let height = view.heightAnchor.constraint(equalTo: scrollView.frameLayoutGuide.heightAnchor, constant: -(margin.top + margin.bottom))
+        let width = view.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor, constant: -(margin.left + margin.right))
 
-        switch axis {
-        case .vertical:
-            scrollView.showsVerticalScrollIndicator = showsScrollIndicator
+        if axis == .vertical {
             height.priority = .init(rawValue: 1)
-        case .horizontal:
-            scrollView.showsHorizontalScrollIndicator = showsScrollIndicator
+        } else {
             width.priority = .init(rawValue: 1)
-        @unknown default:
-            scrollView.showsVerticalScrollIndicator = showsScrollIndicator
-            height.priority = .init(rawValue: 1)
         }
         
         NSLayoutConstraint.activate([
-            view.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
-            view.leftAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leftAnchor),
-            scrollView.contentLayoutGuide.rightAnchor.constraint(equalTo: view.rightAnchor),
-            scrollView.contentLayoutGuide.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            view.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor, constant: margin.top),
+            view.leftAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leftAnchor, constant: margin.left),
+            scrollView.contentLayoutGuide.rightAnchor.constraint(equalTo: view.rightAnchor, constant: margin.right),
+            scrollView.contentLayoutGuide.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: margin.top),
             width,
             height
         ])
@@ -47,17 +41,17 @@ public extension UIScrollView {
     }
     
     static func vertical(
-        showsScrollIndicator: Bool = true,
+        margin: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
         @SingleUIViewBuilder _ builder: () -> UIView
     ) -> UIScrollView {
-        UIScrollView.create(axis: .vertical, showsScrollIndicator: showsScrollIndicator, builder)
+        UIScrollView.create(axis: .vertical, margin: margin, builder)
     }
     
     static func horizontal(
-        showsScrollIndicator: Bool = true,
+        margin: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
         @SingleUIViewBuilder _ builder: () -> UIView
     ) -> UIScrollView {
-        UIScrollView.create(axis: .horizontal, showsScrollIndicator: showsScrollIndicator, builder)
+        UIScrollView.create(axis: .horizontal, margin: margin, builder)
     }
 
 }
@@ -68,4 +62,24 @@ public extension UIScrollView {
         self.isScrollEnabled = isScrollEnabled
         return self
     }
+    
+    @discardableResult
+    func showsVerticalScrollIndicator(_ showsVerticalScrollIndicator: Bool) -> Self {
+        self.showsVerticalScrollIndicator = showsVerticalScrollIndicator
+        return self
+    }
+    
+    @discardableResult
+    func showsHorizontalScrollIndicator(_ showsHorizontalScrollIndicator: Bool) -> Self {
+        self.showsHorizontalScrollIndicator = showsHorizontalScrollIndicator
+        return self
+    }
+    
+    @discardableResult
+    func showsScrollIndicator(_ showsScrollIndicator: Bool) -> Self {
+        self.showsVerticalScrollIndicator = showsScrollIndicator
+        self.showsHorizontalScrollIndicator = showsScrollIndicator
+        return self
+    }
+
 }

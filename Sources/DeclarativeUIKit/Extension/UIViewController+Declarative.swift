@@ -2,7 +2,7 @@ import UIKit.UIStackView
 import UIKit.UIViewController
 
 public extension UIViewController {
-    func build(
+    func declarate(
         safeAreas: TopLeadingBottomTrailingSafeArea,
         priorities: TopLeadingBottomTrailingPriority,
         @SingleUIViewBuilder _ builder: () -> UIView
@@ -12,24 +12,24 @@ public extension UIViewController {
         self.view.edgesConstraints(view, safeAreas: safeAreas, priorities: priorities)
     }
     
-    func build(
+    func declarate(
         priorities: TopLeadingBottomTrailingPriority,
         @SingleUIViewBuilder _ builder: () -> UIView
     ) {
-        self.build(safeAreas: .init(), priorities: priorities, builder)
+        self.declarate(safeAreas: .init(), priorities: priorities, builder)
     }
 
-    func build(
+    func declarate(
         safeAreas: TopLeadingBottomTrailingSafeArea,
         @SingleUIViewBuilder _ builder: () -> UIView
     ) {
-        self.build(safeAreas: safeAreas, priorities: .init(), builder)
+        self.declarate(safeAreas: safeAreas, priorities: .init(), builder)
     }
 
-    func build(
+    func declarate(
         @SingleUIViewBuilder _ builder: () -> UIView
     ) {
-        self.build(safeAreas: .init(), priorities: .init(), builder)
+        self.declarate(safeAreas: .init(), priorities: .init(), builder)
     }
     
     func getView(tag: Int) -> UIView? {

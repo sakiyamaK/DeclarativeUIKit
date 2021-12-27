@@ -15,38 +15,47 @@ public struct TopLeadingBottomTrailingPriority {
     var trailing: UILayoutPriority = .required
 }
 
+//MARK: - instance
 public extension UIView {
     
-    static func build(_ setup: ((Self) -> Void)) -> Self {
-        let view = Self()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        setup(view)
-        return view
+    convenience init(_ imperative: ((Self) -> Void)) {
+        self.init()
+        imperative(self)
     }
     
-    static func spacer(width: CGFloat? = nil, height: CGFloat? = nil, backgroundColor: UIColor? = nil) -> Self {
-        .build {
+    static func spacer() -> UIView {
+        UIView {
             $0.isUserInteractionEnabled = false
-            if let width = width {
-                $0.widthConstraint = width
-            }
-            if let height = height {
-                $0.heightConstraint = height
-            }
-            if let backgroundColor = backgroundColor {
-                $0.backgroundColor = backgroundColor
-            }
         }
     }
 }
 
-
+//MARK: - Declarative method
 public extension UIView {
-        
+    
     @discardableResult
-    func circle(radius: CGFloat) -> Self {
+    func imperative(_ imperative: ((Self) -> Void)) -> Self {
+        imperative(self)
+        return self
+    }
+            
+    @discardableResult
+    func cornerRadius(_ radius: CGFloat, maskedCorners: CACornerMask) -> Self {
         self.layer.cornerRadius = radius
+        self.layer.maskedCorners = maskedCorners
         self.clipsToBounds = true
+        return self
+    }
+
+    @discardableResult
+    func cornerRadius(_ radius: CGFloat) -> Self {
+        cornerRadius(radius, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
+    }
+    
+    @discardableResult
+    func border(color: UIColor, width: CGFloat) -> Self {
+        self.layer.borderColor = color.cgColor
+        self.layer.borderWidth = width
         return self
     }
     
@@ -57,8 +66,102 @@ public extension UIView {
     }
     
     @discardableResult
-    func backgroundColor(_ color: UIColor) -> Self {
+    func backgroundColor(_ backgroundColor: UIColor) -> Self {
         self.backgroundColor = backgroundColor
+        return self
+    }
+
+    @discardableResult
+    func width(_ width: CGFloat) -> Self {
+        self.widthConstraint = width
+        return self
+    }
+    
+    @discardableResult
+    func minWidth(_ width: CGFloat) -> Self {
+        self.minWidthConstraint = width
+        return self
+    }
+
+    @discardableResult
+    func height(_ height: CGFloat) -> Self {
+        self.heightConstraint = height
+        return self
+    }
+    
+    @discardableResult
+    func minHeight(_ height: CGFloat) -> Self {
+        self.minHeightConstraint = height
+        return self
+    }
+    
+    @discardableResult
+    func size(width: CGFloat, height: CGFloat) -> Self {
+        self.widthConstraint = width
+        self.heightConstraint = height
+        return self
+    }
+    
+    @discardableResult
+    func minSize(width: CGFloat, height: CGFloat) -> Self {
+        self.minWidthConstraint = width
+        self.minHeightConstraint = height
+        return self
+    }
+
+    @discardableResult
+    func aspectRatio(_ ratio: CGFloat) -> Self {
+        self.aspectRatioConstraint = ratio
+        return self
+    }
+
+    @discardableResult
+    func isUserInteractionEnabled(_ isUserInteractionEnabled: Bool) -> Self {
+        self.isUserInteractionEnabled = isUserInteractionEnabled
+        return self
+    }
+
+    @discardableResult
+    func contentMode(_ contentMode: ContentMode) -> Self {
+        self.contentMode = contentMode
+        return self
+    }
+    
+    @discardableResult
+    func alpha(_ alpha: CGFloat) -> Self {
+        self.alpha = alpha
+        return self
+    }
+    
+    @discardableResult
+    func transform(_ transform: CGAffineTransform) -> Self {
+        self.transform = transform
+        return self
+    }
+
+    @discardableResult
+    func addSubview(
+        margin: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
+        @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> Self {
+            self.zStack(margin: margin, builder)
+        }
+
+    @discardableResult
+    func zStack(
+        margin: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
+        @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> Self {
+            let superView = self
+            builder().compactMap { $0 }.forEach { (view) in
+            superView.addSubview(view)
+            view.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                view.topAnchor.constraint(equalTo: superView.topAnchor, constant: margin.top),
+                view.leftAnchor.constraint(equalTo: superView.leftAnchor, constant: margin.left),
+                superView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: margin.right),
+                superView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: margin.bottom)
+            ])
+        }
+
         return self
     }
 }
@@ -174,6 +277,16 @@ public extension UIView {
         set {
             guard let constraint = newValue else { return }
             widthAnchor.constraint(equalToConstant: constraint).isActive = true
+        }
+    }
+    
+    var aspectRatioConstraint: CGFloat? {
+        get {
+            nil
+        }
+        set {
+            guard let constraint = newValue else { return }
+            heightAnchor.constraint(equalTo: widthAnchor, multiplier: constraint).isActive = true
         }
     }
 }
