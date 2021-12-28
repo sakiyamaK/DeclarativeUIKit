@@ -41,7 +41,7 @@ public extension UIStackView {
 public extension UIStackView {
 
     @discardableResult
-    func alignment(_ alignment: Alignment) -> Self {
+    func alignment(_ alignment: Alignment) -> Self {        
         self.alignment = alignment
         return self
     }

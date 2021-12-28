@@ -43,7 +43,7 @@ public extension UIView {
 
 //MARK: - Declarative method
 public extension UIView {
-    
+        
     @discardableResult
     func imperative(_ imperative: ((Self) -> Void)) -> Self {
         imperative(self)
@@ -52,10 +52,11 @@ public extension UIView {
             
     @discardableResult
     func cornerRadius(_ radius: CGFloat, maskedCorners: CACornerMask) -> Self {
-        self.layer.cornerRadius = radius
-        self.layer.maskedCorners = maskedCorners
-        self.clipsToBounds = true
-        return self
+        imperative {
+            $0.layer.cornerRadius = radius
+            $0.layer.maskedCorners = maskedCorners
+            $0.clipsToBounds = true
+        }
     }
 
     @discardableResult
@@ -65,89 +66,113 @@ public extension UIView {
     
     @discardableResult
     func border(color: UIColor, width: CGFloat) -> Self {
-        self.layer.borderColor = color.cgColor
-        self.layer.borderWidth = width
-        return self
+        imperative {
+            $0.layer.borderColor = color.cgColor
+            $0.layer.borderWidth = width
+        }
     }
     
     @discardableResult
     func tag(_ tag: Int) -> Self {
-        self.tag = tag
-        return self
+        imperative {
+            $0.tag = tag
+        }
     }
     
     @discardableResult
     func backgroundColor(_ backgroundColor: UIColor) -> Self {
-        self.backgroundColor = backgroundColor
-        return self
+        imperative {
+            $0.backgroundColor = backgroundColor
+        }
     }
 
     @discardableResult
     func width(_ width: CGFloat) -> Self {
-        self.widthConstraint = width
-        return self
+        imperative {
+            $0.widthConstraint = width
+        }
     }
     
     @discardableResult
     func minWidth(_ width: CGFloat) -> Self {
-        self.minWidthConstraint = width
-        return self
+        imperative {
+            $0.minWidthConstraint = width
+        }
     }
 
     @discardableResult
     func height(_ height: CGFloat) -> Self {
-        self.heightConstraint = height
-        return self
+        imperative {
+            $0.heightConstraint = height
+        }
     }
     
     @discardableResult
     func minHeight(_ height: CGFloat) -> Self {
-        self.minHeightConstraint = height
-        return self
+        imperative {
+            $0.minHeightConstraint = height
+        }
     }
     
     @discardableResult
     func size(width: CGFloat, height: CGFloat) -> Self {
-        self.widthConstraint = width
-        self.heightConstraint = height
-        return self
+        imperative {
+            $0.widthConstraint = width
+            $0.heightConstraint = height
+        }
     }
     
     @discardableResult
     func minSize(width: CGFloat, height: CGFloat) -> Self {
-        self.minWidthConstraint = width
-        self.minHeightConstraint = height
-        return self
+        imperative {
+            $0.minWidthConstraint = width
+            $0.minHeightConstraint = height
+        }
     }
 
     @discardableResult
     func aspectRatio(_ ratio: CGFloat) -> Self {
-        self.aspectRatioConstraint = ratio
-        return self
+        imperative {
+            $0.aspectRatioConstraint = ratio
+        }
     }
 
     @discardableResult
     func isUserInteractionEnabled(_ isUserInteractionEnabled: Bool) -> Self {
-        self.isUserInteractionEnabled = isUserInteractionEnabled
-        return self
+        imperative {
+            $0.isUserInteractionEnabled = isUserInteractionEnabled
+        }
     }
 
     @discardableResult
     func contentMode(_ contentMode: ContentMode) -> Self {
-        self.contentMode = contentMode
-        return self
+        imperative {
+            $0.contentMode = contentMode
+        }
     }
     
     @discardableResult
     func alpha(_ alpha: CGFloat) -> Self {
-        self.alpha = alpha
-        return self
+        imperative {
+            $0.alpha = alpha
+        }
     }
     
     @discardableResult
     func transform(_ transform: CGAffineTransform) -> Self {
-        self.transform = transform
-        return self
+        imperative {
+            $0.transform = transform
+        }
+    }
+    
+    @discardableResult
+    func shadow(color: UIColor = .black, radius: CGFloat = 0.0, x: CGFloat = 0.0, y: CGFloat = 0.0) -> Self {
+        imperative {
+            $0.layer.shadowColor = color.cgColor
+            $0.layer.shadowOpacity = 1.0
+            $0.layer.shadowOffset = CGSize(width: x, height: y)
+            $0.layer.shadowRadius = radius
+        }
     }
 
     @discardableResult
@@ -161,19 +186,18 @@ public extension UIView {
     func zStack(
         margin: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
         @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> Self {
-            let superView = self
-            builder().compactMap { $0 }.forEach { (view) in
-            superView.addSubview(view)
-            view.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                view.topAnchor.constraint(equalTo: superView.topAnchor, constant: margin.top),
-                view.leftAnchor.constraint(equalTo: superView.leftAnchor, constant: margin.left),
-                superView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: margin.right),
-                superView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: margin.bottom)
-            ])
+            imperative { superView in 
+                builder().compactMap { $0 }.forEach { (view) in
+                superView.addSubview(view)
+                view.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                    view.topAnchor.constraint(equalTo: superView.topAnchor, constant: margin.top),
+                    view.leftAnchor.constraint(equalTo: superView.leftAnchor, constant: margin.left),
+                    superView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: margin.right),
+                    superView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: margin.bottom)
+                ])
+            }
         }
-
-        return self
     }
 }
 

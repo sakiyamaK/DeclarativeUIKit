@@ -22,7 +22,7 @@ final class SimpleViewController: UIViewController {
             UIView.spacer().height(0.5).backgroundColor(.gray)
         }
         let MarginView = {
-            UIView.spacer().height(20).backgroundColor(.lightGray)
+            UIView.spacer().height(40).backgroundColor(.lightGray)
         }
 
         let Header = { (title: String) -> UIView in
@@ -57,13 +57,14 @@ final class SimpleViewController: UIViewController {
                         .border(color: .blue, width: 10)
                     UIView()
                         .size(width: 100, height: 100)
-                        .backgroundColor(.systemRed)
+                        .backgroundColor(.black)
                         .transform(.init(rotationAngle: 45.0/360 * Double.pi))
                     UIView {
                         $0.heightConstraint = 100
                         $0.widthConstraint = 100
-                        $0.backgroundColor = .black
+                        $0.backgroundColor = .systemRed
                     }
+                    .shadow(color: .black.withAlphaComponent(0.8), radius: 10, x: 5, y: 5)
                 }.spacing(20)
             }
             .showsScrollIndicator(false)

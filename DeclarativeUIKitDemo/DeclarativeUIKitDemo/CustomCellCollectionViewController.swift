@@ -59,8 +59,9 @@ final class CustomCellCollectionViewController: UIViewController {
             UIStackView.vertical {
                 UILabel {
                     guard let label = $0 as? UILabel else { return }
-                    label.text = "カスタムセルのコレクションビューのサンプル"
+                    label.text = "カスタムセルのサンプル"
                     label.textAlignment = .center
+                    label.numberOfLines = 2
                     label.font = UIFont.boldSystemFont(ofSize: 20)
                 }
                 
