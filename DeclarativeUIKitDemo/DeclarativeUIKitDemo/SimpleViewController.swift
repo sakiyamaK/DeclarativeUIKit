@@ -153,7 +153,7 @@ final class SimpleViewController: UIViewController {
 
 import SwiftUI
 
-struct SimpleViewController_Wrapper: UIViewControllerRepresentable {
+private struct ViewController_Wrapper: UIViewControllerRepresentable {
     typealias ViewController = SimpleViewController
     // 初期化メソッド
     func makeUIViewController(context: Context) -> ViewController {
@@ -169,7 +169,7 @@ struct SimpleViewController_Wrapper: UIViewControllerRepresentable {
 struct SimpleViewController_Previews: PreviewProvider {
   static var previews: some View {
       Group {
-          SimpleViewController_Wrapper()
+          ViewController_Wrapper()
       }
   }
 }

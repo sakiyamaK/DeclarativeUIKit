@@ -12,8 +12,9 @@ final class RootViewController: UIViewController {
     
     enum ViewTag: Int {
         case simpleDemoButton = 1
-        case collectionViewButton = 2
-        case customCellButton = 3
+        case collectionViewButton
+        case customCellButton
+        case githubSearch
     }
     
     override func viewDidLoad() {
@@ -64,6 +65,15 @@ final class RootViewController: UIViewController {
                         .tag(ViewTag.customCellButton.rawValue)
 
                     UIView.spacer()
+
+                    Button("GithubSearch")
+                        .imperative {
+                            guard let button = $0 as? UIButton else { return }
+                            button.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
+                        }
+                        .tag(ViewTag.githubSearch.rawValue)
+
+                    UIView.spacer()
                 }
                 .spacing(20)
                 .distribution(.fillEqually)
@@ -86,6 +96,11 @@ final class RootViewController: UIViewController {
             self.navigationController?.pushViewController(vc, animated: true)
         case .customCellButton:
             let vc = CustomCellCollectionViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        case .githubSearch:
+            let vc = GithubSearchCollectionViewController()
+            let presenter = GithubSearchPresenter(output: vc)
+            vc.inject(presenter: presenter)
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

@@ -1,22 +1,46 @@
 import UIKit.UIView
 
 public struct TopLeadingBottomTrailingSafeArea {
-    var top: Bool = true
-    var leading: Bool = true
-    var bottom: Bool = true
-    var trailing: Bool = true
+    public var top: Bool = true
+    public var leading: Bool = true
+    public var bottom: Bool = true
+    public var trailing: Bool = true
+    
+    public init(top: Bool = true, leading: Bool = true, bottom: Bool = true, trailing: Bool = true) {
+        self.top = top
+        self.leading = leading
+        self.bottom = bottom
+        self.trailing = trailing
+    }
 }
 
 public struct TopLeadingBottomTrailingPriority {
-    var top: UILayoutPriority = .required
-    var leading: UILayoutPriority = .required
-    var bottom: UILayoutPriority = .required
-    var trailing: UILayoutPriority = .required
+    public var top: UILayoutPriority = .required
+    public var leading: UILayoutPriority = .required
+    public var bottom: UILayoutPriority = .required
+    public var trailing: UILayoutPriority = .required
+    
+    public init(top: UILayoutPriority = .required, leading: UILayoutPriority = .required, bottom: UILayoutPriority = .required, trailing: UILayoutPriority = .required) {
+        self.top = top
+        self.leading = leading
+        self.bottom = bottom
+        self.trailing = trailing
+    }
 }
 
 //MARK: - instance
 public extension UIView {
     
+    /// 手続的記述をする場合の初期化メソッド
+    ///
+    /// 宣言的記述に対応していないパラメータはimerativeパラメータ内で実装する
+    ///
+    /// ex:
+    /// UIlabel {
+    ///     guard let label = $0 as? UILabel else { return }
+    ///     label.text = "test"
+    ///}
+    /// - Parameter imperative: 手続き型の実装を記載するクロージャ
     convenience init(_ imperative: ((Self) -> Void)) {
         self.init()
         imperative(self)
@@ -158,6 +182,18 @@ public extension UIView {
         }
     }
     
+    @discardableResult
+    func isHidden(_ isHidden: Bool) -> Self {
+        imperative {
+            $0.isHidden = isHidden
+        }
+    }
+
+    @discardableResult
+    func isShow(_ isShow: Bool) -> Self {
+        isHidden(!isShow)
+    }
+
     @discardableResult
     func transform(_ transform: CGAffineTransform) -> Self {
         imperative {
