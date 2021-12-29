@@ -7,7 +7,22 @@
 
 UIKitのAutolayoutを宣言的に記述するライブラリです
 
-
+* [Motivation](#motivation)
+* [Example](#example)
+* [Installation](#installation)
+  * [Swift Package Manager](#swift-package-manager)
+* [Usage](#usage)
+  * [Setting for writing declarative](#setting-for-writing-declarative)
+  * [UIScrollView](#uIScrollView)
+  * [UIStackView](#uIStackView)
+  * [UIView](#uIView)
+      * [basic parameters](#basic-parameters)
+      * [complex parameters](#complex-parameters)
+      * [to use the parent view](#to-use-the-parent-view)
+      * [overlay](#overlay)
+      * [imperative](#imperative)
+* [Quick Start](#quick-start)
+* [Xcode Preview](#xcode-preview)
 ## Motivation
 
 UIKitのプロジェクトからSwiftUIに移行するためには根本の設計から変える必要がある場合があり、さらにUIKitからSwiftUIやSwiftUIからUIKitの相互の連携がどうしても必要になります。
@@ -16,10 +31,13 @@ UIKitのプロジェクトからSwiftUIに移行するためには根本の設�
 
 そのため、あくまでもUIKitをメインとして既存のレイアウトの定義だけを宣言的に記述するためのライブラリとしました。
 
+## Example
+
+[Demo Projects](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo)
 
 ## Installation
 
-### SwiftPackageManager
+### Swift　Package　Manager
 
 Once you have your Swift package set up, adding DeclarativeUIKit as a dependency is as easy as adding it to the dependencies value of your Package.swift.
 
@@ -35,10 +53,201 @@ Go to File -> Swift Packages -> Add Package Dependency...
 Then search for https://github.com/sakiyamaK/DeclarativeUIKit
 And choose the version you want
 
-
 ## Usage
 
+### Setting for writing declarative
+
+`UIViewController`の`viewDidLoad`で`declarate`メソッドを記述します
+
+Write the `declarate` method in `viewDidLoad` of `UIViewController`.
+
+```swift
+class DeclarativeViewController: UIViewController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //最初にdeclarateメソッドを記述します
+        //Write the declare method first
+        self.declarate {
+          //ここに宣言的にレイアウトを記述していきます
+          //ひとつのUIViewを配置できます
+          //UIScrollViewを置くことを推奨します
+          //we'll describe the layout declaratively here
+        }
+    }
+}
+```
+
+### UIScrollView
+
+`UIScrollView.vertical`もしくは`UIScrollView.horizontal`と記載します
+
+```swift
+self.declarate {
+  UIScrollView.vertical(margin: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) {
+    //ひとつのUIViewを配置できます
+    //UIStackViewを置くことを推奨します
+  }
+  .isScrollEnabled(true)
+  .showsScrollIndicator(true)
+}
+```
+
+### UIStackView
+`UIStackView.vertical`もしくは`UIStackView.horizontal`と記載します
+`UIStackView`は自身のインスタンスを伝搬させることができます
+
+```swift
+self.declarate {
+  UIStackView.vertical { stackView in
+    //この中に複数のUIViewを配置できます
+  }
+  .alignment(.fill)
+  .distribution(.fill)
+  .spacing(0)
+}
+```
+
+### UIView
+
+`UIView`の様々なパラメータが宣言的に記述できるようになっています
+
+#### basic parameters
+
+基本的なパラメータの使い方です
+
+```swift
+UIStackView.vertical {
+
+  //基本的なパラメータ
+  UIView()
+    .width(100)
+    .height(100)
+    .backgroundColor(.white)
+    .isHidden(false)
+    .alpha(1.0)
+    .contentMode(.scaleAspectFit)
+    .isUserInteractionEnabled(true)
+    .tag(1)
+
+  //基本的なパラメータの別の記法
+  UIView()
+    //width, heightの代わり
+    .size(width: 100, height: 100)
+    //isHddenと逆の処理
+    .isShow(true)
+
+  //基本的なパラメータの別の記法
+  UIView()
+    .width(100)
+    //widthに対する高さの比率
+    .aspectRatio(1.0)
+
+  //基本的なパラメータの別の記法
+  UIView()
+    .width(100)
+    //widthに対する高さの比率
+    .aspectRatio(1.0)
+
+  //大きさに関するその他パラメータ
+  UIView()
+    //最小サイズ
+    .minWidth(10)
+    .minHeight(10)
+    //最大サイズ
+    .maxWidth(100)
+    .maxHeight(100)
+
+  //大きさに関するその他パラメータの別の記法
+  UIView()
+    .minSize(width: 10, height: 10)
+    .maxSize(width: 100, height: 100)
+}
+```
+
+#### complex parameters
+複雑なパラメータの使い方です
+
+```swift
+UIStackView.vertical {
+  //複雑なパラメータ
+  UIView()
+    .shadow(color: .white, radius: 10, x: 0, y: 10)
+    .border(color: .white, width: 10)
+    .cornerRadius(10, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner])
+```
+
+### to use the parent view
+親Viewのサイズに基づいて大きさを決めたい場合は`widthEqual`や`heightEqual`を使います
+
+```swift
+UIStackView.vertical { stackView in
+  UIView()
+    //親ビュー(UIStackView)のパラメータを代入する
+    .widthEqual(to: stackView, constraint: stackView.widthAnchor)
+    //heightAnchorなどのNSLayoutDimensionは四則演算も対応している
+    .heightEqual(to: stackView, constraint: stackView.heightAnchor * 0.8 + 10)
+}
+```
+
+### overlay
+
+`addSubview`か`zStack`メソッドで上にViewを重ねることができます
+
+```swift
+UIStackView.vertical {
+  UIView()
+    .addSubview(margin: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) {
+        UIStackView.vertical {
+            UIView()
+        }
+    }
+
+  UIView()
+    .zStack {
+      UIStackView.vertical {
+        UIView()
+      }
+  }
+}
+```
+
+### imperative
+宣言的な記述が非対応のパラメータを設定する場合、 `imperative`メソッドを使うことで`UIKit`本来の手続的な記述ができます
+
+これにより`UIKit`のすべてのViewが宣言的に記述してレイアウトを組めます
+
+```swift
+UIStackView.vertical { stackView in
+  UIView()
+    .imperative {
+        if hoge {
+            $0.backgroundColor = .red
+        } else {
+            $0.backgroundColor = .blue
+        }
+    }
+
+  //imperativeは省略できる
+  UIView {
+    if hoge {
+        $0.backgroundColor = .red
+    } else {
+        $0.backgroundColor = .blue
+    }
+  }
+
+  //UILabelを使う場合
+  UILabel {
+    guard let label = $0 as? UILabel else { return }
+    label.text = "テスト"
+  }
+}
+```
+
 ### Quick Start
+
+実例です
 
 ```swift
 import UIKit
@@ -50,19 +259,12 @@ class DeclarativeViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
 
-        //最初にdeclarateを呼びます
         self.declarate {
 
-            //中にひとつのViewを配置できます
-            //複数のViewを置くことはできません
-            //UIScrollViewを置くことを推奨します
             UIScrollView.vertical {
 
-                //UIScrollViewの中も同様でひとつのViewしか配置できません
-                //UIStackViewを置くことを推奨します
                 UIStackView.vertical {
 
-                    //UIViewを横に並べます
                     UIScrollView.horizontal(margin: .init(top: 20, left: 10, bottom: 20, right: 10)) {
                         UIStackView.horizontal(distribution: .fill) {
                             UIView()
@@ -82,17 +284,15 @@ class DeclarativeViewController: UIViewController {
                     }
                     .showsScrollIndicator(false)
 
-                    //これ以降のViewはセンター揃えにするため新しくUIStackViewを置きます
                     UIStackView.vertical {
                         UIImageView {
-                            //UIKit既存の手続的な設定はこのように記述できます
+
                             guard let imageView = $0 as? UIImageView else { return }
                             imageView.image = UIImage.init(systemName: "square.and.arrow.up")
                         }
                         .contentMode(.scaleAspectFit)
                         .size(width: 100, height: 100)
                         
-                        //インスタンス生成後にimperativeを明示しても手続的設定ができます
                         UIButton().imperative {
                             guard let button = $0 as? UIButton else { return }
                             button.setTitle("UIButton", for: .normal)
@@ -109,7 +309,6 @@ class DeclarativeViewController: UIViewController {
                             label.textAlignment = .center
                         }
                         
-                        //z方向の配置は各ViewにzStackかaddSubViewメソッドを呼ぶことで実現できます
                         UIImageView {
                             guard let imageView = $0 as? UIImageView else { return }
                             imageView.image = UIImage.init(systemName: "square.and.arrow.down")
@@ -135,7 +334,7 @@ class DeclarativeViewController: UIViewController {
 }
 ```
 
-### Preview
+### Xcode Preview
 
 Xcode Previewによりビルドすることなくレイアウトを確認することができます
 
