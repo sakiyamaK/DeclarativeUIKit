@@ -197,6 +197,65 @@ public extension UIView {
     }
     
     @discardableResult
+    func minWidth(_ width: CGFloat) -> Self {
+        imperative {
+            $0.minWidthConstraint = width
+        }
+    }
+
+    @discardableResult
+    func maxWidth(_ width: CGFloat) -> Self {
+        imperative {
+            $0.maxWidthConstraint = width
+        }
+    }
+
+    @discardableResult
+    func height(_ height: CGFloat) -> Self {
+        imperative {
+            $0.heightConstraint = height
+        }
+    }
+    
+    @discardableResult
+    func minHeight(_ height: CGFloat) -> Self {
+        imperative {
+            $0.minHeightConstraint = height
+        }
+    }
+
+    @discardableResult
+    func maxHeight(_ height: CGFloat) -> Self {
+        imperative {
+            $0.maxHeightConstraint = height
+        }
+    }
+
+    @discardableResult
+    func size(width: CGFloat, height: CGFloat) -> Self {
+        imperative {
+            $0.widthConstraint = width
+            $0.heightConstraint = height
+        }
+    }
+    
+    @discardableResult
+    func minSize(width: CGFloat, height: CGFloat) -> Self {
+        imperative {
+            $0.minWidthConstraint = width
+            $0.minHeightConstraint = height
+        }
+    }
+
+    @discardableResult
+    func maxSize(width: CGFloat, height: CGFloat) -> Self {
+        imperative {
+            $0.maxWidthConstraint = width
+            $0.maxHeightConstraint = height
+        }
+    }
+
+    @discardableResult
     func widthEqual(to superview: UIView, constraint: HelperConstraint) -> Self {
         imperative {
             if superview is UIStackView, !superview.subviews.contains($0) {
@@ -224,43 +283,6 @@ public extension UIView {
     @discardableResult
     func heightEqual(to superview: UIView, constraint: NSLayoutDimension) -> Self {
         heightEqual(to: superview, constraint: .init(dimension: constraint))
-    }
-
-    @discardableResult
-    func minWidth(_ width: CGFloat) -> Self {
-        imperative {
-            $0.minWidthConstraint = width
-        }
-    }
-    
-    @discardableResult
-    func height(_ height: CGFloat) -> Self {
-        imperative {
-            $0.heightConstraint = height
-        }
-    }
-    
-    @discardableResult
-    func minHeight(_ height: CGFloat) -> Self {
-        imperative {
-            $0.minHeightConstraint = height
-        }
-    }
-    
-    @discardableResult
-    func size(width: CGFloat, height: CGFloat) -> Self {
-        imperative {
-            $0.widthConstraint = width
-            $0.heightConstraint = height
-        }
-    }
-    
-    @discardableResult
-    func minSize(width: CGFloat, height: CGFloat) -> Self {
-        imperative {
-            $0.minWidthConstraint = width
-            $0.minHeightConstraint = height
-        }
     }
     
     @discardableResult

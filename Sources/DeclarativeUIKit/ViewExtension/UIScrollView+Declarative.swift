@@ -97,7 +97,7 @@ public extension UIScrollView {
     }
 }
 
-//MARK: -
+//MARK: - Declarative Parameters
 public extension UIScrollView {
     @discardableResult
     func isScrollEnabled(_ isScrollEnabled: Bool) -> Self {
