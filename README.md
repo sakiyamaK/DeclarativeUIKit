@@ -78,6 +78,39 @@ class DeclarativeViewController: UIViewController {
 }
 ```
 
+### accessing declaratived view
+
+宣言的に記述されたViewはパラメータに代入されていないため`tag`を指定して`UIViewController`か`UIView`の`getView`メソッドでアクセスできます
+
+```swift
+class DeclarativeViewController: UIViewController {
+
+  private enum ViewTag {
+    case button = 1
+  }
+
+  override func viewDidLoad() {
+      super.viewDidLoad()
+      self.declarate {
+        UIButton {
+          guard let button = $0 as? UIButton else { return }
+          button.setTitle("button", for: .normal)
+          button.addTarget(self, action: #selector(self.tapButton), for: .touchUpInside)
+        }
+        //tagを設定
+          .tag(ViewTag.button.rawValue)
+      }
+  }
+
+  @obj func tapButton(_ sender: UIButton) {
+    //getViewでtagを指定して取得
+    if let button = self.getView(tag: ViewTag.button.rawValue) as? UIButton {
+      print(button)
+    }
+  }
+}
+```
+
 ### UIScrollView
 
 `UIScrollView.vertical`もしくは`UIScrollView.horizontal`と記載します
