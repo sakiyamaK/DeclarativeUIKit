@@ -47,17 +47,17 @@ public extension UIView {
     }
     
     func declarate(
-        priorities: TopLeadingBottomTrailingPriority,
-        @SingleUIViewBuilder _ builder: () -> UIView) {
+priorities: TopLeadingBottomTrailingPriority,
+    @SingleUIViewBuilder _ builder: () -> UIView) {
         let view = builder()
         self.subviews.forEach { $0.removeFromSuperview() }
-            self.edgesConstraints(view, safeAreas: .init(), priorities: priorities)
+        self.edgesConstraints(view, safeAreas: .init(), priorities: priorities)
     }
     
     func declarate(@SingleUIViewBuilder _ builder: () -> UIView) {
         self.declarate(priorities: .init(), builder)
     }
-
+    
     static func spacer() -> UIView {
         UIView {
             $0.isUserInteractionEnabled = false
@@ -67,13 +67,13 @@ public extension UIView {
 
 //MARK: - Declarative method
 public extension UIView {
-        
+    
     @discardableResult
     func imperative(_ imperative: ((Self) -> Void)) -> Self {
         imperative(self)
         return self
     }
-            
+    
     @discardableResult
     func cornerRadius(_ radius: CGFloat, maskedCorners: CACornerMask) -> Self {
         imperative {
@@ -82,7 +82,7 @@ public extension UIView {
             $0.clipsToBounds = true
         }
     }
-
+    
     @discardableResult
     func cornerRadius(_ radius: CGFloat) -> Self {
         cornerRadius(radius, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
@@ -109,7 +109,86 @@ public extension UIView {
             $0.backgroundColor = backgroundColor
         }
     }
+    
+    @discardableResult
+    func isUserInteractionEnabled(_ isUserInteractionEnabled: Bool) -> Self {
+        imperative {
+            $0.isUserInteractionEnabled = isUserInteractionEnabled
+        }
+    }
+    
+    @discardableResult
+    func contentMode(_ contentMode: ContentMode) -> Self {
+        imperative {
+            $0.contentMode = contentMode
+        }
+    }
+    
+    @discardableResult
+    func alpha(_ alpha: CGFloat) -> Self {
+        imperative {
+            $0.alpha = alpha
+        }
+    }
+    
+    @discardableResult
+    func isHidden(_ isHidden: Bool) -> Self {
+        imperative {
+            $0.isHidden = isHidden
+        }
+    }
+    
+    @discardableResult
+    func isShow(_ isShow: Bool) -> Self {
+        isHidden(!isShow)
+    }
+    
+    @discardableResult
+    func transform(_ transform: CGAffineTransform) -> Self {
+        imperative {
+            $0.transform = transform
+        }
+    }
+    
+    @discardableResult
+    func shadow(color: UIColor = .black, radius: CGFloat = 0.0, x: CGFloat = 0.0, y: CGFloat = 0.0) -> Self {
+        imperative {
+            $0.layer.shadowColor = color.cgColor
+            $0.layer.shadowOpacity = 1.0
+            $0.layer.shadowOffset = CGSize(width: x, height: y)
+            $0.layer.shadowRadius = radius
+        }
+    }
+    
+    @discardableResult
+    func addSubview(
+margin: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
+    @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> Self {
+        self.zStack(margin: margin, builder)
+    }
+    
+    @discardableResult
+    func zStack(
+margin: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
+    @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> Self {
+        imperative { superView in
+            builder().compactMap { $0 }.forEach { (view) in
+                superView.addSubview(view)
+                view.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                    view.topAnchor.constraint(equalTo: superView.topAnchor, constant: margin.top),
+                    view.leftAnchor.constraint(equalTo: superView.leftAnchor, constant: margin.left),
+                    superView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: margin.right),
+                    superView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: margin.bottom)
+                ])
+                
+            }
+        }
+    }
+}
 
+//MARK: - Declarative constraint method
+public extension UIView {
     @discardableResult
     func width(_ width: CGFloat) -> Self {
         imperative {
@@ -118,12 +197,42 @@ public extension UIView {
     }
     
     @discardableResult
+    func widthEqual(to superview: UIView, constraint: HelperConstraint) -> Self {
+        imperative {
+            if superview is UIStackView, !superview.subviews.contains($0) {
+                superview.addSubview($0)
+            }
+            $0.widthAnchor.constraint(equalTo: constraint.dimension, multiplier: constraint.multiplier, constant: constraint.constant).isActive = true
+        }
+    }
+    
+    @discardableResult
+    func widthEqual(to superview: UIView, constraint: NSLayoutDimension) -> Self {
+        widthEqual(to: superview, constraint: .init(dimension: constraint))
+    }
+        
+    @discardableResult
+    func heightEqual(to superview: UIView, constraint: HelperConstraint) -> Self {
+        imperative {
+            if superview is UIStackView, !superview.subviews.contains($0) {
+                superview.addSubview($0)
+            }
+            $0.heightAnchor.constraint(equalTo: constraint.dimension, multiplier: constraint.multiplier, constant: constraint.constant).isActive = true
+        }
+    }
+    
+    @discardableResult
+    func heightEqual(to superview: UIView, constraint: NSLayoutDimension) -> Self {
+        heightEqual(to: superview, constraint: .init(dimension: constraint))
+    }
+
+    @discardableResult
     func minWidth(_ width: CGFloat) -> Self {
         imperative {
             $0.minWidthConstraint = width
         }
     }
-
+    
     @discardableResult
     func height(_ height: CGFloat) -> Self {
         imperative {
@@ -153,86 +262,11 @@ public extension UIView {
             $0.minHeightConstraint = height
         }
     }
-
+    
     @discardableResult
     func aspectRatio(_ ratio: CGFloat) -> Self {
         imperative {
             $0.aspectRatioConstraint = ratio
-        }
-    }
-
-    @discardableResult
-    func isUserInteractionEnabled(_ isUserInteractionEnabled: Bool) -> Self {
-        imperative {
-            $0.isUserInteractionEnabled = isUserInteractionEnabled
-        }
-    }
-
-    @discardableResult
-    func contentMode(_ contentMode: ContentMode) -> Self {
-        imperative {
-            $0.contentMode = contentMode
-        }
-    }
-    
-    @discardableResult
-    func alpha(_ alpha: CGFloat) -> Self {
-        imperative {
-            $0.alpha = alpha
-        }
-    }
-    
-    @discardableResult
-    func isHidden(_ isHidden: Bool) -> Self {
-        imperative {
-            $0.isHidden = isHidden
-        }
-    }
-
-    @discardableResult
-    func isShow(_ isShow: Bool) -> Self {
-        isHidden(!isShow)
-    }
-
-    @discardableResult
-    func transform(_ transform: CGAffineTransform) -> Self {
-        imperative {
-            $0.transform = transform
-        }
-    }
-    
-    @discardableResult
-    func shadow(color: UIColor = .black, radius: CGFloat = 0.0, x: CGFloat = 0.0, y: CGFloat = 0.0) -> Self {
-        imperative {
-            $0.layer.shadowColor = color.cgColor
-            $0.layer.shadowOpacity = 1.0
-            $0.layer.shadowOffset = CGSize(width: x, height: y)
-            $0.layer.shadowRadius = radius
-        }
-    }
-
-    @discardableResult
-    func addSubview(
-        margin: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
-        @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> Self {
-            self.zStack(margin: margin, builder)
-        }
-
-    @discardableResult
-    func zStack(
-        margin: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
-        @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> Self {
-            imperative { superView in 
-                builder().compactMap { $0 }.forEach { (view) in
-                superView.addSubview(view)
-                view.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate([
-                    view.topAnchor.constraint(equalTo: superView.topAnchor, constant: margin.top),
-                    view.leftAnchor.constraint(equalTo: superView.leftAnchor, constant: margin.left),
-                    superView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: margin.right),
-                    superView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: margin.bottom)
-                ])
-            }
         }
     }
 }
@@ -253,9 +287,8 @@ public extension UIView {
     }
 }
 
-//MARK: - Constraint
+//MARK: - double components constraint
 public extension UIView {
-    
     func edgesConstraints(
         _ view: UIView,
         safeAreas: TopLeadingBottomTrailingSafeArea,
@@ -279,7 +312,7 @@ public extension UIView {
         let trailing = safeAreas.trailing ?
         self.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: view.trailingAnchor) :
         self.rightAnchor.constraint(equalTo: view.rightAnchor)
-               
+        
         top.priority = priorities.top
         leading.priority = priorities.leading
         trailing.priority = priorities.trailing
@@ -289,6 +322,10 @@ public extension UIView {
             top, leading, trailing, bottom
         ])
     }
+}
+
+//MARK: - single component constraint
+public extension UIView {
     
     var minHeightConstraint: CGFloat? {
         get {
@@ -329,7 +366,6 @@ public extension UIView {
             widthAnchor.constraint(lessThanOrEqualToConstant: constraint).isActive = true
         }
     }
-    
     
     var heightConstraint: CGFloat? {
         get {

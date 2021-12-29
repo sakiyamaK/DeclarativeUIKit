@@ -13,7 +13,6 @@ final class RootViewController: UIViewController {
     enum ViewTag: Int {
         case simpleDemoButton = 1
         case collectionViewButton
-        case customCellButton
         case githubSearch
     }
     
@@ -57,15 +56,6 @@ final class RootViewController: UIViewController {
 
                     UIView.spacer()
 
-                    Button("CustomCell")
-                        .imperative {
-                            guard let button = $0 as? UIButton else { return }
-                            button.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
-                        }
-                        .tag(ViewTag.customCellButton.rawValue)
-
-                    UIView.spacer()
-
                     Button("GithubSearch")
                         .imperative {
                             guard let button = $0 as? UIButton else { return }
@@ -94,9 +84,6 @@ final class RootViewController: UIViewController {
         case .collectionViewButton:
             let vc = CollectionViewController()
             self.navigationController?.pushViewController(vc, animated: true)
-        case .customCellButton:
-            let vc = CustomCellCollectionViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
         case .githubSearch:
             let vc = GithubSearchCollectionViewController()
             let presenter = GithubSearchPresenter(output: vc)
@@ -111,13 +98,11 @@ import SwiftUI
 
 struct RootViewController_Wrapper: UIViewControllerRepresentable {
     typealias ViewController = RootViewController
-    // 初期化メソッド
     func makeUIViewController(context: Context) -> ViewController {
         let vc = ViewController()
         return vc
     }
 
-    // 更新用のメソッド
     func updateUIViewController(_ vc: ViewController, context: Context) {
     }
 }

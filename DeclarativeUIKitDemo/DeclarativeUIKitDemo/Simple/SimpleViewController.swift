@@ -42,8 +42,11 @@ final class SimpleViewController: UIViewController {
         
         let ScrollBlocksView = {
             UIScrollView.horizontal(margin: .init(top: 20, left: 10, bottom: 20, right: 10)) {
-                UIStackView.horizontal(distribution: .fill) {
+                UIStackView.horizontal(distribution: .fill) { stackView in
                     UIView()
+                        .imperative { _ in
+                            print(stackView)
+                        }
                         .width(100)
                         .height(100)
                         .backgroundColor(.red)
@@ -118,6 +121,25 @@ final class SimpleViewController: UIViewController {
                 }
             }.alignment(.center)
         }
+        
+        let Geometry = {
+            UIView()
+                .backgroundColor(.red)
+                .zStack {
+                    UIStackView.horizontal { superview in
+                        UIView()
+                            .backgroundColor(.blue)
+                            .heightEqual(to: superview, constraint: superview.heightAnchor - 20)
+
+                        UIView()
+                            .backgroundColor(.green)
+                            .widthEqual(to: superview, constraint: superview.widthAnchor * 0.4)
+                            .heightEqual(to: superview, constraint: superview.heightAnchor / 2 + 10)
+                    }
+                    .height(100)
+                    .alignment(.center)
+                }
+        }
                 
         self.declarate {
             UIScrollView.vertical {
@@ -136,6 +158,12 @@ final class SimpleViewController: UIViewController {
                     UIView.spacer().height(10)
                     Header("Z方向の設定")
                     ZStackView()
+                    MarginView()
+                    UIView.spacer().height(30)
+                    Header("親ビューの大きさで設定")
+                    Geometry()
+                    UIView.spacer().height(20)
+                    MarginView()
                 }
             }
         }

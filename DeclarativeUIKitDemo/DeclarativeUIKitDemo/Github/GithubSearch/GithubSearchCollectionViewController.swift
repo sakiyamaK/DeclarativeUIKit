@@ -219,6 +219,7 @@ private struct ViewController_Wrapper: UIViewControllerRepresentable {
         let vc = ViewController()
         let presenter = GithubSearchPresenterMock(output: vc)
         vc.inject(presenter: presenter)
+//        vc.update(loading: true)
         return vc
     }
 

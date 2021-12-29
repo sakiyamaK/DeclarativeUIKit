@@ -36,6 +36,7 @@ final class GithubSearchCollectionViewCell: UICollectionViewCell {
             }
             .spacing(5)
         }
+        
         self.contentView.declarate(priorities: .init(bottom: .defaultLow) ) {
             UIStackView.vertical {
                 UIView.spacer().height(20)
@@ -51,13 +52,13 @@ final class GithubSearchCollectionViewCell: UICollectionViewCell {
                         .aspectRatio(1.0)
                         
                         UIView.spacer()
-                    }
+                    }.isHidden(true)
                     
                     UIStackView.vertical {
                         UILabel {
                             guard let label = $0 as? UILabel else { return }
                             label.textAlignment = .left
-                            label.font = UIFont.systemFont(ofSize: 20)
+                            label.font = UIFont.systemFont(ofSize: 30)
                             label.setContentHuggingPriority(.required, for: .vertical)
                             label.setContentCompressionResistancePriority(.required, for: .vertical)
                         }.tag(ViewTag.fullNameLabel.rawValue)
@@ -71,7 +72,7 @@ final class GithubSearchCollectionViewCell: UICollectionViewCell {
                         }.tag(ViewTag.descriptionLabel.rawValue)
                         
                         UIStackView.horizontal {
-                            BottomIconView("star", ViewTag.starIconLbel.rawValue)
+                            BottomIconView("circle", ViewTag.starIconLbel.rawValue)
                             
                             BottomIconView("circle", ViewTag.languageIconLbel.rawValue)
                             
@@ -101,7 +102,7 @@ final class GithubSearchCollectionViewCell: UICollectionViewCell {
                 .spacing(10)
                 
                 UIView.spacer().height(20)
-                UIView.spacer().height(0.5).backgroundColor(.gray)
+                UIView.spacer().height(2).backgroundColor(.red)
             }
         }
     }
@@ -164,7 +165,7 @@ private struct View_Wrapper: UIViewRepresentable {
 struct GithubSearchCollectionViewCell_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            View_Wrapper().previewLayout(.fixed(width: 1000, height: 200))
+            View_Wrapper().previewLayout(.fixed(width: 400, height: 200))
         }
     }
 }
