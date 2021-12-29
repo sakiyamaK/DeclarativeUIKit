@@ -13,6 +13,7 @@ UIKitのAutolayoutを宣言的に記述するライブラリです
   * [Swift Package Manager](#swift-package-manager)
 * [Usage](#usage)
   * [Setting for writing declarative](#setting-for-writing-declarative)
+  * [Accessing declaratived view](#accessing-declaratived-view)
   * [UIScrollView](#uIScrollView)
   * [UIStackView](#uIStackView)
   * [UIView](#uIView)
@@ -78,7 +79,7 @@ class DeclarativeViewController: UIViewController {
 }
 ```
 
-### accessing declaratived view
+### Accessing declaratived view
 
 宣言的に記述されたViewはパラメータに代入されていないため`tag`を指定して`UIViewController`か`UIView`の`getView`メソッドでアクセスできます
 
