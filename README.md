@@ -38,7 +38,7 @@ UIKitのプロジェクトからSwiftUIに移行するためには根本の設�
 
 ## Installation
 
-### Swift　Package　Manager
+### Swift Package Manager
 
 Once you have your Swift package set up, adding DeclarativeUIKit as a dependency is as easy as adding it to the dependencies value of your Package.swift.
 
@@ -211,7 +211,7 @@ UIStackView.vertical {
     .cornerRadius(10, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner])
 ```
 
-### to use the parent view
+#### to use the parent view
 親Viewのサイズに基づいて大きさを決めたい場合は`widthEqual`や`heightEqual`を使います
 
 ```swift
@@ -224,7 +224,7 @@ UIStackView.vertical { stackView in
 }
 ```
 
-### overlay
+#### overlay
 
 `addSubview`か`zStack`メソッドで上にViewを重ねることができます
 
@@ -246,7 +246,7 @@ UIStackView.vertical {
 }
 ```
 
-### imperative
+#### imperative
 宣言的な記述が非対応のパラメータを設定する場合、 `imperative`メソッドを使うことで`UIKit`本来の手続的な記述ができます
 
 これにより`UIKit`のすべてのViewが宣言的に記述してレイアウトを組めます
@@ -275,6 +275,38 @@ UIStackView.vertical { stackView in
   UILabel {
     guard let label = $0 as? UILabel else { return }
     label.text = "テスト"
+  }
+}
+```
+
+#### spacer
+レイアウトに余白を付けるためのメソッドです
+
+```swift
+UIStackView.vertical {
+  UIView.spacer()
+  .height(20)
+
+  //こう記述しているのと変わりません
+  UIView()
+  .isUserInteractionEnabled(false)
+  .height(20)
+}
+```
+
+### Array
+
+配列からViewを生成することもできます
+
+```swift
+UIStackView.vertical {
+  Array(1...10).compactMap { num in
+    UILabel {
+      guard let label = $0 as? UILabel else { return }
+      label.text = "\(num)番目のlabel"
+      label.textColor = .black
+      label.textAlignment = .center
+    }
   }
 }
 ```

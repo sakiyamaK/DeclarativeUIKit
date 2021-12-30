@@ -140,6 +140,17 @@ final class SimpleViewController: UIViewController {
                     .alignment(.center)
                 }
         }
+        
+        let SomeViews = {
+            Array(1...10).compactMap { num in
+                UILabel {
+                    guard let label = $0 as? UILabel else { return }
+                    label.text = "\(num)番目のlabel"
+                    label.textColor = .black
+                    label.textAlignment = .center
+                }
+            }
+        }
                 
         self.declarate {
             UIScrollView.vertical {
@@ -164,6 +175,11 @@ final class SimpleViewController: UIViewController {
                     Geometry()
                     UIView.spacer().height(20)
                     MarginView()
+                    UIView.spacer().height(30)
+                    Header("配列で用意")
+                    UIView.spacer().height(20)
+                    SomeViews()
+                    UIView.spacer().height(20)
                 }
             }
         }

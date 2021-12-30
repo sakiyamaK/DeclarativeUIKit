@@ -9,6 +9,10 @@ public enum ArrayUIViewBuilder {
         return [element]
     }
 
+    public static func buildExpression(_ component: Component) -> Component {
+        return component
+    }
+
     public static func buildOptional(_ component: Component?) -> Component {
         guard let component = component else { return [] }
         return component
