@@ -69,7 +69,7 @@ priorities: TopLeadingBottomTrailingPriority,
 public extension UIView {
     
     @discardableResult
-    func imperative(_ imperative: ((Self) -> Void)) -> Self {
+    func imperative(_ imperative: ((UIView) -> Void)) -> Self {
         imperative(self)
         return self
     }
@@ -79,7 +79,6 @@ public extension UIView {
         imperative {
             $0.layer.cornerRadius = radius
             $0.layer.maskedCorners = maskedCorners
-            $0.clipsToBounds = true
         }
     }
     
@@ -117,6 +116,12 @@ public extension UIView {
         }
     }
     
+    func clipsToBounds(_ clipsToBounds: Bool) -> Self {
+        imperative {
+            $0.clipsToBounds = clipsToBounds
+        }
+    }
+
     @discardableResult
     func contentMode(_ contentMode: ContentMode) -> Self {
         imperative {
