@@ -14,6 +14,7 @@ final class RootViewController: UIViewController {
         case simpleDemoButton = 1
         case collectionViewButton
         case githubSearch
+        case swiftuiTutorialButton
     }
     
     override func viewDidLoad() {
@@ -64,6 +65,14 @@ final class RootViewController: UIViewController {
                         .tag(ViewTag.githubSearch.rawValue)
 
                     UIView.spacer()
+                    Button("SwiftUI Tutorial")
+                        .imperative {
+                            guard let button = $0 as? UIButton else { return }
+                            button.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
+                        }
+                        .tag(ViewTag.swiftuiTutorialButton.rawValue)
+
+                    UIView.spacer()
                 }
                 .spacing(20)
                 .distribution(.fillEqually)
@@ -88,6 +97,10 @@ final class RootViewController: UIViewController {
             let vc = GithubSearchCollectionViewController()
             let presenter = GithubSearchPresenter(output: vc)
             vc.inject(presenter: presenter)
+            self.navigationController?.pushViewController(vc, animated: true)
+        case .swiftuiTutorialButton:
+            let vc = LandmarkListViewController()
+            vc.inject(landmarks: ModelData.landmarks, isOn: false)
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
