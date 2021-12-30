@@ -34,7 +34,23 @@ UIKitのプロジェクトからSwiftUIに移行するためには根本の設�
 
 ## Example
 
-[Demo Projects](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo)
+* [Demo Projects](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo)
+
+  * [basic](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/Simple)
+    基礎的な使い方のサンプルです
+    <img src="https://i.gyazo.com/5b971480cc4a93381d3bbc4711ec17d5.png" width=500>
+
+  * [collection view](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/Collection)
+    UICollectionViewの基礎のサンプルです
+        <img src="https://i.gyazo.com/cf53ffbec92922b6bc33df6ef254e167.png" width=500>
+    
+  * [MVP](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/Github)
+    MVPアーキテクチャでGithub Apiを実行するサンプルです
+    <img src="https://gyazo.com/041c6d3f10612f41bc61c9c071d9d62a.png" width=500>
+
+  * [copy SwiftUI tutorial chapter 1](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/CopyAppleSwiftUITutorial)
+    [Apple公式のSwiftUIチュートリアルのChapter 1](https://developer.apple.com/tutorials/swiftui)を真似たサンプルです
+    <img src="https://i.gyazo.com/bd5e96207609de6a4cb6f91adc6a6a6e.png" width=500>
 
 ## Installation
 
