@@ -64,6 +64,7 @@ final class LandmarkListViewController: UIViewController {
 
 extension LandmarkListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard indexPath.row > 0 else { return }
         let landmark = landmarks[indexPath.row - 1]
         let vc = LandmarkDetailViewController()
         vc.inject(landmark: landmark)
