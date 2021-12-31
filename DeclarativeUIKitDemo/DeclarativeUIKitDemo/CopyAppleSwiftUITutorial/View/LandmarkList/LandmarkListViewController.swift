@@ -10,9 +10,19 @@ import DeclarativeUIKit
 
 final class LandmarkListViewController: UIViewController {
     
+    private enum ViewTag: Int {
+        case collectionView = 1
+    }
+    
     private var landmarks: [Landmark] = []
     private var isOn: Bool = false
     
+    private var filteredLandmarks: [Landmark] {
+      landmarks.filter {
+        !isOn || $0.isFavorite
+      }
+    }
+
     func inject(landmarks: [Landmark], isOn: Bool) {
         self.landmarks = landmarks
         self.isOn = isOn
@@ -58,6 +68,7 @@ final class LandmarkListViewController: UIViewController {
                     collectionView.delegate = self
                     collectionView.dataSource = self
                 }
+                .tag(ViewTag.collectionView.rawValue)
         }
     }
 }
@@ -74,16 +85,21 @@ extension LandmarkListViewController: UICollectionViewDelegateFlowLayout {
 
 extension LandmarkListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        landmarks.count + 1
+        filteredLandmarks.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.row == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ToggleRow", for: indexPath) as! ToggleRow
             cell.configure(isOn: self.isOn)
+            cell.toggleAction = {[weak self] (isOn) in
+                self?.isOn = isOn
+                let collectionView = self?.getView(tag: ViewTag.collectionView.rawValue) as! UICollectionView
+                collectionView.reloadData()
+            }
             return cell
         }
-        let landmark = landmarks[indexPath.row - 1]
+        let landmark = filteredLandmarks[indexPath.row - 1]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LandmarkRow", for: indexPath) as! LandmarkRow
         cell.configure(landmark: landmark)
         return cell
