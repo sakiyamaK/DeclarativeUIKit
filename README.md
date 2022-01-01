@@ -38,7 +38,7 @@ In addition, since SwiftUI is based on MVVM design using Combine, projects that 
 
 そのためUIKitをメインとして既存のレイアウトの定義だけを宣言的に記述できるライブラリとしました。
 
-そのためUIKitをメインとして既存のレイアウトの定義だけを宣言的に記述できるライブラリとしました。
+For this reason, we decided to use UIKit as the main library where only the existing layout definitions can be written declaratively.
 ## Example
 
 * [Demo Projects](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo)
