@@ -7,6 +7,8 @@
 
 UIKitのAutolayoutを宣言的に記述するライブラリです
 
+Library for writing UIKit Autolayout declaratively.
+
 * [Motivation](#motivation)
 * [Example](#example)
 * [Installation](#installation)
@@ -28,10 +30,15 @@ UIKitのAutolayoutを宣言的に記述するライブラリです
 
 UIKitのプロジェクトからSwiftUIに移行するためには根本の設計から変える必要がある場合があり、さらにUIKitからSwiftUIやSwiftUIからUIKitの相互の連携がどうしても必要になります。
 
+In order to migrate from a UIKit project to SwiftUI, it may be necessary to change the underlying design, and furthermore, the interworking of UIKit to SwiftUI and SwiftUI to UIKit is inevitable.
+
 またSwiftUIはCombineを用いたMVVM設計を基本とするため、それ以外のアーキテクチャを採用していたりリアクティブプログラミングの学習が十分でないプロジェクトの場合、導入の敷居が高くなります。
 
-そのため、あくまでもUIKitをメインとして既存のレイアウトの定義だけを宣言的に記述するためのライブラリとしました。
+In addition, since SwiftUI is based on MVVM design using Combine, projects that use other architectures or have not sufficiently learned reactive programming will have a higher threshold for implementation.
 
+そのためUIKitをメインとして既存のレイアウトの定義だけを宣言的に記述できるライブラリとしました。
+
+そのためUIKitをメインとして既存のレイアウトの定義だけを宣言的に記述できるライブラリとしました。
 ## Example
 
 * [Demo Projects](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo)
@@ -40,23 +47,31 @@ UIKitのプロジェクトからSwiftUIに移行するためには根本の設�
     
     基礎的な使い方のサンプルです
 
+    Here is a sample of basic usage
+
     <img src="https://i.gyazo.com/5b971480cc4a93381d3bbc4711ec17d5.png" width=500>
 
   * [collection view](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/Collection)
     
     UICollectionViewの基礎のサンプルです
 
+    This is a sample of the basics of UICollectionView.
+
     <img src="https://i.gyazo.com/cf53ffbec92922b6bc33df6ef254e167.png" width=500>
     
   * [MVP](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/Github)
     
-    MVPアーキテクチャでGithub Apiを実行するサンプルです
+    MVPアーキテクチャでGithub APIを実行するサンプルです
+
+    This is a sample of running the Github API on the MVP architecture.
 
     <img src="https://gyazo.com/041c6d3f10612f41bc61c9c071d9d62a.png" width=500>
 
   * [copy SwiftUI tutorial chapter 1](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/CopyAppleSwiftUITutorial)
     
     [Apple公式のSwiftUIチュートリアルのChapter 1](https://developer.apple.com/tutorials/swiftui)を真似たサンプルです
+
+    This is a sample that mimics [Chapter 1 of Apple's official SwiftUI tutorial](https://developer.apple.com/tutorials/swiftui).
 
     <img src="https://i.gyazo.com/bd5e96207609de6a4cb6f91adc6a6a6e.png" width=500>
 
@@ -97,7 +112,9 @@ class DeclarativeViewController: UIViewController {
           //ここに宣言的にレイアウトを記述していきます
           //ひとつのUIViewを配置できます
           //UIScrollViewを置くことを推奨します
-          //we'll describe the layout declaratively here
+          //Declaratively describe the layout here.
+          //You can place a single UIView
+          //It is recommended to place a UIScrollView
         }
     }
 }
@@ -117,18 +134,22 @@ class DeclarativeViewController: UIViewController {
   override func viewDidLoad() {
       super.viewDidLoad()
       self.declarate {
-        UIButton {
+        //tagを設定します
+        // set tag
+        UIButton(tag: ViewTag.button.rawValue) {
           guard let button = $0 as? UIButton else { return }
           button.setTitle("button", for: .normal)
           button.addTarget(self, action: #selector(self.tapButton), for: .touchUpInside)
         }
-        //tagを設定
+        //もしくはtagメソッドから設定します
+        // or set via the tag method
           .tag(ViewTag.button.rawValue)
       }
   }
 
   @obj func tapButton(_ sender: UIButton) {
     //getViewでtagを指定して取得
+    //getView to specify the tag to get
     if let button = self.getView(tag: ViewTag.button.rawValue) as? UIButton {
       print(button)
     }
@@ -140,11 +161,15 @@ class DeclarativeViewController: UIViewController {
 
 `UIScrollView.vertical`もしくは`UIScrollView.horizontal`と記載します
 
+It should write `UIScrollView.vertical` or `UIScrollView.horizontal
+
 ```swift
 self.declarate {
-  UIScrollView.vertical(margin: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) {
+  UIScrollView.vertical(margin: UIEdgeInsets.zero) {
     //ひとつのUIViewを配置できます
     //UIStackViewを置くことを推奨します
+    //You can place a single UIView
+    //It is recommended to place a UIStackView
   }
   .isScrollEnabled(true)
   .showsScrollIndicator(true)
@@ -155,10 +180,14 @@ self.declarate {
 `UIStackView.vertical`もしくは`UIStackView.horizontal`と記載します
 `UIStackView`は自身のインスタンスを伝搬させることができます
 
+It should say `UIStackView.vertical` or `UIStackView.horizontal
+A `UIStackView` can propagate its own instance.
+
 ```swift
 self.declarate {
   UIStackView.vertical { stackView in
     //この中に複数のUIViewを配置できます
+    //Multiple UIViews can be placed in this
   }
   .alignment(.fill)
   .distribution(.fill)
@@ -170,14 +199,19 @@ self.declarate {
 
 `UIView`の様々なパラメータが宣言的に記述できるようになっています
 
+Various parameters of `UIView` can now be described declaratively.
+
 #### basic parameters
 
 基本的なパラメータの使い方です
+
+Here is the basic parameter usage
 
 ```swift
 UIStackView.vertical {
 
   //基本的なパラメータ
+  //Basic Parameters
   UIView()
     .width(100)
     .height(100)
@@ -189,34 +223,45 @@ UIStackView.vertical {
     .tag(1)
 
   //基本的なパラメータの別の記法
+  //Another notation for basic parameters
   UIView()
     //width, heightの代わり
+    //instead of width, height
     .size(width: 100, height: 100)
     //isHddenと逆の処理
+    //isHdden and the reverse process
     .isShow(true)
 
   //基本的なパラメータの別の記法
+  //Another notation for basic parameters
   UIView()
     .width(100)
     //widthに対する高さの比率
+    //height as a percentage ofwidth
     .aspectRatio(1.0)
 
   //基本的なパラメータの別の記法
+  //Another notation for basic parameters
   UIView()
     .width(100)
     //widthに対する高さの比率
+    //height as a percentage ofwidth
     .aspectRatio(1.0)
 
   //大きさに関するその他パラメータ
+  //other parameters related to size
   UIView()
     //最小サイズ
+    //Minimum size
     .minWidth(10)
     .minHeight(10)
     //最大サイズ
+    //Maximum size
     .maxWidth(100)
     .maxHeight(100)
 
   //大きさに関するその他パラメータの別の記法
+  //Another notation for other parameters related to size
   UIView()
     .minSize(width: 10, height: 10)
     .maxSize(width: 100, height: 100)
@@ -226,24 +271,54 @@ UIStackView.vertical {
 #### complex parameters
 複雑なパラメータの使い方です
 
+It's a complex parameter usage.
+
 ```swift
 UIStackView.vertical {
   //複雑なパラメータ
+  //Complex parameters
   UIView()
     .shadow(color: .white, radius: 10, x: 0, y: 10)
     .border(color: .white, width: 10)
     .cornerRadius(10, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner])
+
+
+  //複雑なパラメータ padding
+  //Complex parameters padding
+
+  //paddingは自身の後ろにViewをひとつ付け足します
+  //padding will add a View after itself
+  UIView()
+    .backgroundColor(.green)
+    .padding(10)
+    //paddingの上下左右ごとにも設定できます
+    //padding can also be set for each of the top, bottom, left and right
+    .padding(insets: UIEdgeInsets.init(top: 10, left: 20, bottom: 0, right: 30))
+    //padding以降で呼び出したメソッドは後ろのメソッドに設定されます
+    //Methods called after padding will be set to the method after it
+    .backgroundColor(.red)
+
+    //paddingは次のように設定していることと変わりません
+    //padding is no different than setting it as follows
+    UIView()
+      .zStack { 
+        UIView()
+       }
 ```
 
 #### to use the parent view
 親Viewのサイズに基づいて大きさを決めたい場合は`widthEqual`や`heightEqual`を使います
 
+Use `widthEqual` or `heightEqual` if you want the size to be based on the size of the parent View
+
 ```swift
 UIStackView.vertical { stackView in
   UIView()
-    //親ビュー(UIStackView)のパラメータを代入する
+    //親ビュー(UIStackView)のパラメータを代入できます
+    //assign the parameters of the parent view (UIStackView)
     .widthEqual(to: stackView, constraint: stackView.widthAnchor)
-    //heightAnchorなどのNSLayoutDimensionは四則演算も対応している
+    //heightAnchorなどのNSLayoutDimensionは四則演算も対応しています
+    //NSLayoutDimension, such as heightAnchor, also supports quadrature operations.
     .heightEqual(to: stackView, constraint: stackView.heightAnchor * 0.8 + 10)
 }
 ```
@@ -251,6 +326,8 @@ UIStackView.vertical { stackView in
 #### overlay
 
 `addSubview`か`zStack`メソッドで上にViewを重ねることができます
+
+You can use the `addSubview` or `zStack` methods to add a View on top
 
 ```swift
 UIStackView.vertical {
@@ -273,7 +350,11 @@ UIStackView.vertical {
 #### imperative
 宣言的な記述が非対応のパラメータを設定する場合、 `imperative`メソッドを使うことで`UIKit`本来の手続的な記述ができます
 
+When setting parameters that are not supported by declarative descriptions, you can use the `imperative` method to write them procedurally as `UIKit` should.
+
 これにより`UIKit`のすべてのViewが宣言的に記述してレイアウトを組めます
+
+This allows all views in `UIKit` to be declaratively described and laid out
 
 ```swift
 UIStackView.vertical { stackView in
@@ -286,7 +367,8 @@ UIStackView.vertical { stackView in
         }
     }
 
-  //imperativeは省略できる
+  //imperativeは省略できます
+  //imperative can be omitted
   UIView {
     if hoge {
         $0.backgroundColor = .red
@@ -296,6 +378,7 @@ UIStackView.vertical { stackView in
   }
 
   //UILabelを使う場合
+  //When using UILabel
   UILabel {
     guard let label = $0 as? UILabel else { return }
     label.text = "テスト"
@@ -306,12 +389,15 @@ UIStackView.vertical { stackView in
 #### spacer
 レイアウトに余白を付けるためのメソッドです
 
+This method is used to add margins to the layout
+
 ```swift
 UIStackView.vertical {
   UIView.spacer()
   .height(20)
 
   //こう記述しているのと変わりません
+  //It's no different than describing it this way
   UIView()
   .isUserInteractionEnabled(false)
   .height(20)
@@ -321,6 +407,8 @@ UIStackView.vertical {
 ### Array
 
 配列からViewを生成することもできます
+
+You can also create a View from an array
 
 ```swift
 UIStackView.vertical {
@@ -338,6 +426,8 @@ UIStackView.vertical {
 ### Quick Start
 
 実例です
+
+A practical example.
 
 ```swift
 import UIKit
@@ -427,6 +517,8 @@ class DeclarativeViewController: UIViewController {
 ### Xcode Preview
 
 Xcode Previewによりビルドすることなくレイアウトを確認することができます
+
+Xcode Preview allows you to check the layout without building
 
 ```swift
 import SwiftUI

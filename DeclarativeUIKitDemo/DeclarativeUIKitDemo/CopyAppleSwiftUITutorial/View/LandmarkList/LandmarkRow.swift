@@ -17,22 +17,19 @@ final class LandmarkRow: UICollectionViewCell {
                 UIView.spacer()
                 
                 UIStackView.horizontal {
-                    UIImageView()
+                    UIImageView(tag: ViewTag.icon.rawValue)
                     .size(width: 50, height: 50)
-                        .tag(ViewTag.icon.rawValue)
                     
-                    UILabel()
-                        .tag(ViewTag.text.rawValue)
+                    UILabel(tag: ViewTag.text.rawValue)
                     
                     UIView.spacer()
                     
-                    UIImageView {
+                    UIImageView(tag: ViewTag.star.rawValue) {
                         let imageView = $0 as! UIImageView
                         imageView.image = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysTemplate)
                         imageView.tintColor = .systemYellow
                     }
                     .isHidden(true)
-                    .tag(ViewTag.star.rawValue)
                 }
                 .spacing(8)
                 .alignment(.center)

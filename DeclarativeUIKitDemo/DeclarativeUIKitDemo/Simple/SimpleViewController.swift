@@ -24,7 +24,7 @@ final class SimpleViewController: UIViewController {
         let MarginView = {
             UIView.spacer().height(40).backgroundColor(.lightGray)
         }
-
+        
         let Header = { (title: String) -> UIView in
             UIStackView.vertical {
                 UILabel {
@@ -68,6 +68,13 @@ final class SimpleViewController: UIViewController {
                         $0.backgroundColor = .systemRed
                     }
                     .shadow(color: .black.withAlphaComponent(0.8), radius: 10, x: 5, y: 5)
+                    
+                    UIView()
+                        .backgroundColor(.systemRed)
+                        .padding()
+                        .backgroundColor(.systemYellow)
+                        .size(width: 100, height: 100)
+
                 }.spacing(20)
             }
             .showsScrollIndicator(false)
@@ -130,7 +137,7 @@ final class SimpleViewController: UIViewController {
                         UIView()
                             .backgroundColor(.blue)
                             .heightEqual(to: superview, constraint: superview.heightAnchor - 20)
-
+                        
                         UIView()
                             .backgroundColor(.green)
                             .widthEqual(to: superview, constraint: superview.widthAnchor * 0.4)
@@ -151,7 +158,7 @@ final class SimpleViewController: UIViewController {
                 }
             }
         }
-                
+        
         self.declarate {
             UIScrollView.vertical {
                 UIStackView.vertical {
@@ -204,16 +211,16 @@ private struct ViewController_Wrapper: UIViewControllerRepresentable {
         let vc = ViewController()
         return vc
     }
-
+    
     // 更新用のメソッド
     func updateUIViewController(_ vc: ViewController, context: Context) {
     }
 }
 
 struct SimpleViewController_Previews: PreviewProvider {
-  static var previews: some View {
-      Group {
-          ViewController_Wrapper()
-      }
-  }
+    static var previews: some View {
+        Group {
+            ViewController_Wrapper()
+        }
+    }
 }

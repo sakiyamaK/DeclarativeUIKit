@@ -28,21 +28,31 @@ public struct TopLeadingBottomTrailingPriority {
     }
 }
 
+public extension UIEdgeInsets {
+    init(all: CGFloat) {
+        self.init(top: all, left: all, bottom: all, right: all)
+    }
+
+    init(vertical: CGFloat) {
+        self.init(top: vertical, left: 0, bottom: vertical, right: 0)
+    }
+    
+    init(horizontal: CGFloat) {
+        self.init(top: 0, left: horizontal, bottom: 0, right: horizontal)
+    }
+}
+
 //MARK: - instance
 public extension UIView {
-    
-    /// 手続的記述をする場合の初期化メソッド
-    ///
-    /// 宣言的記述に対応していないパラメータはimerativeパラメータ内で実装する
-    ///
-    /// ex:
-    /// UIlabel {
-    ///     guard let label = $0 as? UILabel else { return }
-    ///     label.text = "test"
-    ///}
-    /// - Parameter imperative: 手続き型の実装を記載するクロージャ
-    convenience init(_ imperative: ((Self) -> Void)) {
+
+    convenience init(tag: Int = 0) {
         self.init()
+        self.tag = tag
+    }
+
+    convenience init(tag: Int = 0, _ imperative: ((Self) -> Void)) {
+        self.init()
+        self.tag = tag
         imperative(self)
     }
     
@@ -167,14 +177,14 @@ public extension UIView {
     
     @discardableResult
     func addSubview(
-margin: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
+margin: UIEdgeInsets = .zero,
     @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> Self {
         self.zStack(margin: margin, builder)
     }
     
     @discardableResult
     func zStack(
-margin: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
+margin: UIEdgeInsets = .zero,
     @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> Self {
         imperative { superView in
             builder().compactMap { $0 }.forEach { (view) in
@@ -189,6 +199,16 @@ margin: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
                 
             }
         }
+    }
+    
+    @discardableResult
+    func padding(insets: UIEdgeInsets) -> UIView {
+        UIView().zStack(margin: insets, { self })
+    }
+    
+    @discardableResult
+    func padding(_ value: CGFloat = 8.0) -> UIView {
+        self.padding(insets: .init(all: value))
     }
 }
 

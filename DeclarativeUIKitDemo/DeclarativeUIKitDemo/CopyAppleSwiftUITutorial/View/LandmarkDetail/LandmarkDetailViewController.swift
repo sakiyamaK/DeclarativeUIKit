@@ -92,13 +92,11 @@ final class LandmarkDetailViewController: UIViewController {
         self.declarate(safeAreas: .init(top: false)) {
             UIScrollView.vertical {
                 UIStackView.vertical {
-                    MapView()
-                        .imperative {
+                    MapView(tag: ViewTag.mapView.rawValue) {
                             let mapView = $0 as! MapView
                             mapView.setRegion(landmark.locationCoordinate)
                         }
                         .height(300)
-                        .tag(ViewTag.mapView.rawValue)
                         .zStack(margin: .init(top: 0, left: 0, bottom: -imageOffset, right: 0)) {
                             UIStackView.vertical {
                                 UIView.spacer()
@@ -152,7 +150,8 @@ private struct ViewController_Wrapper: UIViewControllerRepresentable {
 struct LandmarkDetailViewController_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ViewController_Wrapper(landmark: ModelData.landmarks.first!)
+            ViewController_Wrapper(landmark: ModelData.landmarks.first!).previewDevice("iPhone 13")
+            ViewController_Wrapper(landmark: ModelData.landmarks.first!).previewDevice("iPhone SE (2nd generation)")
         }
     }
 }

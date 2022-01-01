@@ -13,18 +13,15 @@ final class CircleImageView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.declarate {
-            UIView()
-                .zStack(margin: .init(top: margin, left: margin, bottom: margin, right: margin)) {
-                    UIImageView()
-                    .cornerRadius((width - 2*margin)/2)
-                    .clipsToBounds(true)
-                    .contentMode(.scaleAspectFill)
-                    .tag(ViewTag.imageView.rawValue)
-                }
-                .backgroundColor(.white)
-                .shadow(color: .black, radius: 4)
-                .cornerRadius(width/2)
-                .size(width: width, height: width)
+            UIImageView(tag: ViewTag.imageView.rawValue)
+            .cornerRadius((width - 2*margin)/2)
+            .clipsToBounds(true)
+            .contentMode(.scaleAspectFill)
+            .padding(margin)
+            .backgroundColor(.white)
+            .shadow(color: .black, radius: 4)
+            .cornerRadius(width/2)
+            .size(width: width, height: width)
         }
     }
     
