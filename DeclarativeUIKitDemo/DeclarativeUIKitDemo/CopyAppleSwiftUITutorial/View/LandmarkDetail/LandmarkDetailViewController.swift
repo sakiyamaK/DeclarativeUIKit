@@ -15,7 +15,8 @@ final class LandmarkDetailViewController: UIViewController {
     private enum ViewTag: Int {
         case mapView = 1
     }
-    var landmark: Landmark!
+    
+    private var landmark: Landmark!
     
     func inject(landmark: Landmark) {
         self.landmark = landmark
@@ -110,19 +111,15 @@ final class LandmarkDetailViewController: UIViewController {
                     
                     UIView.spacer().height(imageOffset)
                     
-                    UIView()
-                        .zStack(margin: .init(top: 0, left: textHorizontalMargin, bottom: 0, right: textHorizontalMargin)) {
+                    UIStackView.vertical {
+                        NameView(landmark)
                         
-                        UIStackView.vertical {
-                            NameView(landmark)
-                            
-                            UIView.spacer().height(10)
-                            UIView.spacer().height(0.5).backgroundColor(.lightGray)
-                            UIView.spacer().height(10)
-                            
-                            TextsView(landmark)
-                        }
-                    }
+                        UIView.spacer().height(10)
+                        UIView.spacer().height(0.5).backgroundColor(.lightGray)
+                        UIView.spacer().height(10)
+                        
+                        TextsView(landmark)
+                    }.padding(insets: .init(horizontal: textHorizontalMargin))
                 }
             }
         }

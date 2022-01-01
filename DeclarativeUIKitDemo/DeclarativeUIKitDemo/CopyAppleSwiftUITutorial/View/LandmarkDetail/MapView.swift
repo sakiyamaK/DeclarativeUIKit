@@ -3,7 +3,7 @@ import DeclarativeUIKit
 import MapKit
 
 final class MapView: UIView {
-    
+        
     private enum ViewTag: Int {
         case mapView = 1
     }

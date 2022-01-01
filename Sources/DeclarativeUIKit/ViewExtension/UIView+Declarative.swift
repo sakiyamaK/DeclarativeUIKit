@@ -321,13 +321,13 @@ public extension UIView {
 //MARK: - others
 public extension UIView {
     
-    func getView(tag: Int) -> UIView? {
-        if self.tag == tag { return self }
-        if let view = self.subviews.compactMap({ $0.getView(tag: tag) }).first {
+    func getView(tag: Int, _ recursiveCount: Int = 0) -> UIView? {
+        if recursiveCount != 0, self.tag == tag { return self }
+        if let view = self.subviews.compactMap({ $0.getView(tag: tag, recursiveCount + 1) }).first {
             return view
         } else if
             let stackView = self as? UIStackView,
-            let view = stackView.arrangedSubviews.compactMap({ $0.getView(tag: tag) }).first {
+            let view = stackView.arrangedSubviews.compactMap({ $0.getView(tag: tag, recursiveCount + 1) }).first {
             return view
         }
         return nil
