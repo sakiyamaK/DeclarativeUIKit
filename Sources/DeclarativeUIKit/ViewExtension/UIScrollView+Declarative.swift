@@ -4,7 +4,7 @@ public extension UIScrollView {
     
     static private func create(
         axis: NSLayoutConstraint.Axis = .vertical,
-        margin: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
+        margin: UIEdgeInsets = .zero,
         @SingleUIViewBuilder _ builder: () -> UIView
     ) -> UIScrollView {
         UIScrollView {
@@ -34,14 +34,14 @@ public extension UIScrollView {
     }
     
     static func vertical(
-        margin: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
+        margin: UIEdgeInsets = .zero,
         @SingleUIViewBuilder _ builder: () -> UIView
     ) -> UIScrollView {
         UIScrollView.create(axis: .vertical, margin: margin, builder)
     }
     
     static func horizontal(
-        margin: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
+        margin: UIEdgeInsets = .zero,
         @SingleUIViewBuilder _ builder: () -> UIView
     ) -> UIScrollView {
         UIScrollView.create(axis: .horizontal, margin: margin, builder)
@@ -53,7 +53,7 @@ public extension UIScrollView {
     
     static private func create(
         axis: NSLayoutConstraint.Axis = .vertical,
-        margin: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
+        margin: UIEdgeInsets = .zero,
         @SingleUIViewBuilder _ builder: (UIView) -> UIView
     ) -> UIScrollView {
         UIScrollView {
@@ -83,14 +83,14 @@ public extension UIScrollView {
     }
     
     static func vertical(
-        margin: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
+        margin: UIEdgeInsets = .zero,
         @SingleUIViewBuilder _ builder: (UIView) -> UIView
     ) -> UIScrollView {
         UIScrollView.create(axis: .vertical, margin: margin, builder)
     }
     
     static func horizontal(
-        margin: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
+        margin: UIEdgeInsets = .zero,
         @SingleUIViewBuilder _ builder: (UIView) -> UIView
     ) -> UIScrollView {
         UIScrollView.create(axis: .horizontal, margin: margin, builder)

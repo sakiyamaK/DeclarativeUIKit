@@ -1,6 +1,6 @@
 import UIKit.UIView
 
-public struct TopLeadingBottomTrailingSafeArea {
+public struct UIEdgeBools {
     public var top: Bool = true
     public var leading: Bool = true
     public var bottom: Bool = true
@@ -12,9 +12,21 @@ public struct TopLeadingBottomTrailingSafeArea {
         self.bottom = bottom
         self.trailing = trailing
     }
+    
+    public init(all: Bool) {
+        self.init(top: all, leading: all, bottom: all, trailing: all)
+    }
+
+    public init(vertical: Bool) {
+        self.init(top: vertical, leading: true, bottom: vertical, trailing: true)
+    }
+    
+    public init(horizontal: Bool) {
+        self.init(top: true, leading: horizontal, bottom: true, trailing: horizontal)
+    }
 }
 
-public struct TopLeadingBottomTrailingPriority {
+public struct UIEdgePriorities {
     public var top: UILayoutPriority = .required
     public var leading: UILayoutPriority = .required
     public var bottom: UILayoutPriority = .required
@@ -25,6 +37,18 @@ public struct TopLeadingBottomTrailingPriority {
         self.leading = leading
         self.bottom = bottom
         self.trailing = trailing
+    }
+    
+    public init(all: UILayoutPriority) {
+        self.init(top: all, leading: all, bottom: all, trailing: all)
+    }
+
+    public init(vertical: UILayoutPriority) {
+        self.init(top: vertical, leading: .required, bottom: vertical, trailing: .required)
+    }
+    
+    public init(horizontal: UILayoutPriority) {
+        self.init(top: .required, leading: horizontal, bottom: .required, trailing: horizontal)
     }
 }
 
@@ -57,7 +81,7 @@ public extension UIView {
     }
     
     func declarate(
-priorities: TopLeadingBottomTrailingPriority,
+priorities: UIEdgePriorities,
     @SingleUIViewBuilder _ builder: () -> UIView) {
         let view = builder()
         self.subviews.forEach { $0.removeFromSuperview() }
@@ -72,6 +96,10 @@ priorities: TopLeadingBottomTrailingPriority,
         UIView {
             $0.isUserInteractionEnabled = false
         }
+    }
+    
+    static func divider() -> UIView {
+        UIView.spacer().height(0.5).backgroundColor(.lightGray)
     }
 }
 
@@ -338,8 +366,8 @@ public extension UIView {
 public extension UIView {
     func edgesConstraints(
         _ view: UIView,
-        safeAreas: TopLeadingBottomTrailingSafeArea,
-        priorities: TopLeadingBottomTrailingPriority
+        safeAreas: UIEdgeBools,
+        priorities: UIEdgePriorities
     ) {
         view.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(view)
@@ -350,7 +378,7 @@ public extension UIView {
         
         let leading = safeAreas.leading ?
         view.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor) :
-        view.leadingAnchor.constraint(equalTo: self.leftAnchor)
+        view.leadingAnchor.constraint(equalTo: self.leadingAnchor)
         
         let bottom = safeAreas.bottom ?
         self.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: view.bottomAnchor) :
@@ -358,7 +386,7 @@ public extension UIView {
         
         let trailing = safeAreas.trailing ?
         self.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: view.trailingAnchor) :
-        self.rightAnchor.constraint(equalTo: view.rightAnchor)
+        self.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         
         top.priority = priorities.top
         leading.priority = priorities.leading

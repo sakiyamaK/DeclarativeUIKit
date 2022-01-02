@@ -39,50 +39,44 @@ final class GithubSearchCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-    
+            
         self.declarate {
             UIStackView.vertical {
                 UIStackView.horizontal {
                     UIView.spacer().width(12)
 
-                    UIView().zStack(margin: .init(top: 0, left: 0, bottom: 0, right: 0) ) {
-                        UISearchTextField {
-                            guard let textField = $0 as? UISearchTextField else { return }
-                            textField.placeholder = "検索してね"
-                        }
-                        .tag(ViewTag.searchTextField.rawValue)
+                    UISearchTextField(tag: ViewTag.searchTextField.rawValue) {
+                        let textField = $0 as! UISearchTextField
+                        textField.placeholder = "検索してね"
                     }
-                    .border(color: .lightGray, width: 1)
-                    .cornerRadius(8)
-                    .height(32)
 
                     UIView.spacer().width(12)
 
                     UIButton {
-                        guard let button = $0 as? UIButton else { return }
+                        let button = $0 as! UIButton
                         button.setImage(UIImage(systemName: "magnifyingglass.circle"), for: .normal)
                         button.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
                     }
                     .contentMode(.scaleAspectFit)
                     .tag(ViewTag.searchButton.rawValue)
-                    
+
                     UIView.spacer().width(16)
                 }
-                
+
                 UIView.spacer().height(10)
-                UIView.spacer().height(0.5).backgroundColor(.gray)
+                UIView.divider()
                 UIView.spacer().height(10)
 
                 UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
                     .imperative {
-                    guard let collectionView = $0 as? UICollectionView else { return }
+                    let collectionView = $0 as! UICollectionView
                         collectionView.delegate = self
                         collectionView.dataSource = self
                         collectionView.register(GithubSearchCollectionViewCell.self, forCellWithReuseIdentifier: GithubSearchCollectionViewCell.reuseIdentifier)
                     }
                     .isHidden(true)
                     .tag(ViewTag.collectionView.rawValue)
-                
+
                 UIStackView.vertical {
                     UIView.spacer().height(100)
                     UIActivityIndicatorView()
@@ -91,11 +85,11 @@ final class GithubSearchCollectionViewController: UIViewController {
                 }
                 .tag(ViewTag.activityIndicatorStack.rawValue)
                 .isHidden(true)
-                
+
                 UIStackView.vertical {
                     UIView.spacer().height(60)
                     UILabel {
-                        guard let label = $0 as? UILabel else { return }
+                        let label = $0 as! UILabel
                         label.text = "検索ワードを入力してください"
                         label.textAlignment = .center
                     }
@@ -159,8 +153,6 @@ extension GithubSearchCollectionViewController: GithubSearchPresenterOutput {
         }
     }
 }
-
-
 
 extension GithubSearchCollectionViewController: UICollectionViewDelegateFlowLayout {
     

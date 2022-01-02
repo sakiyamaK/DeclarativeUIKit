@@ -48,7 +48,7 @@ spacing: CGFloat = 0.0,
     @ArrayUIViewBuilder _ builder: (UIView) -> [UIView?]
     ) -> UIStackView {
         UIStackView {
-            guard let stackView = $0 as? UIStackView else { return }
+            let stackView = $0 as! UIStackView
             stackView.backgroundColor = .clear
             stackView.axis = axis
             stackView.alignment = alignment

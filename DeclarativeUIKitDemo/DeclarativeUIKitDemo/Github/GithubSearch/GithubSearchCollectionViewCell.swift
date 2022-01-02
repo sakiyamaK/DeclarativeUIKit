@@ -102,7 +102,7 @@ final class GithubSearchCollectionViewCell: UICollectionViewCell {
                 .spacing(10)
                 
                 UIView.spacer().height(20)
-                UIView.spacer().height(2).backgroundColor(.systemGray)
+                UIView.divider()
             }
         }
     }

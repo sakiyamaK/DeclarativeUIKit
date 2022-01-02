@@ -19,7 +19,7 @@ final class SimpleViewController: UIViewController {
         self.view.backgroundColor = .white
         
         let Border = {
-            UIView.spacer().height(0.5).backgroundColor(.gray)
+            UIView.divider().backgroundColor(.gray)
         }
         let MarginView = {
             UIView.spacer().height(40).backgroundColor(.lightGray)
@@ -74,7 +74,7 @@ final class SimpleViewController: UIViewController {
                         .padding()
                         .backgroundColor(.systemYellow)
                         .size(width: 100, height: 100)
-
+                    
                 }.spacing(20)
             }
             .showsScrollIndicator(false)
@@ -190,8 +190,10 @@ final class SimpleViewController: UIViewController {
                 }
             }
         }
+        
     }
 }
+
 
 @objc private extension SimpleViewController {
     func tapButton(_ sender: UIButton) {

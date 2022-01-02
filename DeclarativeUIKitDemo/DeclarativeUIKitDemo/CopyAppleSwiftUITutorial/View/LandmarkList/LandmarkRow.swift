@@ -34,7 +34,7 @@ final class LandmarkRow: UICollectionViewCell {
                 .spacing(8)
                 .alignment(.center)
                 
-                UIView.spacer().height(0.5).backgroundColor(.lightGray)
+                UIView.divider()
             }
             .spacing(10)
         }

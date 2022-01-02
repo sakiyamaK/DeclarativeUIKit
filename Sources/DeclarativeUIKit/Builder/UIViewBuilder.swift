@@ -55,6 +55,10 @@ public enum SingleUIViewBuilder {
     public static func buildBlock(_ component: Component) -> Component {
         return component
     }
+    
+    public static func buildBlock() -> Component? {
+        return nil
+    }
 }
 
 

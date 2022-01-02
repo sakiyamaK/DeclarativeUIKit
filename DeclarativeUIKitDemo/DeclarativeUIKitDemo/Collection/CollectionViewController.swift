@@ -21,7 +21,7 @@ final class CollectionViewController: UIViewController {
                 }
                 
                 UIView.spacer().height(10)
-                UIView.spacer().height(0.5).backgroundColor(.gray)
+                UIView.divider()
                 UIView.spacer().height(10)
 
                 UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())

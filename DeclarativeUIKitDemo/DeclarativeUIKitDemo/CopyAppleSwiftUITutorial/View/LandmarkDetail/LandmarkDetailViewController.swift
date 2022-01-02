@@ -84,7 +84,7 @@ final class LandmarkDetailViewController: UIViewController {
                     label.textColor = .black
                     label.numberOfLines = 0
                 }
-            }
+            }.spacing(10)
         }
         
         let imageOffset: CGFloat = 100
@@ -98,7 +98,7 @@ final class LandmarkDetailViewController: UIViewController {
                             mapView.setRegion(landmark.locationCoordinate)
                         }
                         .height(300)
-                        .zStack(margin: .init(top: 0, left: 0, bottom: -imageOffset, right: 0)) {
+                        .zStack {
                             UIStackView.vertical {
                                 UIView.spacer()
                                 CircleImageView {
@@ -107,6 +107,7 @@ final class LandmarkDetailViewController: UIViewController {
                                 }
                             }
                             .alignment(.center)
+                            .padding(insets: .init(top: 0, left: 0, bottom: -imageOffset, right: 0))
                         }
                     
                     UIView.spacer().height(imageOffset)
@@ -115,7 +116,7 @@ final class LandmarkDetailViewController: UIViewController {
                         NameView(landmark)
                         
                         UIView.spacer().height(10)
-                        UIView.spacer().height(0.5).backgroundColor(.lightGray)
+                        UIView.divider()
                         UIView.spacer().height(10)
                         
                         TextsView(landmark)
