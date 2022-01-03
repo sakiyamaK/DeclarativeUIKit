@@ -97,18 +97,18 @@ And choose the version you want
 
 ### Setting for writing declarative
 
-`UIViewController`の`viewDidLoad`で`declarate`メソッドを記述します
+`UIViewController`の`viewDidLoad`で`declarative`メソッドを記述します
 
-Write the `declarate` method in `viewDidLoad` of `UIViewController`.
+Write the `declarative` method in `viewDidLoad` of `UIViewController`.
 
 ```swift
 class DeclarativeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //最初にdeclarateメソッドを記述します
+        //最初にdeclarativeメソッドを記述します
         //Write the declare method first
-        self.declarate {
+        self.declarative {
           //ここに宣言的にレイアウトを記述していきます
           //ひとつのUIViewを配置できます
           //UIScrollViewを置くことを推奨します
@@ -129,7 +129,7 @@ class DeclarativeViewController: UIViewController {
         //セーフエリア外にレイアウトを組むこともできます
         //You can also set the safe area and priority
         //Layout can be built outside the safe area
-        self.declarate(
+        self.declarative(
             //左右はセーフエリア外までレイアウトを広げる
             //The left and right sides extend the layout to outside the safe area.
             safeAreas: .init(top: true, leading: false, bottom: true, trailing: false),
@@ -174,7 +174,7 @@ class DeclarativeViewController: UIViewController {
 
   override func viewDidLoad() {
       super.viewDidLoad()
-      self.declarate {
+      self.declarative {
         //tagを設定します
         // set tag
         UIButton(tag: ViewTag.button.rawValue) {
@@ -205,7 +205,7 @@ class DeclarativeViewController: UIViewController {
 It should write `UIScrollView.vertical` or `UIScrollView.horizontal
 
 ```swift
-self.declarate {
+self.declarative {
   UIScrollView.vertical(margin: UIEdgeInsets.zero) {
     //ひとつのUIViewを配置できます
     //UIStackViewを置くことを推奨します
@@ -225,7 +225,7 @@ It should say `UIStackView.vertical` or `UIStackView.horizontal
 A `UIStackView` can propagate its own instance.
 
 ```swift
-self.declarate {
+self.declarative {
   UIStackView.vertical { stackView in
     //この中に複数のUIViewを配置できます
     //Multiple UIViews can be placed in this
@@ -480,7 +480,7 @@ class DeclarativeViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
 
-        self.declarate {
+        self.declarative {
 
             UIScrollView.vertical {
 

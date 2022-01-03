@@ -12,7 +12,7 @@ final class CircleImageView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.declarate {
+        self.declarative {
             UIImageView(tag: ViewTag.imageView.rawValue)
             .cornerRadius((width - 2*margin)/2)
             .clipsToBounds(true)

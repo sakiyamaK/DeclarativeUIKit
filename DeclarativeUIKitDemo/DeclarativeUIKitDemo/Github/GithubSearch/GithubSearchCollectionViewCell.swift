@@ -37,7 +37,7 @@ final class GithubSearchCollectionViewCell: UICollectionViewCell {
             .spacing(5)
         }
         
-        self.contentView.declarate(priorities: .init(bottom: .defaultLow) ) {
+        self.contentView.declarative(priorities: .init(bottom: .defaultLow) ) {
             UIStackView.vertical {
                 UIView.spacer().height(20)
                 UIStackView.horizontal {

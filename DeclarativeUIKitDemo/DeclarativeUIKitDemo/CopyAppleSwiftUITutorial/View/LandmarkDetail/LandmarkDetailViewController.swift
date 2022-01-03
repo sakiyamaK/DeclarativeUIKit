@@ -90,7 +90,7 @@ final class LandmarkDetailViewController: UIViewController {
         let imageOffset: CGFloat = 100
         let textHorizontalMargin: CGFloat = 12
         
-        self.declarate(safeAreas: .init(top: false)) {
+        self.declarative(safeAreas: .init(top: false)) {
             UIScrollView.vertical {
                 UIStackView.vertical {
                     MapView(tag: ViewTag.mapView.rawValue) {

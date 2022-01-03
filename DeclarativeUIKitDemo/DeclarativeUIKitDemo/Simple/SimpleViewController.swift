@@ -159,7 +159,7 @@ final class SimpleViewController: UIViewController {
             }
         }
         
-        self.declarate {
+        self.declarative {
             UIScrollView.vertical {
                 UIStackView.vertical {
                     Header("UIViewの設定")

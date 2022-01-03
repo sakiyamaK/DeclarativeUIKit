@@ -16,7 +16,7 @@ final class MapView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.declarate {
+        self.declarative {
             MKMapView(tag: ViewTag.mapView.rawValue)
         }
     }

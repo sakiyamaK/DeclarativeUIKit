@@ -80,7 +80,7 @@ public extension UIView {
         imperative(self)
     }
     
-    func declarate(
+    func declarative(
 priorities: UIEdgePriorities,
     @SingleUIViewBuilder _ builder: () -> UIView) {
         let view = builder()
@@ -88,8 +88,8 @@ priorities: UIEdgePriorities,
         self.edgesConstraints(view, safeAreas: .init(), priorities: priorities)
     }
     
-    func declarate(@SingleUIViewBuilder _ builder: () -> UIView) {
-        self.declarate(priorities: .init(), builder)
+    func declarative(@SingleUIViewBuilder _ builder: () -> UIView) {
+        self.declarative(priorities: .init(), builder)
     }
     
     static func spacer() -> UIView {

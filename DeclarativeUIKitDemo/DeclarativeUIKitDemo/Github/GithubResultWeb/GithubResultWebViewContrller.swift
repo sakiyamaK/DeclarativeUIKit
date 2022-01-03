@@ -30,7 +30,7 @@ final class GithubSearchResultViewController: UIViewController {
         
         self.view.backgroundColor = .white
         
-        self.declarate {
+        self.declarative {
             UIStackView.vertical {
                 WKWebView {
                     guard let webView = $0 as? WKWebView else { return }

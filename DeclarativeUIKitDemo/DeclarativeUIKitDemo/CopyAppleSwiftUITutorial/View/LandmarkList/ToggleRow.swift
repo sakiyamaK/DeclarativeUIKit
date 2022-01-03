@@ -12,7 +12,7 @@ final class ToggleRow: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.contentView.declarate(priorities: .init(bottom: .defaultLow)) {
+        self.contentView.declarative(priorities: .init(bottom: .defaultLow)) {
             UIStackView.vertical {
                 UIView.spacer()
                 

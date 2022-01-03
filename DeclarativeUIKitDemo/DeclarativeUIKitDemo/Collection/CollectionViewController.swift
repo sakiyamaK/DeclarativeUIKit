@@ -11,7 +11,7 @@ final class CollectionViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
                 
-        self.declarate {
+        self.declarative {
             UIStackView.vertical {
                 UILabel {
                     guard let label = $0 as? UILabel else { return }

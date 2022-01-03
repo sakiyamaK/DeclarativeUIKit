@@ -40,7 +40,7 @@ final class GithubSearchCollectionViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
             
-        self.declarate {
+        self.declarative {
             UIStackView.vertical {
                 UIStackView.horizontal {
                     UIView.spacer().width(12)

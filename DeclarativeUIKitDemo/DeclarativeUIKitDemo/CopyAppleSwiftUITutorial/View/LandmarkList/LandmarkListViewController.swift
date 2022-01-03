@@ -35,7 +35,7 @@ final class LandmarkListViewController: UIViewController {
         
         self.navigationItem.title = "Landmarks"
         
-        self.declarate {
+        self.declarative {
             UICollectionView(
                 frame: .zero,
                 collectionViewLayout: UICollectionViewCompositionalLayout { (section, environment) -> NSCollectionLayoutSection? in

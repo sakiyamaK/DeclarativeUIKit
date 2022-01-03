@@ -34,7 +34,7 @@ final class RootViewController: UIViewController {
             .cornerRadius(10)
         }
                 
-        self.declarate {
+        self.declarative {
             UIScrollView.vertical {
                 UIStackView.vertical {
                     UIView.spacer()
