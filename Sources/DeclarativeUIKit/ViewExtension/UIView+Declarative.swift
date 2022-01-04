@@ -85,7 +85,7 @@ priorities: UIEdgePriorities,
     @SingleUIViewBuilder _ builder: () -> UIView) {
         let view = builder()
         self.subviews.forEach { $0.removeFromSuperview() }
-        self.edgesConstraints(view, safeAreas: .init(), priorities: priorities)
+        self.edgesConstraints(view, safeAreas: .init(all: false), priorities: priorities)
     }
     
     func declarative(@SingleUIViewBuilder _ builder: () -> UIView) {
