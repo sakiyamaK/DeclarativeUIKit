@@ -189,17 +189,31 @@ final class SimpleViewController: UIViewController {
                     UIView.spacer().height(20)
                 }
             }
+            .refreshControl {
+                UIRefreshControl {
+                    let refreshControll = $0 as! UIRefreshControl
+                    refreshControll.addTarget(self, action: #selector(refresh), for: .valueChanged)
+                }
+            }
         }
         
     }
 }
-
 
 @objc private extension SimpleViewController {
     func tapButton(_ sender: UIButton) {
         print("ボタンをタップしたね")
         if let button = self.getView(tag: ViewTag.button.rawValue) as? UIButton {
             print(button)
+        }
+    }
+    
+    func refresh(_ sender: UIRefreshControl) {
+        print("refresh")
+        if sender.isRefreshing {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                sender.endRefreshing()
+            }
         }
     }
 }

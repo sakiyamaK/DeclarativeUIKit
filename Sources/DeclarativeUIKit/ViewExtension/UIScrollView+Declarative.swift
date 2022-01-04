@@ -97,4 +97,9 @@ public extension UIScrollView {
         return self
     }
 
+    @discardableResult
+    func refreshControl(_ refreshControl: () -> UIRefreshControl) -> Self {
+        self.refreshControl = refreshControl()
+        return self
+    }
 }

@@ -65,6 +65,23 @@ final class LandmarkListViewController: UIViewController {
             .dataSource(self)
             .registerCellClass(ToggleRow.self, forCellWithReuseIdentifier: "ToggleRow")
             .registerCellClass(LandmarkRow.self, forCellWithReuseIdentifier: "LandmarkRow")
+            .refreshControl {
+                UIRefreshControl {
+                    let refreshControll = $0 as! UIRefreshControl
+                    refreshControll.addTarget(self, action: #selector(refresh), for: .valueChanged)
+                }
+            }
+        }
+    }
+}
+
+@objc private extension LandmarkListViewController {
+    func refresh(_ sender: UIRefreshControl) {
+        print("refresh")
+        if sender.isRefreshing {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                sender.endRefreshing()
+            }
         }
     }
 }
