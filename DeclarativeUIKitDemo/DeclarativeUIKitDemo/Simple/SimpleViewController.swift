@@ -160,8 +160,8 @@ final class SimpleViewController: UIViewController {
         }
         
         self.declarative {
-            UIScrollView.vertical {
-                UIStackView.vertical {
+            UIScrollView {
+                UIStackView {
                     Header("UIViewの設定")
                     UIView.spacer().height(20)
                     ScrollBlocksView()

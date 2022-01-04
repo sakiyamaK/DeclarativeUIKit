@@ -12,10 +12,7 @@ extension Landmark {
 }
 
 final class LandmarkDetailViewController: UIViewController {
-    private enum ViewTag: Int {
-        case mapView = 1
-    }
-    
+        
     private var landmark: Landmark!
     
     func inject(landmark: Landmark) {
@@ -90,29 +87,29 @@ final class LandmarkDetailViewController: UIViewController {
         let imageOffset: CGFloat = 100
         let textHorizontalMargin: CGFloat = 12
         
-        self.declarative(safeAreas: .init(top: false)) {
-            UIScrollView.vertical {
-                UIStackView.vertical {
-                    MapView(tag: ViewTag.mapView.rawValue) {
-                            let mapView = $0 as! MapView
-                            mapView.setRegion(landmark.locationCoordinate)
-                        }
-                        .height(300)
-                        .zStack {
-                            UIStackView.vertical {
-                                UIView.spacer()
-                                CircleImageView {
-                                    let circleImageView = $0 as! CircleImageView
-                                    circleImageView.setLandmark(landmark)
-                                }
+        self.declarative {
+            UIScrollView {
+                UIStackView {
+                    MapView {
+                        let mapView = $0 as! MapView
+                        mapView.setRegion(landmark.locationCoordinate)
+                    }
+                    .height(300)
+                    .zStack {
+                        UIStackView {
+                            UIView.spacer()
+                            CircleImageView {
+                                let circleImageView = $0 as! CircleImageView
+                                circleImageView.setLandmark(landmark)
                             }
-                            .alignment(.center)
-                            .padding(insets: .init(top: 0, left: 0, bottom: -imageOffset, right: 0))
                         }
+                        .alignment(.center)
+                        .padding(insets: .init(top: 0, left: 0, bottom: -imageOffset, right: 0))
+                    }
                     
                     UIView.spacer().height(imageOffset)
                     
-                    UIStackView.vertical {
+                    UIStackView {
                         NameView(landmark)
                         
                         UIView.spacer().height(10)

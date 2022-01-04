@@ -51,49 +51,70 @@ public extension UIScrollView {
 //MARK: - with superview
 public extension UIScrollView {
     
-    static private func create(
-        axis: NSLayoutConstraint.Axis = .vertical,
-        margin: UIEdgeInsets = .zero,
-        @SingleUIViewBuilder _ builder: (UIView) -> UIView
-    ) -> UIScrollView {
-        UIScrollView {
-            guard let scrollView = $0 as? UIScrollView else { return }
-            let view = builder(scrollView)
-            view.translatesAutoresizingMaskIntoConstraints = false
-            scrollView.addSubview(view)
-            
-            let height = view.heightAnchor.constraint(equalTo: scrollView.frameLayoutGuide.heightAnchor, constant: -(margin.top + margin.bottom))
-            let width = view.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor, constant: -(margin.left + margin.right))
+    convenience init(axis: NSLayoutConstraint.Axis = .vertical, margin: UIEdgeInsets = .zero, @SingleUIViewBuilder _ builder: () -> UIView) {
+        self.init(frame: .zero)
+        
+        let view = builder()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(view)
+        
+        let height = view.heightAnchor.constraint(equalTo: self.frameLayoutGuide.heightAnchor, constant: -(margin.top + margin.bottom))
+        let width = view.widthAnchor.constraint(equalTo: self.frameLayoutGuide.widthAnchor, constant: -(margin.left + margin.right))
 
-            if axis == .vertical {
-                height.priority = .init(rawValue: 1)
-            } else {
-                width.priority = .init(rawValue: 1)
-            }
-            
-            NSLayoutConstraint.activate([
-                view.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor, constant: margin.top),
-                view.leftAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leftAnchor, constant: margin.left),
-                scrollView.contentLayoutGuide.rightAnchor.constraint(equalTo: view.rightAnchor, constant: margin.right),
-                scrollView.contentLayoutGuide.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: margin.top),
-                width,
-                height
-            ])
+        if axis == .vertical {
+            height.priority = .init(rawValue: 1)
+        } else {
+            width.priority = .init(rawValue: 1)
         }
+        
+        NSLayoutConstraint.activate([
+            view.topAnchor.constraint(equalTo: self.contentLayoutGuide.topAnchor, constant: margin.top),
+            view.leftAnchor.constraint(equalTo: self.contentLayoutGuide.leftAnchor, constant: margin.left),
+            self.contentLayoutGuide.rightAnchor.constraint(equalTo: view.rightAnchor, constant: margin.right),
+            self.contentLayoutGuide.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: margin.top),
+            width,
+            height
+        ])
     }
-    
+
+    convenience init(axis: NSLayoutConstraint.Axis = .vertical, margin: UIEdgeInsets = .zero, @SingleUIViewBuilder _ builder: (UIView) -> UIView) {
+        self.init(frame: .zero)
+        
+        let view = builder(self)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(view)
+        
+        let height = view.heightAnchor.constraint(equalTo: self.frameLayoutGuide.heightAnchor, constant: -(margin.top + margin.bottom))
+        let width = view.widthAnchor.constraint(equalTo: self.frameLayoutGuide.widthAnchor, constant: -(margin.left + margin.right))
+
+        if axis == .vertical {
+            height.priority = .init(rawValue: 1)
+        } else {
+            width.priority = .init(rawValue: 1)
+        }
+        
+        NSLayoutConstraint.activate([
+            view.topAnchor.constraint(equalTo: self.contentLayoutGuide.topAnchor, constant: margin.top),
+            view.leftAnchor.constraint(equalTo: self.contentLayoutGuide.leftAnchor, constant: margin.left),
+            self.contentLayoutGuide.rightAnchor.constraint(equalTo: view.rightAnchor, constant: margin.right),
+            self.contentLayoutGuide.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: margin.top),
+            width,
+            height
+        ])
+    }
+
     static func vertical(
         margin: UIEdgeInsets = .zero,
         @SingleUIViewBuilder _ builder: (UIView) -> UIView
     ) -> UIScrollView {
-        UIScrollView.create(axis: .vertical, margin: margin, builder)
+        UIScrollView(axis: .vertical, margin: margin, builder)
     }
     
     static func horizontal(
         margin: UIEdgeInsets = .zero,
         @SingleUIViewBuilder _ builder: (UIView) -> UIView
     ) -> UIScrollView {
-        UIScrollView.create(axis: .horizontal, margin: margin, builder)
+        UIScrollView(axis: .horizontal, margin: margin, builder)
     }
 }
 
