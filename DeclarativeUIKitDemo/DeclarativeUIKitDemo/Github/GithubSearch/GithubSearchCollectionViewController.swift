@@ -68,12 +68,9 @@ final class GithubSearchCollectionViewController: UIViewController {
                 UIView.spacer().height(10)
 
                 UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-                    .imperative {
-                    let collectionView = $0 as! UICollectionView
-                        collectionView.delegate = self
-                        collectionView.dataSource = self
-                        collectionView.register(GithubSearchCollectionViewCell.self, forCellWithReuseIdentifier: GithubSearchCollectionViewCell.reuseIdentifier)
-                    }
+                    .delegate(self)
+                    .dataSource(self)
+                    .registerCellClass(GithubSearchCollectionViewCell.self, forCellWithReuseIdentifier: GithubSearchCollectionViewCell.reuseIdentifier)
                     .isHidden(true)
                     .tag(ViewTag.collectionView.rawValue)
 

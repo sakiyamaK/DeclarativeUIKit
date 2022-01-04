@@ -10,7 +10,7 @@ final class CollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-                
+        
         self.declarative {
             UIStackView.vertical {
                 UILabel {
@@ -23,14 +23,13 @@ final class CollectionViewController: UIViewController {
                 UIView.spacer().height(10)
                 UIView.divider()
                 UIView.spacer().height(10)
-
-                UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-                    .imperative {
-                    guard let collectionView = $0 as? UICollectionView else { return }
-                        collectionView.delegate = self
-                        collectionView.dataSource = self
-                    collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+                
+                UICollectionView {
+                    UICollectionViewFlowLayout()
                 }
+                .dataSource(self)
+                .delegate(self)
+                .registerCellClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
             }
         }
     }
@@ -61,16 +60,16 @@ struct CollectionViewController_Wrapper: UIViewControllerRepresentable {
         let vc = ViewController()
         return vc
     }
-
+    
     // 更新用のメソッド
     func updateUIViewController(_ vc: ViewController, context: Context) {
     }
 }
 
 struct CollectionViewController_Previews: PreviewProvider {
-  static var previews: some View {
-      Group {
-          CollectionViewController_Wrapper()
-      }
-  }
+    static var previews: some View {
+        Group {
+            CollectionViewController_Wrapper()
+        }
+    }
 }

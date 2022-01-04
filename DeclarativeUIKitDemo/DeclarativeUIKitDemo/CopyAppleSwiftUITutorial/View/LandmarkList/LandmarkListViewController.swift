@@ -36,9 +36,8 @@ final class LandmarkListViewController: UIViewController {
         self.navigationItem.title = "Landmarks"
         
         self.declarative {
-            UICollectionView(
-                frame: .zero,
-                collectionViewLayout: UICollectionViewCompositionalLayout { (section, environment) -> NSCollectionLayoutSection? in
+            UICollectionView {
+                UICollectionViewCompositionalLayout { (section, environment) -> NSCollectionLayoutSection? in
                     
                     let height: CGFloat = 40
                     
@@ -60,15 +59,12 @@ final class LandmarkListViewController: UIViewController {
                     
                     return section
                 }
-            )
-                .imperative {
-                    guard let collectionView = $0 as? UICollectionView else { return }
-                    collectionView.register(ToggleRow.self, forCellWithReuseIdentifier: "ToggleRow")
-                    collectionView.register(LandmarkRow.self, forCellWithReuseIdentifier: "LandmarkRow")
-                    collectionView.delegate = self
-                    collectionView.dataSource = self
-                }
-                .tag(ViewTag.collectionView.rawValue)
+            }
+            .tag(ViewTag.collectionView.rawValue)
+            .delegate(self)
+            .dataSource(self)
+            .registerCellClass(ToggleRow.self, forCellWithReuseIdentifier: "ToggleRow")
+            .registerCellClass(LandmarkRow.self, forCellWithReuseIdentifier: "LandmarkRow")
         }
     }
 }
