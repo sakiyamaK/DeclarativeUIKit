@@ -21,6 +21,16 @@ final class LandmarkDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self,
+            selector: #selector(setup),
+            name: Notification.Name("INJECTION_BUNDLE_NOTIFICATION"), object: nil)
+        setup()
+    }
+}
+
+@objc
+private extension LandmarkDetailViewController {
+    func setup() {
         self.view.backgroundColor = .white
         
         let NameView = { (landmark: Landmark) -> UIView in
@@ -43,7 +53,7 @@ final class LandmarkDetailViewController: UIViewController {
                     UIView.spacer()
                     
                 }.spacing(10)
-                
+                                
                 UIStackView.horizontal {
                     
                     UILabel {
@@ -124,20 +134,19 @@ final class LandmarkDetailViewController: UIViewController {
     }
 }
 
-
 import SwiftUI
 
 private struct ViewController_Wrapper: UIViewControllerRepresentable {
     typealias ViewController = LandmarkDetailViewController
-    
+
     var landmark: Landmark
-    
+
     func makeUIViewController(context: Context) -> ViewController {
         let vc = ViewController()
         vc.inject(landmark: landmark)
         return vc
     }
-    
+
     func updateUIViewController(_ vc: ViewController, context: Context) {
     }
 }

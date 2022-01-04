@@ -12,7 +12,7 @@ final class LandmarkRow: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
                 
-        self.contentView.declarative {
+        self.contentView.declarative(priorities: .init(bottom: .defaultLow)) {
             UIStackView.vertical {
                 UIView.spacer()
                 
