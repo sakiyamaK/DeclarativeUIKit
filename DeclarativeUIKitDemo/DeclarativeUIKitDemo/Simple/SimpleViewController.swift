@@ -102,7 +102,7 @@ final class SimpleViewController: UIViewController {
                     
                     UILabel(tag: ViewTag.tapLabel.rawValue) {
                         guard let label = $0 as? UILabel else { return }
-                        label.text = "タップジェスターのあるラベル"
+                        label.text = "タップジェスチャーのあるラベル"
                         label.textAlignment = .center
                     }
                     .isUserInteractionEnabled(true)
@@ -204,7 +204,6 @@ final class SimpleViewController: UIViewController {
                     }
             }
         }
-        
     }
 }
 

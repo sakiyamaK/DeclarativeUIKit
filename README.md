@@ -554,9 +554,6 @@ final class SimpleViewController: UIViewController {
         let Border = {
             UIView.divider().backgroundColor(.gray)
         }
-        let MarginView = {
-            UIView.spacer().height(40).backgroundColor(.lightGray)
-        }
         
         let Header = { (title: String) -> UIView in
             UIStackView.vertical {
@@ -628,14 +625,14 @@ final class SimpleViewController: UIViewController {
                         button.setTitle("button", for: .normal)
                         button.setTitleColor(.brown, for: .normal)
                     }
-                    .addTouchAction(target: self, for: .touchUpInside) {
+                    .addControlAction(target: self, for: .touchUpInside) {
                         #selector(self.tapButton)
                     }
                     .tag(ViewTag.button.rawValue)
                     
                     UILabel(tag: ViewTag.tapLabel.rawValue) {
                         guard let label = $0 as? UILabel else { return }
-                        label.text = "タップジェスターのあるラベル"
+                        label.text = "タップジェスチャーのあるラベル"
                         label.textAlignment = .center
                     }
                     .isUserInteractionEnabled(true)
@@ -670,25 +667,6 @@ final class SimpleViewController: UIViewController {
             }.alignment(.center)
         }
         
-        let Geometry = {
-            UIView()
-                .backgroundColor(.red)
-                .zStack {
-                    UIStackView.horizontal { superview in
-                        UIView()
-                            .backgroundColor(.blue)
-                            .heightEqual(to: superview, constraint: superview.heightAnchor - 20)
-                        
-                        UIView()
-                            .backgroundColor(.green)
-                            .widthEqual(to: superview, constraint: superview.widthAnchor * 0.4)
-                            .heightEqual(to: superview, constraint: superview.heightAnchor / 2 + 10)
-                    }
-                    .height(100)
-                    .alignment(.center)
-                }
-        }
-        
         let SomeViews = {
             Array(1...10).compactMap { num in
                 UILabel {
@@ -707,35 +685,21 @@ final class SimpleViewController: UIViewController {
                     UIView.spacer().height(20)
                     ScrollBlocksView()
                     UIView.spacer().height(20)
-                    MarginView()
-                    UIView.spacer().height(10)
-                    Header("レイアウト以外の設定は手続的にする")
-                    UIView.spacer().height(20)
                     CenteringView()
                     UIView.spacer().height(20)
-                    MarginView()
-                    UIView.spacer().height(10)
-                    Header("Z方向の設定")
                     ZStackView()
-                    MarginView()
                     UIView.spacer().height(30)
-                    Header("親ビューの大きさで設定")
-                    Geometry()
-                    UIView.spacer().height(20)
-                    MarginView()
-                    UIView.spacer().height(30)
-                    Header("配列で用意")
-                    UIView.spacer().height(20)
                     SomeViews()
                     UIView.spacer().height(20)
                 }
             }
             .refreshControl {
                 UIRefreshControl()
-                .add(target: self, action: #selector(refresh), for: .valueChanged)
+                    .addControlAction(target: self, for: .valueChanged) {
+                        #selector(refresh)
+                    }
             }
         }
-        
     }
 }
 
@@ -750,11 +714,6 @@ final class SimpleViewController: UIViewController {
     
     func refresh(_ sender: UIRefreshControl) {
         print("refresh")
-        if sender.isRefreshing {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                sender.endRefreshing()
-            }
-        }
     }
 }
 ```
