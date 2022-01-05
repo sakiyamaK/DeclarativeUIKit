@@ -13,7 +13,7 @@ final class LandmarkRow: UICollectionViewCell {
         super.init(frame: frame)
                 
         self.contentView.declarative(priorities: .init(bottom: .defaultLow)) {
-            UIStackView.vertical {
+            UIStackView {
                 UIView.spacer()
                 
                 UIStackView.horizontal {

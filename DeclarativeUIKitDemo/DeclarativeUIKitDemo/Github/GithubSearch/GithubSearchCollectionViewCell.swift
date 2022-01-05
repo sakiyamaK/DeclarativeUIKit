@@ -37,71 +37,55 @@ final class GithubSearchCollectionViewCell: UICollectionViewCell {
             .spacing(5)
         }
         
-        self.contentView.declarative(priorities: .init(bottom: .defaultLow) ) {
-            UIStackView.vertical {
-                UIView.spacer().height(20)
-                UIStackView.horizontal {
-                    UIView.spacer().width(10)
+        self.contentView.declarative(priorities: .init(bottom: .defaultLow)) {
+            UIStackView {
+                UIStackView {
+                    UILabel {
+                        guard let label = $0 as? UILabel else { return }
+                        label.textAlignment = .left
+                        label.font = UIFont.systemFont(ofSize: 30)
+                        label.setContentHuggingPriority(.required, for: .vertical)
+                        label.setContentCompressionResistancePriority(.required, for: .vertical)
+                    }.tag(ViewTag.fullNameLabel.rawValue)
                     
-                    UIStackView.vertical {
-                        UIImageView {
-                            guard let imageView = $0 as? UIImageView else { return }
-                            imageView.image = UIImage(systemName: "book.closed")?.withRenderingMode(.alwaysTemplate).withTintColor(.black)
-                        }
-                        .width(20)
-                        .aspectRatio(1.0)
-                        
-                        UIView.spacer()
-                    }.isHidden(true)
-                    
-                    UIStackView.vertical {
-                        UILabel {
-                            guard let label = $0 as? UILabel else { return }
-                            label.textAlignment = .left
-                            label.font = UIFont.systemFont(ofSize: 30)
-                            label.setContentHuggingPriority(.required, for: .vertical)
-                            label.setContentCompressionResistancePriority(.required, for: .vertical)
-                        }.tag(ViewTag.fullNameLabel.rawValue)
-                        
+                    UILabel {
+                        guard let label = $0 as? UILabel else { return }
+                        label.textAlignment = .left
+                        label.font = UIFont.systemFont(ofSize: 20)
+                        label.setContentHuggingPriority(.required, for: .vertical)
+                        label.setContentCompressionResistancePriority(.required, for: .vertical)
+                    }.tag(ViewTag.descriptionLabel.rawValue)
+
+                    UIStackView.horizontal {
+                        BottomIconView("circle", ViewTag.starIconLbel.rawValue)
+
+                        BottomIconView("circle", ViewTag.languageIconLbel.rawValue)
+
                         UILabel {
                             guard let label = $0 as? UILabel else { return }
                             label.textAlignment = .left
                             label.font = UIFont.systemFont(ofSize: 20)
                             label.setContentHuggingPriority(.required, for: .vertical)
                             label.setContentCompressionResistancePriority(.required, for: .vertical)
-                        }.tag(ViewTag.descriptionLabel.rawValue)
-                        
-                        UIStackView.horizontal {
-                            BottomIconView("circle", ViewTag.starIconLbel.rawValue)
-                            
-                            BottomIconView("circle", ViewTag.languageIconLbel.rawValue)
-                            
-                            UILabel {
-                                guard let label = $0 as? UILabel else { return }
-                                label.textAlignment = .left
-                                label.font = UIFont.systemFont(ofSize: 20)
-                                label.setContentHuggingPriority(.required, for: .vertical)
-                                label.setContentCompressionResistancePriority(.required, for: .vertical)
-                            }.tag(ViewTag.licenseLabel.rawValue)
-                            
-                            UILabel {
-                                guard let label = $0 as? UILabel else { return }
-                                label.textAlignment = .left
-                                label.font = UIFont.systemFont(ofSize: 20)
-                                label.setContentHuggingPriority(.required, for: .vertical)
-                                label.setContentCompressionResistancePriority(.required, for: .vertical)
-                            }.tag(ViewTag.dateLabel.rawValue)
-                            
-                            UIView.spacer()
-                            
-                        }
-                        .spacing(10)
+                        }.tag(ViewTag.licenseLabel.rawValue)
+
+                        UILabel {
+                            guard let label = $0 as? UILabel else { return }
+                            label.textAlignment = .left
+                            label.font = UIFont.systemFont(ofSize: 20)
+                            label.setContentHuggingPriority(.required, for: .vertical)
+                            label.setContentCompressionResistancePriority(.required, for: .vertical)
+                        }.tag(ViewTag.dateLabel.rawValue)
+
+                        UIView.spacer()
+
                     }
-                    .spacing(20)
+                    .spacing(10)
                 }
-                .spacing(10)
+                .alignment(.leading)
+                .spacing(20)
+                .padding(insets: .init(top: 20, left: 10, bottom: 20, right: 10))
                 
-                UIView.spacer().height(20)
                 UIView.divider()
             }
         }

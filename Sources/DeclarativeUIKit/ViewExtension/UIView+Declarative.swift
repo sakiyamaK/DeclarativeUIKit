@@ -136,34 +136,38 @@ public extension UIView {
     }
     
     @discardableResult
-    func addSubview(
-margin: UIEdgeInsets = .zero,
+    func addSubview(margin: UIEdgeInsets = .zero, priorities: UIEdgePriorities = .init(all: .required),
     @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> Self {
-        self.zStack(margin: margin, builder)
+        self.zStack(margin: margin, priorities: priorities, builder)
     }
     
     @discardableResult
-    func zStack(
-margin: UIEdgeInsets = .zero,
+    func zStack(margin: UIEdgeInsets = .zero, priorities: UIEdgePriorities = .init(all: .required),
     @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> Self {
         imperative { superView in
             builder().compactMap { $0 }.forEach { (view) in
                 superView.addSubview(view)
                 view.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate([
-                    view.topAnchor.constraint(equalTo: superView.topAnchor, constant: margin.top),
-                    view.leftAnchor.constraint(equalTo: superView.leftAnchor, constant: margin.left),
-                    superView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: margin.right),
-                    superView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: margin.bottom)
-                ])
+                let top = view.topAnchor.constraint(equalTo: superView.topAnchor, constant: margin.top)
+                let leading = view.leadingAnchor.constraint(equalTo: superView.leadingAnchor, constant: margin.left)
+                let trailing = superView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: margin.right)
+                let bottom = superView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: margin.bottom)
                 
+                top.priority = priorities.top
+                leading.priority = priorities.leading
+                trailing.priority = priorities.trailing
+                bottom.priority = priorities.bottom
+
+                NSLayoutConstraint.activate([
+                    top, leading, trailing, bottom
+                ])
             }
         }
     }
     
     @discardableResult
     func padding(insets: UIEdgeInsets) -> UIView {
-        UIView().zStack(margin: insets, { self })
+        UIView.spacer().zStack(margin: insets, priorities: .init(all: .init(rawValue: 999)), { self })
     }
     
     @discardableResult
@@ -322,8 +326,8 @@ public extension UIView {
         
         top.priority = priorities.top
         leading.priority = priorities.leading
-        trailing.priority = priorities.trailing
         bottom.priority = priorities.bottom
+        trailing.priority = priorities.trailing
         
         NSLayoutConstraint.activate([
             top, leading, trailing, bottom
