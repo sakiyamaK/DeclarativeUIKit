@@ -180,8 +180,8 @@ class DeclarativeViewController: UIViewController {
         UIButton(tag: ViewTag.button.rawValue) {
           guard let button = $0 as? UIButton else { return }
           button.setTitle("button", for: .normal)
-          button.addTarget(self, action: #selector(self.tapButton), for: .touchUpInside)
         }
+        .addTarget(self, action: #selector(self.tapButton), for: .touchUpInside)
         //もしくはtagメソッドから設定します
         // or set via the tag method
           .tag(ViewTag.button.rawValue)

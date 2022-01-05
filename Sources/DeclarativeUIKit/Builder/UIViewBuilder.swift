@@ -33,16 +33,15 @@ public enum ArrayUIViewBuilder {
     public static func buildBlock(_ components: Component...) -> Component {
         return Array(components.joined())
     }
+    
+    public static func buildBlock() -> Component {
+        return []
+    }
 }
 
 @resultBuilder
 public enum SingleUIViewBuilder {
-    public typealias Component = Expression
-    public typealias Expression = UIView
-
-    public static func buildExpression(_ element: Expression) -> Component {
-        return element
-    }
+    public typealias Component = UIView
 
     public static func buildEither(first component: Component) -> Component {
         return component

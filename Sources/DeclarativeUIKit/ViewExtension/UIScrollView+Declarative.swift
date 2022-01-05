@@ -25,7 +25,7 @@ public extension UIScrollView {
         ])
     }
     
-    convenience init(axis: NSLayoutConstraint.Axis = .vertical, margin: UIEdgeInsets = .zero, @SingleUIViewBuilder _ builder: () -> UIView) {
+    convenience init(axis: NSLayoutConstraint.Axis = .vertical, margin: UIEdgeInsets = .zero, _ builder: () -> UIView) {
         self.init(frame: .zero)
         let view = builder()
         self.constraint(axis: axis, margin: margin, view: view)
@@ -33,14 +33,14 @@ public extension UIScrollView {
     
     static func vertical(
         margin: UIEdgeInsets = .zero,
-        @SingleUIViewBuilder _ builder: () -> UIView
+        _ builder: () -> UIView
     ) -> UIScrollView {
         UIScrollView(axis: .vertical, margin: margin, builder)
     }
     
     static func horizontal(
         margin: UIEdgeInsets = .zero,
-        @SingleUIViewBuilder _ builder: () -> UIView
+        _ builder: () -> UIView
     ) -> UIScrollView {
         UIScrollView(axis: .horizontal, margin: margin, builder)
     }
@@ -49,7 +49,7 @@ public extension UIScrollView {
 //MARK: - with superview
 public extension UIScrollView {
     
-    convenience init(axis: NSLayoutConstraint.Axis = .vertical, margin: UIEdgeInsets = .zero, @SingleUIViewBuilder _ builder: (UIView) -> UIView) {
+    convenience init(axis: NSLayoutConstraint.Axis = .vertical, margin: UIEdgeInsets = .zero, _ builder: (UIView) -> UIView) {
         self.init(frame: .zero)        
         let view = builder(self)
         self.constraint(axis: axis, margin: margin, view: view)
@@ -57,14 +57,14 @@ public extension UIScrollView {
 
     static func vertical(
         margin: UIEdgeInsets = .zero,
-        @SingleUIViewBuilder _ builder: (UIView) -> UIView
+        _ builder: (UIView) -> UIView
     ) -> UIScrollView {
         UIScrollView(axis: .vertical, margin: margin, builder)
     }
     
     static func horizontal(
         margin: UIEdgeInsets = .zero,
-        @SingleUIViewBuilder _ builder: (UIView) -> UIView
+        _ builder: (UIView) -> UIView
     ) -> UIScrollView {
         UIScrollView(axis: .horizontal, margin: margin, builder)
     }

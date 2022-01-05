@@ -40,36 +40,24 @@ final class RootViewController: UIViewController {
                     UIView.spacer()
                     
                     Button("シンプルな例")
-                        .imperative {
-                            guard let button = $0 as? UIButton else { return }
-                            button.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
-                        }
+                        .add(target: self, action: #selector(tapButton), for: .touchUpInside)
                         .tag(ViewTag.simpleDemoButton.rawValue)
 
                     UIView.spacer()
 
                     Button("CollectionView")
-                        .imperative {
-                            guard let button = $0 as? UIButton else { return }
-                            button.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
-                        }
+                        .add(target: self, action: #selector(tapButton), for: .touchUpInside)
                         .tag(ViewTag.collectionViewButton.rawValue)
 
                     UIView.spacer()
 
                     Button("GithubSearch")
-                        .imperative {
-                            guard let button = $0 as? UIButton else { return }
-                            button.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
-                        }
+                        .add(target: self, action: #selector(tapButton), for: .touchUpInside)
                         .tag(ViewTag.githubSearch.rawValue)
 
                     UIView.spacer()
                     Button("SwiftUI Tutorial")
-                        .imperative {
-                            guard let button = $0 as? UIButton else { return }
-                            button.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
-                        }
+                        .add(target: self, action: #selector(tapButton), for: .touchUpInside)
                         .tag(ViewTag.swiftuiTutorialButton.rawValue)
 
                     UIView.spacer()

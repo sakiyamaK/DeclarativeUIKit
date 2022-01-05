@@ -55,8 +55,8 @@ final class GithubSearchCollectionViewController: UIViewController {
                     UIButton {
                         let button = $0 as! UIButton
                         button.setImage(UIImage(systemName: "magnifyingglass.circle"), for: .normal)
-                        button.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
                     }
+                    .add(target: self, action: #selector(tapButton), for: .touchUpInside)
                     .contentMode(.scaleAspectFit)
                     .tag(ViewTag.searchButton.rawValue)
 

@@ -94,8 +94,8 @@ final class SimpleViewController: UIViewController {
                         guard let button = $0 as? UIButton else { return }
                         button.setTitle("button", for: .normal)
                         button.setTitleColor(.brown, for: .normal)
-                        button.addTarget(self, action: #selector(self.tapButton), for: .touchUpInside)
                     }
+                    .add(target: self, action: #selector(self.tapButton), for: .touchUpInside)
                     .tag(ViewTag.button.rawValue)
                     
                     UILabel {
@@ -190,10 +190,8 @@ final class SimpleViewController: UIViewController {
                 }
             }
             .refreshControl {
-                UIRefreshControl {
-                    let refreshControll = $0 as! UIRefreshControl
-                    refreshControll.addTarget(self, action: #selector(refresh), for: .valueChanged)
-                }
+                UIRefreshControl()
+                .add(target: self, action: #selector(refresh), for: .valueChanged)
             }
         }
         

@@ -24,10 +24,8 @@ final class ToggleRow: UICollectionViewCell {
                     
                     UIView.spacer()
                     
-                    UISwitch {
-                        let switchView = $0 as! UISwitch
-                        switchView.addTarget(self, action: #selector(_toggleAction), for: .valueChanged)
-                    }
+                    UISwitch()
+                    .add(target: self, action: #selector(_toggleAction), for: .valueChanged)
                     .tag(ViewTag.toggle.rawValue)
                 }
                 .alignment(.center)

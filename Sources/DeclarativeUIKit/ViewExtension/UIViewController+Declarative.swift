@@ -39,7 +39,7 @@ public extension UIViewController {
                 self.view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: leadingView.trailingAnchor)
             ])
         }
-
+        
         //セーフエリアの下の外側
         if let bottomView = outsideSafeAreaBottomBuilder() {
             bottomView.translatesAutoresizingMaskIntoConstraints = false
@@ -51,7 +51,7 @@ public extension UIViewController {
                 self.view.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor)
             ])
         }
-
+        
         //セーフエリアの右の外側
         if let trailingView = outsideSafeAreaTrailingBuilder() {
             trailingView.translatesAutoresizingMaskIntoConstraints = false

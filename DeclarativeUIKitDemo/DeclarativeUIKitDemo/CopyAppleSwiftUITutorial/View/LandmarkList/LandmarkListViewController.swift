@@ -66,10 +66,8 @@ final class LandmarkListViewController: UIViewController {
             .registerCellClass(ToggleRow.self, forCellWithReuseIdentifier: "ToggleRow")
             .registerCellClass(LandmarkRow.self, forCellWithReuseIdentifier: "LandmarkRow")
             .refreshControl {
-                UIRefreshControl {
-                    let refreshControll = $0 as! UIRefreshControl
-                    refreshControll.addTarget(self, action: #selector(refresh), for: .valueChanged)
-                }
+                UIRefreshControl()
+                    .add(target: self, action: #selector(refresh), for: .valueChanged)
             }
         }
     }
