@@ -14,7 +14,7 @@ public extension UIControl {
     }
     
     @discardableResult
-    func addTouchAction(_ target: Any?, for controlEvents: UIControl.Event, _ actionBuilder: () -> Selector) -> Self {
+    func addTouchAction(target: Any?, for controlEvents: UIControl.Event, _ actionBuilder: () -> Selector) -> Self {
         self.add(target: target, action: actionBuilder(), for: controlEvents)
     }
 

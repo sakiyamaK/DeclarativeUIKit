@@ -95,7 +95,7 @@ final class SimpleViewController: UIViewController {
                         button.setTitle("button", for: .normal)
                         button.setTitleColor(.brown, for: .normal)
                     }
-                    .addTouchAction(self, for: .touchUpInside) {
+                    .addTouchAction(target: self, for: .touchUpInside) {
                         #selector(self.tapButton)
                     }
                     .tag(ViewTag.button.rawValue)
