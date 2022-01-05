@@ -24,6 +24,10 @@ Library for writing UIKit Autolayout declaratively.
       * [to use the parent view](#to-use-the-parent-view)
       * [overlay](#overlay)
       * [imperative](#imperative)
+      * [spacer](#spacer)
+      * [Array](#array)
+  * [UICollectionView](#uICollectionView)
+  * [UIButton](#uIButton)
 * [Quick Start](#quick-start)
 * [Xcode Preview](#xcode-preview)
 ## Motivation
@@ -39,6 +43,7 @@ In addition, since SwiftUI is based on MVVM design using Combine, projects that 
 そのためUIKitをメインとして既存のレイアウトの定義だけを宣言的に記述できるライブラリとしました。
 
 For this reason, we decided to use UIKit as the main library where only the existing layout definitions can be written declaratively.
+
 ## Example
 
 * [Demo Projects](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo)
@@ -165,6 +170,9 @@ class DeclarativeViewController: UIViewController {
 
 宣言的に記述されたViewはパラメータに代入されていないため`tag`を指定して`UIViewController`か`UIView`の`getView`メソッドでアクセスできます
 
+Since the declaratively described View is not assigned to a parameter, it can be accessed by specifying a `tag` and using the `UIViewController` or `UIView's getView` method.
+
+
 ```swift
 class DeclarativeViewController: UIViewController {
 
@@ -202,7 +210,7 @@ class DeclarativeViewController: UIViewController {
 
 `UIScrollView.vertical`もしくは`UIScrollView.horizontal`と記載します
 
-It should write `UIScrollView.vertical` or `UIScrollView.horizontal
+It should write `UIScrollView.vertical` or `UIScrollView.horizontal`
 
 ```swift
 self.declarative {
@@ -322,6 +330,11 @@ UIStackView.vertical {
     .shadow(color: .white, radius: 10, x: 0, y: 10)
     .border(color: .white, width: 10)
     .cornerRadius(10, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner])
+    .addGestureRecognizer {
+        UITapGestureRecognizer(target: self) {
+            #selector(self.tapView)
+        }
+    }
 
 
   //複雑なパラメータ padding
@@ -464,7 +477,44 @@ UIStackView.vertical {
 }
 ```
 
-### Quick Start
+### UICollectionView
+
+UICollectionViewのいくつかのパラメータは宣言的に設定することができます
+
+Some parameters of UICollectionView can be set declaratively
+
+```swift
+UICollectionView {
+    UICollectionViewFlowLayout()
+}
+.dataSource(self)
+.delegate(self)
+.prefetchDataSource(self)
+.dragDelegate(self)
+.dropDelegate(self)
+.registerCellClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+.registerViewClass(UIView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "Header")
+
+```
+
+### UIButton
+
+タッチアクションの設定が宣言的に書けるようになっています
+
+Touch action settings can be written declaratively.
+
+```swift
+UIButton {
+    let button = $0 as! UIButton
+    button.setTitle("button", for: .normal)
+    button.setTitleColor(.brown, for: .normal)
+}
+.addTouchAction(target: self, for: .touchUpInside) {
+    #selector(self.tapButton)
+}
+```
+
+## Quick Start
 
 実例です
 
@@ -555,7 +605,7 @@ class DeclarativeViewController: UIViewController {
 }
 ```
 
-### Xcode Preview
+## Xcode Preview
 
 Xcode Previewによりビルドすることなくレイアウトを確認することができます
 
