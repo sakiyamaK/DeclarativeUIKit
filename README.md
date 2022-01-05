@@ -27,7 +27,7 @@ Library for writing UIKit Autolayout declaratively.
       * [spacer](#spacer)
       * [Array](#array)
   * [UICollectionView](#uICollectionView)
-  * [UIButton](#uIButton)
+  * [UIControl](#uIControl)
 * [Quick Start](#quick-start)
 * [Xcode Preview](#xcode-preview)
 ## Motivation
