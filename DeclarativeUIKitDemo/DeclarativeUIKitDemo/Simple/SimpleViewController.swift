@@ -95,7 +95,9 @@ final class SimpleViewController: UIViewController {
                         button.setTitle("button", for: .normal)
                         button.setTitleColor(.brown, for: .normal)
                     }
-                    .add(target: self, action: #selector(self.tapButton), for: .touchUpInside)
+                    .addTouchAction(self, for: .touchUpInside) {
+                        #selector(self.tapButton)
+                    }
                     .tag(ViewTag.button.rawValue)
                     
                     UILabel(tag: ViewTag.tapLabel.rawValue) {
@@ -104,7 +106,11 @@ final class SimpleViewController: UIViewController {
                         label.textAlignment = .center
                     }
                     .isUserInteractionEnabled(true)
-                    .add(gestureRecognizer: UITapGestureRecognizer(target: self, action: #selector(self.tapLabel(_:))))
+                    .addGestureRecognizer {
+                        UITapGestureRecognizer(target: self) {
+                            #selector(self.tapLabel(_:))
+                        }
+                    }
                 }
                 .spacing(30)
             }
