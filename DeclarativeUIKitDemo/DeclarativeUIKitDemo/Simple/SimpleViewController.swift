@@ -95,7 +95,7 @@ final class SimpleViewController: UIViewController {
                         button.setTitle("button", for: .normal)
                         button.setTitleColor(.brown, for: .normal)
                     }
-                    .addTouchAction(target: self, for: .touchUpInside) {
+                    .addControlAction(target: self, for: .touchUpInside) {
                         #selector(self.tapButton)
                     }
                     .tag(ViewTag.button.rawValue)
@@ -199,7 +199,9 @@ final class SimpleViewController: UIViewController {
             }
             .refreshControl {
                 UIRefreshControl()
-                .add(target: self, action: #selector(refresh), for: .valueChanged)
+                    .addControlAction(target: self, for: .valueChanged) {
+                        #selector(refresh)
+                    }
             }
         }
         

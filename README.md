@@ -222,6 +222,12 @@ self.declarative {
   }
   .isScrollEnabled(true)
   .showsScrollIndicator(true)
+  .refreshControl {
+      UIRefreshControl()
+          .addControlAction(target: self, for: .valueChanged) {
+              #selector(refresh)
+          }
+  }
 }
 ```
 
@@ -497,9 +503,9 @@ UICollectionView {
 
 ```
 
-### UIButton
+### UIControl
 
-タッチアクションの設定が宣言的に書けるようになっています
+アクションの設定が宣言的に書けるようになっています
 
 Touch action settings can be written declaratively.
 
@@ -509,8 +515,19 @@ UIButton {
     button.setTitle("button", for: .normal)
     button.setTitleColor(.brown, for: .normal)
 }
-.addTouchAction(target: self, for: .touchUpInside) {
+.addControlAction(target: self, for: .touchUpInside) {
     #selector(self.tapButton)
+}
+
+UIScrollView {
+  UIStackView {
+  }
+}
+.refreshControl {
+    UIRefreshControl()
+        .addControlAction(target: self, for: .valueChanged) {
+            #selector(refresh)
+        }
 }
 ```
 
@@ -524,81 +541,218 @@ A practical example.
 import UIKit
 import DeclarativeUIKit
 
-class DeclarativeViewController: UIViewController {
-
+final class SimpleViewController: UIViewController {
+    
+    enum ViewTag: Int {
+        case button = 1, tapLabel
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-
-        self.declarative {
-
-            UIScrollView.vertical {
-
-                UIStackView.vertical {
-
-                    UIScrollView.horizontal(margin: .init(top: 20, left: 10, bottom: 20, right: 10)) {
-                        UIStackView.horizontal(distribution: .fill) {
-                            UIView()
-                                .width(100)
-                                .height(100)
-                                .backgroundColor(.red)
-                                .cornerRadius(30, maskedCorners: [.layerMinXMinYCorner, .layerMaxXMaxYCorner])
-                            UIView()
-                                .size(width: 100, height: 100)
-                                .backgroundColor(.systemGreen)
-                                .transform(.init(rotationAngle: 45.0/360 * Double.pi))
-                            UIView()
-                                .size(width: 100, height: 100)
-                                .border(color: .systemBlue, width: 10)
-                                .shadow(color: .black.withAlphaComponent(0.7), radius: 10, x: 5, y: 5)
-                        }.spacing(30)
-                    }
-                    .showsScrollIndicator(false)
-
-                    UIStackView.vertical {
-                        UIImageView {
-
-                            guard let imageView = $0 as? UIImageView else { return }
-                            imageView.image = UIImage.init(systemName: "square.and.arrow.up")
+        
+        let Border = {
+            UIView.divider().backgroundColor(.gray)
+        }
+        let MarginView = {
+            UIView.spacer().height(40).backgroundColor(.lightGray)
+        }
+        
+        let Header = { (title: String) -> UIView in
+            UIStackView.vertical {
+                UILabel {
+                    guard let label = $0 as? UILabel else { return }
+                    label.text = title
+                    label.textColor = .black
+                    label.textAlignment = .center
+                    label.numberOfLines = 0
+                    label.font = UIFont.systemFont(ofSize: 30)
+                }
+                UIView.spacer().height(10)
+                Border()
+            }
+        }
+        
+        let ScrollBlocksView = {
+            UIScrollView.horizontal(margin: .init(top: 20, left: 10, bottom: 20, right: 10)) {
+                UIStackView.horizontal(distribution: .fill) { stackView in
+                    UIView()
+                        .imperative { _ in
+                            print(stackView)
                         }
-                        .contentMode(.scaleAspectFit)
+                        .width(100)
+                        .height(100)
+                        .backgroundColor(.red)
+                    UIView()
+                        .width(100)
+                        .aspectRatio(1.0)
+                        .backgroundColor(.green)
+                        .cornerRadius(30, maskedCorners: [.layerMinXMinYCorner, .layerMaxXMaxYCorner])
+                    UIView()
                         .size(width: 100, height: 100)
-                        
-                        UIButton().imperative {
-                            guard let button = $0 as? UIButton else { return }
-                            button.setTitle("UIButton", for: .normal)
-                            button.titleLabel?.font = UIFont.systemFont(ofSize: 30)
-                            button.contentEdgeInsets = .init(top: 10, left: 10, bottom: 10, right: 10)
-                        }
-                        .backgroundColor(.systemBlue)
-                        .cornerRadius(10)
-                        
-                        UILabel {
-                            guard let label = $0 as? UILabel else { return }
-                            label.text = "UILabel"
-                            label.font = UIFont.systemFont(ofSize: 30)
-                            label.textAlignment = .center
-                        }
-                        
-                        UIImageView {
-                            guard let imageView = $0 as? UIImageView else { return }
-                            imageView.image = UIImage.init(systemName: "square.and.arrow.down")
-                        }
-                        .contentMode(.scaleAspectFit)
-                        .size(width: 150, height: 150)
-                        .zStack(margin: .init(top: 70, left: 10, bottom: 0, right: 10)) {
-                            UILabel {
-                                guard let label = $0 as? UILabel else { return }
-                                label.text = "zStack"
-                                label.textColor = .black
-                                label.textAlignment = .center
-                                label.font = UIFont.boldSystemFont(ofSize: 30)
-                            }
+                        .border(color: .blue, width: 10)
+                    UIView()
+                        .size(width: 100, height: 100)
+                        .backgroundColor(.black)
+                        .transform(.init(rotationAngle: 45.0/360 * Double.pi))
+                    UIView {
+                        $0.heightConstraint = 100
+                        $0.widthConstraint = 100
+                        $0.backgroundColor = .systemRed
+                    }
+                    .shadow(color: .black.withAlphaComponent(0.8), radius: 10, x: 5, y: 5)
+                    
+                    UIView()
+                        .backgroundColor(.systemRed)
+                        .padding()
+                        .backgroundColor(.systemYellow)
+                        .size(width: 100, height: 100)
+                    
+                }.spacing(20)
+            }
+            .showsScrollIndicator(false)
+        }
+        
+        let CenteringView = {
+            UIStackView.horizontal {
+                UIStackView.vertical {
+                    UIImageView {
+                        guard let imageView = $0 as? UIImageView else { return }
+                        imageView.image = UIImage.init(systemName: "square.and.arrow.up")
+                    }
+                    .contentMode(.scaleAspectFit)
+                    .height(200)
+                    
+                    UIButton {
+                        guard let button = $0 as? UIButton else { return }
+                        button.setTitle("button", for: .normal)
+                        button.setTitleColor(.brown, for: .normal)
+                    }
+                    .addTouchAction(target: self, for: .touchUpInside) {
+                        #selector(self.tapButton)
+                    }
+                    .tag(ViewTag.button.rawValue)
+                    
+                    UILabel(tag: ViewTag.tapLabel.rawValue) {
+                        guard let label = $0 as? UILabel else { return }
+                        label.text = "タップジェスターのあるラベル"
+                        label.textAlignment = .center
+                    }
+                    .isUserInteractionEnabled(true)
+                    .addGestureRecognizer {
+                        UITapGestureRecognizer(target: self) {
+                            #selector(self.tapLabel(_:))
                         }
                     }
-                    .spacing(50)
+                }
+                .spacing(30)
+            }
+            .alignment(.center)
+        }
+        
+        let ZStackView = {
+            UIStackView.horizontal {
+                UIImageView {
+                    guard let imageView = $0 as? UIImageView else { return }
+                    imageView.image = UIImage.init(systemName: "square.and.arrow.down")
+                }
+                .height(200)
+                .contentMode(.scaleAspectFit)
+                .zStack(margin: .init(top: 70, left: 10, bottom: 0, right: 10)) {
+                    UILabel {
+                        guard let label = $0 as? UILabel else { return }
+                        label.text = "上に重なってるね"
+                        label.textColor = .black
+                        label.textAlignment = .center
+                        label.font = UIFont.boldSystemFont(ofSize: 30)
+                    }
+                }
+            }.alignment(.center)
+        }
+        
+        let Geometry = {
+            UIView()
+                .backgroundColor(.red)
+                .zStack {
+                    UIStackView.horizontal { superview in
+                        UIView()
+                            .backgroundColor(.blue)
+                            .heightEqual(to: superview, constraint: superview.heightAnchor - 20)
+                        
+                        UIView()
+                            .backgroundColor(.green)
+                            .widthEqual(to: superview, constraint: superview.widthAnchor * 0.4)
+                            .heightEqual(to: superview, constraint: superview.heightAnchor / 2 + 10)
+                    }
+                    .height(100)
                     .alignment(.center)
-                }.spacing(50)
+                }
+        }
+        
+        let SomeViews = {
+            Array(1...10).compactMap { num in
+                UILabel {
+                    guard let label = $0 as? UILabel else { return }
+                    label.text = "\(num)番目のlabel"
+                    label.textColor = .black
+                    label.textAlignment = .center
+                }
+            }
+        }
+        
+        self.declarative {
+            UIScrollView {
+                UIStackView {
+                    Header("UIViewの設定")
+                    UIView.spacer().height(20)
+                    ScrollBlocksView()
+                    UIView.spacer().height(20)
+                    MarginView()
+                    UIView.spacer().height(10)
+                    Header("レイアウト以外の設定は手続的にする")
+                    UIView.spacer().height(20)
+                    CenteringView()
+                    UIView.spacer().height(20)
+                    MarginView()
+                    UIView.spacer().height(10)
+                    Header("Z方向の設定")
+                    ZStackView()
+                    MarginView()
+                    UIView.spacer().height(30)
+                    Header("親ビューの大きさで設定")
+                    Geometry()
+                    UIView.spacer().height(20)
+                    MarginView()
+                    UIView.spacer().height(30)
+                    Header("配列で用意")
+                    UIView.spacer().height(20)
+                    SomeViews()
+                    UIView.spacer().height(20)
+                }
+            }
+            .refreshControl {
+                UIRefreshControl()
+                .add(target: self, action: #selector(refresh), for: .valueChanged)
+            }
+        }
+        
+    }
+}
+
+@objc private extension SimpleViewController {
+    func tapLabel(_ sender: UIGestureRecognizer) {
+        print("ラベルをタップしたね")
+    }
+    
+    func tapButton(_ sender: UIButton) {
+        print("ボタンをタップしたね")
+    }
+    
+    func refresh(_ sender: UIRefreshControl) {
+        print("refresh")
+        if sender.isRefreshing {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                sender.endRefreshing()
             }
         }
     }
