@@ -11,7 +11,7 @@ import DeclarativeUIKit
 final class SimpleViewController: UIViewController {
     
     enum ViewTag: Int {
-        case button = 1
+        case button = 1, tapLabel
     }
     
     override func viewDidLoad() {
@@ -98,11 +98,13 @@ final class SimpleViewController: UIViewController {
                     .add(target: self, action: #selector(self.tapButton), for: .touchUpInside)
                     .tag(ViewTag.button.rawValue)
                     
-                    UILabel {
+                    UILabel(tag: ViewTag.tapLabel.rawValue) {
                         guard let label = $0 as? UILabel else { return }
-                        label.text = "センターだね"
+                        label.text = "タップジェスターのあるラベル"
                         label.textAlignment = .center
                     }
+                    .isUserInteractionEnabled(true)
+                    .add(gestureRecognizer: UITapGestureRecognizer(target: self, action: #selector(self.tapLabel(_:))))
                 }
                 .spacing(30)
             }
@@ -199,9 +201,18 @@ final class SimpleViewController: UIViewController {
 }
 
 @objc private extension SimpleViewController {
+    func tapLabel(_ sender: UIGestureRecognizer) {
+        print("ラベルをタップしたね")
+        if
+            let view = sender.view,
+            let label = self.getView(tag: view.tag) as? UILabel {
+            print(label)
+        }
+    }
+    
     func tapButton(_ sender: UIButton) {
         print("ボタンをタップしたね")
-        if let button = self.getView(tag: ViewTag.button.rawValue) as? UIButton {
+        if let button = self.getView(tag: sender.tag) as? UIButton {
             print(button)
         }
     }

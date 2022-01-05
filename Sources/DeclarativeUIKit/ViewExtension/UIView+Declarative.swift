@@ -136,6 +136,13 @@ public extension UIView {
     }
     
     @discardableResult
+    func add(gestureRecognizer: UIGestureRecognizer) -> Self {
+        imperative {
+            $0.addGestureRecognizer(gestureRecognizer)
+        }
+    }
+    
+    @discardableResult
     func addSubview(margin: UIEdgeInsets = .zero, priorities: UIEdgePriorities = .init(all: .required),
     @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> Self {
         self.zStack(margin: margin, priorities: priorities, builder)
