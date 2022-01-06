@@ -181,7 +181,7 @@ public extension UIView {
     
     @discardableResult
     func padding(insets: UIEdgeInsets) -> UIView {
-        UIView.spacer().zStack(margin: insets, priorities: .init(all: .init(rawValue: 999)), { self })
+        UIView().zStack(margin: insets, priorities: .init(all: .init(rawValue: 999)), { self })
     }
     
     @discardableResult
