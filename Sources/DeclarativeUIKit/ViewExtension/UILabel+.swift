@@ -1,6 +1,5 @@
 import UIKit.UILabel
 
-
 //MARK: -
 private extension UILabel {
     @discardableResult
@@ -21,16 +20,16 @@ public extension UILabel {
         self.init(frame: .zero)
         self.text(text)
     }
-    
-    convenience init(_ text: NSAttributedString?) {
-        self.init(frame: .zero)
-        self.text(text)
-    }
-
+        
     convenience init(_ text: String?, _ imperative: (Self) -> Void) {
         self.init(frame: .zero)
         self.text(text)
         imperative(self)
+    }
+
+    convenience init(_ text: NSAttributedString?) {
+        self.init(frame: .zero)
+        self.text(text)
     }
     
     convenience init(_ text: NSAttributedString?, _ imperative: (Self) -> Void) {

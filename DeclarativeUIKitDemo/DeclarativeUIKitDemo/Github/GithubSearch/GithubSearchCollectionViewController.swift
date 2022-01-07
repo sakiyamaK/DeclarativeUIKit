@@ -30,50 +30,49 @@ final class GithubSearchCollectionViewController: UIViewController {
     private var searchButton: UIButton {
         self.getView(tag: ViewTag.searchButton.rawValue) as! UIButton
     }
-
+    
     private var presenter: GithubSearchPresenterInput!
     func inject(presenter: GithubSearchPresenterInput) {
-      self.presenter = presenter
+        self.presenter = presenter
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-            
+        
         self.declarative {
             UIStackView.vertical {
                 UIStackView.horizontal {
                     UIView.spacer().width(12)
-
+                    
                     UISearchTextField(tag: ViewTag.searchTextField.rawValue) {
                         let textField = $0 as! UISearchTextField
                         textField.placeholder = "検索してね"
                     }
-
+                    
                     UIView.spacer().width(12)
-
-                    UIButton {
-                        let button = $0 as! UIButton
-                        button.setImage(UIImage(systemName: "magnifyingglass.circle"), for: .normal)
-                    }
-                    .add(target: self, action: #selector(tapButton), for: .touchUpInside)
-                    .contentMode(.scaleAspectFit)
-                    .tag(ViewTag.searchButton.rawValue)
-
+                    
+                    UIButton(UIImage(systemName: "magnifyingglass.circle"))
+                        .add(target: self, for: .touchUpInside) {
+                            #selector(tapButton)
+                        }
+                        .contentMode(.scaleAspectFit)
+                        .tag(ViewTag.searchButton.rawValue)
+                    
                     UIView.spacer().width(16)
                 }
-
+                
                 UIView.spacer().height(10)
                 UIView.divider()
                 UIView.spacer().height(10)
-
-                UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+                
+                UICollectionView(UICollectionViewFlowLayout())
                     .delegate(self)
                     .dataSource(self)
                     .registerCellClass(GithubSearchCollectionViewCell.self, forCellWithReuseIdentifier: GithubSearchCollectionViewCell.reuseIdentifier)
                     .isHidden(true)
                     .tag(ViewTag.collectionView.rawValue)
-
+                
                 UIStackView.vertical {
                     UIView.spacer().height(100)
                     UIActivityIndicatorView()
@@ -82,14 +81,11 @@ final class GithubSearchCollectionViewController: UIViewController {
                 }
                 .tag(ViewTag.activityIndicatorStack.rawValue)
                 .isHidden(true)
-
+                
                 UIStackView.vertical {
                     UIView.spacer().height(60)
-                    UILabel {
-                        let label = $0 as! UILabel
-                        label.text = "検索ワードを入力してください"
-                        label.textAlignment = .center
-                    }
+                    UILabel("検索ワードを入力してください")
+                        .textAlignment(.center)
                     UIView.spacer()
                 }.tag(ViewTag.startStack.rawValue)
             }
@@ -98,42 +94,42 @@ final class GithubSearchCollectionViewController: UIViewController {
 }
 
 extension GithubSearchCollectionViewController: GithubSearchPresenterOutput {
-  func update(loading: Bool) {
-    DispatchQueue.main.async { [weak self] in
-        guard let self = self else { return }        
-        self.collectionView.isHidden = loading
-        self.activityIndicatorStack.isHidden = !loading
-        if loading {
-            self.activityIndicator.startAnimating()
-        } else {
-            self.activityIndicator.stopAnimating()
+    func update(loading: Bool) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.collectionView.isHidden = loading
+            self.activityIndicatorStack.isHidden = !loading
+            if loading {
+                self.activityIndicator.startAnimating()
+            } else {
+                self.activityIndicator.stopAnimating()
+            }
+            self.activityIndicator.isHidden = !loading
+            self.startStack.isHidden = true
         }
-        self.activityIndicator.isHidden = !loading
-        self.startStack.isHidden = true
     }
-  }
-
-  func update(githubModels: [GithubModel]) {
-    DispatchQueue.main.async { [weak self] in
-        guard let self = self else { return }
-        self.collectionView.reloadData()
+    
+    func update(githubModels: [GithubModel]) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.collectionView.reloadData()
+        }
     }
-  }
-
-  func get(error: Error) {
-    DispatchQueue.main.async {
-      print(error.localizedDescription)
+    
+    func get(error: Error) {
+        DispatchQueue.main.async {
+            print(error.localizedDescription)
+        }
     }
-  }
-
-  func showWeb(githubModel: GithubModel) {
-    DispatchQueue.main.async {
-        let vc = GithubSearchResultViewController()
-        let presenter = GithubResultWebPresenter(output: vc, githubModel: githubModel)
-        vc.inject(presenter: presenter)
-        self.navigationController?.pushViewController(vc, animated: true)
+    
+    func showWeb(githubModel: GithubModel) {
+        DispatchQueue.main.async {
+            let vc = GithubSearchResultViewController()
+            let presenter = GithubResultWebPresenter(output: vc, githubModel: githubModel)
+            vc.inject(presenter: presenter)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
-  }
 }
 
 @objc extension GithubSearchCollectionViewController {
@@ -201,9 +197,9 @@ private struct ViewController_Wrapper: UIViewControllerRepresentable {
         func didSelect(index: Int) {
             print(index)
         }
-
+        
     }
-
+    
     func makeUIViewController(context: Context) -> ViewController {
         let vc = ViewController()
         let presenter = GithubSearchPresenterMock(output: vc)
@@ -211,15 +207,15 @@ private struct ViewController_Wrapper: UIViewControllerRepresentable {
         vc.update(loading: false)
         return vc
     }
-
+    
     func updateUIViewController(_ vc: ViewController, context: Context) {
     }
 }
 
 struct GithubSearchCollectionViewController_Previews: PreviewProvider {
-  static var previews: some View {
-      Group {
-          ViewController_Wrapper()
-      }
-  }
+    static var previews: some View {
+        Group {
+            ViewController_Wrapper()
+        }
+    }
 }

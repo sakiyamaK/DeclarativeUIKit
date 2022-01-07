@@ -36,12 +36,9 @@ private extension LandmarkDetailViewController {
         let NameView = { (landmark: Landmark) -> UIView in
             UIStackView.vertical {
                 UIStackView.horizontal {
-                    UILabel {
-                        let label = $0 as! UILabel
-                        label.text = landmark.name
-                        label.font = UIFont.systemFont(ofSize: 30)
-                        label.textColor = .black
-                    }
+                    UILabel(landmark.name)
+                        .font(UIFont.systemFont(ofSize: 30))
+                        .textColor(.black)
                     
                     UIImageView {
                         let imageView = $0 as! UIImageView
@@ -56,41 +53,29 @@ private extension LandmarkDetailViewController {
                                 
                 UIStackView.horizontal {
                     
-                    UILabel {
-                        let label = $0 as! UILabel
-                        label.text = landmark.park
-                        label.font = UIFont.systemFont(ofSize: 18)
-                        label.textColor = .systemGray
-                    }
+                    UILabel(landmark.park)
+                        .font(UIFont.systemFont(ofSize: 18))
+                        .textColor(.systemGray)
                     
                     UIView.spacer()
                     
-                    UILabel {
-                        let label = $0 as! UILabel
-                        label.text = landmark.state
-                        label.font = UIFont.systemFont(ofSize: 18)
-                        label.textColor = .systemGray
-                    }
+                    UILabel(landmark.state)
+                        .font(UIFont.systemFont(ofSize: 18))
+                        .textColor(.systemGray)
                 }
             }
         }
         
         let TextsView = { (landmark: Landmark) -> UIView in
             UIStackView.vertical {
-                UILabel {
-                    let label = $0 as! UILabel
-                    label.text = "Abount \(landmark.name)"
-                    label.font = UIFont.systemFont(ofSize: 20)
-                    label.textColor = .black
-                }
+                UILabel("Abount \(landmark.name)")
+                    .font(UIFont.systemFont(ofSize: 20))
+                    .textColor(.black)
                 
-                UILabel {
-                    let label = $0 as! UILabel
-                    label.text = landmark.description
-                    label.font = UIFont.systemFont(ofSize: 16)
-                    label.textColor = .black
-                    label.numberOfLines = 0
-                }
+                UILabel(landmark.description)
+                    .font(UIFont.systemFont(ofSize: 16))
+                    .textColor(.black)
+                    .numberOfLines(0)
             }.spacing(10)
         }
         

@@ -21,18 +21,14 @@ final class GithubSearchCollectionViewCell: UICollectionViewCell {
         
         let BottomIconView = { (iconName: String, tagId: Int) -> UIView in
             UIStackView.horizontal {
-                UIImageView {
-                    guard let imageView = $0 as? UIImageView else { return }
-                    imageView.image = UIImage(systemName: iconName)?.withRenderingMode(.alwaysTemplate).withTintColor(.black)
-                }
-                .contentMode(.scaleAspectFit)
-                UILabel {
-                    guard let label = $0 as? UILabel else { return }
-                    label.textAlignment = .left
-                    label.font = UIFont.systemFont(ofSize: 20)
-                    label.setContentHuggingPriority(.required, for: .vertical)
-                    label.setContentCompressionResistancePriority(.required, for: .vertical)
-                }.tag(tagId)
+                UIImageView(
+                    UIImage(systemName: iconName)?.withRenderingMode(.alwaysTemplate).withTintColor(.black)
+                ).contentMode(.scaleAspectFit)
+                UILabel(tag: tagId)
+                    .textAlignment(.left)
+                    .font(UIFont.systemFont(ofSize: 20))
+                    .contentHuggingPriority(.required, for: .vertical)
+                    .contentCompressionResistancePriority(.required, for: .vertical)
             }
             .spacing(5)
         }
@@ -40,45 +36,37 @@ final class GithubSearchCollectionViewCell: UICollectionViewCell {
         self.contentView.declarative(priorities: .init(bottom: .defaultLow)) {
             UIStackView {
                 UIStackView {
-                    UILabel {
-                        guard let label = $0 as? UILabel else { return }
-                        label.textAlignment = .left
-                        label.font = UIFont.systemFont(ofSize: 30)
-                        label.setContentHuggingPriority(.required, for: .vertical)
-                        label.setContentCompressionResistancePriority(.required, for: .vertical)
-                    }.tag(ViewTag.fullNameLabel.rawValue)
-                    
-                    UILabel {
-                        guard let label = $0 as? UILabel else { return }
-                        label.textAlignment = .left
-                        label.font = UIFont.systemFont(ofSize: 20)
-                        label.setContentHuggingPriority(.required, for: .vertical)
-                        label.setContentCompressionResistancePriority(.required, for: .vertical)
-                    }.tag(ViewTag.descriptionLabel.rawValue)
+                    UILabel(tag: ViewTag.fullNameLabel.rawValue)
+                        .textAlignment(.left)
+                        .font(UIFont.systemFont(ofSize: 30))
+                        .contentHuggingPriority(.required, for: .vertical)
+                        .contentCompressionResistancePriority(.required, for: .vertical)
 
+                    UILabel(tag: ViewTag.descriptionLabel.rawValue)
+                        .textAlignment(.left)
+                        .font(UIFont.systemFont(ofSize: 20))
+                        .contentHuggingPriority(.required, for: .vertical)
+                        .contentCompressionResistancePriority(.required, for: .vertical)
+                    
                     UIStackView.horizontal {
                         BottomIconView("circle", ViewTag.starIconLbel.rawValue)
-
+                        
                         BottomIconView("circle", ViewTag.languageIconLbel.rawValue)
+                        
+                        UILabel(tag: ViewTag.licenseLabel.rawValue)
+                            .textAlignment(.left)
+                            .font(UIFont.systemFont(ofSize: 20))
+                            .contentHuggingPriority(.required, for: .vertical)
+                            .contentCompressionResistancePriority(.required, for: .vertical)
 
-                        UILabel {
-                            guard let label = $0 as? UILabel else { return }
-                            label.textAlignment = .left
-                            label.font = UIFont.systemFont(ofSize: 20)
-                            label.setContentHuggingPriority(.required, for: .vertical)
-                            label.setContentCompressionResistancePriority(.required, for: .vertical)
-                        }.tag(ViewTag.licenseLabel.rawValue)
-
-                        UILabel {
-                            guard let label = $0 as? UILabel else { return }
-                            label.textAlignment = .left
-                            label.font = UIFont.systemFont(ofSize: 20)
-                            label.setContentHuggingPriority(.required, for: .vertical)
-                            label.setContentCompressionResistancePriority(.required, for: .vertical)
-                        }.tag(ViewTag.dateLabel.rawValue)
-
+                        UILabel(tag: ViewTag.dateLabel.rawValue)
+                            .textAlignment(.left)
+                            .font(UIFont.systemFont(ofSize: 20))
+                            .contentHuggingPriority(.required, for: .vertical)
+                            .contentCompressionResistancePriority(.required, for: .vertical)
+                        
                         UIView.spacer()
-
+                        
                     }
                     .spacing(10)
                 }

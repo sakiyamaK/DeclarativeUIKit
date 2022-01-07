@@ -2,6 +2,10 @@ import UIKit.UICollectionView
 
 //MARK: - instance
 public extension UICollectionView {
+    convenience init(_ collectionViewLayout: UICollectionViewLayout) {
+        self.init(frame: .zero, collectionViewLayout: collectionViewLayout)
+    }
+    
     convenience init(_ collectionViewLayoutBuilder: () -> UICollectionViewLayout) {
         self.init(frame: .zero, collectionViewLayout: collectionViewLayoutBuilder())
     }

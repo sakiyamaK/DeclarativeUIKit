@@ -28,7 +28,7 @@ final class SimpleViewController: UIViewController {
         let Header = { (title: String) -> UIView in
             UIStackView.vertical {
                 UILabel {
-                    guard let label = $0 as? UILabel else { return }
+                    let label = $0 as! UILabel
                     label.text = title
                     label.textColor = .black
                     label.textAlignment = .center
@@ -83,22 +83,16 @@ final class SimpleViewController: UIViewController {
         let CenteringView = {
             UIStackView.horizontal {
                 UIStackView.vertical {
-                    UIImageView {
-                        guard let imageView = $0 as? UIImageView else { return }
-                        imageView.image = UIImage.init(systemName: "square.and.arrow.up")
-                    }
-                    .contentMode(.scaleAspectFit)
-                    .height(200)
+                    UIImageView(UIImage.init(systemName: "square.and.arrow.up"))
+                        .contentMode(.scaleAspectFit)
+                        .height(200)
                     
-                    UIButton {
-                        guard let button = $0 as? UIButton else { return }
-                        button.setTitle("button", for: .normal)
-                        button.setTitleColor(.brown, for: .normal)
-                    }
-                    .addControlAction(target: self, for: .touchUpInside) {
-                        #selector(self.tapButton)
-                    }
-                    .tag(ViewTag.button.rawValue)
+                    UIButton("button")
+                        .titleColor(.brown)
+                        .addControlAction(target: self, for: .touchUpInside) {
+                            #selector(self.tapButton)
+                        }
+                        .tag(ViewTag.button.rawValue)
                     
                     UILabel(tag: ViewTag.tapLabel.rawValue)
                         .text("タップジェスチャーのあるラベル")
@@ -118,19 +112,16 @@ final class SimpleViewController: UIViewController {
         
         let ZStackView = {
             UIStackView.horizontal {
-                UIImageView {
-                    guard let imageView = $0 as? UIImageView else { return }
-                    imageView.image = UIImage.init(systemName: "square.and.arrow.down")
-                }
-                .height(200)
-                .contentMode(.scaleAspectFit)
-                .zStack(margin: .init(top: 70, left: 10, bottom: 0, right: 10)) {
-                    UILabel("上に重なってるね")
-                        .font(UIFont.boldSystemFont(ofSize: 20))
-                        .textColor(.black)
-                        .textAlignment(.center)
-                        .numberOfLines(1)
-                }
+                UIImageView(UIImage.init(systemName: "square.and.arrow.down"))
+                    .height(200)
+                    .contentMode(.scaleAspectFit)
+                    .zStack(margin: .init(top: 70, left: 10, bottom: 0, right: 10)) {
+                        UILabel("上に重なってるね")
+                            .font(UIFont.boldSystemFont(ofSize: 20))
+                            .textColor(.black)
+                            .textAlignment(.center)
+                            .numberOfLines(1)
+                    }
             }
             .alignment(.center)
         }
@@ -162,12 +153,14 @@ final class SimpleViewController: UIViewController {
                             .textColor(.black)
                             .textAlignment(.center)
                     } else {
-                        let attributes: [NSAttributedString.Key : Any] = [
-                            .foregroundColor: UIColor.orange,
-                            .strokeColor: UIColor.red
-                        ]
-                        return UILabel(NSAttributedString(string: "\(num)番目のlabel", attributes: attributes))
-                            .textAlignment(.center)
+                        return UILabel {
+                            let label = $0 as! UILabel
+                            let attributes: [NSAttributedString.Key: Any] = [
+                                .foregroundColor: UIColor.orange,
+                                .strokeColor: UIColor.red
+                            ]
+                            label.attributedText = NSAttributedString(string: "\(num)番目のlabel", attributes: attributes)                            
+                        }.textAlignment(.center)
                     }
                 }
             }.spacing(10)

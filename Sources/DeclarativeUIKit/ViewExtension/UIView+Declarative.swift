@@ -188,6 +188,22 @@ public extension UIView {
     func padding(_ value: CGFloat = 8.0) -> UIView {
         self.padding(insets: .init(all: value))
     }
+    
+    @discardableResult
+    func contentHuggingPriority(_ priority: UILayoutPriority, for axis: NSLayoutConstraint.Axis) -> Self {
+        imperative {
+            $0.setContentHuggingPriority(priority, for: axis)
+        }
+    }
+    
+    @discardableResult
+    func contentCompressionResistancePriority(_ priority: UILayoutPriority, for axis: NSLayoutConstraint.Axis) -> Self {
+        imperative {
+            $0.setContentCompressionResistancePriority(priority, for: axis)
+        }
+    }
+
+
 }
 
 //MARK: - Declarative constraint method
