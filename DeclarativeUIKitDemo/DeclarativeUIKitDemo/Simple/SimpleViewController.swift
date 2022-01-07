@@ -100,17 +100,16 @@ final class SimpleViewController: UIViewController {
                     }
                     .tag(ViewTag.button.rawValue)
                     
-                    UILabel(tag: ViewTag.tapLabel.rawValue) {
-                        guard let label = $0 as? UILabel else { return }
-                        label.text = "タップジェスチャーのあるラベル"
-                        label.textAlignment = .center
-                    }
-                    .isUserInteractionEnabled(true)
-                    .addGestureRecognizer {
-                        UITapGestureRecognizer(target: self) {
-                            #selector(self.tapLabel(_:))
+                    UILabel(tag: ViewTag.tapLabel.rawValue)
+                        .text("タップジェスチャーのあるラベル")
+                        .textAlignment(.center)
+                        .isUserInteractionEnabled(true)
+                        .numberOfLines(1)
+                        .addGestureRecognizer {
+                            UITapGestureRecognizer(target: self) {
+                                #selector(self.tapLabel(_:))
+                            }
                         }
-                    }
                 }
                 .spacing(30)
             }
@@ -126,15 +125,14 @@ final class SimpleViewController: UIViewController {
                 .height(200)
                 .contentMode(.scaleAspectFit)
                 .zStack(margin: .init(top: 70, left: 10, bottom: 0, right: 10)) {
-                    UILabel {
-                        guard let label = $0 as? UILabel else { return }
-                        label.text = "上に重なってるね"
-                        label.textColor = .black
-                        label.textAlignment = .center
-                        label.font = UIFont.boldSystemFont(ofSize: 30)
-                    }
+                    UILabel("上に重なってるね")
+                        .font(UIFont.boldSystemFont(ofSize: 20))
+                        .textColor(.black)
+                        .textAlignment(.center)
+                        .numberOfLines(1)
                 }
-            }.alignment(.center)
+            }
+            .alignment(.center)
         }
         
         let Geometry = {
@@ -157,14 +155,22 @@ final class SimpleViewController: UIViewController {
         }
         
         let SomeViews = {
-            Array(1...10).compactMap { num in
-                UILabel {
-                    guard let label = $0 as? UILabel else { return }
-                    label.text = "\(num)番目のlabel"
-                    label.textColor = .black
-                    label.textAlignment = .center
+            UIStackView {
+                Array(1...10).compactMap { num -> UILabel in
+                    if num < 6 {
+                        return UILabel("\(num)番目のlabel")
+                            .textColor(.black)
+                            .textAlignment(.center)
+                    } else {
+                        let attributes: [NSAttributedString.Key : Any] = [
+                            .foregroundColor: UIColor.orange,
+                            .strokeColor: UIColor.red
+                        ]
+                        return UILabel(NSAttributedString(string: "\(num)番目のlabel", attributes: attributes))
+                            .textAlignment(.center)
+                    }
                 }
-            }
+            }.spacing(10)
         }
         
         self.declarative {
