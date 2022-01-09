@@ -12,9 +12,11 @@ final class RootViewController: UIViewController {
     
     enum ViewTag: Int {
         case simpleDemoButton = 1
+        case tablewViewButton
         case collectionViewButton
-        case githubSearch
+        case githubSearchButton
         case swiftuiTutorialButton
+        case pathButton
     }
     
     override func viewDidLoad() {
@@ -39,9 +41,22 @@ final class RootViewController: UIViewController {
                 UIStackView.vertical {
                     UIView.spacer()
                     
+                    Button("Path")
+                        .add(target: self, action: #selector(tapButton), for: .touchUpInside)
+                        .tag(ViewTag.pathButton.rawValue)
+                        .minWidth(200)
+
+                    UIView.spacer()
+                    
                     Button("シンプルな例")
                         .add(target: self, action: #selector(tapButton), for: .touchUpInside)
                         .tag(ViewTag.simpleDemoButton.rawValue)
+
+                    UIView.spacer()
+
+                    Button("TablewView")
+                        .add(target: self, action: #selector(tapButton), for: .touchUpInside)
+                        .tag(ViewTag.tablewViewButton.rawValue)
 
                     UIView.spacer()
 
@@ -53,9 +68,10 @@ final class RootViewController: UIViewController {
 
                     Button("GithubSearch")
                         .add(target: self, action: #selector(tapButton), for: .touchUpInside)
-                        .tag(ViewTag.githubSearch.rawValue)
+                        .tag(ViewTag.githubSearchButton.rawValue)
 
                     UIView.spacer()
+                    
                     Button("SwiftUI Tutorial")
                         .add(target: self, action: #selector(tapButton), for: .touchUpInside)
                         .tag(ViewTag.swiftuiTutorialButton.rawValue)
@@ -75,13 +91,19 @@ final class RootViewController: UIViewController {
     func tapButton(_ sender: UIButton) {
         guard let viewTag = ViewTag(rawValue: sender.tag) else { return }
         switch viewTag {
+        case .pathButton:
+            let vc = PathViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
         case .simpleDemoButton:
             let vc = SimpleViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        case .tablewViewButton:
+            let vc = TableViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         case .collectionViewButton:
             let vc = CollectionViewController()
             self.navigationController?.pushViewController(vc, animated: true)
-        case .githubSearch:
+        case .githubSearchButton:
             let vc = GithubSearchCollectionViewController()
             let presenter = GithubSearchPresenter(output: vc)
             vc.inject(presenter: presenter)

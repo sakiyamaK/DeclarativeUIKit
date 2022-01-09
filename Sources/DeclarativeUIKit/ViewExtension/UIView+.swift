@@ -180,6 +180,13 @@ public extension UIView {
     }
     
     @discardableResult
+    func path(_ imperativeBezierPath: @escaping (UIBezierPath) -> Void) -> HelperPathView {
+        let bezierPath = UIBezierPath()
+        let helper = HelperPathView(bezierPath, imperativeBezierPath)
+        return helper
+    }
+    
+    @discardableResult
     func padding(insets: UIEdgeInsets) -> UIView {
         UIView().zStack(margin: insets, priorities: .init(all: .init(rawValue: 999)), { self })
     }
