@@ -28,6 +28,7 @@ Library for writing UIKit Autolayout declaratively.
       * [Array](#array)
   * [UITableView,UICollectionView](#uITableView,UICollectionView)
   * [UIControl](#uIControl)
+  * [UIBezierPath](#uIBezierPath)
 * [Quick Start](#quick-start)
 * [Xcode Preview](#xcode-preview)
 ## Motivation
@@ -539,6 +540,39 @@ UIScrollView {
         .addControlAction(target: self, for: .valueChanged) {
             #selector(refresh)
         }
+}
+```
+
+### UIBezierPath
+
+`UIView.path`メソッドを呼び出して`UIBezierPath`を宣言的に記述できます
+
+The `UIView.path` method can be called to declaratively describe the `UIBezierPath`.
+
+```swift
+UIStackView { superview in 
+  UIView.path {
+      let size = superview.frame.size
+
+      //宣言的に書ける
+      UIBezierPath().imperative {
+          $0.move(to: CGPoint(x: 0, y: size.height))
+          $0.addLine(to: CGPoint(x: size.width, y: 0))
+      }.stroke(.green, lineWidth: 10)
+
+      UIBezierPath.imperative {
+          $0.move(to: CGPoint(x: 0, y: 0))
+          $0.addLine(to: CGPoint(x: size.width, y: size.height))
+      }.stroke(.red, lineWidth: 10)
+
+      //既存の書き方でもいい
+      let path = UIBezierPath()
+      path.move(to: CGPoint(x: size.width/2, y: 0))
+      path.addLine(to: CGPoint(x: size.width/2, y: size.height))
+      UIColor.blue.setStroke()
+      path.lineWidth = 10
+      path.stroke()
+  }
 }
 ```
 
