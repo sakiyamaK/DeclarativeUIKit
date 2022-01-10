@@ -41,13 +41,6 @@ final class RootViewController: UIViewController {
                 UIStackView {
                     UIView.spacer()
                     
-                    Button("Path")
-                        .add(target: self, action: #selector(tapButton), for: .touchUpInside)
-                        .tag(ViewTag.pathButton.rawValue)
-                        .minWidth(200)
-
-                    UIView.spacer()
-
                     Button("シンプルな例")
                         .add(target: self, action: #selector(tapButton), for: .touchUpInside)
                         .tag(ViewTag.simpleDemoButton.rawValue)
@@ -63,6 +56,13 @@ final class RootViewController: UIViewController {
                     Button("CollectionView")
                         .add(target: self, action: #selector(tapButton), for: .touchUpInside)
                         .tag(ViewTag.collectionViewButton.rawValue)
+
+                    UIView.spacer()
+
+                    Button("Path")
+                        .add(target: self, action: #selector(tapButton), for: .touchUpInside)
+                        .tag(ViewTag.pathButton.rawValue)
+                        .minWidth(200)
 
                     UIView.spacer()
 
