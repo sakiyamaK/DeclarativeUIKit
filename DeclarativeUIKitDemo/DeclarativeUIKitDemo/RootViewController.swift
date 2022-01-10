@@ -25,20 +25,20 @@ final class RootViewController: UIViewController {
         self.navigationItem.title = "Root"
         
         let Button = {(title: String) -> UIButton in
-            UIButton {
-                guard let button = $0 as? UIButton else { return }
-                button.setTitle(title, for: .normal)
-                button.titleLabel?.font = UIFont.systemFont(ofSize: 30)
+            UIButton.imperative {
+                let button = $0 as! UIButton
                 button.contentEdgeInsets = .init(top: 10, left: 10, bottom: 10, right: 10)
                 button.titleLabel?.setContentCompressionResistancePriority(.required, for: .horizontal)
             }
+            .title(title)
+            .font(UIFont.systemFont(ofSize: 30))
             .backgroundColor(.systemBlue)
             .cornerRadius(10)
         }
                 
         self.declarative {
-            UIScrollView.vertical {
-                UIStackView.vertical {
+            UIScrollView {
+                UIStackView {
                     UIView.spacer()
                     
                     Button("Path")
@@ -47,7 +47,7 @@ final class RootViewController: UIViewController {
                         .minWidth(200)
 
                     UIView.spacer()
-                    
+
                     Button("シンプルな例")
                         .add(target: self, action: #selector(tapButton), for: .touchUpInside)
                         .tag(ViewTag.simpleDemoButton.rawValue)
@@ -71,7 +71,7 @@ final class RootViewController: UIViewController {
                         .tag(ViewTag.githubSearchButton.rawValue)
 
                     UIView.spacer()
-                    
+
                     Button("SwiftUI Tutorial")
                         .add(target: self, action: #selector(tapButton), for: .touchUpInside)
                         .tag(ViewTag.swiftuiTutorialButton.rawValue)

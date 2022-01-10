@@ -45,7 +45,7 @@ final class GithubSearchCollectionViewController: UIViewController {
                 UIStackView.horizontal {
                     UIView.spacer().width(12)
                     
-                    UISearchTextField(tag: ViewTag.searchTextField.rawValue) {
+                    UISearchTextField(tag: ViewTag.searchTextField.rawValue).imperative {
                         let textField = $0 as! UISearchTextField
                         textField.placeholder = "検索してね"
                     }

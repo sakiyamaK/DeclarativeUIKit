@@ -32,7 +32,7 @@ final class GithubSearchResultViewController: UIViewController {
         
         self.declarative {
             UIStackView.vertical {
-                WKWebView {
+                WKWebView.imperative {
                     guard let webView = $0 as? WKWebView else { return }
                     webView.uiDelegate = self
                     webView.navigationDelegate = self
@@ -42,7 +42,7 @@ final class GithubSearchResultViewController: UIViewController {
                 
                 UIStackView.vertical {
                     UIView.spacer().height(100)
-                    UIActivityIndicatorView {
+                    UIActivityIndicatorView.imperative {
                         guard let indicator = $0 as? UIActivityIndicatorView else { return }
                         indicator.startAnimating()
                     }

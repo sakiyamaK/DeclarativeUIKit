@@ -13,8 +13,8 @@ final class CollectionViewController: UIViewController {
         
         self.declarative {
             UIStackView.vertical {
-                UILabel {
-                    guard let label = $0 as? UILabel else { return }
+                UILabel.imperative {
+                    let label = ($0 as! UILabel)
                     label.text = "コレクションビューのサンプル"
                     label.textAlignment = .center
                     label.font = UIFont.boldSystemFont(ofSize: 20)

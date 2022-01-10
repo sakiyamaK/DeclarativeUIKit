@@ -27,7 +27,7 @@ final class SimpleViewController: UIViewController {
         
         let Header = { (title: String) -> UIView in
             UIStackView.vertical {
-                UILabel {
+                UILabel.imperative {
                     let label = $0 as! UILabel
                     label.text = title
                     label.textColor = .black
@@ -62,7 +62,7 @@ final class SimpleViewController: UIViewController {
                         .size(width: 100, height: 100)
                         .backgroundColor(.black)
                         .transform(.init(rotationAngle: 45.0/360 * Double.pi))
-                    UIView {
+                    UIView.imperative {
                         $0.heightConstraint = 100
                         $0.widthConstraint = 100
                         $0.backgroundColor = .systemRed
@@ -153,7 +153,7 @@ final class SimpleViewController: UIViewController {
                             .textColor(.black)
                             .textAlignment(.center)
                     } else {
-                        return UILabel {
+                        return UILabel.imperative {
                             let label = $0 as! UILabel
                             let attributes: [NSAttributedString.Key: Any] = [
                                 .foregroundColor: UIColor.orange,

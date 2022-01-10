@@ -17,7 +17,7 @@ final class ToggleRow: UICollectionViewCell {
                 UIView.spacer()
                 
                 UIStackView.horizontal {
-                    UILabel {
+                    UILabel.imperative {
                         let label = $0 as! UILabel
                         label.text = "Favorites only"
                     }
