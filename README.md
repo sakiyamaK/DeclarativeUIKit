@@ -26,7 +26,7 @@ Library for writing UIKit Autolayout declaratively.
       * [imperative](#imperative)
       * [spacer](#spacer)
       * [Array](#array)
-  * [UICollectionView](#uICollectionView)
+  * [UITableView,UICollectionView](#uITableView,UICollectionView)
   * [UIControl](#uIControl)
 * [Quick Start](#quick-start)
 * [Xcode Preview](#xcode-preview)
@@ -185,7 +185,7 @@ class DeclarativeViewController: UIViewController {
       self.declarative {
         //tagを設定します
         // set tag
-        UIButton(tag: ViewTag.button.rawValue) {
+        UIButton(tag: ViewTag.button.rawValue).imperative {
           guard let button = $0 as? UIButton else { return }
           button.setTitle("button", for: .normal)
         }
@@ -427,9 +427,9 @@ UIStackView.vertical { stackView in
         }
     }
 
-  //imperativeは省略できます
-  //imperative can be omitted
-  UIView {
+  //()は省略できます
+  //() can be omitted
+  UIView.imperative {
     if hoge {
         $0.backgroundColor = .red
     } else {
@@ -439,8 +439,8 @@ UIStackView.vertical { stackView in
 
   //UILabelを使う場合
   //When using UILabel
-  UILabel {
-    guard let label = $0 as? UILabel else { return }
+  UILabel.imperative {
+    let label = $0 as! UILabel
     label.text = "テスト"
   }
 }
@@ -473,8 +473,8 @@ You can also create a View from an array
 ```swift
 UIStackView.vertical {
   Array(1...10).compactMap { num in
-    UILabel {
-      guard let label = $0 as? UILabel else { return }
+    UILabel.imperative {
+      let label = $0 as! UILabel
       label.text = "\(num)番目のlabel"
       label.textColor = .black
       label.textAlignment = .center
@@ -483,13 +483,24 @@ UIStackView.vertical {
 }
 ```
 
-### UICollectionView
+### UITableView,UICollectionView
 
-UICollectionViewのいくつかのパラメータは宣言的に設定することができます
+UITableViewとUICollectionViewのいくつかのパラメータは宣言的に設定することができます
 
-Some parameters of UICollectionView can be set declaratively
+Some parameters of UITableView, UICollectionView can be set declaratively
 
 ```swift
+
+UITablewView()
+  .delegate(self)
+  .dataSource(self)
+  .prefetchDataSource(self)
+  .dragDelegate(self)
+  .dropDelegate(self)
+  .registerCellClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+  .registerViewClass(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: "Header")
+  .registerViewClass(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: "Footer")
+
 UICollectionView {
     UICollectionViewFlowLayout()
 }
@@ -510,7 +521,7 @@ UICollectionView {
 Touch action settings can be written declaratively.
 
 ```swift
-UIButton {
+UIButton.imperative {
     let button = $0 as! UIButton
     button.setTitle("button", for: .normal)
     button.setTitleColor(.brown, for: .normal)
@@ -557,7 +568,7 @@ final class SimpleViewController: UIViewController {
         
         let Header = { (title: String) -> UIView in
             UIStackView.vertical {
-                UILabel {
+                UILabel.imperative {
                     guard let label = $0 as? UILabel else { return }
                     label.text = title
                     label.textColor = .black
@@ -592,7 +603,7 @@ final class SimpleViewController: UIViewController {
                         .size(width: 100, height: 100)
                         .backgroundColor(.black)
                         .transform(.init(rotationAngle: 45.0/360 * Double.pi))
-                    UIView {
+                    UIView.imperative {
                         $0.heightConstraint = 100
                         $0.widthConstraint = 100
                         $0.backgroundColor = .systemRed
@@ -613,15 +624,15 @@ final class SimpleViewController: UIViewController {
         let CenteringView = {
             UIStackView.horizontal {
                 UIStackView.vertical {
-                    UIImageView {
-                        guard let imageView = $0 as? UIImageView else { return }
+                    UIImageView.imperative {
+                        let imageView = $0 as! UIImageView
                         imageView.image = UIImage.init(systemName: "square.and.arrow.up")
                     }
                     .contentMode(.scaleAspectFit)
                     .height(200)
                     
-                    UIButton {
-                        guard let button = $0 as? UIButton else { return }
+                    UIButton.imperative {
+                        let button = $0 as! UIButton
                         button.setTitle("button", for: .normal)
                         button.setTitleColor(.brown, for: .normal)
                     }
@@ -630,8 +641,8 @@ final class SimpleViewController: UIViewController {
                     }
                     .tag(ViewTag.button.rawValue)
                     
-                    UILabel(tag: ViewTag.tapLabel.rawValue) {
-                        guard let label = $0 as? UILabel else { return }
+                    UILabel(tag: ViewTag.tapLabel.rawValue).imperative {
+                        let label = $0 as! UILabel
                         label.text = "タップジェスチャーのあるラベル"
                         label.textAlignment = .center
                     }
@@ -649,15 +660,15 @@ final class SimpleViewController: UIViewController {
         
         let ZStackView = {
             UIStackView.horizontal {
-                UIImageView {
-                    guard let imageView = $0 as? UIImageView else { return }
+                UIImageView.imperative {
+                    let imageView = $0 as! UIImageView
                     imageView.image = UIImage.init(systemName: "square.and.arrow.down")
                 }
                 .height(200)
                 .contentMode(.scaleAspectFit)
                 .zStack(margin: .init(top: 70, left: 10, bottom: 0, right: 10)) {
-                    UILabel {
-                        guard let label = $0 as? UILabel else { return }
+                    UILabel.imperative {
+                        let label = $0 as! UILabel
                         label.text = "上に重なってるね"
                         label.textColor = .black
                         label.textAlignment = .center
@@ -669,8 +680,8 @@ final class SimpleViewController: UIViewController {
         
         let SomeViews = {
             Array(1...10).compactMap { num in
-                UILabel {
-                    guard let label = $0 as? UILabel else { return }
+                UILabel.imperative {
+                    let label = $0 as! UILabel
                     label.text = "\(num)番目のlabel"
                     label.textColor = .black
                     label.textAlignment = .center

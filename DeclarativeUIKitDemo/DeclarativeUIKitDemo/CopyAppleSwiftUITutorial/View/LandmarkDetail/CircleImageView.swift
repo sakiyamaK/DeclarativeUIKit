@@ -43,13 +43,15 @@ private struct View_Wrapper: UIViewRepresentable {
     var landmark: Landmark
 
     func makeUIView(context: Context) -> View {
-        return UIStackView.vertical {
+        UIStackView {
             UIView.spacer()
-            CircleImageView()
-                .imperative {
-                let circleImageView = $0 as! CircleImageView
-                circleImageView.setLandmark(landmark)
-            }
+
+            //なぜかsegmentation fault: 11になる
+//            CircleImageView.imperative {
+//                let circleImageView = $0 as! CircleImageView
+//                circleImageView.setLandmark(landmark)
+//            }
+
             UIView.spacer()
         }
         .distribution(.equalSpacing)

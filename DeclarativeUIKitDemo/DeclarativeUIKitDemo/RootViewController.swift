@@ -12,9 +12,11 @@ final class RootViewController: UIViewController {
     
     enum ViewTag: Int {
         case simpleDemoButton = 1
+        case tablewViewButton
         case collectionViewButton
-        case githubSearch
+        case githubSearchButton
         case swiftuiTutorialButton
+        case pathButton
     }
     
     override func viewDidLoad() {
@@ -23,25 +25,31 @@ final class RootViewController: UIViewController {
         self.navigationItem.title = "Root"
         
         let Button = {(title: String) -> UIButton in
-            UIButton {
-                guard let button = $0 as? UIButton else { return }
-                button.setTitle(title, for: .normal)
-                button.titleLabel?.font = UIFont.systemFont(ofSize: 30)
+            UIButton.imperative {
+                let button = $0 as! UIButton
                 button.contentEdgeInsets = .init(top: 10, left: 10, bottom: 10, right: 10)
                 button.titleLabel?.setContentCompressionResistancePriority(.required, for: .horizontal)
             }
+            .title(title)
+            .font(UIFont.systemFont(ofSize: 30))
             .backgroundColor(.systemBlue)
             .cornerRadius(10)
         }
                 
         self.declarative {
-            UIScrollView.vertical {
-                UIStackView.vertical {
+            UIScrollView {
+                UIStackView {
                     UIView.spacer()
                     
                     Button("シンプルな例")
                         .add(target: self, action: #selector(tapButton), for: .touchUpInside)
                         .tag(ViewTag.simpleDemoButton.rawValue)
+
+                    UIView.spacer()
+
+                    Button("TablewView")
+                        .add(target: self, action: #selector(tapButton), for: .touchUpInside)
+                        .tag(ViewTag.tablewViewButton.rawValue)
 
                     UIView.spacer()
 
@@ -51,11 +59,19 @@ final class RootViewController: UIViewController {
 
                     UIView.spacer()
 
-                    Button("GithubSearch")
+                    Button("Path")
                         .add(target: self, action: #selector(tapButton), for: .touchUpInside)
-                        .tag(ViewTag.githubSearch.rawValue)
+                        .tag(ViewTag.pathButton.rawValue)
+                        .minWidth(200)
 
                     UIView.spacer()
+
+                    Button("GithubSearch")
+                        .add(target: self, action: #selector(tapButton), for: .touchUpInside)
+                        .tag(ViewTag.githubSearchButton.rawValue)
+
+                    UIView.spacer()
+
                     Button("SwiftUI Tutorial")
                         .add(target: self, action: #selector(tapButton), for: .touchUpInside)
                         .tag(ViewTag.swiftuiTutorialButton.rawValue)
@@ -75,13 +91,19 @@ final class RootViewController: UIViewController {
     func tapButton(_ sender: UIButton) {
         guard let viewTag = ViewTag(rawValue: sender.tag) else { return }
         switch viewTag {
+        case .pathButton:
+            let vc = PathViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
         case .simpleDemoButton:
             let vc = SimpleViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        case .tablewViewButton:
+            let vc = TableViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         case .collectionViewButton:
             let vc = CollectionViewController()
             self.navigationController?.pushViewController(vc, animated: true)
-        case .githubSearch:
+        case .githubSearchButton:
             let vc = GithubSearchCollectionViewController()
             let presenter = GithubSearchPresenter(output: vc)
             vc.inject(presenter: presenter)

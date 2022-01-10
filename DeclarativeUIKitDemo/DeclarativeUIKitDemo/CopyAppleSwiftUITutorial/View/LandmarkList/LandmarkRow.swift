@@ -24,7 +24,7 @@ final class LandmarkRow: UICollectionViewCell {
                     
                     UIView.spacer()
                     
-                    UIImageView(tag: ViewTag.star.rawValue) {
+                    UIImageView(tag: ViewTag.star.rawValue).imperative {
                         let imageView = $0 as! UIImageView
                         imageView.image = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysTemplate)
                         imageView.tintColor = .systemYellow

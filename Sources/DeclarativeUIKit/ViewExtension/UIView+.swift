@@ -7,12 +7,6 @@ public extension UIView {
         self.init()
         self.tag = tag
     }
-
-    convenience init(tag: Int = 0, _ imperative: ((Self) -> Void)) {
-        self.init()
-        self.tag = tag
-        imperative(self)
-    }
     
     func declarative(priorities: UIEdgePriorities, _ builder: () -> UIView) {
         let view = builder()
@@ -24,22 +18,30 @@ public extension UIView {
         self.declarative(priorities: .init(), builder)
     }
     
+    @discardableResult
     static func spacer() -> UIView {
-        UIView {
+        UIView.imperative {
             $0.isUserInteractionEnabled = false
         }
     }
     
+    @discardableResult
     static func divider() -> UIView {
         UIView.spacer().height(0.5).backgroundColor(.lightGray)
     }
+    
+    @discardableResult
+    static func path(margin: UIEdgeInsets = .zero, _ imperativeBezierPath: @escaping () -> Void) -> HelperPathView {
+        HelperPathView(imperativeBezierPath)
+    }
 }
+
 
 //MARK: - Declarative method
 public extension UIView {
     
     @discardableResult
-    func imperative(_ imperative: ((UIView) -> Void)) -> Self {
+    func imperative(_ imperative: ((Self) -> Void)) -> Self {
         imperative(self)
         return self
     }
@@ -178,17 +180,7 @@ public extension UIView {
             }
         }
     }
-    
-    @discardableResult
-    func padding(insets: UIEdgeInsets) -> UIView {
-        UIView().zStack(margin: insets, priorities: .init(all: .init(rawValue: 999)), { self })
-    }
-    
-    @discardableResult
-    func padding(_ value: CGFloat = 8.0) -> UIView {
-        self.padding(insets: .init(all: value))
-    }
-    
+        
     @discardableResult
     func contentHuggingPriority(_ priority: UILayoutPriority, for axis: NSLayoutConstraint.Axis) -> Self {
         imperative {
@@ -202,8 +194,25 @@ public extension UIView {
             $0.setContentCompressionResistancePriority(priority, for: axis)
         }
     }
+}
 
+//MARK: - other instanse
+public extension UIView {
+    
+    @discardableResult
+    static func imperative(_ imperative: ((Self) -> Void)) -> Self {
+        Self().imperative(imperative)
+    }
 
+    @discardableResult
+    func padding(insets: UIEdgeInsets) -> UIView {
+        UIView().zStack(margin: insets, priorities: .init(all: .init(rawValue: 999)), { self })
+    }
+    
+    @discardableResult
+    func padding(_ value: CGFloat = 8.0) -> UIView {
+        self.padding(insets: .init(all: value))
+    }
 }
 
 //MARK: - Declarative constraint method

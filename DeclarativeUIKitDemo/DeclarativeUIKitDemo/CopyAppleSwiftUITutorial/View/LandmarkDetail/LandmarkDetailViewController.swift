@@ -40,7 +40,7 @@ private extension LandmarkDetailViewController {
                         .font(UIFont.systemFont(ofSize: 30))
                         .textColor(.black)
                     
-                    UIImageView {
+                    UIImageView.imperative {
                         let imageView = $0 as! UIImageView
                         imageView.image = UIImage(systemName: landmark.isFavorite ? "star.fill" : "star")?.withRenderingMode(.alwaysTemplate)
                         imageView.tintColor = .systemYellow
@@ -85,7 +85,7 @@ private extension LandmarkDetailViewController {
         self.declarative {
             UIScrollView {
                 UIStackView {
-                    MapView {
+                    MapView.imperative {
                         let mapView = $0 as! MapView
                         mapView.setRegion(landmark.locationCoordinate)
                     }
@@ -93,7 +93,7 @@ private extension LandmarkDetailViewController {
                     .zStack {
                         UIStackView {
                             UIView.spacer()
-                            CircleImageView {
+                            CircleImageView.imperative {
                                 let circleImageView = $0 as! CircleImageView
                                 circleImageView.setLandmark(landmark)
                             }

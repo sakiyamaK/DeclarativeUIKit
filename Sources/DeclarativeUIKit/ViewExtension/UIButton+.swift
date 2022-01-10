@@ -61,6 +61,12 @@ public extension UIButton {
     }
     
     @discardableResult
+    func font(_ font: UIFont?) -> Self {
+        self.titleLabel?.font = font
+        return self
+    }
+    
+    @discardableResult
     func image(_ image: UIImage?) -> Self {
         self.image(image, for: .normal)
     }
