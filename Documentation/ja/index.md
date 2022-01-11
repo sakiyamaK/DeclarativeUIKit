@@ -5,14 +5,21 @@
 
 ### Table Of Contents
 
-### [UIViewController](uiviewcontroller.md#uIViewController.md)
+### [UIViewController](uiviewcontroller.md#uiviewcontroller)
 - [function](uiviewcontroller.md##function)
   - [declarative](uiviewcontroller.md###declarative)
 - [sample](uiviewcontroller.md##sample)
 
+### [UIView](uiview.md#uiview)
+- [initilizer](uiview.md##initilizer)
+  - [init(tag: Int)](uiview.md###init(tag:-Int))
+- [function](uiviewcontroller.md##function)
+  - [declarative](uiview.md###declarative)
+    - [sample](uiview.md###declarative####sample)
+
 ### [Original Parameter](parameter.md)
-- [UIEdgeInsets](parameter.md##uIEdgeInsets.md)
-- [UIEdgeBools](parameter.md##uIEdgeBools.md)
-- [UIEdgePriorities](parameter.md##uIEdgePriorities.md)
+- [UIEdgeInsets](parameter.md##uiedgeinsets.md)
+- [UIEdgeBools](parameter.md##uiedgebools.md)
+- [UIEdgePriorities](parameter.md##uiedgepriorities.md)
 
 #### Other Links

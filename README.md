@@ -26,7 +26,7 @@ Library for writing UIKit Autolayout declaratively.
       * [imperative](#imperative)
       * [spacer](#spacer)
       * [Array](#array)
-  * [UITableView,UICollectionView](#uITableView,UICollectionView)
+  * [UITableView,UICollectionView](#uitablewviewuicollectionview)
   * [UIControl](#uIControl)
   * [UIBezierPath](#uIBezierPath)
 * [Quick Start](#quick-start)

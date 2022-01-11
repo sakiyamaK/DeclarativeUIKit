@@ -2,8 +2,6 @@
 
 ## function
 
-`UIViewController`の`extension`として以下の`function`が用意されています
-
 ### declarative
 
 declarativeの各種builderパラメータ内でUIViewを宣言的に記述します
@@ -30,7 +28,7 @@ declarativeの各種builderパラメータ内でUIViewを宣言的に記述し�
 | outsideSafeAreaTrailingBuilder | () -> UIView? | セーフエリアのTrailingの外側に対するレイアウト |
 | builder | () -> UIView? | メインのレイアウト、`safeAreas`と`priorities`はここに適応される |
 
-## Sample
+#### Sample
 
 `MainViewController.swift`で`UIScrollView`を設定する例です
 
@@ -40,24 +38,25 @@ import DeclarativeUIKit
 
 final class MainViewController: UIViewController {
 
-  override func viewDidLoad() {
-      super.viewDidLoad()
-      self.view.backgroundColor = .white
-      
-      override func viewDidLoad() {
-          super.viewDidLoad()
-          self.view.backgroundColor = .white
-          
-          //宣言的にレイアウトを記述していく
-          self.declarative {
-              UIScrollView {
-                  UIStackView { superview in
-                      UIView.spacer().height(300).backgroundColor(.systemRed)
-                      UIView.spacer().height(300).backgroundColor(.systemGreen)
-                      UIView.spacer().height(300).backgroundColor(.systemBlue)
-                  }
-              }
-          }
-      }
-  }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor = .white
+        
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            self.view.backgroundColor = .white
+            
+            //宣言的にレイアウトを記述していく
+            self.declarative {
+                UIScrollView {
+                    UIStackView { superview in
+                        UIView.spacer().height(300).backgroundColor(.systemRed)
+                        UIView.spacer().height(300).backgroundColor(.systemGreen)
+                        UIView.spacer().height(300).backgroundColor(.systemBlue)
+                    }
+                }
+            }
+        }
+    }
+}
 ```
