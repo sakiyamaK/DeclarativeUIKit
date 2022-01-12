@@ -31,7 +31,7 @@ public extension UIView {
     }
     
     @discardableResult
-    static func path(margin: UIEdgeInsets = .zero, _ imperativeBezierPath: @escaping () -> Void) -> HelperPathView {
+    static func path(_ imperativeBezierPath: @escaping () -> Void) -> HelperPathView {
         HelperPathView(imperativeBezierPath)
     }
 }
