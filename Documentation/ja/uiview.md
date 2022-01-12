@@ -2,7 +2,7 @@
 
 ## initilizer
 
-### init(tag: Int)
+### init with tag
 
 ```swift
 init(tag: Int)
@@ -357,7 +357,7 @@ self.declarative {
 
 ```
 
-## draw graphics
+## drawing graphics
 
 `UIBezierPath`による描画の記述する静的メソッドです  
 `HelperPathView`は内部でパスの描画をするUIViewのサブクラスです
@@ -384,7 +384,7 @@ self.declarative {
 }
 ```
 
-## Constraint
+## constraint
 
 `Autolayout`の制約を貼るためのメソッドです  
 固定の数値を指定するものは以下の通りです  
