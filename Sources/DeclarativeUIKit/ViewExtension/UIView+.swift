@@ -8,14 +8,9 @@ public extension UIView {
         self.tag = tag
     }
     
-    func declarative(priorities: UIEdgePriorities, _ builder: () -> UIView) {
-        let view = builder()
-        self.subviews.forEach { $0.removeFromSuperview() }
-        self.edgesConstraints(view, safeAreas: .init(all: false), priorities: priorities)
-    }
-    
-    func declarative(_ builder: () -> UIView) {
-        self.declarative(priorities: .init(), builder)
+    convenience init<T>(assign variable: inout T) {
+        self.init()
+        self.assign(to: &variable)
     }
     
     @discardableResult
@@ -31,7 +26,7 @@ public extension UIView {
     }
     
     @discardableResult
-    static func path(margin: UIEdgeInsets = .zero, _ imperativeBezierPath: @escaping () -> Void) -> HelperPathView {
+    static func path(_ imperativeBezierPath: @escaping () -> Void) -> HelperPathView {
         HelperPathView(imperativeBezierPath)
     }
 }
@@ -39,7 +34,17 @@ public extension UIView {
 
 //MARK: - Declarative method
 public extension UIView {
+
+    func declarative(priorities: UIEdgePriorities, _ builder: () -> UIView) {
+        let view = builder()
+        self.subviews.forEach { $0.removeFromSuperview() }
+        self.edgesConstraints(view, safeAreas: .init(all: false), priorities: priorities)
+    }
     
+    func declarative(_ builder: () -> UIView) {
+        self.declarative(priorities: .init(), builder)
+    }
+
     @discardableResult
     func imperative(_ imperative: ((Self) -> Void)) -> Self {
         imperative(self)
@@ -193,6 +198,17 @@ public extension UIView {
         imperative {
             $0.setContentCompressionResistancePriority(priority, for: axis)
         }
+    }
+
+    @discardableResult
+    func assign<T>(to variable: inout T) -> Self {
+        guard let casted = self as? T else {
+            assertionFailure("Can't cast \(Self.self) to \(T.self)")
+            return self
+        }
+
+        variable = casted
+        return self
     }
 }
 

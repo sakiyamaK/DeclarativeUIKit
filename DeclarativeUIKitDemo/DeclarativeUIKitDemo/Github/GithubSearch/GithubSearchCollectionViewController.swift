@@ -3,33 +3,12 @@ import DeclarativeUIKit
 
 final class GithubSearchCollectionViewController: UIViewController {
     
-    private enum ViewTag: Int {
-        case collectionView = 1
-        case activityIndicatorStack
-        case activityIndicator
-        case startStack
-        case searchTextField
-        case searchButton
-    }
-    
-    private var collectionView: UICollectionView {
-        self.getView(tag: ViewTag.collectionView.rawValue) as! UICollectionView
-    }
-    private var activityIndicatorStack: UIStackView {
-        self.getView(tag: ViewTag.activityIndicatorStack.rawValue) as! UIStackView
-    }
-    private var activityIndicator: UIActivityIndicatorView {
-        self.getView(tag: ViewTag.activityIndicator.rawValue) as! UIActivityIndicatorView
-    }
-    private var startStack: UIStackView {
-        self.getView(tag: ViewTag.startStack.rawValue) as! UIStackView
-    }
-    private var searchTextField: UISearchTextField {
-        self.getView(tag: ViewTag.searchTextField.rawValue) as! UISearchTextField
-    }
-    private var searchButton: UIButton {
-        self.getView(tag: ViewTag.searchButton.rawValue) as! UIButton
-    }
+    private weak var collectionView: UICollectionView!
+    private weak var activityIndicatorStack: UIStackView!
+    private weak var activityIndicator: UIActivityIndicatorView!
+    private weak var startStack: UIStackView!
+    private weak var searchTextField: UISearchTextField!
+    private weak var searchButton: UIButton!
     
     private var presenter: GithubSearchPresenterInput!
     func inject(presenter: GithubSearchPresenterInput) {
@@ -45,7 +24,7 @@ final class GithubSearchCollectionViewController: UIViewController {
                 UIStackView.horizontal {
                     UIView.spacer().width(12)
                     
-                    UISearchTextField(tag: ViewTag.searchTextField.rawValue).imperative {
+                    UISearchTextField(assign: &searchTextField).imperative {
                         let textField = $0 as! UISearchTextField
                         textField.placeholder = "検索してね"
                     }
@@ -57,7 +36,7 @@ final class GithubSearchCollectionViewController: UIViewController {
                             #selector(tapButton)
                         }
                         .contentMode(.scaleAspectFit)
-                        .tag(ViewTag.searchButton.rawValue)
+                        .assign(to: &searchButton)
                     
                     UIView.spacer().width(16)
                 }
@@ -71,15 +50,14 @@ final class GithubSearchCollectionViewController: UIViewController {
                     .dataSource(self)
                     .registerCellClass(GithubSearchCollectionViewCell.self, forCellWithReuseIdentifier: GithubSearchCollectionViewCell.reuseIdentifier)
                     .isHidden(true)
-                    .tag(ViewTag.collectionView.rawValue)
+                    .assign(to: &collectionView)
                 
                 UIStackView.vertical {
                     UIView.spacer().height(100)
-                    UIActivityIndicatorView()
-                        .tag(ViewTag.activityIndicator.rawValue)
+                    UIActivityIndicatorView(assign: &activityIndicator)
                     UIView.spacer()
                 }
-                .tag(ViewTag.activityIndicatorStack.rawValue)
+                .assign(to: &activityIndicatorStack)
                 .isHidden(true)
                 
                 UIStackView.vertical {
@@ -87,7 +65,7 @@ final class GithubSearchCollectionViewController: UIViewController {
                     UILabel("検索ワードを入力してください")
                         .textAlignment(.center)
                     UIView.spacer()
-                }.tag(ViewTag.startStack.rawValue)
+                }.assign(to: &startStack)
             }
         }
     }
@@ -134,16 +112,8 @@ extension GithubSearchCollectionViewController: GithubSearchPresenterOutput {
 
 @objc extension GithubSearchCollectionViewController {
     func tapButton(_ sender: UIButton) {
-        guard
-            let viewTag = ViewTag(rawValue: sender.tag)
-        else { return }
         let searchParameter: GithubSearchParameters = .init(searchWord: searchTextField.text)
-        switch viewTag {
-        case .searchButton:
-            presenter.search(parameters: searchParameter)
-        default:
-            break
-        }
+        presenter.search(parameters: searchParameter)
     }
 }
 

@@ -10,9 +10,7 @@ import DeclarativeUIKit
 
 final class LandmarkListViewController: UIViewController {
     
-    private enum ViewTag: Int {
-        case collectionView = 1
-    }
+    private weak var collectionView: UICollectionView!
     
     private var landmarks: [Landmark] = []
     private var isOn: Bool = false
@@ -60,7 +58,7 @@ final class LandmarkListViewController: UIViewController {
                     return section
                 }
             }
-            .tag(ViewTag.collectionView.rawValue)
+            .assign(to: &collectionView)
             .delegate(self)
             .dataSource(self)
             .registerCellClass(ToggleRow.self, forCellWithReuseIdentifier: "ToggleRow")
@@ -105,7 +103,6 @@ extension LandmarkListViewController: UICollectionViewDataSource {
             cell.configure(isOn: self.isOn)
             cell.toggleAction = {[weak self] (isOn) in
                 self?.isOn = isOn
-                let collectionView = self?.getView(tag: ViewTag.collectionView.rawValue) as! UICollectionView
                 collectionView.reloadData()
             }
             return cell

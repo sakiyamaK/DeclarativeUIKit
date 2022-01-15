@@ -3,11 +3,9 @@ import DeclarativeUIKit
 
 final class LandmarkRow: UICollectionViewCell {
 
-    private enum ViewTag: Int {
-        case icon = 1
-        case text
-        case star
-    }
+    private weak var iconView: UIImageView!
+    private weak var textLabel: UILabel!
+    private weak var starView: UIImageView!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -17,19 +15,18 @@ final class LandmarkRow: UICollectionViewCell {
                 UIView.spacer()
                 
                 UIStackView.horizontal {
-                    UIImageView(tag: ViewTag.icon.rawValue)
-                    .size(width: 50, height: 50)
-                    
-                    UILabel(tag: ViewTag.text.rawValue)
-                    
+                    UIImageView(assign: &iconView)
+                        .size(width: 50, height: 50)
+
+                    UILabel(assign: &textLabel)
+
                     UIView.spacer()
-                    
-                    UIImageView(tag: ViewTag.star.rawValue).imperative {
-                        let imageView = $0 as! UIImageView
-                        imageView.image = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysTemplate)
-                        imageView.tintColor = .systemYellow
-                    }
-                    .isHidden(true)
+
+                    UIImageView(assign: &starView)
+                        .image(UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysTemplate))
+                        .imperative({
+                            $0.tintColor = .systemYellow
+                        }).isHidden(true)
                 }
                 .spacing(8)
                 .alignment(.center)
@@ -41,10 +38,6 @@ final class LandmarkRow: UICollectionViewCell {
     }
             
     func configure(landmark: Landmark) {
-        let iconView = self.getView(tag: ViewTag.icon.rawValue) as! UIImageView
-        let textLabel = self.getView(tag: ViewTag.text.rawValue) as! UILabel
-        let starView = self.getView(tag: ViewTag.star.rawValue) as! UIImageView
-        
         iconView.image = UIImage(named: landmark.imageName)
         textLabel.text = landmark.name
         starView.isHidden = !landmark.isFavorite
