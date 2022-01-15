@@ -6,9 +6,9 @@
 ### Table Of Contents
 
 ### [UIViewController](uiviewcontroller.md#uiviewcontroller)
-- [function](uiviewcontroller.md##function)
-  - [declarative](uiviewcontroller.md###declarative)
-- [sample](uiviewcontroller.md##sample)
+- [function](uiviewcontroller.md#function)
+  - [declarative](uiviewcontroller.md#declarative)
+- [sample](uiviewcontroller.md#sample)
 
 ### [UIView](uiview.md#uiview)
 - [initilizer](uiview.md#initilizer)
