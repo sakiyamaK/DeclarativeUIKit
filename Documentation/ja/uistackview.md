@@ -130,7 +130,7 @@ self.declarative {
 }
 ```
 
-配列や`if`を使ったサンプルは(こちら)[####sample]を参考にしてください
+配列や`if`を使ったサンプルは[こちら](#sample)を参考にしてください
 
 ### init with horizontal parameters
 
