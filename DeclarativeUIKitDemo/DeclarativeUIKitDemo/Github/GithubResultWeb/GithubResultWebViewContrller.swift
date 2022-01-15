@@ -4,29 +4,17 @@ import DeclarativeUIKit
 
 final class GithubSearchResultViewController: UIViewController {
     
-    private enum ViewTag: Int {
-        case webView = 1
-        case activityIndicatorStack
-        case activityIndicator
-    }
-    
-    private var webView: WKWebView {
-        self.getView(tag: ViewTag.webView.rawValue) as! WKWebView
-    }
-    private var activityIndicatorStack: UIStackView {
-        self.getView(tag: ViewTag.activityIndicatorStack.rawValue) as! UIStackView
-    }
-    private var activityIndicator: UIActivityIndicatorView {
-        self.getView(tag: ViewTag.activityIndicator.rawValue) as! UIActivityIndicatorView
-    }
+    private weak var webView: WKWebView!
+    private weak var activityIndicatorStack: UIStackView!
+    private weak var activityIndicator: UIActivityIndicatorView!
     
     private var presenter: GithubResultWebPresenterInput!
     func inject(presenter: GithubResultWebPresenterInput) {
         self.presenter = presenter
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func loadView() {
+        super.loadView()
         
         self.view.backgroundColor = .white
         
@@ -37,7 +25,7 @@ final class GithubSearchResultViewController: UIViewController {
                     webView.uiDelegate = self
                     webView.navigationDelegate = self
                 }
-                .tag(ViewTag.webView.rawValue)
+                .assign(to: &webView)
                 .isHidden(true)
                 
                 UIStackView.vertical {
@@ -46,10 +34,10 @@ final class GithubSearchResultViewController: UIViewController {
                         let indicator = $0 as! UIActivityIndicatorView
                         indicator.startAnimating()
                     }
-                    .tag(ViewTag.activityIndicator.rawValue)
+                    .assign(to: &activityIndicator)
                     UIView.spacer()
                 }
-                .tag(ViewTag.activityIndicatorStack.rawValue)
+                .assign(to: &activityIndicatorStack)
             }
         }
         
