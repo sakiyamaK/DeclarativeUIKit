@@ -21,20 +21,18 @@ final class SimpleViewController: UIViewController {
         let Border = {
             UIView.divider().backgroundColor(.gray)
         }
+        
         let MarginView = {
             UIView.spacer().height(40).backgroundColor(.lightGray)
         }
         
         let Header = { (title: String) -> UIView in
             UIStackView.vertical {
-                UILabel.imperative {
-                    let label = $0 as! UILabel
-                    label.text = title
-                    label.textColor = .black
-                    label.textAlignment = .center
-                    label.numberOfLines = 0
-                    label.font = UIFont.systemFont(ofSize: 30)
-                }
+                UILabel(title)
+                    .textColor(.black)
+                    .textAlignment(.center)
+                    .numberOfLines(0)
+                    .font(UIFont.systemFont(ofSize: 30))
                 UIView.spacer().height(10)
                 Border()
             }

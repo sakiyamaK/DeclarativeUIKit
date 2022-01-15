@@ -3,9 +3,7 @@ import DeclarativeUIKit
 
 final class CircleImageView: UIView {
     
-    private enum ViewTag: Int {
-        case imageView = 1
-    }
+    private weak var imageView: UIImageView!
     
     private let width: CGFloat = 200
     private let margin: CGFloat = 5
@@ -13,20 +11,19 @@ final class CircleImageView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.declarative {
-            UIImageView(tag: ViewTag.imageView.rawValue)
-            .cornerRadius((width - 2*margin)/2)
-            .clipsToBounds(true)
-            .contentMode(.scaleAspectFill)
-            .padding(margin)
-            .backgroundColor(.white)
-            .shadow(color: .black, radius: 4)
-            .cornerRadius(width/2)
-            .size(width: width, height: width)
+            UIImageView(assign: &imageView)
+                .cornerRadius((width - 2*margin)/2)
+                .clipsToBounds(true)
+                .contentMode(.scaleAspectFill)
+                .padding(margin)
+                .backgroundColor(.white)
+                .shadow(color: .black, radius: 4)
+                .cornerRadius(width/2)
+                .size(width: width, height: width)
         }
     }
     
     func setLandmark(_ landmark: Landmark) {
-        let imageView = self.getView(tag: ViewTag.imageView.rawValue) as! UIImageView
         imageView.image = UIImage(named: landmark.imageName)
     }
     

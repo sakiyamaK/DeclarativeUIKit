@@ -4,9 +4,7 @@ import MapKit
 
 final class MapView: UIView {
         
-    private enum ViewTag: Int {
-        case mapView = 1
-    }
+    private weak var mapView: MKMapView!
 
     private static let defCoordinate = CLLocationCoordinate2D(latitude: 34.011_286, longitude: -116.166_868)
     private static let defSpan = MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
@@ -17,7 +15,7 @@ final class MapView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.declarative {
-            MKMapView(tag: ViewTag.mapView.rawValue)
+            MKMapView(assign: &mapView)
         }
     }
     
@@ -26,7 +24,6 @@ final class MapView: UIView {
           center: coordinate,
           span: MapView.defSpan
         )
-        let mapView = self.getView(tag: ViewTag.mapView.rawValue) as! MKMapView
         mapView.setRegion(region, animated: true)
     }
     

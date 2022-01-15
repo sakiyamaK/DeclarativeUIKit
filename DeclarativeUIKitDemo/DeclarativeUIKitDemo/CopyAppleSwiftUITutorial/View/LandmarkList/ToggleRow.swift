@@ -3,9 +3,8 @@ import UIKit
 import DeclarativeUIKit
 
 final class ToggleRow: UICollectionViewCell {
-    private enum ViewTag: Int {
-        case toggle = 1
-    }
+
+    private weak var switchView: UISwitch!
     
     var toggleAction: ((Bool) -> Void)? = nil
     
@@ -17,16 +16,12 @@ final class ToggleRow: UICollectionViewCell {
                 UIView.spacer()
                 
                 UIStackView.horizontal {
-                    UILabel.imperative {
-                        let label = $0 as! UILabel
-                        label.text = "Favorites only"
-                    }
+                    UILabel("Favorites only")
                     
                     UIView.spacer()
                     
-                    UISwitch()
+                    UISwitch(assign: &switchView)
                     .add(target: self, action: #selector(_toggleAction), for: .valueChanged)
-                    .tag(ViewTag.toggle.rawValue)
                 }
                 .alignment(.center)
                 
@@ -38,7 +33,6 @@ final class ToggleRow: UICollectionViewCell {
     }
     
     func configure(isOn: Bool) {
-        let switchView = self.getView(tag: ViewTag.toggle.rawValue) as! UISwitch
         switchView.isOn = isOn
     }
     

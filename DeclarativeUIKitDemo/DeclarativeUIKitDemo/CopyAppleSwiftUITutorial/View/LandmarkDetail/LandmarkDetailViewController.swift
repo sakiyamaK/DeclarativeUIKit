@@ -19,13 +19,13 @@ final class LandmarkDetailViewController: UIViewController {
         self.landmark = landmark
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func loadView() {
+        super.loadView()
         NotificationCenter.default.addObserver(self,
             selector: #selector(setup),
             name: Notification.Name("INJECTION_BUNDLE_NOTIFICATION"), object: nil)
         setup()
-    }
+    }    
 }
 
 @objc
@@ -40,12 +40,9 @@ private extension LandmarkDetailViewController {
                         .font(UIFont.systemFont(ofSize: 30))
                         .textColor(.black)
                     
-                    UIImageView.imperative {
-                        let imageView = $0 as! UIImageView
-                        imageView.image = UIImage(systemName: landmark.isFavorite ? "star.fill" : "star")?.withRenderingMode(.alwaysTemplate)
-                        imageView.tintColor = .systemYellow
-                        
-                    }.contentMode(.scaleAspectFit)
+                    UIImageView(UIImage(systemName: landmark.isFavorite ? "star.fill" : "star")?.withRenderingMode(.alwaysTemplate))
+                        .tintColor(.systemYellow)
+                        .contentMode(.scaleAspectFit)
                     
                     UIView.spacer()
                     

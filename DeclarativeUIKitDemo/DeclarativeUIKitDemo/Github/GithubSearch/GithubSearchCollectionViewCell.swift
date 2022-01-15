@@ -7,24 +7,22 @@ final class GithubSearchCollectionViewCell: UICollectionViewCell {
     
     static let reuseIdentifier: String = "GithubSearchCollectionViewCell"
     
-    private enum ViewTag: Int {
-        case fullNameLabel = 1
-        case descriptionLabel
-        case starIconLbel
-        case languageIconLbel
-        case licenseLabel
-        case dateLabel
-    }
+    private weak var fullNameLabel: UILabel!
+    private weak var descriptionLabel: UILabel!
+    private weak var starIconLabel: UILabel!
+    private weak var languageIconLabel: UILabel!
+    private weak var licenseLabel: UILabel!
+    private weak var dateLabel: UILabel!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        let BottomIconView = { (iconName: String, tagId: Int) -> UIView in
+        let BottomIconView = { (iconName: String, assign: inout UILabel?) -> UIView in
             UIStackView.horizontal {
                 UIImageView(
                     UIImage(systemName: iconName)?.withRenderingMode(.alwaysTemplate).withTintColor(.black)
                 ).contentMode(.scaleAspectFit)
-                UILabel(tag: tagId)
+                UILabel(assign: &assign)
                     .textAlignment(.left)
                     .font(UIFont.systemFont(ofSize: 20))
                     .contentHuggingPriority(.required, for: .vertical)
@@ -36,30 +34,30 @@ final class GithubSearchCollectionViewCell: UICollectionViewCell {
         self.contentView.declarative(priorities: .init(bottom: .defaultLow)) {
             UIStackView {
                 UIStackView {
-                    UILabel(tag: ViewTag.fullNameLabel.rawValue)
+                    UILabel(assign: &fullNameLabel)
                         .textAlignment(.left)
                         .font(UIFont.systemFont(ofSize: 30))
                         .contentHuggingPriority(.required, for: .vertical)
                         .contentCompressionResistancePriority(.required, for: .vertical)
 
-                    UILabel(tag: ViewTag.descriptionLabel.rawValue)
+                    UILabel(assign: &descriptionLabel)
                         .textAlignment(.left)
                         .font(UIFont.systemFont(ofSize: 20))
                         .contentHuggingPriority(.required, for: .vertical)
                         .contentCompressionResistancePriority(.required, for: .vertical)
                     
                     UIStackView.horizontal {
-                        BottomIconView("circle", ViewTag.starIconLbel.rawValue)
+                        BottomIconView("star", &starIconLabel)
+
+                        BottomIconView("circle", &languageIconLabel)
                         
-                        BottomIconView("circle", ViewTag.languageIconLbel.rawValue)
-                        
-                        UILabel(tag: ViewTag.licenseLabel.rawValue)
+                        UILabel(assign: &licenseLabel)
                             .textAlignment(.left)
                             .font(UIFont.systemFont(ofSize: 20))
                             .contentHuggingPriority(.required, for: .vertical)
                             .contentCompressionResistancePriority(.required, for: .vertical)
 
-                        UILabel(tag: ViewTag.dateLabel.rawValue)
+                        UILabel(assign: &dateLabel)
                             .textAlignment(.left)
                             .font(UIFont.systemFont(ofSize: 20))
                             .contentHuggingPriority(.required, for: .vertical)
@@ -81,21 +79,10 @@ final class GithubSearchCollectionViewCell: UICollectionViewCell {
     
     @discardableResult
     func configure(github: GithubModel) -> Self {
-        guard
-            let fullNameLabel = self.viewWithTag(ViewTag.fullNameLabel.rawValue) as? UILabel,
-            let descriptionLabel = self.viewWithTag(ViewTag.descriptionLabel.rawValue) as? UILabel,
-            let starIconLabel = self.viewWithTag(ViewTag.starIconLbel.rawValue) as? UILabel,
-            let languageLabel = self.viewWithTag(ViewTag.languageIconLbel.rawValue) as? UILabel,
-            let licenseLabel = self.viewWithTag(ViewTag.licenseLabel.rawValue) as? UILabel,
-            let dateLabel = self.viewWithTag(ViewTag.dateLabel.rawValue) as? UILabel
-        else {
-            return self
-        }
-        
         fullNameLabel.text = github.fullName
         descriptionLabel.text = github.description
         starIconLabel.text = github.stargazersCount?.description ?? ""
-        languageLabel.text = github.language ?? ""
+        languageIconLabel.text = github.language ?? ""
         licenseLabel.text = github.license?.name ?? ""
         dateLabel.text = github.updatedAt?.description ?? ""
         
