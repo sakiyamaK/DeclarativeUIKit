@@ -13,9 +13,11 @@ Library for writing UIKit Autolayout declaratively.
 * [Example](#example)
 * [Installation](#installation)
   * [Swift Package Manager](#swift-package-manager)
+  * [CocoaPods](#cocoapods)
+* [Documents]
+  * [Japanese](https://github.com/sakiyamaK/DeclarativeUIKit/blob/add_document/Documentation/ja/index.md)
 * [Usage](#usage)
   * [Setting for writing declarative](#setting-for-writing-declarative)
-  * [Accessing declaratived view](#accessing-declaratived-view)
   * [UIScrollView](#uIScrollView)
   * [UIStackView](#uIStackView)
   * [UIView](#uIView)
@@ -26,11 +28,12 @@ Library for writing UIKit Autolayout declaratively.
       * [imperative](#imperative)
       * [spacer](#spacer)
       * [Array](#array)
-  * [UITableView,UICollectionView](#uITableView,UICollectionView)
+  * [UITableView,UICollectionView](#uitablewviewuicollectionview)
   * [UIControl](#uIControl)
   * [UIBezierPath](#uIBezierPath)
 * [Quick Start](#quick-start)
 * [Xcode Preview](#xcode-preview)
+
 ## Motivation
 
 UIKitのプロジェクトからSwiftUIに移行するためには根本の設計から変える必要がある場合があり、さらにUIKitからSwiftUIやSwiftUIからUIKitの相互の連携がどうしても必要になります。
@@ -99,6 +102,14 @@ Go to File -> Swift Packages -> Add Package Dependency...
 Then search for https://github.com/sakiyamaK/DeclarativeUIKit
 And choose the version you want
 
+### CocoaPods
+
+[CocoaPods](https://cocoapods.org) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate Alamofire into your Xcode project using CocoaPods, specify it in your `Podfile`:
+
+```ruby
+pod 'DeclarativeUIKit'
+```
+
 ## Usage
 
 ### Setting for writing declarative
@@ -123,87 +134,6 @@ class DeclarativeViewController: UIViewController {
           //It is recommended to place a UIScrollView
         }
     }
-}
-```
-
-```swift
-class DeclarativeViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        //セーフエリアの設定やpriorityもできます
-        //セーフエリア外にレイアウトを組むこともできます
-        //You can also set the safe area and priority
-        //Layout can be built outside the safe area
-        self.declarative(
-            //左右はセーフエリア外までレイアウトを広げる
-            //The left and right sides extend the layout to outside the safe area.
-            safeAreas: .init(top: true, leading: false, bottom: true, trailing: false),
-            //Viewの上下左右の制約をpriorityにする
-            //Set the top, bottom, left and right constraints of the View to priority.
-            priorities: .init(all: .required),
-            outsideSafeAreaTop: {
-                //上のセーフエリア外のレイアウトを組む
-                //set a layout outside the safe area on
-                UIView.spacer().backgroundColor(.systemYellow)
-            },
-            outsideSafeAreaLeading: {
-            },
-            outsideSafeAreaBottom: {
-                //下のセーフエリア外のレイアウトを組む
-                //set a layout outside the safe area down
-                UIView.spacer().backgroundColor(.systemBlue)
-            },
-            outsideSafeAreaTrailing: {
-            }
-        ) {
-            //メインのViewのレイアウトを組む
-            //set the layout of the main View
-            UIStackView.vertical {
-                UIView.spacer().backgroundColor(.systemRed)
-            }
-        }
-    }
-}
-```
-
-### Accessing declaratived view
-
-宣言的に記述されたViewはパラメータに代入されていないため`tag`を指定して`UIViewController`か`UIView`の`getView`メソッドでアクセスできます
-
-Since the declaratively described View is not assigned to a parameter, it can be accessed by specifying a `tag` and using the `UIViewController` or `UIView's getView` method.
-
-
-```swift
-class DeclarativeViewController: UIViewController {
-
-  private enum ViewTag {
-    case button = 1
-  }
-
-  override func viewDidLoad() {
-      super.viewDidLoad()
-      self.declarative {
-        //tagを設定します
-        // set tag
-        UIButton(tag: ViewTag.button.rawValue).imperative {
-          guard let button = $0 as? UIButton else { return }
-          button.setTitle("button", for: .normal)
-        }
-        .addTarget(self, action: #selector(self.tapButton), for: .touchUpInside)
-        //もしくはtagメソッドから設定します
-        // or set via the tag method
-          .tag(ViewTag.button.rawValue)
-      }
-  }
-
-  @obj func tapButton(_ sender: UIButton) {
-    //getViewでtagを指定して取得
-    //getView to specify the tag to get
-    if let button = self.getView(tag: ViewTag.button.rawValue) as? UIButton {
-      print(button)
-    }
-  }
 }
 ```
 
