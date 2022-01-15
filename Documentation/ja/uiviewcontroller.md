@@ -60,3 +60,49 @@ final class MainViewController: UIViewController {
     }
 }
 ```
+
+セーフエリア外にレイアウトを配置する例です
+
+```swift 
+import UIKit
+import DeclarativeUIKit
+
+final class MainViewController: UIViewController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //セーフエリアの設定やpriorityもできます
+        //セーフエリア外にレイアウトを組むこともできます
+        //You can also set the safe area and priority
+        //Layout can be built outside the safe area
+        self.declarative(
+            //左右はセーフエリア外までレイアウトを広げる
+            //The left and right sides extend the layout to outside the safe area.
+            safeAreas: .init(top: true, leading: false, bottom: true, trailing: false),
+            //Viewの上下左右の制約をpriorityにする
+            //Set the top, bottom, left and right constraints of the View to priority.
+            priorities: .init(all: .required),
+            outsideSafeAreaTop: {
+                //上のセーフエリア外のレイアウトを組む
+                //set a layout outside the safe area on
+                UIView.spacer().backgroundColor(.systemYellow)
+            },
+            outsideSafeAreaLeading: {
+            },
+            outsideSafeAreaBottom: {
+                //下のセーフエリア外のレイアウトを組む
+                //set a layout outside the safe area down
+                UIView.spacer().backgroundColor(.systemBlue)
+            },
+            outsideSafeAreaTrailing: {
+            }
+        ) {
+            //メインのViewのレイアウトを組む
+            //set the layout of the main View
+            UIStackView.vertical {
+                UIView.spacer().backgroundColor(.systemRed)
+            }
+        }
+    }
+}
+```
