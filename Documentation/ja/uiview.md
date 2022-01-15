@@ -11,6 +11,41 @@ init(tag: Int)
 | ---- | ---- | ---- |
 | tag | Int | Viewのタグ |
 
+### init with assign
+
+クラスのパラメータに代入するためのパラメータをもつイニシャライザです
+
+```swift
+init<T>(assign variable: inout T)
+```
+
+#### sample
+
+```swift
+import UIKit
+import DeclarativeUIKit
+
+final class MainViewController: UIViewController {
+    
+    private weak var mainLabel: UILabel!
+    
+    override func loadView() {
+        super.loadView()
+        
+        self.declarative {
+            //宣言的に定義したUILabelをmainLabelに代入する
+            UILabel(assign: &mainLabel)
+                .text("text")
+                .font(.systemFont(ofSize: 20))
+        }
+    }
+    
+    func configure(text: String) {
+        mainLabel.text = text
+    }
+}
+```
+
 ### spacer
 
 `isUserInteractionEnabled`が`false`に設定されたViewを生成します
@@ -28,6 +63,52 @@ static func divider() -> UIView
 ```
 
 ## function
+
+### declarative
+
+declarativeのbuilderパラメータ内でUIViewを宣言的に記述します
+
+```swift
+func declarative(priorities: UIEdgePriorities, _ builder: () -> UIView)
+```
+
+|  parameter | 型 | description |
+| ---- | ---- | ---- |
+| priorities | [UIEdgePriorities](parameter.md#uIEdgePriorities) | builderパラメータで生成されたViewの上下左右の制約の優先度、デフォルトは全て`required` |
+| builder | () -> UIView | UIViewのレイアウトを宣言的に記述する |
+
+#### sample
+
+`UILabel`や`UIImageView`を並べるサンプルです
+
+```swift
+import UIKit
+import DeclarativeUIKit
+
+final class SampleView: UIView {
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+          //宣言的にレイアウトを記述していく
+          self.declarative {
+            UIStackView {
+                UILabel("aa").font(UIFont.systemFont(ofSize: 30))
+
+                UIStackView.horizontal {
+                    UIView.spacer()
+                    UIImageView(UIImage(systemName: "pencil"))
+                        .size(width: 100, height: 100)
+                    UIView.spacer()
+                }
+
+                UIView.spacer()
+            }
+        }
+    }
+}
+
+```
 
 ### declarative
 
@@ -111,6 +192,41 @@ self.declarative {
             label.textColor = .blue
         }
         UIView.spacer()
+    }
+}
+```
+
+### assign
+
+クラスのパラメータに代入します
+
+```swift
+func assign<T>(to variable: inout T) -> Self
+```
+
+#### sample
+
+```swift
+import UIKit
+import DeclarativeUIKit
+
+final class MainViewController: UIViewController {
+    
+    private weak var mainLabel: UILabel!
+    
+    override func loadView() {
+        super.loadView()
+        
+        self.declarative {
+            //宣言的に定義したUILabelをmainLabelに代入する
+            UILabel("text")
+                .font(.systemFont(ofSize: 20))
+                .assign(to: &mainLabel)
+        }
+    }
+    
+    func configure(text: String) {
+        mainLabel.text = text
     }
 }
 ```

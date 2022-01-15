@@ -18,6 +18,22 @@ final class SimpleViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         
+        self.declarative {
+            UIScrollView { superview in
+                UIView.spacer()
+                    .backgroundColor(.blue)
+                    .heightEqual(to: superview, constraint: superview.heightAnchor * 2 + 100)
+            }
+            .refreshControl {
+                UIRefreshControl()
+                    .add(target: self, for: .valueChanged) {
+                        #selector(refresh)
+                    }
+            }
+        }
+        
+        return
+        
         let Border = {
             UIView.divider().backgroundColor(.gray)
         }
