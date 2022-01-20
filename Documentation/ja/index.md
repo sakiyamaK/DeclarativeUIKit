@@ -70,9 +70,10 @@
   - [some default parameters](uistackview.md#some-default-parameters)
     - [sample](uistackview.md#sample-3)
 
-### [Original Parameter](parameter.md)
-- [UIEdgeInsets](parameter.md##uiedgeinsets.md)
-- [UIEdgeBools](parameter.md##uiedgebools.md)
-- [UIEdgePriorities](parameter.md##uiedgepriorities.md)
-
-#### Other Links
+### [UILabel](uilabel.md#uilabel)
+- [initilizer](uilabel.md#initilizer)
+  - [init with parameters](uilabel.md#init-with-parameters)
+    - [sample](uilabel.md#sample)
+- [function](uilabel.md#function)
+  - [some default parameters](uilabel.md#some-default-parameters)
+    - [sample](uilabel.md#sample-1)
