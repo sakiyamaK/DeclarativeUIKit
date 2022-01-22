@@ -4,10 +4,6 @@
 
 ### init with parameters
 
-`UILabel`に宣言的にレイアウトを構築することができます  
-`builder`内は複数のview配置することができます  
-配列や`if`にも対応しています
-
 ```swift
     init(_ text: String?)
         

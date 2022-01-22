@@ -110,7 +110,7 @@ final class SampleView: UIView {
 
 ```
 
-## imperative
+### imperative
 
 `UIView`のパラメータを標準の通り手続的に実装するメソッドです
 

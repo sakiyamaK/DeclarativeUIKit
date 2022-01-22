@@ -37,23 +37,17 @@ import UIKit
 import DeclarativeUIKit
 
 final class MainViewController: UIViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         
-        override func viewDidLoad() {
-            super.viewDidLoad()
-            self.view.backgroundColor = .white
-            
-            //宣言的にレイアウトを記述していく
-            self.declarative {
-                UIScrollView {
-                    UIStackView { superview in
-                        UIView.spacer().height(300).backgroundColor(.systemRed)
-                        UIView.spacer().height(300).backgroundColor(.systemGreen)
-                        UIView.spacer().height(300).backgroundColor(.systemBlue)
-                    }
+        //宣言的にレイアウトを記述していく
+        self.declarative {
+            UIScrollView {
+                UIStackView.vertical {
+                    UIView.spacer().height(300).backgroundColor(.systemRed)
+                    UIView.spacer().height(300).backgroundColor(.systemGreen)
+                    UIView.spacer().height(300).backgroundColor(.systemBlue)
                 }
             }
         }
