@@ -2,8 +2,6 @@
 
 ## initilizer
 
-`UIButton`に宣言的にレイアウトを構築することができます  
-
 ### init with title
 
 #### 
@@ -27,7 +25,6 @@
 | ---- | ---- | ---- |
 | image | UIImage | `UIButton`の`image`パラメータ`の値 |
 | for | UIControl.State | `UIButton`の`State`パラメータの値、デフォルトは`normal` |
-
 
 #### sample
 
