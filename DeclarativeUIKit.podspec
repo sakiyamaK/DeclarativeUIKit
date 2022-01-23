@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = "DeclarativeUIKit"
-  spec.version      = "0.17.0"
+  spec.version      = "0.17.1"
   spec.summary      = "Library for writing UIKit Autolayout declaratively."
   spec.description  = "Library for writing UIKit Autolayout declaratively."
   spec.homepage     = "https://github.com/sakiyamaK/DeclarativeUIKit"
