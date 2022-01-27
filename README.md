@@ -107,10 +107,6 @@ final class SimpleViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
 
-                let Border = {
-            UIView.divider().backgroundColor(.gray)
-        }
-
         let Header = { (title: String) -> UIView in
             UIStackView.vertical {
                 UILabel(title)
@@ -119,7 +115,7 @@ final class SimpleViewController: UIViewController {
                     .numberOfLines(0)
                     .font(UIFont.systemFont(ofSize: 30))
                 UIView.spacer().height(10)
-                Border()
+                UIView.divider()
             }
         }
 
