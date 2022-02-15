@@ -10,11 +10,8 @@ import DeclarativeUIKit
 
 final class SimpleViewController: UIViewController {
     
-    private weak var button: UIButton!
-    private weak var tapLabel: UILabel!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func loadView() {
+        super.loadView()
         self.view.backgroundColor = .white
                 
         let Border = {
@@ -38,7 +35,7 @@ final class SimpleViewController: UIViewController {
         }
         
         let ScrollBlocksView = {
-            UIScrollView.horizontal(margin: .init(top: 20, left: 10, bottom: 20, right: 10)) {
+            UIScrollView.horizontal {
                 UIStackView.horizontal(distribution: .fill) { stackView in
                     UIView()
                         .imperative { _ in
@@ -73,45 +70,16 @@ final class SimpleViewController: UIViewController {
                         .size(width: 100, height: 100)
                     
                 }.spacing(20)
+                    .padding(insets: .init(top: 20, left: 10, bottom: 20, right: 10))
             }
             .showsScrollIndicator(false)
         }
         
-        let CenteringView = {
-            UIStackView.horizontal {
-                UIStackView.vertical {
-                    UIImageView(UIImage.init(systemName: "square.and.arrow.up"))
-                        .contentMode(.scaleAspectFit)
-                        .height(200)
-                    
-                    UIButton("button")
-                        .titleColor(.brown)
-                        .addControlAction(target: self, for: .touchUpInside) {
-                            #selector(self.tapButton)
-                        }
-                        .assign(to: &self.button)
-                    
-                    UILabel(assign: &self.tapLabel)
-                        .text("タップジェスチャーのあるラベル")
-                        .textAlignment(.center)
-                        .isUserInteractionEnabled(true)
-                        .numberOfLines(1)
-                        .addGestureRecognizer {
-                            UITapGestureRecognizer(target: self) {
-                                #selector(self.tapLabel(_:))
-                            }
-                        }
-                }
-                .spacing(30)
-            }
-            .alignment(.center)
-        }
-        
         let ZStackView = {
             UIStackView.horizontal {
-                UIImageView(UIImage.init(systemName: "square.and.arrow.down"))
+                UIView()
                     .height(200)
-                    .contentMode(.scaleAspectFit)
+                    .backgroundColor(.brown)
                     .zStack(margin: .init(top: 70, left: 10, bottom: 0, right: 10)) {
                         UILabel("上に重なってるね")
                             .font(UIFont.boldSystemFont(ofSize: 20))
@@ -172,12 +140,6 @@ final class SimpleViewController: UIViewController {
                     UIView.spacer().height(20)
                     MarginView()
                     UIView.spacer().height(10)
-                    Header("レイアウト以外の設定は手続的にする")
-                    UIView.spacer().height(20)
-                    CenteringView()
-                    UIView.spacer().height(20)
-                    MarginView()
-                    UIView.spacer().height(10)
                     Header("Z方向の設定")
                     ZStackView()
                     MarginView()
@@ -193,40 +155,10 @@ final class SimpleViewController: UIViewController {
                     UIView.spacer().height(20)
                 }
             }
-            .refreshControl {
-                UIRefreshControl()
-                    .addControlAction(target: self, for: .valueChanged) {
-                        #selector(refresh)
-                    }
-            }
-        }
+        }                
     }
 }
 
-@objc private extension SimpleViewController {
-    func tapLabel(_ sender: UIGestureRecognizer) {
-        print("ラベルをタップしたね")
-        if tapLabel == sender.view {
-            print(self.tapLabel.text ?? "")
-        }
-    }
-    
-    func tapButton(_ sender: UIButton) {
-        print("ボタンをタップしたね")
-        if button == sender {
-            print(self.button.titleLabel?.text ?? "")
-        }
-    }
-    
-    func refresh(_ sender: UIRefreshControl) {
-        print("refresh")
-        if sender.isRefreshing {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                sender.endRefreshing()
-            }
-        }
-    }
-}
 
 import SwiftUI
 

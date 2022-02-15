@@ -17,6 +17,7 @@
 		B62F38A0278B204700AD2CC4 /* PathViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F389F278B204700AD2CC4 /* PathViewController.swift */; };
 		B63FFA98277B4AE900209684 /* GithubResultWebViewContrller.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63FFA97277B4AE900209684 /* GithubResultWebViewContrller.swift */; };
 		B63FFA9A277B4C1400209684 /* GithubResultWebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63FFA99277B4C1400209684 /* GithubResultWebPresenter.swift */; };
+		B65F3F3527B8CCA400DBA44B /* Simple2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65F3F3427B8CCA400DBA44B /* Simple2ViewController.swift */; };
 		B69B2EA6277D6219006F1FF9 /* LandmarkListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69B2EA5277D6219006F1FF9 /* LandmarkListViewController.swift */; };
 		B69B2EA8277D685C006F1FF9 /* LandmarkRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69B2EA7277D685C006F1FF9 /* LandmarkRow.swift */; };
 		B69B2EAD277D6937006F1FF9 /* Landmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69B2EAC277D6937006F1FF9 /* Landmark.swift */; };
@@ -48,6 +49,7 @@
 		B62F389F278B204700AD2CC4 /* PathViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathViewController.swift; sourceTree = "<group>"; };
 		B63FFA97277B4AE900209684 /* GithubResultWebViewContrller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubResultWebViewContrller.swift; sourceTree = "<group>"; };
 		B63FFA99277B4C1400209684 /* GithubResultWebPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubResultWebPresenter.swift; sourceTree = "<group>"; };
+		B65F3F3427B8CCA400DBA44B /* Simple2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Simple2ViewController.swift; sourceTree = "<group>"; };
 		B69B2EA5277D6219006F1FF9 /* LandmarkListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkListViewController.swift; sourceTree = "<group>"; };
 		B69B2EA7277D685C006F1FF9 /* LandmarkRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkRow.swift; sourceTree = "<group>"; };
 		B69B2EAC277D6937006F1FF9 /* Landmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Landmark.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 		B63FFA9B277BF3FA00209684 /* Simple */ = {
 			isa = PBXGroup;
 			children = (
+				B65F3F3427B8CCA400DBA44B /* Simple2ViewController.swift */,
 				B6D0CEB9277983C700031EDB /* SimpleViewController.swift */,
 			);
 			path = Simple;
@@ -321,6 +324,7 @@
 				B69B2EB8277D8199006F1FF9 /* LandmarkDetailViewController.swift in Sources */,
 				B69B2EB4277D7630006F1FF9 /* ToggleRow.swift in Sources */,
 				B601AB1127761CA600B57E0F /* AppDelegate.swift in Sources */,
+				B65F3F3527B8CCA400DBA44B /* Simple2ViewController.swift in Sources */,
 				B63FFA9A277B4C1400209684 /* GithubResultWebPresenter.swift in Sources */,
 				B69B2EAF277D6955006F1FF9 /* ModelData.swift in Sources */,
 				B6D0CEBA277983C700031EDB /* SimpleViewController.swift in Sources */,

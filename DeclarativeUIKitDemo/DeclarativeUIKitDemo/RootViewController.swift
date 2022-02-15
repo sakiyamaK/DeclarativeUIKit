@@ -12,6 +12,7 @@ final class RootViewController: UIViewController {
     
     enum ViewTag: Int {
         case simpleDemoButton = 1
+        case simple2DemoButton
         case tablewViewButton
         case collectionViewButton
         case githubSearchButton
@@ -41,9 +42,15 @@ final class RootViewController: UIViewController {
                 UIStackView {
                     UIView.spacer()
                     
-                    Button("シンプルな例")
+                    Button("レイアウトの基本")
                         .add(target: self, action: #selector(tapButton), for: .touchUpInside)
                         .tag(ViewTag.simpleDemoButton.rawValue)
+
+                    UIView.spacer()
+
+                    Button("基本的なコンポーネント")
+                        .add(target: self, action: #selector(tapButton), for: .touchUpInside)
+                        .tag(ViewTag.simple2DemoButton.rawValue)
 
                     UIView.spacer()
 
@@ -96,6 +103,9 @@ final class RootViewController: UIViewController {
             self.navigationController?.pushViewController(vc, animated: true)
         case .simpleDemoButton:
             let vc = SimpleViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        case .simple2DemoButton:
+            let vc = Simple2ViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         case .tablewViewButton:
             let vc = TableViewController()
