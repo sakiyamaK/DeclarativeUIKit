@@ -35,14 +35,24 @@ public extension UIView {
 //MARK: - Declarative method
 public extension UIView {
 
-    func declarative(priorities: UIEdgePriorities, _ builder: () -> UIView) {
+    func declarative(priorities: UIEdgePriorities, reset: Bool, _ builder: () -> UIView) {
         let view = builder()
-        self.subviews.forEach { $0.removeFromSuperview() }
+        if reset {
+            self.subviews.forEach { $0.removeFromSuperview() }
+        }
         self.edgesConstraints(view, safeAreas: .init(all: false), priorities: priorities)
+    }
+
+    func declarative(reset: Bool, _ builder: () -> UIView) {
+        declarative(priorities: .init(), reset: reset, builder)
+    }
+    
+    func declarative(priorities: UIEdgePriorities, _ builder: () -> UIView) {
+        declarative(priorities: priorities, reset: true, builder)
     }
     
     func declarative(_ builder: () -> UIView) {
-        self.declarative(priorities: .init(), builder)
+        self.declarative(priorities: .init(), reset: true, builder)
     }
 
     @discardableResult
