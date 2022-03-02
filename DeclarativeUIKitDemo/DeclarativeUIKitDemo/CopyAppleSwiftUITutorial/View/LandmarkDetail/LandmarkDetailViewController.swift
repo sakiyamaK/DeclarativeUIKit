@@ -1,6 +1,6 @@
 import UIKit
-import DeclarativeUIKit
 import MapKit
+import DeclarativeUIKit
 
 extension Landmark {
     var locationCoordinate: CLLocationCoordinate2D {
@@ -80,23 +80,23 @@ private extension LandmarkDetailViewController {
         let textHorizontalMargin: CGFloat = 12
         
         self.declarative {
-            UIScrollView {
-                UIStackView {
+            UIScrollView.vertical {
+                UIStackView.vertical {
                     MapView.imperative {
                         let mapView = $0 as! MapView
                         mapView.setRegion(landmark.locationCoordinate)
                     }
                     .height(300)
                     .zStack {
-                        UIStackView {
+                        UIStackView.vertical {
                             UIView.spacer()
-                            CircleImageView.imperative {
+                            CircleImageView().imperative {
                                 let circleImageView = $0 as! CircleImageView
                                 circleImageView.setLandmark(landmark)
                             }
                         }
                         .alignment(.center)
-                        .padding(insets: .init(top: 0, left: 0, bottom: -imageOffset, right: 0))
+                        .offset(x: 0, y: imageOffset)
                     }
                     
                     UIView.spacer().height(imageOffset)
@@ -109,7 +109,8 @@ private extension LandmarkDetailViewController {
                         UIView.spacer().height(10)
                         
                         TextsView(landmark)
-                    }.padding(insets: .init(horizontal: textHorizontalMargin))
+                    }
+                    .padding(insets: .init(horizontal: textHorizontalMargin))
                 }
             }
         }

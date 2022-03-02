@@ -239,6 +239,17 @@ public extension UIView {
     func padding(_ value: CGFloat = 8.0) -> UIView {
         self.padding(insets: .init(all: value))
     }
+    
+    @discardableResult
+    func offset(x: CGFloat, y: CGFloat) -> UIView {
+        self.offset(.init(x: x, y: y))
+    }
+    
+    @discardableResult
+    func offset(_ offset: CGPoint) -> UIView {
+        self.padding(insets: .init(top: offset.y, left: offset.x, bottom: -offset.y, right: -offset.x))
+    }
+
 }
 
 //MARK: - Declarative constraint method
