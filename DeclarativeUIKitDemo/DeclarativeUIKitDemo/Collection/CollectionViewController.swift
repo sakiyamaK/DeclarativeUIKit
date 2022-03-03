@@ -20,9 +20,7 @@ final class CollectionViewController: UIViewController {
                     label.font = UIFont.boldSystemFont(ofSize: 20)
                 }
                 
-                UIView.spacer().height(10)
                 UIView.divider()
-                UIView.spacer().height(10)
                 
                 UICollectionView {
                     UICollectionViewFlowLayout()
@@ -31,6 +29,7 @@ final class CollectionViewController: UIViewController {
                 .delegate(self)
                 .registerCellClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
             }
+            .spacing(10)
         }
     }
 }

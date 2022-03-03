@@ -14,36 +14,31 @@ final class GithubSearchCollectionViewController: UIViewController {
     func inject(presenter: GithubSearchPresenterInput) {
         self.presenter = presenter
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+
+    override func loadView() {
+        super.loadView()
+
         self.view.backgroundColor = .white
         
         self.declarative {
             UIStackView.vertical {
                 UIStackView.horizontal {
-                    UIView.spacer().width(12)
-                    
                     UISearchTextField(assign: &searchTextField).imperative {
                         let textField = $0 as! UISearchTextField
                         textField.placeholder = "検索してね"
                     }
-                    
-                    UIView.spacer().width(12)
-                    
+
                     UIButton(UIImage(systemName: "magnifyingglass.circle"))
                         .add(target: self, for: .touchUpInside) {
                             #selector(tapButton)
                         }
                         .contentMode(.scaleAspectFit)
                         .assign(to: &searchButton)
-                    
-                    UIView.spacer().width(16)
                 }
+                .spacing(12)
+                .padding(insets: .init(horizontal: 12))
                 
-                UIView.spacer().height(10)
                 UIView.divider()
-                UIView.spacer().height(10)
                 
                 UICollectionView(UICollectionViewFlowLayout())
                     .delegate(self)
@@ -66,7 +61,7 @@ final class GithubSearchCollectionViewController: UIViewController {
                         .textAlignment(.center)
                     UIView.spacer()
                 }.assign(to: &startStack)
-            }
+            }.spacing(10)
         }
     }
 }
