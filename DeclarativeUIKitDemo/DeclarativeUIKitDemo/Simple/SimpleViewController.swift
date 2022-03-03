@@ -12,31 +12,26 @@ final class SimpleViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
+
         self.view.backgroundColor = .white
-                
-        let Border = {
-            UIView.divider().backgroundColor(.gray)
-        }
-        
-        let MarginView = {
-            UIView.spacer().height(40).backgroundColor(.lightGray)
-        }
         
         let Header = { (title: String) -> UIView in
             UIStackView.vertical {
+                UIView.spacer()
                 UILabel(title)
-                    .textColor(.black)
+                    .textColor(.white)
                     .textAlignment(.center)
                     .numberOfLines(0)
                     .font(UIFont.systemFont(ofSize: 30))
-                UIView.spacer().height(10)
-                Border()
+                UIView.spacer()
             }
+            .spacing(10)
+            .backgroundColor(.gray)
         }
         
         let ScrollBlocksView = {
             UIScrollView.horizontal {
-                UIStackView.horizontal(distribution: .fill) { stackView in
+                UIStackView.horizontal{ stackView in
                     UIView()
                         .imperative { _ in
                             print(stackView)
@@ -80,12 +75,11 @@ final class SimpleViewController: UIViewController {
                 UIView()
                     .height(200)
                     .backgroundColor(.brown)
-                    .zStack(margin: .init(top: 70, left: 10, bottom: 0, right: 10)) {
+                    .zStack {
                         UILabel("上に重なってるね")
                             .font(UIFont.boldSystemFont(ofSize: 20))
-                            .textColor(.black)
+                            .textColor(.white)
                             .textAlignment(.center)
-                            .numberOfLines(1)
                     }
             }
             .alignment(.center)
@@ -124,7 +118,7 @@ final class SimpleViewController: UIViewController {
                                 .foregroundColor: UIColor.orange,
                                 .strokeColor: UIColor.red
                             ]
-                            label.attributedText = NSAttributedString(string: "\(num)番目のlabel", attributes: attributes)                            
+                            label.attributedText = NSAttributedString(string: "\(num)番目のlabel", attributes: attributes)
                         }.textAlignment(.center)
                     }
                 }
@@ -132,33 +126,21 @@ final class SimpleViewController: UIViewController {
         }
         
         self.declarative {
-            UIScrollView {
-                UIStackView {
+            UIScrollView.vertical {
+                UIStackView.vertical {
                     Header("UIViewの設定")
-                    UIView.spacer().height(20)
                     ScrollBlocksView()
-                    UIView.spacer().height(20)
-                    MarginView()
-                    UIView.spacer().height(10)
                     Header("Z方向の設定")
                     ZStackView()
-                    MarginView()
-                    UIView.spacer().height(30)
                     Header("親ビューの大きさで設定")
                     Geometry()
-                    UIView.spacer().height(20)
-                    MarginView()
-                    UIView.spacer().height(30)
                     Header("配列で用意")
-                    UIView.spacer().height(20)
                     SomeViews()
-                    UIView.spacer().height(20)
                 }
             }
-        }                
+        }
     }
 }
-
 
 import SwiftUI
 

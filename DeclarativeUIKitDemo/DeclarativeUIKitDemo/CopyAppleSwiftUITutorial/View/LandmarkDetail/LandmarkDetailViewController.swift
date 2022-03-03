@@ -96,20 +96,19 @@ private extension LandmarkDetailViewController {
                             }
                         }
                         .alignment(.center)
-                        .offset(x: 0, y: imageOffset)
+                        .offset(y: imageOffset)
                     }
-                    
-                    UIView.spacer().height(imageOffset)
-                    
-                    UIStackView {
+                    .customSpacing(imageOffset)
+
+                    UIStackView.vertical {
+
                         NameView(landmark)
-                        
-                        UIView.spacer().height(10)
+
                         UIView.divider()
-                        UIView.spacer().height(10)
-                        
+
                         TextsView(landmark)
                     }
+                    .spacing(10)
                     .padding(insets: .init(horizontal: textHorizontalMargin))
                 }
             }

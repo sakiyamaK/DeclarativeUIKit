@@ -241,15 +241,19 @@ public extension UIView {
     }
     
     @discardableResult
-    func offset(x: CGFloat, y: CGFloat) -> UIView {
+    func offset(x: CGFloat = 0, y: CGFloat = 0) -> UIView {
         self.offset(.init(x: x, y: y))
     }
-    
+
     @discardableResult
     func offset(_ offset: CGPoint) -> UIView {
         self.padding(insets: .init(top: offset.y, left: offset.x, bottom: -offset.y, right: -offset.x))
     }
-
+    
+    @discardableResult
+    func customSpacing(_ customSpacing: CGFloat) -> UIView {
+        HelperCustomSpacingView(customSpacing: customSpacing).zStack{ self }
+    }
 }
 
 //MARK: - Declarative constraint method

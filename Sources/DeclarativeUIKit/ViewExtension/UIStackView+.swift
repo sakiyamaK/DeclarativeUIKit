@@ -11,8 +11,14 @@ public extension UIStackView {
         self.distribution = distribution
         self.spacing = spacing
         builder().compactMap { $0 }.forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            self.addArrangedSubview($0)
+            if let customSpacingView = $0 as? HelperCustomSpacingView, let view = customSpacingView.subviews.first {
+                view.translatesAutoresizingMaskIntoConstraints = false
+                self.addArrangedSubview(view)
+                self.setCustomSpacing(customSpacingView.customSpacing, after: view)
+            } else {
+                $0.translatesAutoresizingMaskIntoConstraints = false
+                self.addArrangedSubview($0)
+            }
         }
     }
 
@@ -42,8 +48,14 @@ public extension UIStackView {
         self.distribution = distribution
         self.spacing = spacing
         builder(self).compactMap { $0 }.forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            self.addArrangedSubview($0)
+            if let customSpacingView = $0 as? HelperCustomSpacingView, let view = customSpacingView.subviews.first {
+                view.translatesAutoresizingMaskIntoConstraints = false
+                self.addArrangedSubview(view)
+                self.setCustomSpacing(customSpacingView.customSpacing, after: view)
+            } else {
+                $0.translatesAutoresizingMaskIntoConstraints = false
+                self.addArrangedSubview($0)
+            }
         }
     }
     
