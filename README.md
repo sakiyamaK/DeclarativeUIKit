@@ -14,8 +14,8 @@ Library for writing UIKit Autolayout declaratively.
 * [Installation](#installation)
   * [Swift Package Manager](#swift-package-manager)
   * [CocoaPods](#cocoapods)
-* [Documents](https://github.com/sakiyamaK/DeclarativeUIKit/blob/add_document/Documentation)
-  * [Japanese](https://github.com/sakiyamaK/DeclarativeUIKit/blob/add_document/Documentation/ja/index.md)
+* [Documents](https://github.com/sakiyamaK/DeclarativeUIKit/blob/main/Documentation)
+  * [Japanese](https://github.com/sakiyamaK/DeclarativeUIKit/blob/main/Documentation/ja/index.md)
 * [Quick Start](#quick-start)
 * [Xcode Preview](#xcode-preview)
 
