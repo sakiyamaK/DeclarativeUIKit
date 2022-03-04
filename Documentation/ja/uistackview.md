@@ -202,3 +202,21 @@ self.declarative {
     .spacing(10)
 }
 ```
+
+### custom spacing
+
+UIViewにcustomSpacingを設定することでそれぞれのViewの下に余白を設定することができます
+
+
+#### sample
+
+```swift
+self.declarative {
+    UIStackView {
+        UIView.spacer().backgroundColor(.blue)
+    }
+    .alignment(.fill)
+    .distribution(.fillEqually)
+    .spacing(10)
+}
+```
