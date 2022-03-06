@@ -12,6 +12,7 @@ final class RootViewController: UIViewController {
     
     enum ViewTag: Int {
         case simpleDemoButton = 1
+        case hotReload
         case simple2DemoButton
         case tablewViewButton
         case collectionViewButton
@@ -98,6 +99,9 @@ final class RootViewController: UIViewController {
     func tapButton(_ sender: UIButton) {
         guard let viewTag = ViewTag(rawValue: sender.tag) else { return }
         switch viewTag {
+        case .hotReload:
+            let vc = HotReloadViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
         case .pathButton:
             let vc = PathViewController()
             self.navigationController?.pushViewController(vc, animated: true)

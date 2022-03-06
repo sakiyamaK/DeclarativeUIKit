@@ -13,6 +13,7 @@
 		B601AB1A27761CA800B57E0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B601AB1927761CA800B57E0F /* Assets.xcassets */; };
 		B601AB1D27761CA800B57E0F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B601AB1B27761CA800B57E0F /* LaunchScreen.storyboard */; };
 		B601AB2727761D4600B57E0F /* DeclarativeUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = B601AB2627761D4600B57E0F /* DeclarativeUIKit */; };
+		B61256C127D459BB00DFAC78 /* HotReloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61256C027D459BB00DFAC78 /* HotReloadViewController.swift */; };
 		B62F389D278B12D000AD2CC4 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F389C278B12D000AD2CC4 /* TableViewController.swift */; };
 		B62F38A0278B204700AD2CC4 /* PathViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F389F278B204700AD2CC4 /* PathViewController.swift */; };
 		B63FFA98277B4AE900209684 /* GithubResultWebViewContrller.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63FFA97277B4AE900209684 /* GithubResultWebViewContrller.swift */; };
@@ -45,6 +46,7 @@
 		B601AB1C27761CA800B57E0F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B601AB1E27761CA800B57E0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B601AB2427761CFB00B57E0F /* DeclarativeUIKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DeclarativeUIKit; path = ..; sourceTree = "<group>"; };
+		B61256C027D459BB00DFAC78 /* HotReloadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotReloadViewController.swift; sourceTree = "<group>"; };
 		B62F389C278B12D000AD2CC4 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		B62F389F278B204700AD2CC4 /* PathViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathViewController.swift; sourceTree = "<group>"; };
 		B63FFA97277B4AE900209684 /* GithubResultWebViewContrller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubResultWebViewContrller.swift; sourceTree = "<group>"; };
@@ -101,18 +103,19 @@
 		B601AB0F27761CA600B57E0F /* DeclarativeUIKitDemo */ = {
 			isa = PBXGroup;
 			children = (
-				B62F389E278B203400AD2CC4 /* Path */,
-				B62F389B278B125A00AD2CC4 /* Table */,
-				B69B2EA4277D61FE006F1FF9 /* CopyAppleSwiftUITutorial */,
-				B63FFA9C277BF40700209684 /* Collection */,
-				B63FFA9B277BF3FA00209684 /* Simple */,
-				B601AB1E27761CA800B57E0F /* Info.plist */,
-				B6D0CEC4277B100000031EDB /* Github */,
 				B601AB1027761CA600B57E0F /* AppDelegate.swift */,
+				B601AB1927761CA800B57E0F /* Assets.xcassets */,
+				B63FFA9C277BF40700209684 /* Collection */,
+				B69B2EA4277D61FE006F1FF9 /* CopyAppleSwiftUITutorial */,
+				B6D0CEC4277B100000031EDB /* Github */,
+				B61256C027D459BB00DFAC78 /* HotReloadViewController.swift */,
+				B601AB1E27761CA800B57E0F /* Info.plist */,
+				B601AB1B27761CA800B57E0F /* LaunchScreen.storyboard */,
+				B62F389E278B203400AD2CC4 /* Path */,
 				B601AB1427761CA600B57E0F /* RootViewController.swift */,
 				B601AB1227761CA600B57E0F /* SceneDelegate.swift */,
-				B601AB1927761CA800B57E0F /* Assets.xcassets */,
-				B601AB1B27761CA800B57E0F /* LaunchScreen.storyboard */,
+				B63FFA9B277BF3FA00209684 /* Simple */,
+				B62F389B278B125A00AD2CC4 /* Table */,
 			);
 			path = DeclarativeUIKitDemo;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 				B69B2EBA277D81D3006F1FF9 /* CircleImageView.swift in Sources */,
 				B6D0CEBD2779AF5F00031EDB /* CollectionViewController.swift in Sources */,
 				B63FFA98277B4AE900209684 /* GithubResultWebViewContrller.swift in Sources */,
+				B61256C127D459BB00DFAC78 /* HotReloadViewController.swift in Sources */,
 				B6D0CED0277B120900031EDB /* GithubAPI.swift in Sources */,
 				B69B2EA8277D685C006F1FF9 /* LandmarkRow.swift in Sources */,
 				B69B2EBC277D8CC1006F1FF9 /* MapView.swift in Sources */,

@@ -1,5 +1,4 @@
 import UIKit.UIViewController
-import UIKit
 
 public extension UIViewController {
         

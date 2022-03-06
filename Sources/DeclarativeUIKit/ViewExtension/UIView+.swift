@@ -176,22 +176,8 @@ public extension UIView {
     func zStack(margin: UIEdgeInsets = .zero, priorities: UIEdgePriorities = .init(all: .required),
     @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> Self {
         imperative { superView in
-            builder().compactMap { $0 }.forEach { (view) in
-                superView.addSubview(view)
-                view.translatesAutoresizingMaskIntoConstraints = false
-                let top = view.topAnchor.constraint(equalTo: superView.topAnchor, constant: margin.top)
-                let leading = view.leadingAnchor.constraint(equalTo: superView.leadingAnchor, constant: margin.left)
-                let trailing = superView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: margin.right)
-                let bottom = superView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: margin.bottom)
-                
-                top.priority = priorities.top
-                leading.priority = priorities.leading
-                trailing.priority = priorities.trailing
-                bottom.priority = priorities.bottom
-
-                NSLayoutConstraint.activate([
-                    top, leading, trailing, bottom
-                ])
+            builder().compactMap({$0}).forEach { (view) in
+                self.edgesConstraints(view, margin: margin, safeAreas: .init(all: false), priorities: priorities)
             }
         }
     }
@@ -253,6 +239,30 @@ public extension UIView {
     @discardableResult
     func customSpacing(_ customSpacing: CGFloat) -> UIView {
         HelperCustomSpacingView(customSpacing: customSpacing).zStack{ self }
+    }
+    
+    @discardableResult
+    func center() -> UIView {
+        UIStackView.horizontal {
+            UIStackView.vertical {
+                self
+            }.alignment(.center)
+        }
+        .alignment(.center)
+    }
+
+    @discardableResult
+    func centerX() -> UIView {
+        UIStackView.vertical {
+            self
+        }.alignment(.center)
+    }
+
+    @discardableResult
+    func centerY() -> UIView {
+        UIStackView.horizontal {
+            self
+        }.alignment(.center)
     }
 }
 
@@ -382,6 +392,7 @@ public extension UIView {
 public extension UIView {
     func edgesConstraints(
         _ view: UIView,
+        margin: UIEdgeInsets = .zero,
         safeAreas: UIEdgeBools,
         priorities: UIEdgePriorities
     ) {
@@ -403,6 +414,11 @@ public extension UIView {
         let trailing = safeAreas.trailing ?
         self.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: view.trailingAnchor) :
         self.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        
+        top.constant = margin.top
+        leading.constant = margin.left
+        bottom.constant = margin.bottom
+        trailing.constant = margin.right
         
         top.priority = priorities.top
         leading.priority = priorities.leading
