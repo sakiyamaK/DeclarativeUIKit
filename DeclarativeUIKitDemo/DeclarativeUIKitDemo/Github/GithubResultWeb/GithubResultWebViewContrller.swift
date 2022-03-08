@@ -5,7 +5,7 @@ import DeclarativeUIKit
 final class GithubSearchResultViewController: UIViewController {
     
     private weak var webView: WKWebView!
-    private weak var activityIndicatorStack: UIStackView!
+    private weak var activityIndicatorContianerView: UIView!
     private weak var activityIndicator: UIActivityIndicatorView!
     
     private var presenter: GithubResultWebPresenterInput!
@@ -28,19 +28,21 @@ final class GithubSearchResultViewController: UIViewController {
                 .assign(to: &webView)
                 .isHidden(true)
                 
-                UIStackView.vertical {
-                    UIView.spacer().height(100)
-                    UIActivityIndicatorView.imperative {
+                UIActivityIndicatorView(assign: &activityIndicator)
+                    .imperative {
                         let indicator = $0 as! UIActivityIndicatorView
                         indicator.startAnimating()
                     }
-                    .assign(to: &activityIndicator)
-                    UIView.spacer()
-                }
-                .assign(to: &activityIndicatorStack)
+                    .center()
+                    .offset(y: -100)
+                    .assign(to: &activityIndicatorContianerView)
+                    .isHidden(true)
             }
         }
-        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         presenter.viewDidLoad()
     }
 }
@@ -54,7 +56,7 @@ private extension GithubSearchResultViewController {
         } else {
             self.activityIndicator.stopAnimating()
         }
-        self.activityIndicatorStack.isHidden = !isLoading
+        self.activityIndicatorContianerView.isHidden = !isLoading
     }
 }
 

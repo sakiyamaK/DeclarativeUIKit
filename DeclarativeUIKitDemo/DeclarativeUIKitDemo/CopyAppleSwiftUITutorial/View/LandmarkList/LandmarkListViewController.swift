@@ -26,8 +26,8 @@ final class LandmarkListViewController: UIViewController {
         self.isOn = isOn
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func loadView() {
+        super.loadView()
         
         self.view.backgroundColor = .white
         

@@ -16,7 +16,7 @@ final class GithubSearchCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+                        
         let BottomIconView = { (iconName: String, assign: inout UILabel?) -> UIView in
             UIStackView.horizontal {
                 UIImageView(
@@ -24,7 +24,7 @@ final class GithubSearchCollectionViewCell: UICollectionViewCell {
                 ).contentMode(.scaleAspectFit)
                 UILabel(assign: &assign)
                     .textAlignment(.left)
-                    .font(UIFont.systemFont(ofSize: 20))
+                    .font(UIFont.systemFont(ofSize: 15))
                     .contentHuggingPriority(.required, for: .vertical)
                     .contentCompressionResistancePriority(.required, for: .vertical)
             }
@@ -32,45 +32,46 @@ final class GithubSearchCollectionViewCell: UICollectionViewCell {
         }
         
         self.contentView.declarative(priorities: .init(bottom: .defaultLow)) {
-            UIStackView {
-                UIStackView {
+            UIStackView.vertical {
+                UIStackView.vertical {
                     UILabel(assign: &fullNameLabel)
                         .textAlignment(.left)
-                        .font(UIFont.systemFont(ofSize: 30))
+                        .font(UIFont.systemFont(ofSize: 28))
                         .contentHuggingPriority(.required, for: .vertical)
                         .contentCompressionResistancePriority(.required, for: .vertical)
-
+                    
                     UILabel(assign: &descriptionLabel)
                         .textAlignment(.left)
-                        .font(UIFont.systemFont(ofSize: 20))
+                        .font(UIFont.systemFont(ofSize: 18))
                         .contentHuggingPriority(.required, for: .vertical)
                         .contentCompressionResistancePriority(.required, for: .vertical)
                     
                     UIStackView.horizontal {
                         BottomIconView("star", &starIconLabel)
-
+                        
                         BottomIconView("circle", &languageIconLabel)
                         
                         UILabel(assign: &licenseLabel)
                             .textAlignment(.left)
-                            .font(UIFont.systemFont(ofSize: 20))
+                            .font(UIFont.systemFont(ofSize: 15))
                             .contentHuggingPriority(.required, for: .vertical)
                             .contentCompressionResistancePriority(.required, for: .vertical)
-
+                        
                         UILabel(assign: &dateLabel)
                             .textAlignment(.left)
-                            .font(UIFont.systemFont(ofSize: 20))
+                            .font(UIFont.systemFont(ofSize: 15))
                             .contentHuggingPriority(.required, for: .vertical)
                             .contentCompressionResistancePriority(.required, for: .vertical)
+                            .contentCompressionResistancePriority(.defaultLow, for: .horizontal)
                         
                         UIView.spacer()
                         
                     }
-                    .spacing(10)
+                    .spacing(8)
                 }
                 .alignment(.leading)
-                .spacing(20)
-                .padding(insets: .init(top: 20, left: 10, bottom: 20, right: 10))
+                .spacing(5)
+                .padding(insets: .init(all: 10))
                 
                 UIView.divider()
             }

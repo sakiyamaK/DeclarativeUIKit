@@ -4,7 +4,7 @@ import DeclarativeUIKit
 final class GithubSearchCollectionViewController: UIViewController {
     
     private weak var collectionView: UICollectionView!
-    private weak var activityIndicatorStack: UIStackView!
+    private weak var activityIndicatorContianerView: UIView!
     private weak var activityIndicator: UIActivityIndicatorView!
     private weak var startStack: UIStackView!
     private weak var searchTextField: UISearchTextField!
@@ -19,14 +19,12 @@ final class GithubSearchCollectionViewController: UIViewController {
         super.loadView()
 
         self.view.backgroundColor = .white
-        
+
         self.declarative {
             UIStackView.vertical {
                 UIStackView.horizontal {
-                    UISearchTextField(assign: &searchTextField).imperative {
-                        let textField = $0 as! UISearchTextField
-                        textField.placeholder = "検索してね"
-                    }
+                    UISearchTextField(assign: &searchTextField)
+                        .placeholder("検索してね")
 
                     UIButton(UIImage(systemName: "magnifyingglass.circle"))
                         .add(target: self, for: .touchUpInside) {
@@ -46,14 +44,12 @@ final class GithubSearchCollectionViewController: UIViewController {
                     .registerCellClass(GithubSearchCollectionViewCell.self, forCellWithReuseIdentifier: GithubSearchCollectionViewCell.reuseIdentifier)
                     .isHidden(true)
                     .assign(to: &collectionView)
-                
-                UIStackView.vertical {
-                    UIView.spacer().height(100)
-                    UIActivityIndicatorView(assign: &activityIndicator)
-                    UIView.spacer()
-                }
-                .assign(to: &activityIndicatorStack)
-                .isHidden(true)
+
+                UIActivityIndicatorView(assign: &activityIndicator)
+                    .center()
+                    .offset(y: -100)
+                    .assign(to: &activityIndicatorContianerView)
+                    .isHidden(true)
                 
                 UIStackView.vertical {
                     UIView.spacer().height(60)
@@ -71,7 +67,7 @@ extension GithubSearchCollectionViewController: GithubSearchPresenterOutput {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.collectionView.isHidden = loading
-            self.activityIndicatorStack.isHidden = !loading
+            self.activityIndicatorContianerView.isHidden = !loading
             if loading {
                 self.activityIndicator.startAnimating()
             } else {

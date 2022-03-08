@@ -14,8 +14,9 @@ final class Simple2ViewController: UIViewController {
     private weak var tapLabel: UILabel!
     private weak var overlapView: UIView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func loadView() {
+        super.loadView()
+        
         self.view.backgroundColor = .white
                                 
         let Header = { (title: String) -> UIView in

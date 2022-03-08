@@ -3,12 +3,8 @@ import DeclarativeUIKit
 
 final class CollectionViewController: UIViewController {
     
-    enum ViewTag: Int {
-        case button = 1
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func loadView() {
+        super.loadView()
         self.view.backgroundColor = .white
         
         self.declarative {

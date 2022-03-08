@@ -2,8 +2,8 @@ import UIKit
 
 final class TableViewController: UIViewController {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func loadView() {
+        super.loadView()
         
         self.view.backgroundColor = .white
         
@@ -61,7 +61,7 @@ extension TableViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "Footer")!
-        view.contentView.backgroundColor = .systemPink
+        view.contentView.backgroundColor = .systemOrange
         return view
     }
 }

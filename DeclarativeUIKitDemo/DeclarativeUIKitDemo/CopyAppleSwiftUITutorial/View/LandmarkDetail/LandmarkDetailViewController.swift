@@ -21,16 +21,7 @@ final class LandmarkDetailViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        NotificationCenter.default.addObserver(self,
-            selector: #selector(setup),
-            name: Notification.Name("INJECTION_BUNDLE_NOTIFICATION"), object: nil)
-        setup()
-    }    
-}
 
-@objc
-private extension LandmarkDetailViewController {
-    func setup() {
         self.view.backgroundColor = .white
         
         let NameView = { (landmark: Landmark) -> UIView in

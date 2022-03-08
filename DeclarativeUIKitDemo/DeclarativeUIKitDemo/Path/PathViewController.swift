@@ -4,14 +4,7 @@ final class PathViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(update),
-                                               name: Notification.Name("INJECTION_BUNDLE_NOTIFICATION"), object: nil)
-        update()
-    }
-    
-    @objc
-    private func update() {
+
         self.declarative {
             UIStackView { superview in
                 UIView.path {
