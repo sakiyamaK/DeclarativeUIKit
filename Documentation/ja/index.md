@@ -1,7 +1,7 @@
 ## Documentation
 
-- Reference Version: **0.0.3**
-- Last Update: **2022/03/04**
+- Reference Version: **0.0.4**
+- Last Update: **2022/03/19**
 
 ### Table Of Contents
 
@@ -69,6 +69,8 @@
 - [function](uistackview.md#function)
   - [some default parameters](uistackview.md#some-default-parameters)
     - [sample](uistackview.md#sample-3)
+  - [custom spacing](uistackview.md#custom-spacing)
+    - [sample](uistackview.md#sample-4)
 
 ### [UILabel](uilabel.md#uilabel)
 - [initilizer](uilabel.md#initilizer)

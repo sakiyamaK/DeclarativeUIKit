@@ -427,6 +427,35 @@ self.declarative {
 
 ```
 
+## center
+
+Viewを親ビューの中央に配置する  
+  
+これはViewをStackViewのhorizontalとverticalを重ねてalignmentをcenterに設定して実現されます  
+そのため、このメソッド以降に宣言したメソッドは後ろのViewに設定されます
+`centerX()`、`centerY()`はそれぞれX方向Y方向だけセンター揃えさせます
+
+```swift
+func center() -> UIView
+
+func centerX() -> UIView
+
+func centerY() -> UIView
+```
+### sample
+
+赤いViewを画面の中央に配置します
+
+```swift
+self.declarative {
+    UIView()
+        .backgroundColor(.red)
+        .size(width: 100, height: 100)
+        .center()
+}
+
+```
+
 ## drawing graphics
 
 `UIBezierPath`による描画の記述する静的メソッドです  

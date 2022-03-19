@@ -207,12 +207,20 @@ self.declarative {
 
 UIViewにcustomSpacingを設定することでそれぞれのViewの下に余白を設定することができます
 
-
 #### sample
 
 ```swift
 self.declarative {
     UIStackView {
+        //このviewの下は20の余白
+        UIView.spacer().backgroundColor(.blue)
+          .customSpacing(20)
+        //このviewの下は30の余白
+        UIView.spacer().backgroundColor(.blue)
+          .customSpacing(30)
+        //customSpacingが設定されていないviewは通常通りUIStackViewのspacing(10)が効く
+        UIView.spacer().backgroundColor(.blue)
+        UIView.spacer().backgroundColor(.blue)
         UIView.spacer().backgroundColor(.blue)
     }
     .alignment(.fill)
