@@ -31,23 +31,24 @@ final class HotReloadViewController: UIViewController {
     func setupLayout() {
         self.view.backgroundColor = .white
         self.declarative {
-            UIButton("タップしてね")
+            UIButton("タップしてね1")
                 .backgroundColor(.red)
                 .add(target: self, for: .touchUpInside, {
                     #selector(tapButton)
                 })
                 .zStack {
-                    UIView().backgroundColor(.blue)
-                        .isUserInteractionEnabled(false)
+                    UIButton("タップしてね２")
+                        .backgroundColor(.blue)
                         .size(width: 200, height: 200)
+                        .add(target: self, for: .touchUpInside, {
+                            #selector(tapButton)
+                        })
                         .center()
-//                        .backgroundColor(.systemPink)
-//                        .isUserInteractionEnabled(true)
                 }
         }
     }
     
-    func tapButton() {
-        print("tap")
+    func tapButton(_ button: UIButton) {
+        print(button.titleLabel!.text)
     }
 }
