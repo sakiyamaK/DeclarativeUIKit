@@ -243,8 +243,8 @@ public extension UIView {
     
     @discardableResult
     func center() -> UIView {
-        UIStackView.horizontal {
-            UIStackView.vertical {
+        HelperTouchTransparencyStackView(axis: .horizontal) {
+            HelperTouchTransparencyStackView(axis: .vertical) {
                 self
             }.alignment(.center)
         }
@@ -253,14 +253,14 @@ public extension UIView {
 
     @discardableResult
     func centerX() -> UIView {
-        UIStackView.vertical {
+        HelperTouchTransparencyStackView(axis: .vertical) {
             self
         }.alignment(.center)
     }
 
     @discardableResult
     func centerY() -> UIView {
-        UIStackView.horizontal {
+        HelperTouchTransparencyStackView(axis: .horizontal) {
             self
         }.alignment(.center)
     }

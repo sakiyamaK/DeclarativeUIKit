@@ -25,21 +25,29 @@ final class HotReloadViewController: UIViewController {
         NotificationCenter.default.addInjectionObserver(self, selector: #selector(setupLayout), object: nil)
         setupLayout()
     }
-    
-    @objc private func setupLayout() {
+}
+
+@objc private extension HotReloadViewController {
+    func setupLayout() {
         self.view.backgroundColor = .white
         self.declarative {
-                UIStackView.horizontal {
-                    UILabel("普通のラベル")
-                        .backgroundColor(.red)
-                    UILabel("普通のラベル")
-                        .backgroundColor(.green)
-                    UILabel("普通のラベル")
-                        .textColor(.white)
-                        .backgroundColor(.blue)
+            UIButton("タップしてね")
+                .backgroundColor(.red)
+                .add(target: self, for: .touchUpInside, {
+                    #selector(tapButton)
+                })
+                .zStack {
+                    UIView().backgroundColor(.blue)
+                        .isUserInteractionEnabled(false)
+                        .size(width: 200, height: 200)
+                        .center()
+//                        .backgroundColor(.systemPink)
+//                        .isUserInteractionEnabled(true)
                 }
-                .spacing(10)
-                .center()
-        }     
+        }
+    }
+    
+    func tapButton() {
+        print("tap")
     }
 }
