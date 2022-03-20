@@ -47,6 +47,7 @@ final class RootViewController: UIViewController {
                         Button("ホットリロード")
                             .add(target: self, action: #selector(tapButton), for: .touchUpInside)
                             .tag(ViewTag.hotReload.rawValue)
+                        UIView.spacer()
                     }
                     
                     Button("レイアウトの基本")

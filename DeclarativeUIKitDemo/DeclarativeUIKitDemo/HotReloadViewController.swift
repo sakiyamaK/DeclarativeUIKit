@@ -31,24 +31,55 @@ final class HotReloadViewController: UIViewController {
     func setupLayout() {
         self.view.backgroundColor = .white
         self.declarative {
-            UIButton("タップしてね1")
-                .backgroundColor(.red)
+            UIButton("タップしてね")
+                .titleColor(.systemBlue)
                 .add(target: self, for: .touchUpInside, {
                     #selector(tapButton)
                 })
-                .zStack {
-                    UIButton("タップしてね２")
-                        .backgroundColor(.blue)
-                        .size(width: 200, height: 200)
-                        .add(target: self, for: .touchUpInside, {
-                            #selector(tapButton)
-                        })
-                        .center()
-                }
         }
     }
     
     func tapButton(_ button: UIButton) {
-        print(button.titleLabel!.text)
+        
+        
+        
+        self.present(
+                        
+            UIAlertController(preferredStyle: .actionSheet)
+                .title("タイトルだよーーん")
+                .message("メッセージ")
+                .addActions {
+                    
+                    //OKボタン押した時
+                    UIAlertAction(title: "OK", style: .default) { _ in
+                        self.present(
+                            UIAlertController(preferredStyle: .alert)
+                                .title("OKだね")
+                                .addAction {
+                                    UIAlertAction(title: "閉じる", style: .default) { _ in }
+                                }
+                            , animated: true)
+                    }
+                                        
+                    //NOボタン押した時
+                    UIAlertAction(title: "NO", style: .default) { _ in
+                        self.present(
+                            UIAlertController(preferredStyle: .alert)
+                                .title("NOだね")
+                                .addAction {
+                                    UIAlertAction(title: "閉じる", style: .default) { _ in }
+                                }
+                            , animated: true)
+                    }
+                    
+                    //Cancelボタン押した時
+                    UIAlertAction(title: "Cancel", style: .cancel) { _ in
+                        print("Cancelをタップしたよ")
+                    }
+                }
+            , animated: true)
+        
+        
+        
     }
 }
