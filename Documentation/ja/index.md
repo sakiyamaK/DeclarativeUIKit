@@ -1,6 +1,6 @@
 ## Documentation
 
-- Reference Version: **0.0.5**
+- Reference Version: **0.0.6**
 - Last Update: **2022/03/20**
 
 ### Table Of Contents
@@ -42,10 +42,12 @@
     - [sample](uiview.md#sample-9)
   - [padding](uiview.md#padding)
     - [sample](uiview.md#sample-10)
-  - [drawing graphics](uiview.md#drawing-graphics)
+  - [center](uiview.md#center)
     - [sample](uiview.md#sample-11)
-  - [constraint](uiview.md#constraint)
+  - [drawing graphics](uiview.md#drawing-graphics)
     - [sample](uiview.md#sample-12)
+  - [constraint](uiview.md#constraint)
+    - [sample](uiview.md#sample-13)
 
 ### [UIScrollView](uiscrollview.md#uiscrollview)
 - [initilizer](uiscrollview.md#initilizer)

@@ -15,7 +15,10 @@ public extension UIAlertController {
     convenience init(preferredStyle: Style, @ArrayUIAlertActionBuilder _ builder: (() -> [UIAlertAction?])) {
         self.init(title: nil, message: nil, preferredStyle: preferredStyle, builder)
     }
-    
+}
+
+//MARK: - Declarative method
+public extension UIAlertController {
     @discardableResult
     func imperative(_ imperative: ((Self) -> Void)) -> Self {
         imperative(self)
@@ -37,13 +40,6 @@ public extension UIAlertController {
     }
     
     @discardableResult
-    func addAction(_ action: UIAlertAction) -> Self {
-        imperative {
-            $0.addAction(action)
-        }
-    }
-
-    @discardableResult
     func addAction(_ builder: (() -> UIAlertAction)) -> Self {
         imperative {
             $0.addAction(builder())
@@ -56,6 +52,28 @@ public extension UIAlertController {
             builder().compactMap({$0}).forEach {
                 vc.addAction($0)
             }
+        }
+    }
+
+    @discardableResult
+    func addPreferredAction(_ builder: (() -> UIAlertAction)) -> Self {
+        imperative {
+            let action = builder()
+            $0.addAction {
+                action
+            }
+            $0.preferredAction = action
+        }
+    }
+    
+    @discardableResult
+    func addTextField(withHandler: @escaping ((UITextField) -> Void)) -> Self {
+        imperative {
+            guard $0.preferredStyle == .alert else {
+                debugPrint("TextField can not add, if preferredStyle is not alert")
+                return
+            }
+            $0.addTextField(configurationHandler: withHandler)
         }
     }
 }
