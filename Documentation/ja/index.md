@@ -10,9 +10,9 @@
   - [declarative](uiviewcontroller.md#declarative)
   - [sample](uiviewcontroller.md#sample)
 
-### [UIAlertViewController](uialertviewcontroller.md#uialertviewcontroller)
-- [function](uialertviewcontroller.md#function)
-  - [sample](uialertviewcontroller.md#sample)
+### [UIAlertController](uialertcontroller.md#uialertcontroller)
+- [function](uialertcontroller.md#function)
+  - [sample](uialertcontroller.md#sample)
 
 ### [UIView](uiview.md#uiview)
 - [initilizer](uiview.md#initilizer)
