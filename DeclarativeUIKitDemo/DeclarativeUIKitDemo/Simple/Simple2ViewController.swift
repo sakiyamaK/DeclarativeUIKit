@@ -39,13 +39,24 @@ final class Simple2ViewController: UIViewController {
                         UIImageView(UIImage.init(systemName: "square.and.arrow.up"))
                             .contentMode(.scaleAspectFit)
                             .height(200)
-                        
-                        UIButton("button")
-                            .titleColor(.brown)
-                            .addControlAction(target: self, for: .touchUpInside) {
-                                #selector(self.tapButton)
-                            }
-                            .assign(to: &self.button)
+
+                        if #available(iOS 14.0, *) {
+                            UIButton("button")
+                                .titleColor(.brown)
+                                .addAction(.touchUpInside) { [weak self] action in
+                                    guard let self = self,
+                                          let sender = action.sender as? UIButton else { return }
+                                    self.tapButton(sender)
+                                }
+                                .assign(to: &self.button)
+                        } else {
+                            UIButton("button")
+                                .titleColor(.brown)
+                                .addControlAction(target: self, for: .touchUpInside) {
+                                    #selector(self.tapButton)
+                                }
+                                .assign(to: &self.button)
+                        }
                         
                         UITextField()
                             .placeholder(NSAttributedString(string: "プレースホルダー", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black]))

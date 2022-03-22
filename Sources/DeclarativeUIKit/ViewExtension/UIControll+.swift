@@ -18,4 +18,11 @@ public extension UIControl {
         self.add(target: target, action: actionBuilder(), for: controlEvents)
     }
 
+    @available(iOS 14.0, *)
+    @discardableResult
+    func addAction(_ controlEvents: UIControl.Event, handler: @escaping UIActionHandler) -> Self {
+        self.addAction(.init(handler: handler), for: controlEvents)
+        return self
+    }
+
 }
