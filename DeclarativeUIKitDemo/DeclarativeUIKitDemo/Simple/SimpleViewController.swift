@@ -9,6 +9,8 @@ import UIKit
 import DeclarativeUIKit
 
 final class SimpleViewController: UIViewController {
+
+    var label = UILabel()
     
     override func loadView() {
         super.loadView()
@@ -124,6 +126,19 @@ final class SimpleViewController: UIViewController {
                 }
             }.spacing(10)
         }
+
+        let UISwitchViews = {
+            UIStackView.horizontal(distribution: .equalCentering) {
+                UISwitch()
+                    .isOn(true)
+                    .onTintColor(.red)
+                    .add(target: self, action: #selector(self.uiSwitchValueChanged(sender:)), for: .valueChanged)
+                    .customSpacing(50)
+                UILabel()
+                    .text("ON")
+                    .assign(to: &self.label)
+            }.padding(insets: .init(all: 20))
+        }
         
         self.declarative {
             UIScrollView.vertical {
@@ -136,9 +151,15 @@ final class SimpleViewController: UIViewController {
                     Geometry()
                     Header("配列で用意")
                     SomeViews()
+                    Header("UISwitch")
+                    UISwitchViews()
                 }
             }
         }
+    }
+
+    @objc private func uiSwitchValueChanged(sender: UISwitch) {
+        label.text = sender.isOn ? "ON" : "OFF"
     }
 }
 
