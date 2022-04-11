@@ -1,7 +1,7 @@
 ## Documentation
 
-- Reference Version: **0.0.6**
-- Last Update: **2022/03/20**
+- Reference Version: **0.0.7**
+- Last Update: **2022/04/11**
 
 ### Table Of Contents
 
@@ -120,6 +120,12 @@
 - [initilizer](uigesturerecognizer.md#initilizer)
   - [init with target action](uigesturerecognizer.md#init-with-target-action)
     - [sample](uigesturerecognizer.md#sample)
+
+### [UISwitch](uiswitch.md#uiswitch)
+- [initilizer](uiswitch.md#initilizer)
+- [function](uiswitch.md#function)
+  - [some default parameters](uiswitch.md#some-default-parameters)
+    - [sample](uiswitch.md#sample-1)
 
 ### [UITableView](uitableview.md#uitableview)
   - [some default parameters](uitableview.md#some-default-parameters)
