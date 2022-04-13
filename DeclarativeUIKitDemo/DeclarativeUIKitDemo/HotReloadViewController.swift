@@ -41,10 +41,6 @@ final class HotReloadViewController: UIViewController {
     
     func tapButton(_ button: UIButton) {
         
-        
-        
-        self.present(
-                        
             UIAlertController(preferredStyle: .actionSheet)
                 .title("タイトルだよーーん")
                 .message("メッセージ")
@@ -63,13 +59,14 @@ final class HotReloadViewController: UIViewController {
                                         
                     //NOボタン押した時
                     UIAlertAction(title: "NO", style: .default) { _ in
-                        self.present(
-                            UIAlertController(preferredStyle: .alert)
-                                .title("NOだね")
-                                .addAction {
-                                    UIAlertAction(title: "閉じる", style: .default) { _ in }
-                                }
-                            , animated: true)
+                        UIAlertController(preferredStyle: .alert)
+                            .title("NOだね")
+                            .addAction {
+                                UIAlertAction(title: "閉じる", style: .default) { _ in }
+                            }
+                            .present(from: self, animated: true) {
+                                print("completion")
+                            }
                     }
                     
                     //Cancelボタン押した時
@@ -77,9 +74,6 @@ final class HotReloadViewController: UIViewController {
                         print("Cancelをタップしたよ")
                     }
                 }
-            , animated: true)
-        
-        
-        
+                .present(from: self, animated: true)
     }
 }

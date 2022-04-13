@@ -203,3 +203,12 @@ public extension UIViewController {
         self.view.getView(tag: tag)
     }
 }
+
+//MARK: - Declarative method
+public extension UIViewController {
+    @discardableResult
+    func present(from: UIViewController, animated: Bool, completion: (() -> Void)? = nil) -> Self {
+        from.present(self, animated: animated, completion: completion)
+        return self
+    }
+}
