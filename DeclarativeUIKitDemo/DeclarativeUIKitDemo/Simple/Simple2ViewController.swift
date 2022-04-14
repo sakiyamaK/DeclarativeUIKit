@@ -34,6 +34,9 @@ final class Simple2ViewController: UIViewController {
         
         self.declarative {
             UIStackView.vertical {
+                UIProgressView(progressViewStyle: .bar)
+                    .progress(1.0, animated: true)
+                    .progressTintColor(.systemRed)
                 Header("その他のViewの設定")
                 UIScrollView.vertical {
                     UIStackView.vertical {
