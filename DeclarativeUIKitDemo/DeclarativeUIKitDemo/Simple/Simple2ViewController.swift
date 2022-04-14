@@ -13,6 +13,7 @@ final class Simple2ViewController: UIViewController {
     private weak var button: UIButton!
     private weak var tapLabel: UILabel!
     private weak var overlapView: UIView!
+    private weak var indicator: UIActivityIndicatorView!
     
     override func loadView() {
         super.loadView()
@@ -77,6 +78,19 @@ final class Simple2ViewController: UIViewController {
                     }
                     .spacing(40)
                     .padding(insets: .init(horizontal: 10))
+                    .zStack {
+                        UIActivityIndicatorView(assign: &indicator)
+                            .imperative({
+                                let indicator = $0 as! UIActivityIndicatorView
+                                indicator.startAnimating()
+                            })
+                            .style(.large)
+                            .color(.blue)
+                            .isHidden(true)
+                            .hidesWhenStopped(true)
+                            .center()
+                    }
+
                 }
                 .refreshControl {
                     UIRefreshControl()
@@ -139,7 +153,14 @@ final class Simple2ViewController: UIViewController {
         if button == sender {
             print(self.button.titleLabel?.text ?? "")
         }
+        
         self.overlapView.isHidden.toggle()
+        self.indicator.isHidden = false
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.overlapView.isHidden.toggle()
+            self.indicator.isHidden = true
+        }
     }
     
     func refresh(_ sender: UIRefreshControl) {
