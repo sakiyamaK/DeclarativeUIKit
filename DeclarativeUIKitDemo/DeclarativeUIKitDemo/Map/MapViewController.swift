@@ -28,6 +28,13 @@ final class MapViewController: UIViewController {
                 .mapType(.hybridFlyover)
                 .isZoomEnabled(true)
                 .isRotateEnabled(false)
+                .add(annotations:
+                        [
+                            MKPointAnnotation(coordinate: .init(latitude: 35.6598, longitude: 139.7023), title: "渋谷付近1", subtitle: "詳しくは分からない"),
+                            MKPointAnnotation(coordinate: .init(latitude: 35.6578, longitude: 139.7023), title: "渋谷付近2", subtitle: "詳しくは分からない"),
+                            MKPointAnnotation(coordinate: .init(latitude: 35.6608, longitude: 139.7023), title: "渋谷付近3", subtitle: "詳しくは分からない")
+                            ]
+                )
                 .delegate(self)
         }
     }
