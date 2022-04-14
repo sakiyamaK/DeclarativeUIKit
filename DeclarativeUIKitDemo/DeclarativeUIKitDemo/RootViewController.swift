@@ -45,7 +45,7 @@ final class RootViewController: UIViewController {
                 UIStackView {
                     UIView.spacer()
                     
-                    if true {
+                    if false {
                         Button("ホットリロード")
                             .add(target: self, action: #selector(tapButton), for: .touchUpInside)
                             .tag(ViewTag.hotReload.rawValue)

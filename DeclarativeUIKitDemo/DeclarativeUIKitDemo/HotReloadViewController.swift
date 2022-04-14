@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MapKit
 import DeclarativeUIKit
 
 extension Notification.Name {
@@ -31,49 +32,23 @@ final class HotReloadViewController: UIViewController {
     func setupLayout() {
         self.view.backgroundColor = .white
         self.declarative {
-            UIButton("タップしてね")
-                .titleColor(.systemBlue)
-                .add(target: self, for: .touchUpInside, {
-                    #selector(tapButton)
-                })
+            MKMapView()
+                .region(.init(center: .init(latitude: 35.6598, longitude: 139.7023), latitudinalMeters: 1000, longitudinalMeters: 1000))
+                .mapType(.hybridFlyover)
+                .isZoomEnabled(true)
+                .isRotateEnabled(false)
+                .add(annotation: MKPointAnnotation()
+                    .coordinate(.init(latitude: 35.6598, longitude: 139.7023))
+                    .title("どこやねん")
+                    .subtitle("わからんわ")
+                )
+                .delegate(self)
         }
     }
-    
-    func tapButton(_ button: UIButton) {
+}
+
+extension HotReloadViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
         
-            UIAlertController(preferredStyle: .actionSheet)
-                .title("タイトルだよーーん")
-                .message("メッセージ")
-                .addActions {
-                    
-                    //OKボタン押した時
-                    UIAlertAction(title: "OK", style: .default) { _ in
-                        self.present(
-                            UIAlertController(preferredStyle: .alert)
-                                .title("OKだね")
-                                .addAction {
-                                    UIAlertAction(title: "閉じる", style: .default) { _ in }
-                                }
-                            , animated: true)
-                    }
-                                        
-                    //NOボタン押した時
-                    UIAlertAction(title: "NO", style: .default) { _ in
-                        UIAlertController(preferredStyle: .alert)
-                            .title("NOだね")
-                            .addAction {
-                                UIAlertAction(title: "閉じる", style: .default) { _ in }
-                            }
-                            .present(from: self, animated: true) {
-                                print("completion")
-                            }
-                    }
-                    
-                    //Cancelボタン押した時
-                    UIAlertAction(title: "Cancel", style: .cancel) { _ in
-                        print("Cancelをタップしたよ")
-                    }
-                }
-                .present(from: self, animated: true)
     }
 }
