@@ -112,10 +112,26 @@ final class Simple2ViewController: UIViewController {
 
 @objc private extension Simple2ViewController {
     func tapLabel(_ sender: UIGestureRecognizer) {
-        print("ラベルをタップしたね")
         if tapLabel == sender.view {
             print(self.tapLabel.text ?? "")
         }
+        UIAlertController(title: "ラベルをタップ", message: "アラートです", preferredStyle: .actionSheet) {
+            UIAlertAction(title: "default", style: .default) { _ in
+                UIAlertController(title: "defaultをタップ", message: nil, preferredStyle: .alert, {
+                    UIAlertAction(title: "閉じる", style: .cancel)
+                }).present(from: self, animated: true, completion: nil)
+            }
+            UIAlertAction(title: "cancel", style: .cancel) { _ in
+                UIAlertController(title: "cancelをタップ", message: nil, preferredStyle: .alert, {
+                    UIAlertAction(title: "閉じる", style: .cancel)
+                }).present(from: self, animated: true, completion: nil)
+            }
+            UIAlertAction(title: "destructive", style: .destructive) { _ in
+                UIAlertController(title: "destructiveをタップ", message: nil, preferredStyle: .alert, {
+                    UIAlertAction(title: "閉じる", style: .cancel)
+                }).present(from: self, animated: true, completion: nil)
+            }
+        }.present(from: self, animated: true, completion: nil)
     }
     
     func tapButton(_ sender: UIButton) {

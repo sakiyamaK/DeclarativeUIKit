@@ -19,10 +19,12 @@ final class RootViewController: UIViewController {
         case githubSearchButton
         case swiftuiTutorialButton
         case pathButton
+        case mapViewButton
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func loadView() {
+        super.loadView()
+
         self.view.backgroundColor = .white
         self.navigationItem.title = "Root"
         
@@ -92,6 +94,12 @@ final class RootViewController: UIViewController {
                         .tag(ViewTag.swiftuiTutorialButton.rawValue)
 
                     UIView.spacer()
+                    
+                    Button("MapView")
+                        .add(target: self, action: #selector(tapButton), for: .touchUpInside)
+                        .tag(ViewTag.mapViewButton.rawValue)
+
+                    UIView.spacer()
                 }
                 .spacing(20)
                 .distribution(.fillEqually)
@@ -132,6 +140,9 @@ final class RootViewController: UIViewController {
         case .swiftuiTutorialButton:
             let vc = LandmarkListViewController()
             vc.inject(landmarks: ModelData.landmarks, isOn: false)
+            self.navigationController?.pushViewController(vc, animated: true)
+        case .mapViewButton:
+            let vc = MapViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
