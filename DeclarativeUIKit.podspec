@@ -1,11 +1,11 @@
 Pod::Spec.new do |spec|
   spec.name         = 'DeclarativeUIKit'
-  spec.version      = '0.23.0'
+  spec.version      = '0.24.0'
   spec.summary      = <<-DESC
   Library for writing UIKit Autolayout declaratively.
   DESC
   spec.description  = <<-DESC
-  Library for writing UIKit Autolayout declaratively.
+  This Library for writing UIKit Autolayout declaratively.
   DESC
   spec.homepage     = 'https://github.com/sakiyamaK/DeclarativeUIKit'
   spec.license      = { :type => 'MIT', :file => 'LICENSE' }

@@ -13,6 +13,7 @@ final class Simple2ViewController: UIViewController {
     private weak var button: UIButton!
     private weak var tapLabel: UILabel!
     private weak var overlapView: UIView!
+    private weak var indicator: UIActivityIndicatorView!
     
     override func loadView() {
         super.loadView()
@@ -33,6 +34,9 @@ final class Simple2ViewController: UIViewController {
         
         self.declarative {
             UIStackView.vertical {
+                UIProgressView(progressViewStyle: .bar)
+                    .progress(1.0, animated: true)
+                    .progressTintColor(.systemRed)
                 Header("その他のViewの設定")
                 UIScrollView.vertical {
                     UIStackView.vertical {
@@ -77,6 +81,19 @@ final class Simple2ViewController: UIViewController {
                     }
                     .spacing(40)
                     .padding(insets: .init(horizontal: 10))
+                    .zStack {
+                        UIActivityIndicatorView(assign: &indicator)
+                            .imperative({
+                                let indicator = $0 as! UIActivityIndicatorView
+                                indicator.startAnimating()
+                            })
+                            .style(.large)
+                            .color(.blue)
+                            .isHidden(true)
+                            .hidesWhenStopped(true)
+                            .center()
+                    }
+
                 }
                 .refreshControl {
                     UIRefreshControl()
@@ -112,10 +129,26 @@ final class Simple2ViewController: UIViewController {
 
 @objc private extension Simple2ViewController {
     func tapLabel(_ sender: UIGestureRecognizer) {
-        print("ラベルをタップしたね")
         if tapLabel == sender.view {
             print(self.tapLabel.text ?? "")
         }
+        UIAlertController(title: "ラベルをタップ", message: "アラートです", preferredStyle: .actionSheet) {
+            UIAlertAction(title: "default", style: .default) { _ in
+                UIAlertController(title: "defaultをタップ", message: nil, preferredStyle: .alert, {
+                    UIAlertAction(title: "閉じる", style: .cancel)
+                }).present(from: self, animated: true, completion: nil)
+            }
+            UIAlertAction(title: "cancel", style: .cancel) { _ in
+                UIAlertController(title: "cancelをタップ", message: nil, preferredStyle: .alert, {
+                    UIAlertAction(title: "閉じる", style: .cancel)
+                }).present(from: self, animated: true, completion: nil)
+            }
+            UIAlertAction(title: "destructive", style: .destructive) { _ in
+                UIAlertController(title: "destructiveをタップ", message: nil, preferredStyle: .alert, {
+                    UIAlertAction(title: "閉じる", style: .cancel)
+                }).present(from: self, animated: true, completion: nil)
+            }
+        }.present(from: self, animated: true, completion: nil)
     }
     
     func tapButton(_ sender: UIButton) {
@@ -123,7 +156,14 @@ final class Simple2ViewController: UIViewController {
         if button == sender {
             print(self.button.titleLabel?.text ?? "")
         }
+        
         self.overlapView.isHidden.toggle()
+        self.indicator.isHidden = false
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.overlapView.isHidden.toggle()
+            self.indicator.isHidden = true
+        }
     }
     
     func refresh(_ sender: UIRefreshControl) {
