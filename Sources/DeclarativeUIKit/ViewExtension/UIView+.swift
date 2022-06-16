@@ -264,6 +264,38 @@ public extension UIView {
             self
         }.alignment(.center)
     }
+    
+    @discardableResult
+    func top() -> UIView {
+        HelperTouchTransparencyStackView(axis: .vertical) {
+            self
+            UIView.spacer()
+        }
+    }
+
+    @discardableResult
+    func bottom() -> UIView {
+        HelperTouchTransparencyStackView(axis: .vertical) {
+            UIView.spacer()
+            self
+        }
+    }
+
+    @discardableResult
+    func left() -> UIView {
+        HelperTouchTransparencyStackView(axis: .horizontal) {
+            self
+            UIView.spacer()
+        }
+    }
+
+    @discardableResult
+    func right() -> UIView {
+        HelperTouchTransparencyStackView(axis: .horizontal) {
+            UIView.spacer()
+            self
+        }
+    }
 }
 
 //MARK: - Declarative constraint method
