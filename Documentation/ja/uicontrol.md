@@ -9,6 +9,8 @@
 
     func add(target: Any?, for controlEvents: UIControl.Event, _ actionBuilder: () -> Selector) -> Self
 
+    func add(target: Any, for controlEvents: UIControl.Event, _ action: @escaping ((Any) -> Void)) -> Self
+
     @available(iOS 14.0, *)
     func addAction(_ controlEvents: UIControl.Event, handler: @escaping UIActionHandler) -> Self
 ```
@@ -26,6 +28,17 @@ self.declarative {
         UIButton("tap")
             .add(target: self, action: #selector(tapAction), for: .touchUpInside)
 
+        UIButton("tap")
+            .add(target: self, for: .touchUpInside) { sender in 
+              print(sender)
+            }
+
+        if #available(iOS 14.0, *) {
+          UIButton("tap")
+            .addAction(.touchUpInside) { [weak self] action in
+              print(sender)
+            }
+        }
     }.alignment(.center)
 }
 ```
