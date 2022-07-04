@@ -9,7 +9,7 @@ import UIKit
 import DeclarativeUIKit
 
 final class Simple2ViewController: UIViewController {
-    
+        
     private weak var button: UIButton!
     private weak var tapLabel: UILabel!
     private weak var overlapView: UIView!
@@ -74,8 +74,28 @@ final class Simple2ViewController: UIViewController {
                             .isUserInteractionEnabled(true)
                             .numberOfLines(1)
                             .addGestureRecognizer {
-                                UITapGestureRecognizer(target: self) {
-                                    #selector(self.tapLabel(_:))
+                                UITapGestureRecognizer(target: self) {[weak self] sender in
+                                    guard let self = self, let sender = sender as? UITapGestureRecognizer else { return }
+                                    if self.tapLabel == sender.view {
+                                        print(self.tapLabel.text ?? "")
+                                    }
+                                    UIAlertController(title: "ラベルをタップ", message: "アラートです", preferredStyle: .actionSheet) {
+                                        UIAlertAction(title: "default", style: .default) { _ in
+                                            UIAlertController(title: "defaultをタップ", message: nil, preferredStyle: .alert, {
+                                                UIAlertAction(title: "閉じる", style: .cancel)
+                                            }).present(from: self, animated: true, completion: nil)
+                                        }
+                                        UIAlertAction(title: "cancel", style: .cancel) { _ in
+                                            UIAlertController(title: "cancelをタップ", message: nil, preferredStyle: .alert, {
+                                                UIAlertAction(title: "閉じる", style: .cancel)
+                                            }).present(from: self, animated: true, completion: nil)
+                                        }
+                                        UIAlertAction(title: "destructive", style: .destructive) { _ in
+                                            UIAlertController(title: "destructiveをタップ", message: nil, preferredStyle: .alert, {
+                                                UIAlertAction(title: "閉じる", style: .cancel)
+                                            }).present(from: self, animated: true, completion: nil)
+                                        }
+                                    }.present(from: self, animated: true, completion: nil)
                                 }
                             }
                     }
@@ -128,28 +148,6 @@ final class Simple2ViewController: UIViewController {
 }
 
 @objc private extension Simple2ViewController {
-    func tapLabel(_ sender: UIGestureRecognizer) {
-        if tapLabel == sender.view {
-            print(self.tapLabel.text ?? "")
-        }
-        UIAlertController(title: "ラベルをタップ", message: "アラートです", preferredStyle: .actionSheet) {
-            UIAlertAction(title: "default", style: .default) { _ in
-                UIAlertController(title: "defaultをタップ", message: nil, preferredStyle: .alert, {
-                    UIAlertAction(title: "閉じる", style: .cancel)
-                }).present(from: self, animated: true, completion: nil)
-            }
-            UIAlertAction(title: "cancel", style: .cancel) { _ in
-                UIAlertController(title: "cancelをタップ", message: nil, preferredStyle: .alert, {
-                    UIAlertAction(title: "閉じる", style: .cancel)
-                }).present(from: self, animated: true, completion: nil)
-            }
-            UIAlertAction(title: "destructive", style: .destructive) { _ in
-                UIAlertController(title: "destructiveをタップ", message: nil, preferredStyle: .alert, {
-                    UIAlertAction(title: "閉じる", style: .cancel)
-                }).present(from: self, animated: true, completion: nil)
-            }
-        }.present(from: self, animated: true, completion: nil)
-    }
     
     func tapButton(_ sender: UIButton) {
         print("ボタンをタップしたね")
