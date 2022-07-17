@@ -9,65 +9,28 @@ UIKitのAutolayoutを宣言的に記述するライブラリです
 
 Library for writing UIKit Autolayout declaratively.
 
-* [Motivation](#motivation)
-* [Example](#example)
+
+```swift
+self.declarative {
+  UIScrollView.vertical {
+    UIStackView.vertical {
+      UIView()
+      UIButton()
+      UILabel()
+    }
+  }
+}
+```
+
 * [Installation](#installation)
   * [Swift Package Manager](#swift-package-manager)
   * [CocoaPods](#cocoapods)
-* [Documents](https://github.com/sakiyamaK/DeclarativeUIKit/blob/main/Documentation)
-  * [Japanese](https://github.com/sakiyamaK/DeclarativeUIKit/blob/main/Documentation/ja/index.md)
+* [Documentation](#documentation)
+  * [English](#english)
+  * [Japanese](#japanese)
 * [Quick Start](#quick-start)
 * [Xcode Preview](#xcode-preview)
-
-## Motivation
-
-UIKitのプロジェクトからSwiftUIに移行するためには根本の設計から変える必要がある場合があり、さらにUIKitからSwiftUIやSwiftUIからUIKitの相互の連携がどうしても必要になります。
-
-またSwiftUIはCombineを用いたMVVM設計を基本とするため、それ以外のアーキテクチャを採用していたりリアクティブプログラミングの学習が十分でないプロジェクトの場合、導入の敷居が高くなります。
-
-そのためUIKitをメインとして既存のレイアウトの定義だけを宣言的に記述できるライブラリとしました。
-
-In order to migrate from a UIKit project to SwiftUI, it may be necessary to change the underlying design, and furthermore, the interworking of UIKit to SwiftUI and SwiftUI to UIKit is inevitable.
-
-In addition, since SwiftUI is based on MVVM design using Combine, projects that use other architectures or have not sufficiently learned reactive programming will have a higher threshold for implementation.
-
-For this reason, we decided to use UIKit as the main library where only the existing layout definitions can be written declaratively.
-
-## Example
-
-* [Demo Projects](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo)
-
-  * [basic](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/Simple)
-    
-    基礎的な使い方のサンプルです
-
-    Here is a sample of basic usage
-
-    <img src="https://i.gyazo.com/5b971480cc4a93381d3bbc4711ec17d5.png" width=500>
-
-  * [collection view](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/Collection)
-    
-    UICollectionViewの基礎のサンプルです
-
-    This is a sample of the basics of UICollectionView.
-
-    <img src="https://i.gyazo.com/cf53ffbec92922b6bc33df6ef254e167.png" width=500>
-    
-  * [MVP](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/Github)
-    
-    MVPアーキテクチャでGithub APIを実行するサンプルです
-
-    This is a sample of running the Github API on the MVP architecture.
-
-    <img src="https://gyazo.com/041c6d3f10612f41bc61c9c071d9d62a.png" width=500>
-
-  * [copy SwiftUI tutorial chapter 1](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/CopyAppleSwiftUITutorial)
-    
-    [Apple公式のSwiftUIチュートリアルのChapter 1](https://developer.apple.com/tutorials/swiftui)を真似たサンプルです
-
-    This is a sample that mimics [Chapter 1 of Apple's official SwiftUI tutorial](https://developer.apple.com/tutorials/swiftui).
-
-    <img src="https://i.gyazo.com/bd5e96207609de6a4cb6f91adc6a6a6e.png" width=500>
+* [Other Examples](#other-examples)
 
 ## Installation
 
@@ -95,116 +58,61 @@ And choose the version you want
 pod 'DeclarativeUIKit'
 ```
 
+## Documentation
+
+### [English](https://github.com/sakiyamaK/DeclarativeUIKit/blob/develop/Documentation/en/index.md)
+
+### [Japanese](https://github.com/sakiyamaK/DeclarativeUIKit/blob/develop/Documentation/ja/index.md)
+
+
 ## Quick Start
 
 ```swift
 import UIKit
 import DeclarativeUIKit
 
-final class SimpleViewController: UIViewController {
+final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = .white
 
-        let ArrayViews = {
-            Array(1 ... 10).compactMap { num in
-                UILabel("\(num)番目のlabel")
-                    .textColor(.black)
-                    .textAlignment(.center)
-            }
-        }
-
-        self.declarative {
+        self.declarative {            
             UIScrollView.vertical {
                 UIStackView.vertical {
 
-                    UIImageView(UIImage(systemName: "square.and.arrow.up"))
-                        .contentMode(.scaleAspectFit)
-                        .height(200)
-                        .zStack(margin: .init(top: 70, left: 10, bottom: 0, right: 10)) {
-                            UILabel("タップジェスチャーのあるラベル")
-                                .textAlignment(.center)
-                                .font(UIFont.boldSystemFont(ofSize: 20))
-                                .isUserInteractionEnabled(true)
-                                .addGestureRecognizer {
-                                    UITapGestureRecognizer(target: self) {
-                                        #selector(self.tapLabel(_:))
-                                    }
-                                }
-                        }
+                    UIView()
+                      .imperative { view in
+                          print("命令的に記述も可能")
+                          view.tintColor = .black
+                          view.isUserInteractionEnabled = true
+                      }
+                      .size(width: 100, height: 100)
+                      .backgroundColor(.red)
+                      .transform(.init(rotationAngle: 45.0 / 360 * Double.pi))
+                      .cornerRadius(30, maskedCorners: [.layerMinXMinYCorner, .layerMaxXMaxYCorner])
+                      .border(color: .blue, width: 10)
+                      .customSpacing(40)
 
                     UIButton()
                         .title("button", for: .normal)
                         .titleColor(.brown, for: .normal)
-                        .addControlAction(target: self, for: .touchUpInside) {
-                            #selector(self.tapButton)
-                        }
-                    
-                    UIView.divider()
+                        .add(target: self, for: .touchUpInside, { _ in
+                            print("タッチアクション")
+                        })
 
-                    ArrayViews()
-
-                    UIView.divider()
-
-                    UIScrollView.horizontal(margin: .init(top: 20, left: 10, bottom: 20, right: 10)) {
-                        
-                        UIStackView.horizontal(distribution: .fill) { stackView in
-                            UIView()
-                                .imperative { _ in
-                                    print(stackView)
-                                }
-                                .size(width: 100, height: 100)
-                                .backgroundColor(.red)
-                                .transform(.init(rotationAngle: 45.0 / 360 * Double.pi))
-                                .cornerRadius(30, maskedCorners: [.layerMinXMinYCorner, .layerMaxXMaxYCorner])
-                                .border(color: .blue, width: 10)
-                                .customSpacing(40)
-
-                            UIView.imperative {
-                                print(stackView)
-                                $0.heightConstraint = 100
-                                $0.widthConstraint = 100
-                                $0.backgroundColor = .systemBlue
-                            }
-                            .shadow(color: .black.withAlphaComponent(0.8), radius: 10, x: 5, y: 5)
-
-                            UIView()
-                                .backgroundColor(.systemRed)
-                                .padding()
-                                .backgroundColor(.systemYellow)
-                                .size(width: 100, height: 100)
-
-                        }.spacing(20)
+                    Array(1 ... 10).compactMap { num in
+                        UILabel("\(num)番目のlabel")
+                            .textColor(.black)
+                            .textAlignment(.center)
                     }
-                    .showsScrollIndicator(false)
 
                     UIView.spacer()
                 }
                 .spacing(20)
             }
-            .refreshControl {
-                UIRefreshControl()
-                    .addControlAction(target: self, for: .valueChanged) {
-                        #selector(refresh)
-                    }
-            }
         }
-    }
-}
-
-@objc private extension SimpleViewController {
-    func tapLabel(_ sender: UIGestureRecognizer) {
-        print("ラベルをタップしたね")
-    }
-    
-    func tapButton(_ sender: UIButton) {
-        print("ボタンをタップしたね")
-    }
-    
-    func refresh(_ sender: UIRefreshControl) {
-        print("refresh")
     }
 }
 ```
@@ -239,4 +147,60 @@ struct DeclarativeViewController_Previews: PreviewProvider {
 }
 ```
 
-[![Image from Gyazo](https://i.gyazo.com/5b971480cc4a93381d3bbc4711ec17d5.png)](https://gyazo.com/5b971480cc4a93381d3bbc4711ec17d5)
+## Other Examples
+
+* Demo Projects
+
+  [All Demo Index](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo)
+
+  * Basic Samples
+    
+    基礎的な使い方のサンプルです
+
+    Here is a sample of basic usage
+
+    - [Index](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/Simple)
+
+      - [SimpleViewController](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/Simple/SimpleViewController.swift)
+      - [Simple2ViewController](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/Simple/Simple2ViewController.swift)
+
+    _
+    <img src="https://i.gyazo.com/620c480905f256485fd84b528f0cfcf6.png" width=300>
+
+  * CollectionView
+    
+    UICollectionViewの基礎のサンプルです
+
+    This is a sample of the basics of UICollectionView.
+
+    - [Index](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/Collection)
+      - [CollectionViewController](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/Collection/CollectionViewController.swift)
+
+     _
+    <img src="https://i.gyazo.com/804a05bb8263911cd38fcde91635a6dc.png" width=300>
+    
+  * MVP Architecture
+
+    MVPアーキテクチャでGithub APIを実行するサンプルです
+
+    This is a sample of running the Github API on the MVP architecture.
+
+    - [Index](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/Github)
+      - [GithubSearchCollectionViewController](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/Github/GithubSearch/GithubSearchCollectionViewController.swift)    
+      - [GithubResultWebViewContrller](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/Github/GithubResultWeb/GithubResultWebViewContrller.swift)
+
+    _
+    <img src="https://i.gyazo.com/f56db1f88b943d4c3b32840adc9235d0.png" width=300>
+
+  * Copy SwiftUI Tutorial Chapter 1
+      
+    [Apple公式のSwiftUIチュートリアルのChapter 1](https://developer.apple.com/tutorials/swiftui)を真似たサンプルです
+
+    This is a sample that mimics [Chapter 1 of Apple's official SwiftUI tutorial](https://developer.apple.com/tutorials/swiftui).
+
+    - [Index](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/CopyAppleSwiftUITutorial)
+      - [LandmarkListViewController](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/CopyAppleSwiftUITutorial/LandmarkList/LandmarkListViewController.swift)
+      - [LandmarkDetailViewController](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/CopyAppleSwiftUITutorial/LandmarkDetail/LandmarkDetailViewController.swift)
+
+    _
+    <img src="https://i.gyazo.com/02b4e0eca90a99d891575fc11af54e6b.png" width=300>
