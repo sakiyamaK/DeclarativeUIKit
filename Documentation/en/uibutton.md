@@ -11,8 +11,8 @@ init(_ image: UIImage?, for: UIControl.State)
 
 |  parameter | 型 | description |
 | ---- | ---- | ---- |
-| title | String | `UIButton`の`title`パラメータ`の値 |
-| for | UIControl.State | `UIButton`の`State`パラメータの値、デフォルトは`normal` |
+| title | String | Value of `title` parameter of `UIButton`. |
+| for | UIControl.State | Value of `State` parameter of `UIButton`, default `normal`. |
 
 ### init with image
 
@@ -23,8 +23,8 @@ init(_ image: UIImage?, for: UIControl.State)
 
 |  parameter | 型 | description |
 | ---- | ---- | ---- |
-| image | UIImage | `UIButton`の`image`パラメータの値 |
-| for | UIControl.State | `UIButton`の`State`パラメータの値、デフォルトは`normal` |
+| image | UIImage | Value of `image` parameter of `UIButton |
+| for | UIControl.State | Value of `State` parameter of `UIButton`, default `normal`. |
 
 #### sample
 
@@ -45,17 +45,17 @@ self.declarative {
 
 ### some default parameters
 
-以下の標準パラメータは宣言的に記述できます
-`for`パラメータは全てデフォルトで`normal`です
+The following standard parameters can be written declaratively.
+All `for` parameters are `normal` by default.
 
 ```swift
-    func title(_ title: String?, for: UIControl.State) -> Self
+func title(_ title: String?, for: UIControl.State) -> Self
 
-    func titleColor(_ color: UIColor?, for: UIControl.State)
-    
-    func font(_ font: UIFont?) -> Self
-    
-    func image(_ image: UIImage?, for: UIControl.State) -> Self
+func titleColor(_ color: UIColor?, for: UIControl.State)
+
+func font(_ font: UIFont?) -> Self
+
+func image(_ image: UIImage?, for: UIControl.State) -> Self
 ```
 
 #### sample
