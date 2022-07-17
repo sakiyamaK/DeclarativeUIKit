@@ -456,9 +456,66 @@ self.declarative {
 
 ```
 
+## touch actions
+
+自身の上にタッチアクションを受け取るViewを乗せるメソッドです
+そのため`Set<UITouch>`が保持する`view`は自身ではなくなります
+
+```swift
+func touches(
+        beganHandler: ((Set<UITouch>, UIEvent?) -> Void)? = nil,
+        endedHandler: ((Set<UITouch>, UIEvent?) -> Void)? = nil,
+        movedHandler: ((Set<UITouch>, UIEvent?) -> Void)? = nil,
+        cancelledHandler: ((Set<UITouch>, UIEvent?) -> Void)? = nil,
+        estimatedPropertiesUpdatedHandler: ((Set<UITouch>) -> Void)? = nil
+    ) -> UIView
+```
+
+### sample
+
+```swift
+self.declarative {
+    
+    UIView()
+        .backgroundColor(.white)
+        .width(250).height(200)
+        .touches(beganHandler: { touches, event in
+            
+            let touche = touches.first!
+            let point = touche.location(in: touche.view)
+            print("began: \(point)")
+
+        }, endedHandler: { touches, event in
+
+            let touche = touches.first!
+            let point = touche.location(in: touche.view)
+            print("ended: \(point)")
+
+        }, movedHandler: { touches, event in
+
+            let touche = touches.first!
+            let point = touche.location(in: touche.view)
+            print("moved: \(point)")
+
+        }, cancelledHandler: { touches, event in
+
+            let touche = touches.first!
+            let point = touche.location(in: touche.view)
+            print("cancelled: \(point)")
+
+        }, estimatedPropertiesUpdatedHandler: { touches in
+
+            let touche = touches.first!
+            let point = touche.location(in: touche.view)
+            print("estimatedPropertiesUpdated: \(point)")
+
+        })
+        .center()
+}
+```
 ## drawing graphics
 
-`UIBezierPath`による描画の記述する静的メソッドです  
+`UIBezierPath`による描画の記述をする静的メソッドです  
 `HelperPathView`は内部でパスの描画をするUIViewのサブクラスです
 
 ```swift
