@@ -59,7 +59,9 @@ pod 'DeclarativeUIKit'
 
 ## Documentation
 
-### [Japanese index](https://github.com/sakiyamaK/DeclarativeUIKit/blob/main/Documentation/ja/index.md)
+### [English](https://github.com/sakiyamaK/DeclarativeUIKit/blob/develop/Documentation/en/index.md)
+
+### [Japanese](https://github.com/sakiyamaK/DeclarativeUIKit/blob/develop/Documentation/ja/index.md)
 
 
 ## Quick Start
