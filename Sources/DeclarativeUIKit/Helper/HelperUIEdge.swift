@@ -13,6 +13,10 @@ public extension UIEdgeInsets {
     init(horizontal: CGFloat) {
         self.init(top: 0, left: horizontal, bottom: 0, right: horizontal)
     }
+    
+    init(vertical: CGFloat, horizontal: CGFloat) {
+        self.init(top: vertical, left: horizontal, bottom: vertical, right: horizontal)
+    }    
 }
 
 public struct UIEdgeBools {
