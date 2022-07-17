@@ -206,6 +206,25 @@ public extension UIView {
         variable = casted
         return self
     }
+
+    @discardableResult
+    func touches(
+        beganHandler: ((Set<UITouch>, UIEvent?) -> Void)? = nil,
+        endedHandler: ((Set<UITouch>, UIEvent?) -> Void)? = nil,
+        movedHandler: ((Set<UITouch>, UIEvent?) -> Void)? = nil,
+        cancelledHandler: ((Set<UITouch>, UIEvent?) -> Void)? = nil,
+        estimatedPropertiesUpdatedHandler: ((Set<UITouch>) -> Void)? = nil
+    ) -> UIView {
+        self.zStack {
+            HelperTouchView(
+                touchesBeganHandler: beganHandler,
+                touchesEndedHandler: endedHandler,
+                touchesMovedHandler: movedHandler,
+                touchesCancelledHandler: cancelledHandler,
+                touchesEstimatedPropertiesUpdatedHandler: estimatedPropertiesUpdatedHandler
+            )
+        }
+    }
 }
 
 //MARK: - other instanse

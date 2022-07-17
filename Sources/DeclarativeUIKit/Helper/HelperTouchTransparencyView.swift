@@ -1,11 +1,5 @@
-//
-//  File.swift
-//  
-//
-//  Created by sakiyamaK on 2022/03/19.
-//
-
-import UIKit
+import UIKit.UIView
+import UIKit.UIStackView
 
 //自身のタッチアクションは全て透過させるが子のタッチアクションは反応させる
 class HelperTouchTransparencyView: UIView {
