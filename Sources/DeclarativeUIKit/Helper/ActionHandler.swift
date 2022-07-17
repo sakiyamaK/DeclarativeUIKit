@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by sakiyamaK on 2022/07/04.
-//
-
 import Foundation
 
 final class ActionHandler {

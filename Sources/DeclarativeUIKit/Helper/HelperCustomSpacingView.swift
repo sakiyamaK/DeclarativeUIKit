@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by sakiyamaK on 2022/03/03.
-//
-
 import UIKit.UIView
 
 final class HelperCustomSpacingView: UIView {
