@@ -29,8 +29,8 @@ self.declarative {
   * [English](#english)
   * [Japanese](#japanese)
 * [Quick Start](#quick-start)
-* [Other Examples](#example)
 * [Xcode Preview](#xcode-preview)
+* [Other Examples](#other-examples)
 
 ## Installation
 
