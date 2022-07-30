@@ -138,6 +138,7 @@ public extension UIScrollView {
     @discardableResult
     func delegate(_ delegate: UIScrollViewDelegate?) -> Self {
         self.delegate = delegate
+        return self
     }
 
     @discardableResult
@@ -167,24 +168,6 @@ public extension UIScrollView {
     @discardableResult
     func isPagingEnabled(_ isPagingEnabled: Bool) -> Self {
         self.isPagingEnabled = isPagingEnabled
-        return self
-    }
-
-    @discardableResult
-    func isScrollEnabled(_ isScrollEnabled: Bool) -> Self {
-        self.isScrollEnabled = isScrollEnabled
-        return self
-    }
-
-    @discardableResult
-    func showsVerticalScrollIndicator(_ showsVerticalScrollIndicator: Bool) -> Self {
-        self.showsVerticalScrollIndicator = showsVerticalScrollIndicator
-        return self
-    }
-
-    @discardableResult
-    func showsHorizontalScrollIndicator(_ showsHorizontalScrollIndicator: Bool) -> Self {
-        self.showsHorizontalScrollIndicator = showsHorizontalScrollIndicator
         return self
     }
 
