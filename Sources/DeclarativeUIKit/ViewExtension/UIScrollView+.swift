@@ -102,4 +102,158 @@ public extension UIScrollView {
         self.refreshControl = refreshControl()
         return self
     }
+        
+    @discardableResult
+    func contentOffset(_ contentOffset: CGPoint) -> Self {
+        self.contentOffset = contentOffset
+        return self
+    }
+
+    @discardableResult
+    func contentSize(_ contentSize: CGSize) -> Self {
+        self.contentSize = contentSize
+        return self
+    }
+
+    @discardableResult
+    func contentInset(_ contentInset: UIEdgeInsets) -> Self {
+        self.contentInset = contentInset
+        return self
+    }
+
+    @available(iOS 11.0, *)
+    @discardableResult
+    func contentInsetAdjustmentBehavior(_ contentInsetAdjustmentBehavior: ContentInsetAdjustmentBehavior) -> Self {
+        self.contentInsetAdjustmentBehavior = contentInsetAdjustmentBehavior
+        return self
+    }
+    
+    @available(iOS 13.0, *)
+    @discardableResult
+    func automaticallyAdjustsScrollIndicatorInsets(_ automaticallyAdjustsScrollIndicatorInsets: Bool) -> Self {
+        self.automaticallyAdjustsScrollIndicatorInsets = automaticallyAdjustsScrollIndicatorInsets
+        return self
+    }
+    
+    @discardableResult
+    func delegate(_ delegate: UIScrollViewDelegate?) -> Self {
+        self.delegate = delegate
+        return self
+    }
+
+    @discardableResult
+    func isDirectionalLockEnabled(_ isDirectionalLockEnabled: Bool) -> Self {
+        self.isDirectionalLockEnabled = isDirectionalLockEnabled
+        return self
+    }
+
+    @discardableResult
+    func bounces(_ bounces: Bool) -> Self {
+        self.bounces = bounces
+        return self
+    }
+
+    @discardableResult
+    func alwaysBounceVertical(_ alwaysBounceVertical: Bool) -> Self {
+        self.alwaysBounceVertical = alwaysBounceVertical
+        return self
+    }
+
+    @discardableResult
+    func alwaysBounceHorizontal(_ alwaysBounceHorizontal: Bool) -> Self {
+        self.alwaysBounceHorizontal = alwaysBounceHorizontal
+        return self
+    }
+
+    @discardableResult
+    func isPagingEnabled(_ isPagingEnabled: Bool) -> Self {
+        self.isPagingEnabled = isPagingEnabled
+        return self
+    }
+
+    @discardableResult
+    func indicatorStyle(_ indicatorStyle: UIScrollView.IndicatorStyle) -> Self {
+        self.indicatorStyle = indicatorStyle
+        return self
+    }
+    
+    @available(iOS 11.1, *)
+    @discardableResult
+    func verticalScrollIndicatorInsets(_ verticalScrollIndicatorInsets: UIEdgeInsets) -> Self {
+        self.verticalScrollIndicatorInsets = verticalScrollIndicatorInsets
+        return self
+    }
+
+    @available(iOS 11.1, *)
+    @discardableResult
+    func horizontalScrollIndicatorInsets(_ horizontalScrollIndicatorInsets: UIEdgeInsets) -> Self {
+        self.horizontalScrollIndicatorInsets = horizontalScrollIndicatorInsets
+        return self
+    }
+
+    @discardableResult
+    func scrollIndicatorInsets(_ scrollIndicatorInsets: UIEdgeInsets) -> Self {
+        self.scrollIndicatorInsets = scrollIndicatorInsets
+        return self
+    }
+    
+    @discardableResult
+    func decelerationRate(_ decelerationRate: UIScrollView.DecelerationRate) -> Self {
+        self.decelerationRate = decelerationRate
+        return self
+    }
+
+    @discardableResult
+    func indexDisplayMode(_ indexDisplayMode: UIScrollView.IndexDisplayMode) -> Self {
+        self.indexDisplayMode = indexDisplayMode
+        return self
+    }
+
+    @discardableResult
+    func delaysContentTouches(_ delaysContentTouches: Bool) -> Self {
+        self.delaysContentTouches = delaysContentTouches
+        return self
+    }
+
+    @discardableResult
+    func canCancelContentTouches(_ canCancelContentTouches: Bool) -> Self {
+        self.canCancelContentTouches = canCancelContentTouches
+        return self
+    }
+
+    @discardableResult
+    func minimumZoomScale(_ minimumZoomScale: CGFloat) -> Self {
+        self.minimumZoomScale = minimumZoomScale
+        return self
+    }
+
+    @discardableResult
+    func maximumZoomScale(_ maximumZoomScale: CGFloat) -> Self {
+        self.maximumZoomScale = maximumZoomScale
+        return self
+    }
+
+    @discardableResult
+    func zoomScale(_ zoomScale: CGFloat) -> Self {
+        self.zoomScale = zoomScale
+        return self
+    }
+
+    @discardableResult
+    func bouncesZoom(_ bouncesZoom: Bool) -> Self {
+        self.bouncesZoom = bouncesZoom
+        return self
+    }
+
+    @discardableResult
+    func scrollsToTop(_ scrollsToTop: Bool) -> Self {
+        self.scrollsToTop = scrollsToTop
+        return self
+    }
+
+    @discardableResult
+    func keyboardDismissMode(_ keyboardDismissMode: UIScrollView.KeyboardDismissMode) -> Self {
+        self.keyboardDismissMode = keyboardDismissMode
+        return self
+    }
 }
