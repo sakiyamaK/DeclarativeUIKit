@@ -76,5 +76,4 @@ public extension UIButton {
         self.setImage(image, for: `for`)
         return self
     }
-
 }
