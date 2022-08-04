@@ -236,23 +236,26 @@ public extension UIView {
     }
 
     @discardableResult
-    func padding(insets: UIEdgeInsets) -> UIView {
-        UIView().zStack(margin: insets, priorities: .init(all: .init(rawValue: 999)), { self })
+    func padding(insets: UIEdgeInsets, priorities: UIEdgePriorities = .init(all: .required)) -> UIView {
+        HelperTouchTransparencyView().zStack(margin: insets, priorities: priorities) { self }
     }
     
     @discardableResult
-    func padding(_ value: CGFloat = 8.0) -> UIView {
-        self.padding(insets: .init(all: value))
+    func padding(_ value: CGFloat = 8.0, priorities: UIEdgePriorities = .init(all: .required)) -> UIView {
+        self.padding(insets: .init(all: value), priorities: priorities)
     }
     
     @discardableResult
-    func offset(x: CGFloat = 0, y: CGFloat = 0) -> UIView {
-        self.offset(.init(x: x, y: y))
+    func offset(x: CGFloat = 0, y: CGFloat = 0, priorities: UIEdgePriorities = .init(all: .required)) -> UIView {
+        self.offset(.init(x: x, y: y), priorities: priorities)
     }
 
     @discardableResult
-    func offset(_ offset: CGPoint) -> UIView {
-        self.padding(insets: .init(top: offset.y, left: offset.x, bottom: -offset.y, right: -offset.x))
+    func offset(_ offset: CGPoint, priorities: UIEdgePriorities = .init(all: .required)) -> UIView {
+        self.padding(
+            insets: .init(top: offset.y, left: offset.x, bottom: -offset.y, right: -offset.x),
+            priorities: priorities
+        )
     }
     
     @discardableResult
