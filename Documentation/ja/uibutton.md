@@ -49,13 +49,19 @@ self.declarative {
 `for`パラメータは全てデフォルトで`normal`です
 
 ```swift
-    func title(_ title: String?, for: UIControl.State) -> Self
+func title(_ title: String?, for: UIControl.State) -> Self
 
-    func titleColor(_ color: UIColor?, for: UIControl.State)
-    
-    func font(_ font: UIFont?) -> Self
-    
-    func image(_ image: UIImage?, for: UIControl.State) -> Self
+func titleColor(_ color: UIColor?, for: UIControl.State)
+
+func font(_ font: UIFont?) -> Self
+
+func image(_ image: UIImage?, for: UIControl.State) -> Self
+
+func contentEdgeInset(_ contentEdgeInsets: UIEdgeInsets) -> Self
+
+func titleEdgeInsets(_ titleEdgeInsets: UIEdgeInsets) -> Self
+
+func imageEdgeInsets(_ imageEdgeInsets: UIEdgeInsets) -> Self
 ```
 
 #### sample
@@ -67,5 +73,6 @@ self.declarative {
       .titleColor(.black)
       .font(UIFont.systemFont(ofSize: 20))
       .image(UIImage(systemName: "square.and.arrow.up"))
+      .contentEdgeInset(.init(all: 10))
 }
 ```
