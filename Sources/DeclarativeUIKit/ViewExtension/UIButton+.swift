@@ -77,3 +77,25 @@ public extension UIButton {
         return self
     }
 }
+
+//MARK: - Declarative method
+@available(iOS, deprecated: 15.0, message: "This property is ignored when using UIButtonConfiguration")
+public extension UIButton {
+    @discardableResult
+    func contentEdgeInset(_ contentEdgeInsets: UIEdgeInsets) -> Self {
+        self.contentEdgeInsets = contentEdgeInsets
+        return self
+    }
+
+    @discardableResult
+    func titleEdgeInsets(_ titleEdgeInsets: UIEdgeInsets) -> Self {
+        self.titleEdgeInsets = titleEdgeInsets
+        return self
+    }
+
+    @discardableResult
+    func imageEdgeInsets(_ imageEdgeInsets: UIEdgeInsets) -> Self {
+        self.imageEdgeInsets = imageEdgeInsets
+        return self
+    }
+}
