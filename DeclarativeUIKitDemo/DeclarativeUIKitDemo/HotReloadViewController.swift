@@ -76,7 +76,7 @@ final class HotReloadViewController: UIViewController {
                           view.tintColor = .black
                           view.isUserInteractionEnabled = true
                       }
-                      .size(width: 100, height: 100)
+//                      .size(width: 100, height: 100)
                       .backgroundColor(.red)
                       .transform(.init(rotationAngle: 45.0 / 360 * Double.pi))
                       .cornerRadius(30, maskedCorners: [.layerMinXMinYCorner, .layerMaxXMaxYCorner])
@@ -96,10 +96,27 @@ final class HotReloadViewController: UIViewController {
                             .textAlignment(.center)
                     }
 
-                    UIView.spacer()
+                    UIView.spacer().height(500)
                 }
                 .spacing(20)
             }
+            .showsScrollIndicator(true)
+        }
+        
+        self.declarative(reset: false) {
+            UIButton("hoge")
+                .image(UIImage(systemName: "plus"))
+                .contentEdgeInsets(.init(top: 10, left: 10, bottom: 20, right: 20))
+                .imageEdgeInsets(.init(top: 0, left: -10, bottom: 0, right: 0))
+                .titleEdgeInsets(.init(top: 10, left: 10, bottom: 0, right: -10))
+                .titleColor(.brown, for: .normal)
+                .add(target: self, for: .touchUpInside, { _ in
+                    print("タッチアクション")
+                })
+                .backgroundColor(.black)
+                .bottom()
+                .right()
+                .offset(x: -10, y: 10)
         }
     }
 }

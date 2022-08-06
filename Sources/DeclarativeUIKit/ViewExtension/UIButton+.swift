@@ -82,7 +82,7 @@ public extension UIButton {
 @available(iOS, deprecated: 15.0, message: "This property is ignored when using UIButtonConfiguration")
 public extension UIButton {
     @discardableResult
-    func contentEdgeInset(_ contentEdgeInsets: UIEdgeInsets) -> Self {
+    func contentEdgeInsets(_ contentEdgeInsets: UIEdgeInsets) -> Self {
         self.contentEdgeInsets = contentEdgeInsets
         return self
     }
