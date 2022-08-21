@@ -112,7 +112,7 @@ final class TwitterHomeViewController: UIViewController {
         
         self.view.backgroundColor = .white
         
-        self.declarative(reset: false) {
+        self.declarative {
             UICollectionView {
                 UICollectionViewCompositionalLayout { _, _ -> NSCollectionLayoutSection? in
                     
@@ -136,7 +136,16 @@ final class TwitterHomeViewController: UIViewController {
             }
             .dataSource(self)
             .registerCellClass(TwitterHomeCell.self, forCellWithReuseIdentifier: "TwitterHomeCell")
-            
+        }
+        
+        self.declarative(reset: false) {
+            UIButton(UIImage(systemName: "plus")?.withTintColor(.white, renderingMode: .alwaysOriginal))
+                .backgroundColor(.systemBlue)
+                .size(width: 50, height: 50)
+                .cornerRadius(25)
+                .bottom()
+                .right()
+                .offset(x: -10, y: -10)
         }
     }
 }
