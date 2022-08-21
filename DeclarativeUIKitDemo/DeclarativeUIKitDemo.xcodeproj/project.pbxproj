@@ -20,7 +20,8 @@
 		B63FFA9A277B4C1400209684 /* GithubResultWebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63FFA99277B4C1400209684 /* GithubResultWebPresenter.swift */; };
 		B65F3F3527B8CCA400DBA44B /* Simple2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65F3F3427B8CCA400DBA44B /* Simple2ViewController.swift */; };
 		B6875FB428073D2E000404F3 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6875FB328073D2E000404F3 /* MapViewController.swift */; };
-		B68EA53728B1EDFD00773D9C /* TiktokViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68EA53628B1EDFD00773D9C /* TiktokViewController.swift */; };
+		B68EA53728B1EDFD00773D9C /* TiktokHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68EA53628B1EDFD00773D9C /* TiktokHomeViewController.swift */; };
+		B68EA53B28B2312C00773D9C /* TwitterHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68EA53A28B2312C00773D9C /* TwitterHomeViewController.swift */; };
 		B69B2EA6277D6219006F1FF9 /* LandmarkListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69B2EA5277D6219006F1FF9 /* LandmarkListViewController.swift */; };
 		B69B2EA8277D685C006F1FF9 /* LandmarkRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69B2EA7277D685C006F1FF9 /* LandmarkRow.swift */; };
 		B69B2EAD277D6937006F1FF9 /* Landmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69B2EAC277D6937006F1FF9 /* Landmark.swift */; };
@@ -55,7 +56,8 @@
 		B63FFA99277B4C1400209684 /* GithubResultWebPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubResultWebPresenter.swift; sourceTree = "<group>"; };
 		B65F3F3427B8CCA400DBA44B /* Simple2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Simple2ViewController.swift; sourceTree = "<group>"; };
 		B6875FB328073D2E000404F3 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		B68EA53628B1EDFD00773D9C /* TiktokViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TiktokViewController.swift; sourceTree = "<group>"; };
+		B68EA53628B1EDFD00773D9C /* TiktokHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TiktokHomeViewController.swift; sourceTree = "<group>"; };
+		B68EA53A28B2312C00773D9C /* TwitterHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterHomeViewController.swift; sourceTree = "<group>"; };
 		B69B2EA5277D6219006F1FF9 /* LandmarkListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkListViewController.swift; sourceTree = "<group>"; };
 		B69B2EA7277D685C006F1FF9 /* LandmarkRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkRow.swift; sourceTree = "<group>"; };
 		B69B2EAC277D6937006F1FF9 /* Landmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Landmark.swift; sourceTree = "<group>"; };
@@ -177,9 +179,26 @@
 		B68EA53528B1EDFD00773D9C /* Samples */ = {
 			isa = PBXGroup;
 			children = (
-				B68EA53628B1EDFD00773D9C /* TiktokViewController.swift */,
+				B68EA53928B2311C00773D9C /* Twitter */,
+				B68EA53828B2305C00773D9C /* Tiktok */,
 			);
 			path = Samples;
+			sourceTree = "<group>";
+		};
+		B68EA53828B2305C00773D9C /* Tiktok */ = {
+			isa = PBXGroup;
+			children = (
+				B68EA53628B1EDFD00773D9C /* TiktokHomeViewController.swift */,
+			);
+			path = Tiktok;
+			sourceTree = "<group>";
+		};
+		B68EA53928B2311C00773D9C /* Twitter */ = {
+			isa = PBXGroup;
+			children = (
+				B68EA53A28B2312C00773D9C /* TwitterHomeViewController.swift */,
+			);
+			path = Twitter;
 			sourceTree = "<group>";
 		};
 		B69B2EA4277D61FE006F1FF9 /* CopyAppleSwiftUITutorial */ = {
@@ -351,6 +370,7 @@
 				B601AB1127761CA600B57E0F /* AppDelegate.swift in Sources */,
 				B65F3F3527B8CCA400DBA44B /* Simple2ViewController.swift in Sources */,
 				B6875FB428073D2E000404F3 /* MapViewController.swift in Sources */,
+				B68EA53B28B2312C00773D9C /* TwitterHomeViewController.swift in Sources */,
 				B63FFA9A277B4C1400209684 /* GithubResultWebPresenter.swift in Sources */,
 				B69B2EAF277D6955006F1FF9 /* ModelData.swift in Sources */,
 				B6D0CEBA277983C700031EDB /* SimpleViewController.swift in Sources */,
@@ -360,7 +380,7 @@
 				B69B2EBA277D81D3006F1FF9 /* CircleImageView.swift in Sources */,
 				B6D0CEBD2779AF5F00031EDB /* CollectionViewController.swift in Sources */,
 				B63FFA98277B4AE900209684 /* GithubResultWebViewContrller.swift in Sources */,
-				B68EA53728B1EDFD00773D9C /* TiktokViewController.swift in Sources */,
+				B68EA53728B1EDFD00773D9C /* TiktokHomeViewController.swift in Sources */,
 				B61256C127D459BB00DFAC78 /* HotReloadViewController.swift in Sources */,
 				B6D0CED0277B120900031EDB /* GithubAPI.swift in Sources */,
 				B69B2EA8277D685C006F1FF9 /* LandmarkRow.swift in Sources */,

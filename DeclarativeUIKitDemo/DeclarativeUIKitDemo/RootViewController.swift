@@ -152,7 +152,7 @@ final class RootViewController: UIViewController {
             let vc = MapViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         case .tiktokButton:
-            let vc = TiktokViewController()
+            let vc = TiktokHomeViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

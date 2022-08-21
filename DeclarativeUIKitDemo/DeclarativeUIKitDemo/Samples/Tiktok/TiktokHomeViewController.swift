@@ -8,8 +8,7 @@
 import UIKit
 import DeclarativeUIKit
 
-
-final class TiktokViewController: UIViewController {
+final class TiktokHomeViewController: UIViewController {
 
     override func loadView() {
         super.loadView()
@@ -18,7 +17,7 @@ final class TiktokViewController: UIViewController {
     }
 }
 
-@objc private extension TiktokViewController {
+@objc private extension TiktokHomeViewController {
     func setupLayout() {
         
         self.view.backgroundColor = .white
@@ -141,4 +140,25 @@ final class TiktokViewController: UIViewController {
             .padding(insets: .init(top: 10, left: 16, bottom: 10, right: 16))
         }
     }
+}
+
+import SwiftUI
+
+struct TiktokHomeViewController_Wrapper: UIViewControllerRepresentable {
+    typealias ViewController = TiktokHomeViewController
+    func makeUIViewController(context: Context) -> ViewController {
+        let vc = ViewController()
+        return vc
+    }
+
+    func updateUIViewController(_ vc: ViewController, context: Context) {
+    }
+}
+
+struct TiktokHomeViewController_Previews: PreviewProvider {
+  static var previews: some View {
+      Group {
+          TiktokHomeViewController_Wrapper()
+      }
+  }
 }
