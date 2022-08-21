@@ -79,14 +79,12 @@ final class LandmarkDetailViewController: UIViewController {
                     }
                     .height(300)
                     .zStack {
-                        UIStackView.vertical {
-                            UIView.spacer()
-                            CircleImageView().imperative {
-                                let circleImageView = $0 as! CircleImageView
-                                circleImageView.setLandmark(landmark)
-                            }
+                        CircleImageView().imperative {
+                            let circleImageView = $0 as! CircleImageView
+                            circleImageView.setLandmark(landmark)
                         }
-                        .alignment(.center)
+                        .centerX()
+                        .bottom()
                         .offset(y: imageOffset)
                     }
                     .customSpacing(imageOffset)

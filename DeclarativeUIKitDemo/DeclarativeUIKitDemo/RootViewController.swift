@@ -20,6 +20,7 @@ final class RootViewController: UIViewController {
         case swiftuiTutorialButton
         case pathButton
         case mapViewButton
+        case tiktokButton
     }
     
     override func loadView() {
@@ -100,6 +101,12 @@ final class RootViewController: UIViewController {
                         .tag(ViewTag.mapViewButton.rawValue)
 
                     UIView.spacer()
+
+                    Button("tiktok")
+                        .add(target: self, action: #selector(tapButton), for: .touchUpInside)
+                        .tag(ViewTag.tiktokButton.rawValue)
+
+                    UIView.spacer()
                 }
                 .spacing(20)
                 .distribution(.fillEqually)
@@ -143,6 +150,9 @@ final class RootViewController: UIViewController {
             self.navigationController?.pushViewController(vc, animated: true)
         case .mapViewButton:
             let vc = MapViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        case .tiktokButton:
+            let vc = TiktokViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
