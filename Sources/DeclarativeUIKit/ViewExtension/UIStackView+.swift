@@ -22,19 +22,25 @@ public extension UIStackView {
         }
     }
 
-    static func vertical(alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> UIStackView {
-        UIStackView(axis: .vertical, alignment: alignment, distribution: distribution, spacing: spacing, builder)
+    static func vertical(alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, isTouchTransparency: Bool = false, @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> UIStackView {
+        if isTouchTransparency {
+            return HelperTouchTransparencyStackView(axis: .vertical, alignment: alignment, distribution: distribution, spacing: spacing, builder)
+        }
+        return UIStackView(axis: .vertical, alignment: alignment, distribution: distribution, spacing: spacing, builder)
     }
     
-    static func vStack(alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> UIStackView {
-        UIStackView(axis: .vertical, alignment: alignment, distribution: distribution, spacing: spacing, builder)
+    static func vStack(alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, isTouchTransparency: Bool = false, @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> UIStackView {
+        UIStackView.vertical(alignment: alignment, distribution: distribution, spacing: spacing, isTouchTransparency: isTouchTransparency, builder)
     }
     
-    static func horizontal(alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> UIStackView {
-        UIStackView(axis: .horizontal, alignment: alignment, distribution: distribution, spacing: spacing, builder)
+    static func horizontal(alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, isTouchTransparency: Bool = false, @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> UIStackView {
+        if isTouchTransparency {
+            return HelperTouchTransparencyStackView(axis: .horizontal, alignment: alignment, distribution: distribution, spacing: spacing, builder)
+        }
+        return UIStackView(axis: .horizontal, alignment: alignment, distribution: distribution, spacing: spacing, builder)
     }
-    static func hStack(alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> UIStackView {
-        UIStackView(axis: .horizontal, alignment: alignment, distribution: distribution, spacing: spacing, builder)
+    static func hStack(alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, isTouchTransparency: Bool = false, @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> UIStackView {
+        UIStackView.horizontal(alignment: alignment, distribution: distribution, spacing: spacing, isTouchTransparency: isTouchTransparency, builder)
     }
 }
 
@@ -59,19 +65,25 @@ public extension UIStackView {
         }
     }
     
-    static func vertical(alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, @ArrayUIViewBuilder _ builder: (UIView) -> [UIView?]) -> UIStackView {
-        UIStackView(axis: .vertical, alignment: alignment, distribution: distribution, spacing: spacing, builder)
+    static func vertical(alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, isTouchTransparency: Bool = false, @ArrayUIViewBuilder _ builder: (UIView) -> [UIView?]) -> UIStackView {
+        if isTouchTransparency {
+            return HelperTouchTransparencyStackView(axis: .vertical, alignment: alignment, distribution: distribution, spacing: spacing, builder)
+        }
+        return UIStackView(axis: .vertical, alignment: alignment, distribution: distribution, spacing: spacing, builder)
     }
     
-    static func vStack(alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, @ArrayUIViewBuilder _ builder: (UIView) -> [UIView?]) -> UIStackView {
-        UIStackView(axis: .vertical, alignment: alignment, distribution: distribution, spacing: spacing, builder)
+    static func vStack(alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, isTouchTransparency: Bool = false, @ArrayUIViewBuilder _ builder: (UIView) -> [UIView?]) -> UIStackView {
+        UIStackView.vertical(alignment: alignment, distribution: distribution, spacing: spacing, isTouchTransparency: isTouchTransparency, builder)
     }
     
-    static func horizontal(alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, @ArrayUIViewBuilder _ builder: (UIView) -> [UIView?]) -> UIStackView {
-        UIStackView(axis: .horizontal, alignment: alignment, distribution: distribution, spacing: spacing, builder)
+    static func horizontal(alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, isTouchTransparency: Bool = false, @ArrayUIViewBuilder _ builder: (UIView) -> [UIView?]) -> UIStackView {
+        if isTouchTransparency {
+            return HelperTouchTransparencyStackView(axis: .horizontal, alignment: alignment, distribution: distribution, spacing: spacing, builder)
+        }
+        return UIStackView(axis: .horizontal, alignment: alignment, distribution: distribution, spacing: spacing, builder)
     }
-    static func hStack(alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, @ArrayUIViewBuilder _ builder: (UIView) -> [UIView?]) -> UIStackView {
-        UIStackView(axis: .horizontal, alignment: alignment, distribution: distribution, spacing: spacing, builder)
+    static func hStack(alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, isTouchTransparency: Bool = false, @ArrayUIViewBuilder _ builder: (UIView) -> [UIView?]) -> UIStackView {
+        UIStackView.horizontal(alignment: alignment, distribution: distribution, spacing: spacing, isTouchTransparency: isTouchTransparency, builder)
     }
 }
 
