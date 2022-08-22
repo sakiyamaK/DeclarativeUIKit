@@ -95,13 +95,13 @@ self.declarative {
 配列や`if`にも対応しています
 
 ```swift
-vertical(alignment: Alignment, distribution: Distribution, spacing: CGFloat, _ builder: () -> [UIView?])
+vertical(alignment: Alignment, distribution: Distribution, spacing: CGFloat, isTouchTransparency: Bool, _ builder: () -> [UIView?])
 
-vStack(alignment: Alignment, distribution: Distribution, spacing: CGFloat, _ builder: () -> [UIView?])
+vStack(alignment: Alignment, distribution: Distribution, spacing: CGFloat, isTouchTransparency: Bool, _ builder: () -> [UIView?])
 
-vertical(alignment: Alignment, distribution: Distribution, spacing: CGFloat, _ builder: (UIView) -> [UIView?])
+vertical(alignment: Alignment, distribution: Distribution, spacing: CGFloat, isTouchTransparency: Bool, _ builder: (UIView) -> [UIView?])
 
-vStack(alignment: Alignment, distribution: Distribution, spacing: CGFloat, _ builder: (UIView) -> [UIView?])
+vStack(alignment: Alignment, distribution: Distribution, spacing: CGFloat, isTouchTransparency: Bool, _ builder: (UIView) -> [UIView?])
 ```
 
 |  parameter | 型 | description |
@@ -109,6 +109,7 @@ vStack(alignment: Alignment, distribution: Distribution, spacing: CGFloat, _ bui
 | alignment | Alignment | 標準パラメータのalignmentを設定する、デフォルトは`fill` |
 | distribution | Distribution | 標準パラメータのdistributionを設定する、デフォルトは`fill` |
 | spacing | CGFloat | 標準パラメータのspacingを設定する、デフォルトは`0` |
+| isTouchTransparency | Bool | 自身のタッチのみ透過させるか設定する、デフォルトは`false` |
 | builder | () -> [UIView?] | 配置するViewを生成する |
 
 |  parameter | 型 | description |
@@ -139,13 +140,13 @@ self.declarative {
 配列や`if`にも対応しています
 
 ```swift
-horizontal(alignment: Alignment, distribution: Distribution, spacing: CGFloat, _ builder: () -> [UIView?])
+horizontal(alignment: Alignment, distribution: Distribution, spacing: CGFloat, isTouchTransparency: Bool, _ builder: () -> [UIView?])
 
-hStack(alignment: Alignment, distribution: Distribution, spacing: CGFloat, _ builder: () -> [UIView?])
+hStack(alignment: Alignment, distribution: Distribution, spacing: CGFloat, isTouchTransparency: Bool, _ builder: () -> [UIView?])
 
-horizontal(alignment: Alignment, distribution: Distribution, spacing: CGFloat, _ builder: (UIView) -> [UIView?])
+horizontal(alignment: Alignment, distribution: Distribution, spacing: CGFloat, isTouchTransparency: Bool, _ builder: (UIView) -> [UIView?])
 
-hStack(alignment: Alignment, distribution: Distribution, spacing: CGFloat, _ builder: (UIView) -> [UIView?])
+hStack(alignment: Alignment, distribution: Distribution, spacing: CGFloat, isTouchTransparency: Bool, _ builder: (UIView) -> [UIView?])
 ```
 
 |  parameter | 型 | description |
@@ -153,6 +154,7 @@ hStack(alignment: Alignment, distribution: Distribution, spacing: CGFloat, _ bui
 | alignment | Alignment | 標準パラメータのalignmentを設定する、デフォルトは`fill` |
 | distribution | Distribution | 標準パラメータのdistributionを設定する、デフォルトは`fill` |
 | spacing | CGFloat | 標準パラメータのspacingを設定する、デフォルトは`0` |
+| isTouchTransparency | Bool | 自身のタッチのみ透過させるか設定する、デフォルトは`false` |
 | builder | () -> [UIView?] | 配置するViewを生成する |
 
 |  parameter | 型 | description |
