@@ -94,13 +94,13 @@ Multiple views can be placed in a `builder`.
 supports arrays and `if`.
 
 ```swift
-vertical(alignment: Alignment, distribution: Distribution, spacing: CGFloat, _ builder: () -> [UIView?])
+vertical(alignment: Alignment, distribution: Distribution, spacing: CGFloat, isTouchTransparency: Bool, _ builder: () -> [UIView?])
 
-vStack(alignment: Alignment, distribution: Distribution, spacing: CGFloat, _ builder: () -> [UIView?])
+vStack(alignment: Alignment, distribution: Distribution, spacing: CGFloat, isTouchTransparency: Bool, _ builder: () -> [UIView?])
 
-vertical(alignment: Alignment, distribution: Distribution, spacing: CGFloat, _ builder: (UIView) -> [UIView?])
+vertical(alignment: Alignment, distribution: Distribution, spacing: CGFloat, isTouchTransparency: Bool, _ builder: (UIView) -> [UIView?])
 
-vStack(alignment: Alignment, distribution: Distribution, spacing: CGFloat, _ builder: (UIView) -> [UIView?])
+vStack(alignment: Alignment, distribution: Distribution, spacing: CGFloat, isTouchTransparency: Bool, _ builder: (UIView) -> [UIView?])
 ```
 
 |  parameter | 型 | description |
@@ -108,6 +108,7 @@ vStack(alignment: Alignment, distribution: Distribution, spacing: CGFloat, _ bui
 | alignment | Alignment | Set alignment for standard parameters, defaults to `fill` |
 | distribution | Distribution | Set standard parameter distribution, default is `fill`. |
 | spacing | CGFloat | Set standard parameter spacing, default `0`. |
+| isTouchTransparency | Bool | Set whether or not only your own touch is made transparent. default is `false` |
 | builder | () -> [UIView?] | Generate View to be placed |
 |  parameter | 型 | description |
 | ---- | ---- | ---- |
@@ -137,13 +138,13 @@ Multiple views can be placed in a `builder`.
 supports arrays and `if`.
 
 ```swift
-horizontal(alignment: Alignment, distribution: Distribution, spacing: CGFloat, _ builder: () -> [UIView?])
+horizontal(alignment: Alignment, distribution: Distribution, spacing: CGFloat, isTouchTransparency: Bool, _ builder: () -> [UIView?])
 
-hStack(alignment: Alignment, distribution: Distribution, spacing: CGFloat, _ builder: () -> [UIView?])
+hStack(alignment: Alignment, distribution: Distribution, spacing: CGFloat, isTouchTransparency: Bool, _ builder: () -> [UIView?])
 
-horizontal(alignment: Alignment, distribution: Distribution, spacing: CGFloat, _ builder: (UIView) -> [UIView?])
+horizontal(alignment: Alignment, distribution: Distribution, spacing: CGFloat, isTouchTransparency: Bool, _ builder: (UIView) -> [UIView?])
 
-hStack(alignment: Alignment, distribution: Distribution, spacing: CGFloat, _ builder: (UIView) -> [UIView?])
+hStack(alignment: Alignment, distribution: Distribution, spacing: CGFloat, isTouchTransparency: Bool, _ builder: (UIView) -> [UIView?])
 ```
 
 |  parameter | 型 | description |
@@ -151,6 +152,7 @@ hStack(alignment: Alignment, distribution: Distribution, spacing: CGFloat, _ bui
 | alignment | Alignment | Set alignment for standard parameters, defaults to `fill` |
 | distribution | Distribution | Set standard parameter distribution, default is `fill` |
 | spacing | CGFloat | Set standard parameter spacing, default `0`. |
+| isTouchTransparency | Bool | Set whether or not only your own touch is made transparent. default is `false` |
 | builder | () -> [UIView?] | Generate View to be placed |
 
 |  parameter | 型 | description |
