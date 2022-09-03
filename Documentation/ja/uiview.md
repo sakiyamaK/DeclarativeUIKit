@@ -232,6 +232,30 @@ self.declarative {
 }
 ```
 
+## contentPriorities
+
+`ContentHuggingPriority`と`ContentCompressionResistancePriority`を同時に設定するメソッドです
+
+```swift
+func contentPriorities(_ priorities: UIContentPriorities) -> Self
+```
+
+|  parameter | 型 | description |
+| ---- | ---- | ---- |
+| priorities | UIContentPriorities | contentHuggingPriorityとcontentCompressionResistancePriorityを決めるパラメータ、デフォルトは全て`nil`のためクラスの設定に準拠する |
+
+#### sample
+
+```swift
+self.declarative {
+    //contentHuggingPriorityのhorizontalとvertical,
+    //contentCompressionResistancePriorityのhorizontalとvertical
+    //全て.requiredにする
+    UILabel("contents")
+      .contentPriorities(.init(all: .required))
+      .center()
+}
+```
 ## cornerRadius
 
 角丸にするメソッドです

@@ -226,6 +226,33 @@ self.declarative {
 }
 ```
 
+## contentPriorities
+
+Method to set `ContentHuggingPriority` and `ContentCompressionResistancePriority` at the same time
+
+```swift
+func contentPriorities(_ priorities: UIContentPriorities) -> Self
+```
+
+|  parameter | 型 | description |
+| ---- | ---- | ---- |
+| priorities | UIContentPriorities | contentHuggingPriorityとcontentCompressionResistancePriorityを決めるパラメータ、デフォルトは全て`nil`のためクラスの設定に準拠する |
+
+#### sample
+
+```swift
+self.declarative {
+    // Set all horizontal and vertical of 
+    // contentHuggingPriority and
+    // all horizontal and vertical of 
+    // contentCompressionResistancePriority
+    // to .required
+    UILabel("contents")
+      .contentPriorities(.init(all: .required))
+      .center()
+}
+```
+
 ## cornerRadius
 
 Method for rounding corners.
