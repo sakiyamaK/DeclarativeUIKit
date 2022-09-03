@@ -197,6 +197,24 @@ public extension UIView {
     }
 
     @discardableResult
+    func contentPriorities(_ priorities: UIContentPriorities) -> Self {
+        imperative {
+            if let priority = priorities.huggingVertical {
+                $0.setContentHuggingPriority(priority, for: .vertical)
+            }
+            if let priority = priorities.huggingHorizontal {
+                $0.setContentHuggingPriority(priority, for: .horizontal)
+            }
+            if let priority = priorities.compressionResistanceVertical {
+                $0.setContentCompressionResistancePriority(priority, for: .vertical)
+            }
+            if let priority = priorities.compressionResistanceHorizontal {
+                $0.setContentCompressionResistancePriority(priority, for: .horizontal)
+            }
+        }
+    }
+
+    @discardableResult
     func assign<T>(to variable: inout T) -> Self {
         guard let casted = self as? T else {
             assertionFailure("Can't cast \(Self.self) to \(T.self)")
