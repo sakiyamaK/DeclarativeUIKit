@@ -82,7 +82,7 @@
 `UIEdgeInsets`の`UILayoutPriority`版です
 `UIViewController.decrative`のパラメータで使われます
 
-### init(top: , leading, bottom, trailing) 
+### init(top:, leading, bottom, trailing) 
 
 ```swift
   init(top: UILayoutPriority = .required, leading: UILayoutPriority = .required, bottom: UILayoutPriority = .required, trailing: UILayoutPriority = .required)
@@ -120,3 +120,61 @@
 |  parameter | 型 | description |
 | ---- | ---- | ---- |
 | horizontal | UILayoutPriority | `UIEdgePriorities`のパラメータの`leading`,`trailing`を`horizontal`に設定する |
+
+## UIContentPriorities
+
+`UIView`の`ContentHuggingPriority`と`ContentCompressionResistancePriority`を制御するパラメータです
+`UIView.contentPriorities`のパラメータで使われます
+
+### init(huggingVertical:, huggingHorizontal, compressionResistanceVertical, compressionResistanceHorizontal) 
+
+```swift
+  init(huggingVertical: UILayoutPriority? = nil, huggingHorizontal: UILayoutPriority? = nil, compressionResistanceVertical: UILayoutPriority? = nil, compressionResistanceHorizontal: UILayoutPriority? = nil)
+```
+|  parameter | 型 | description |
+| ---- | ---- | ---- |
+| huggingVertical | UILayoutPriority | `UIView`の`ContentHuggingPriority`の`vertical`を設定する |
+| huggingHorizontal | UILayoutPriority | `UIView`の`ContentHuggingPriority`の`horizontal`を設定する |
+| compressionResistanceVertical | UILayoutPriority | `UIView`の`CompressionResistance`の`vertical`を設定する |
+| compressionResistanceHorizontal | UILayoutPriority | `UIView`の`CompressionResistance`の`horizontal`を設定する |
+
+### init(all:)
+```swift
+  init(all: UILayoutPriority)
+```
+|  parameter | 型 | description |
+| ---- | ---- | ---- |
+| all | UILayoutPriority | `UIContentPriorities`のパラメータの`huggingVertical`,`huggingHorizontal`, `compressionResistanceVertical`, `compressionResistanceHorizontal`を設定する |
+
+### init(hugging:)
+```swift
+  init(hugging: UILayoutPriority)
+```
+|  parameter | 型 | description |
+| ---- | ---- | ---- |
+| hugging | UILayoutPriority | `UIContentPriorities`のパラメータの`huggingVertical`,`huggingHorizontal`を設定する |
+
+### init(compressionResistance:)
+```swift
+  init(compressionResistance: UILayoutPriority)
+```
+|  parameter | 型 | description |
+| ---- | ---- | ---- |
+| compressionResistance | UILayoutPriority | `UIContentPriorities`のパラメータの`compressionResistanceVertical`,`compressionResistanceHorizontal`を設定する |
+
+### init(vertical:)
+```swift
+  init(vertical: UILayoutPriority)
+```
+|  parameter | 型 | description |
+| ---- | ---- | ---- |
+| vertical | UILayoutPriority | `UIContentPriorities`のパラメータの`huggingVertical`,`compressionResistanceVertical`を設定する |
+
+
+### init(horizontal:)
+```swift
+  init(horizontal: UILayoutPriority)
+```
+|  parameter | 型 | description |
+| ---- | ---- | ---- |
+| horizontal | UILayoutPriority | `UIContentPriorities`のパラメータの`huggingHorizontal`,`compressionResistanceHorizontal`を設定する |

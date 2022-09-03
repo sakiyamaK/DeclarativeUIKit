@@ -120,3 +120,61 @@ Used in `UIViewController.directive` parameter.
 |  parameter | 型 | description |
 | ---- | ---- | ---- |
 | horizontal | UILayoutPriority | Set `leading` and `trailing` parameters of `UIEdgePriorities` to `horizontal`. |
+
+## UIContentPriorities
+
+`UIView`の`ContentHuggingPriority`と`ContentCompressionResistancePriority`を制御するパラメータです
+`UIView.contentPriorities`のパラメータで使われます
+
+### init(huggingVertical:, huggingHorizontal, compressionResistanceVertical, compressionResistanceHorizontal) 
+
+```swift
+  init(huggingVertical: UILayoutPriority? = nil, huggingHorizontal: UILayoutPriority? = nil, compressionResistanceVertical: UILayoutPriority? = nil, compressionResistanceHorizontal: UILayoutPriority? = nil)
+```
+|  parameter | 型 | description |
+| ---- | ---- | ---- |
+| huggingVertical | UILayoutPriority | Set `vertical` of `ContentHuggingPriority` in `UIView`. |
+| huggingHorizontal | UILayoutPriority | Set `horizontal` of `ContentHuggingPriority` in `UIView`. |
+| compressionResistanceVertical | UILayoutPriority | Set `vertical` of `CompressionResistance` in `UIView`. |
+| compressionResistanceHorizontal | UILayoutPriority | Set `horizontal` of `CompressionResistance` in `UIView`. |
+
+### init(all:)
+```swift
+  init(all: UILayoutPriority)
+```
+|  parameter | 型 | description |
+| ---- | ---- | ---- |
+| all | UILayoutPriority | Sets the `UIContentPriorities` parameters `huggingVertical`,`huggingHorizontal`, `compressionResistanceVertical`, `compressionResistanceHorizontal` parameters. |
+
+### init(hugging:)
+```swift
+  init(hugging: UILayoutPriority)
+```
+|  parameter | 型 | description |
+| ---- | ---- | ---- |
+| hugging | UILayoutPriority | Sets the `UIContentPriorities` parameters `huggingVertical`,`huggingHorizontal` parameters. |
+
+### init(compressionResistance:)
+```swift
+  init(compressionResistance: UILayoutPriority)
+```
+|  parameter | 型 | description |
+| ---- | ---- | ---- |
+| compressionResistance | UILayoutPriority | Sets the `UIContentPriorities` parameters `compressionResistanceVertical`, `compressionResistanceHorizontal` parameters. |
+
+### init(vertical:)
+```swift
+  init(vertical: UILayoutPriority)
+```
+|  parameter | 型 | description |
+| ---- | ---- | ---- |
+| vertical | UILayoutPriority | Sets the `UIContentPriorities` parameters `huggingVertical`, `compressionResistanceVertical` parameters. |
+
+
+### init(horizontal:)
+```swift
+  init(horizontal: UILayoutPriority)
+```
+|  parameter | 型 | description |
+| ---- | ---- | ---- |
+| horizontal | UILayoutPriority | Sets the `UIContentPriorities` parameters `huggingHorizontal`, `compressionResistanceHorizontal` parameters. |
