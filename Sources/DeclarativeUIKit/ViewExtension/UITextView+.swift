@@ -61,4 +61,22 @@ public extension UITextView {
     func text(_ attrText: NSAttributedString?) -> Self {
         return self.setup(attrText: attrText)
     }
+    
+    @discardableResult
+    func textColor(_ textColor: UIColor) -> Self {
+        self.textColor = textColor
+        return self
+    }
+
+    @discardableResult
+    func font(_ font: UIFont) -> Self {
+        self.font = font
+        return self
+    }
+    
+    @discardableResult
+    func keyboardType(_ keyboardType: UIKeyboardType) -> Self {
+        self.keyboardType = keyboardType
+        return self
+    }
 }
