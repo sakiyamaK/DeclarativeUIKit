@@ -79,4 +79,10 @@ public extension UITextView {
         self.keyboardType = keyboardType
         return self
     }
+    
+    @discardableResult
+    func delegate(_ delegate: UITextViewDelegate?) -> Self {
+        self.delegate = delegate
+        return self
+    }
 }
