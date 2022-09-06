@@ -106,10 +106,10 @@ public extension UITextField {
 
     @discardableResult
     func placeholder(_ placeholder: String?) -> Self {
-        guard let text = text else {
+        guard let placeholder = placeholder else {
             return self.setupPlaceholder(attrText: nil)
         }
-        return self.setupPlaceholder(attrText: NSAttributedString(string: text))
+        return self.setupPlaceholder(attrText: NSAttributedString(string: placeholder))
     }
 
     @discardableResult
