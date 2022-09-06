@@ -85,4 +85,22 @@ public extension UITextView {
         self.delegate = delegate
         return self
     }
+    
+    @discardableResult
+    func textAlignment(_ textAlignment: NSTextAlignment) -> Self {
+        self.textAlignment = textAlignment
+        return self
+    }
+
+    @discardableResult
+    func isEditable(_ isEditable: Bool) -> Self {
+        self.isEditable = isEditable
+        return self
+    }
+
+    @discardableResult
+    func isScrollEnabled(_ isScrollEnabled: Bool) -> Self {
+        self.isScrollEnabled = isScrollEnabled
+        return self
+    }
 }
