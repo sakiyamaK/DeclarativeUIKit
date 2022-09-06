@@ -22,7 +22,12 @@ private extension UITextField {
     }
     
     @discardableResult
-    func setupPlaceholder(attrText: NSAttributedString) -> Self {
+    func setupPlaceholder(attrText: NSAttributedString?) -> Self {
+        guard let attrText = attrText else {
+            self.placeholder = nil
+            self.attributedPlaceholder = nil
+            return self
+        }
         self.attributedPlaceholder = attrText
         return self
     }
@@ -101,7 +106,10 @@ public extension UITextField {
 
     @discardableResult
     func placeholder(_ placeholder: String?) -> Self {
-        return self.setupPlaceholder(attrText: NSAttributedString(string: text))
+        guard let placeholder = placeholder else {
+            return self.setupPlaceholder(attrText: nil)
+        }
+        return self.setupPlaceholder(attrText: NSAttributedString(string: placeholder))
     }
 
     @discardableResult
