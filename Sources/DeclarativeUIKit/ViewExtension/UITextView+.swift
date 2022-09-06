@@ -103,4 +103,10 @@ public extension UITextView {
         self.isScrollEnabled = isScrollEnabled
         return self
     }
+    
+    @discardableResult
+    func isSelectable(_ isSelectable: Bool) -> Self {
+        self.isSelectable = isSelectable
+        return self
+    }
 }
