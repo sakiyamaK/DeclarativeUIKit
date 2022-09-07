@@ -59,6 +59,9 @@ public extension UITextView {
     
     @discardableResult
     func text(_ attrText: NSAttributedString?) -> Self {
+        guard let attrText = attrText else {
+            return self.setup(attrText: nil)
+        }
         return self.setup(attrText: attrText)
     }
     
