@@ -50,6 +50,12 @@ public extension UITextView {
 public extension UITextView {
 
     @discardableResult
+    func delegate(_ delegate: UITextViewDelegate?) -> Self {
+        self.delegate = delegate
+        return self
+    }
+    
+    @discardableResult
     func text(_ text: String?) -> Self {
         guard let text = text else {
             return self.setup(attrText: nil)
@@ -66,35 +72,29 @@ public extension UITextView {
     }
     
     @discardableResult
-    func textColor(_ textColor: UIColor) -> Self {
-        self.textColor = textColor
-        return self
-    }
-
-    @discardableResult
     func font(_ font: UIFont) -> Self {
         self.font = font
         return self
     }
     
     @discardableResult
-    func keyboardType(_ keyboardType: UIKeyboardType) -> Self {
-        self.keyboardType = keyboardType
+    func textColor(_ textColor: UIColor) -> Self {
+        self.textColor = textColor
         return self
     }
-    
-    @discardableResult
-    func delegate(_ delegate: UITextViewDelegate?) -> Self {
-        self.delegate = delegate
-        return self
-    }
-    
+
     @discardableResult
     func textAlignment(_ textAlignment: NSTextAlignment) -> Self {
         self.textAlignment = textAlignment
         return self
     }
 
+    @discardableResult
+    func keyboardType(_ keyboardType: UIKeyboardType) -> Self {
+        self.keyboardType = keyboardType
+        return self
+    }
+    
     @discardableResult
     func isEditable(_ isEditable: Bool) -> Self {
         self.isEditable = isEditable
