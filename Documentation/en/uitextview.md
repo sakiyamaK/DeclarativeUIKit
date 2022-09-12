@@ -69,8 +69,6 @@ You can write default parameters declarative as below.
 
     func isEditable(_ isEditable: Bool) -> Self
 
-    func isScrollEnabled(_ isScrollEnabled: Bool) -> Self
-
     func isSelectable(_ isSelectable: Bool) -> Self
 
 ```
