@@ -1,6 +1,6 @@
 # UIStackView
 
-## initilizer
+## initializer
 
 ### init with layout parameters
 

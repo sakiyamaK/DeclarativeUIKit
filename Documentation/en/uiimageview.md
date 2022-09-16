@@ -1,6 +1,6 @@
 # UIImageView
 
-## initilizer
+## initializer
 
 ### init with image
 

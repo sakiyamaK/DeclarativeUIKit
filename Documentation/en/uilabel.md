@@ -1,6 +1,6 @@
 # UILabel
 
-## initilizer
+## initializer
 
 ### init with parameters
 
@@ -10,7 +10,7 @@
     init(_ text: String?, _ imperative: (Self) -> Void)
 
     init(_ text: NSAttributedString?)
-    
+
     init(_ text: NSAttributedString?, _ imperative: (Self) -> Void)
 ```
 
