@@ -144,3 +144,8 @@
     - [imperative](uibezierpath.md#imperative)
     - [stroke](uibezierpath.md#stroke)
       - [sample](uibezierpath.md#sample)
+
+### [UIPickerView](uipickerview.md#uipickerview)
+- [function](uipickerview.md#function)
+  - [some default parameters](uipickerview.md#some-default-parameters)
+    - [sample](uipickerview.md#sample)
