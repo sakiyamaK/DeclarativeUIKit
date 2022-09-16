@@ -20,8 +20,8 @@ declarativeの各種builderパラメータ内でUIViewを宣言的に記述し�
 
 |  parameter | 型 | description |
 | ---- | ---- | ---- |
-| safeAreas | [UIEdgeBools](parameter.md#uIEdgeBools) | 上下左右のセーフエリア内にレイアウトを配置するか決めるパラメータ、`false`の場合はセーフエリア外までレイアウトを広げる |
-| priorities | [UIEdgePriorities](parameter.md#uIEdgePriorities) | 上下左右の制約の優先度のパラメータ |
+| safeAreas | [UIEdgeBools](parameter.md#uiedgebools) | 上下左右のセーフエリア内にレイアウトを配置するか決めるパラメータ、`false`の場合はセーフエリア外までレイアウトを広げる |
+| priorities | [UIEdgePriorities](parameter.md#uiedgepriorities) | 上下左右の制約の優先度のパラメータ |
 | outsideSafeAreaTopBuilder | () -> UIView? | セーフエリアのTopの外側に対するレイアウト |
 | outsideSafeAreaLeadingBuilder | () -> UIView? | セーフエリアのLeadingの外側に対するレイアウト |
 | outsideSafeAreaBottomBuilder | () -> UIView? | セーフエリアのBottomの外側に対するレイアウト |
