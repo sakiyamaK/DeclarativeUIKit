@@ -1,6 +1,6 @@
 # UILabel
 
-## initilizer
+## initializer
 
 ### init with parameters
 

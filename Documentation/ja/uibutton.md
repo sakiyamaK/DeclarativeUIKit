@@ -1,6 +1,6 @@
 # UIButton
 
-## initilizer
+## initializer
 
 ### init with title
 
