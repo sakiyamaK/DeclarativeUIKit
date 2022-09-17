@@ -96,6 +96,14 @@
   - [some default parameters](uitextfield.md#some-default-parameters)
     - [sample](uitextfield.md#sample-1)
 
+### [UITextView](uitextview.md#uitextview)
+- [initializer](uitextview.md#initializer)ß
+  - [init with parameters](uitextview.md#init-with-parameters)
+    - [sample](uitextview.md#sample)
+- [function](uitextview.md#function)
+  - [some default parameters](uitextview.md#some-default-parameters)
+    - [sample](uitextview.md#sample-1)
+
 ### [UIButton](uibutton.md#uibutton)
 - [initilizer](uibutton.md#initilizer)
   - [init with title](uibutton.md#init-with-title)
