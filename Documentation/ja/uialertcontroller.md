@@ -1,6 +1,6 @@
 # UIAlertController
 
-## initilizer
+## initializer
 
 ### init with preferredStyle
 

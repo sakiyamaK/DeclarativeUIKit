@@ -1,6 +1,6 @@
 # UITextField
 
-## initilizer
+## initializer
 
 ### init with parameters
 

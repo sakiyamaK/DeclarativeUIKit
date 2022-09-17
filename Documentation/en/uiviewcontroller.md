@@ -20,8 +20,8 @@ Declaratively describe the UIView within the various builder parameters of the d
 
 |  parameter | 型 | description |
 | ---- | ---- | ---- |
-| safeAreas | [UIEdgeBools](parameter.md#uIEdgeBools) | Parameter that determines whether the layout is placed within the top, bottom, left, and right safe areas; if `false`, the layout is extended outside the safe areas |
-| priorities | [UIEdgePriorities](parameter.md#uIEdgePriorities) | Parameter for priority of up/down and left/right constraints |
+| safeAreas | [UIEdgeBools](parameter.md#uiedgebools) | Parameter that determines whether the layout is placed within the top, bottom, left, and right safe areas; if `false`, the layout is extended outside the safe areas |
+| priorities | [UIEdgePriorities](parameter.md#uiedgepriorities) | Parameter for priority of up/down and left/right constraints |
 | outsideSafeAreaTopBuilder | () -> UIView? | Layout for outside of Safe Area Top |
 | outsideSafeAreaLeadingBuilder | () -> UIView? | Layout for outside of Safe Area Leading |
 | outsideSafeAreaBottomBuilder | () -> UIView? | Layout for outside of Safe Area Bottom |

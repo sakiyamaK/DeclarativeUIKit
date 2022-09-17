@@ -1,10 +1,10 @@
 # UICollectionView
 
-## initilizer
+## initializer
 
 ### init with layout builder
 
-#### 
+####
 ```swift
     init(_ collectionViewLayoutBuilder: () -> UICollectionViewLayout)
 ```
@@ -30,9 +30,9 @@ The following standard parameters can be written declaratively.
     func dragDelegate(_ delegate: NSObject & UICollectionViewDragDelegate) -> Self
 
     func dropDelegate(_ delegate: NSObject & UICollectionViewDropDelegate) -> Self
-    
+
     func registerCellClass(_ cellClass: AnyClass?, forCellWithReuseIdentifier identifier: String) -> Self
-    
+
     func registerViewClass(_ viewClass: AnyClass?, forSupplementaryViewOfKind elementKind: String, withReuseIdentifier identifier: String) -> Self
 ```
 

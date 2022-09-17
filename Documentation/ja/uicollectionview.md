@@ -1,6 +1,6 @@
 # UICollectionView
 
-## initilizer
+## initializer
 
 ### init with layout builder
 

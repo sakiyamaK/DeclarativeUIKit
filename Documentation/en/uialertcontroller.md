@@ -1,10 +1,10 @@
 # UIAlertController
 
-## initilizer
+## initializer
 
 ### init with preferredStyle
 
-#### 
+####
 ```swift
     init(title: String?, message: String?, preferredStyle: Style, _ builder: (() -> [UIAlertAction?])
 ```
@@ -19,9 +19,9 @@ The following standard parameters can be written declaratively.
     func title(_ title: String?, for: UIControl.State) -> Self
 
     func titleColor(_ color: UIColor?, for: UIControl.State)
-    
+
     func font(_ font: UIFont?) -> Self
-    
+
     func image(_ image: UIImage?, for: UIControl.State) -> Self
 ```
 
