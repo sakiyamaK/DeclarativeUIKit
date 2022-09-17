@@ -1,6 +1,6 @@
 # UIView
 
-## initilizer
+## initializer
 
 ### init with tag
 

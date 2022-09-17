@@ -1,6 +1,6 @@
 # UIGestureRecognizer
 
-## initilizer
+## initializer
 
 ### init with target action
 

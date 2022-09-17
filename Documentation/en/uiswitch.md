@@ -1,6 +1,6 @@
 # UISwitch
 
-## initilizer
+## initializer
 
 ```swift
 init(_ frame: CGRect = .zero, _ imperative: (Self) -> Void)

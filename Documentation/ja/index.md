@@ -15,7 +15,7 @@
   - [sample](uialertcontroller.md#sample)
 
 ### [UIView](uiview.md#uiview)
-- [initilizer](uiview.md#initilizer)
+- [initializer](uiview.md#initializer)
   - [init with tag](uiview.md#init-with-tag)
   - [init with assign](uiview.md#init-with-assign)
     - [sample](uiview.md#sample)
@@ -52,7 +52,7 @@
     - [sample](uiview.md#sample-14)
 
 ### [UIScrollView](uiscrollview.md#uiscrollview)
-- [initilizer](uiscrollview.md#initilizer)
+- [initializer](uiscrollview.md#initializer)
   - [init with layout parameters](uiscrollview.md#init-with-layout-parameters)
     - [sample](uiscrollview.md#sample)
   - [init with vertical parameters](uiscrollview.md#init-with-vertical-parameters)
@@ -67,7 +67,7 @@
     - [sample](uiscrollview.md#sample-4)
 
 ### [UIStackView](uistackview.md#uistackview)
-- [initilizer](uistackview.md#initilizer)
+- [initializer](uistackview.md#initializer)
   - [init with layout parameters](uistackview.md#init-with-layout-parameters)
     - [sample](uistackview.md#sample)
   - [init with vertical parameters](uistackview.md#init-with-vertical-parameters)
@@ -81,7 +81,7 @@
     - [sample](uistackview.md#sample-4)
 
 ### [UILabel](uilabel.md#uilabel)
-- [initilizer](uilabel.md#initilizer)
+- [initializer](uilabel.md#initializer)
   - [init with parameters](uilabel.md#init-with-parameters)
     - [sample](uilabel.md#sample)
 - [function](uilabel.md#function)
@@ -89,7 +89,7 @@
     - [sample](uilabel.md#sample-1)
 
 ### [UITextField](uitextfield.md#uitextfield)
-- [initilizer](uitextfield.md#initilizer)
+- [initializer](uitextfield.md#initializer)
   - [init with parameters](uitextfield.md#init-with-parameters)
     - [sample](uitextfield.md#sample)
 - [function](uitextfield.md#function)
@@ -105,7 +105,7 @@
     - [sample](uitextview.md#sample-1)
 
 ### [UIButton](uibutton.md#uibutton)
-- [initilizer](uibutton.md#initilizer)
+- [initializer](uibutton.md#initializer)
   - [init with title](uibutton.md#init-with-title)
   - [init with image](uibutton.md#init-with-image)
   - [sample](uibutton.md#sample)
@@ -114,7 +114,7 @@
     - [sample](uibutton.md#sample-1)
 
 ### [UIImageView](uiimageview.md#uiimageview)
-- [initilizer](uiimageview.md#initilizer)
+- [initializer](uiimageview.md#initializer)
   - [init with image](uiimageview.md#init-with-image)
   - [sample](uiimageview.md#sample)
 - [function](uiimageview.md#function)
@@ -127,12 +127,12 @@
     - [sample](uicontrol.md#sample)
 
 ### [UIGestureRecognizer](uigesturerecognizer.md#uigesturerecognizer)
-- [initilizer](uigesturerecognizer.md#initilizer)
+- [initializer](uigesturerecognizer.md#initializer)
   - [init with target action](uigesturerecognizer.md#init-with-target-action)
     - [sample](uigesturerecognizer.md#sample)
 
 ### [UISwitch](uiswitch.md#uiswitch)
-- [initilizer](uiswitch.md#initilizer)
+- [initializer](uiswitch.md#initializer)
 - [function](uiswitch.md#function)
   - [some default parameters](uiswitch.md#some-default-parameters)
     - [sample](uiswitch.md#sample-1)
@@ -142,7 +142,7 @@
     - [sample](uitableview.md#sample)
 
 ### [UICollectionView](uicollectionview.md#uicollectionview)
-- [initilizer](uicollectionview.md#initilizer)
+- [initializer](uicollectionview.md#initializer)
   - [init with layout builder](uicollectionview.md#init-with-layout-builder)
   - [some default parameters](uicollectionview.md#some-default-parameters)
     - [sample](uicollectionview.md#sample)
