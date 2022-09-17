@@ -74,7 +74,7 @@ func declarative(priorities: UIEdgePriorities, _ builder: () -> UIView)
 
 |  parameter | 型 | description |
 | ---- | ---- | ---- |
-| priorities | [UIEdgePriorities](parameter.md#uIEdgePriorities) | builderパラメータで生成されたViewの上下左右の制約の優先度、デフォルトは全て`required` |
+| priorities | [UIEdgePriorities](parameter.md#uiedgepriorities) | builderパラメータで生成されたViewの上下左右の制約の優先度、デフォルトは全て`required` |
 | builder | () -> UIView | UIViewのレイアウトを宣言的に記述する |
 
 #### sample
