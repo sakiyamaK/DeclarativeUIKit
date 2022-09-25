@@ -44,7 +44,7 @@ dependencies: [
 ]
 ```
 
-To install IQKeyboardManager package via Xcode
+To install DeclarativeUIKit package via Xcode
 
 Go to File -> Swift Packages -> Add Package Dependency...
 Then search for https://github.com/sakiyamaK/DeclarativeUIKit
@@ -52,7 +52,7 @@ And choose the version you want
 
 ### CocoaPods
 
-[CocoaPods](https://cocoapods.org) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate Alamofire into your Xcode project using CocoaPods, specify it in your `Podfile`:
+[CocoaPods](https://cocoapods.org) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate DeclarativeUIKit into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ```ruby
 pod 'DeclarativeUIKit'
