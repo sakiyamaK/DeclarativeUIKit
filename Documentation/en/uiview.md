@@ -406,14 +406,16 @@ This is accomplished by creating another View behind its own View in the z-direc
 Therefore, any methods declared after this method will be set to the view behind it.
 
 ```swift
-func padding(value: CGFloat) -> UIView
+func padding(value: CGFloat, touchTransparency: Bool, priorities: UIEdgePriorities) -> UIView
 
-func padding(insets: UIEdgeInsets) -> UIView
+func padding(insets: UIEdgeInsets, touchTransparency: Bool, priorities: UIEdgePriorities) -> UIView
 ```
 
 |  parameter | 型 | description |
 | ---- | ---- | ---- |
 | value | CGFloat | Margins to be attached to the four corners |
+| touchTransparency | Bool |  Whether to make the spread margin touch transparent, defaults to `true |
+| priorities | UIEdgePriorities | Priority of margins and own four corner constraints, defaults to all `required`. |
 
 |  parameter | 型 | description |
 | ---- | ---- | ---- |
