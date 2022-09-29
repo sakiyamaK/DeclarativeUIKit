@@ -254,24 +254,29 @@ public extension UIView {
     }
 
     @discardableResult
-    func padding(insets: UIEdgeInsets, priorities: UIEdgePriorities = .init(all: .required)) -> UIView {
-        HelperTouchTransparencyView().zStack(margin: insets, priorities: priorities) { self }
+    func padding(insets: UIEdgeInsets, touchTransparency: Bool = true, priorities: UIEdgePriorities = .init(all: .required)) -> UIView {
+        if touchTransparency {
+            return HelperTouchTransparencyView().zStack(margin: insets, priorities: priorities) { self }
+        } else {
+            return UIView().zStack(margin: insets, priorities: priorities) { self }
+        }
     }
     
     @discardableResult
-    func padding(_ value: CGFloat = 8.0, priorities: UIEdgePriorities = .init(all: .required)) -> UIView {
-        self.padding(insets: .init(all: value), priorities: priorities)
+    func padding(_ value: CGFloat = 8.0, touchTransparency: Bool = true, priorities: UIEdgePriorities = .init(all: .required)) -> UIView {
+        self.padding(insets: .init(all: value), touchTransparency: touchTransparency, priorities: priorities)
     }
     
     @discardableResult
-    func offset(x: CGFloat = 0, y: CGFloat = 0, priorities: UIEdgePriorities = .init(all: .required)) -> UIView {
-        self.offset(.init(x: x, y: y), priorities: priorities)
+    func offset(x: CGFloat = 0, y: CGFloat = 0, touchTransparency: Bool = true, priorities: UIEdgePriorities = .init(all: .required)) -> UIView {
+        self.offset(.init(x: x, y: y), touchTransparency: touchTransparency, priorities: priorities)
     }
 
     @discardableResult
-    func offset(_ offset: CGPoint, priorities: UIEdgePriorities = .init(all: .required)) -> UIView {
+    func offset(_ offset: CGPoint, touchTransparency: Bool = true, priorities: UIEdgePriorities = .init(all: .required)) -> UIView {
         self.padding(
             insets: .init(top: offset.y, left: offset.x, bottom: -offset.y, right: -offset.x),
+            touchTransparency: touchTransparency,
             priorities: priorities
         )
     }
