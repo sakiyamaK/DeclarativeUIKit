@@ -422,14 +422,16 @@ self.declarative {
 そのため、このメソッド以降に宣言したメソッドは後ろのViewに設定されます
 
 ```swift
-func padding(value: CGFloat) -> UIView
+func padding(value: CGFloat, touchTransparency: Bool, priorities: UIEdgePriorities) -> UIView
 
-func padding(insets: UIEdgeInsets) -> UIView
+func padding(insets: UIEdgeInsets, touchTransparency: Bool, priorities: UIEdgePriorities) -> UIView
 ```
 
 |  parameter | 型 | description |
 | ---- | ---- | ---- |
 | value | CGFloat | 四隅に付ける余白 |
+| touchTransparency | Bool | 広げた余白のタッチを透過させるかどうか、デフォルトは`true` |
+| priorities | UIEdgePriorities | 余白と自身の四隅の制約の優先度、デフォルトは全て`required` |
 
 |  parameter | 型 | description |
 | ---- | ---- | ---- |
