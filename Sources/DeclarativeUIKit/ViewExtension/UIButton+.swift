@@ -78,6 +78,20 @@ public extension UIButton {
     }
 }
 
+//MARK: - available iOS 14.0
+@available(iOS 14.0, *)
+public extension UIButton {
+    func menu(_ menu: UIMenu) -> Self {
+        self.menu = menu
+        return self
+    }
+    
+    func showsMenuAsPrimaryAction(_ showsMenuAsPrimaryAction: Bool) -> Self {
+        self.showsMenuAsPrimaryAction = showsMenuAsPrimaryAction
+        return self
+    }
+}
+
 //MARK: - Declarative method
 @available(iOS, deprecated: 15.0, message: "This property is ignored when using UIButtonConfiguration")
 public extension UIButton {
