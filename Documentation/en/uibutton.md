@@ -62,6 +62,12 @@ func contentEdgeInset(_ contentEdgeInsets: UIEdgeInsets) -> Self
 func titleEdgeInsets(_ titleEdgeInsets: UIEdgeInsets) -> Self
 
 func imageEdgeInsets(_ imageEdgeInsets: UIEdgeInsets) -> Self
+
+@available(iOS 14.0, *)
+func menu(_ menu: UIMenu) -> Self
+
+@available(iOS 14.0, *)
+func showsMenuAsPrimaryAction(_ showsMenuAsPrimaryAction: Bool) -> Self
 ```
 
 #### sample

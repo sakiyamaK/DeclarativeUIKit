@@ -1,7 +1,7 @@
 ## Documentation
 
-- Reference Version: **1.2.0**
-- Last Update: **2022/09/17**
+- Reference Version: **1.3.0**
+- Last Update: **2022/10/09**
 
 ### Table Of Contents
 
@@ -157,3 +157,7 @@
 - [function](uipickerview.md#function)
   - [some default parameters](uipickerview.md#some-default-parameters)
     - [sample](uipickerview.md#sample)
+
+### [UIMenu](uimenu.md#uimenu)
+- [initializer](uimenu.md#initializer)
+  - [sample](uimenu.md#sample)
