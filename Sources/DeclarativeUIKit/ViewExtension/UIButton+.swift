@@ -2,33 +2,35 @@ import UIKit.UIButton
 
 //MARK: -
 public extension UIButton {
-    convenience init(_ title: String?) {
+
+    convenience init(_ title: String?, for: UIControl.State = .normal) {
         self.init(frame: .zero)
-        self.setTitle(title, for: .normal)
+        self.title(title, for: `for`)
+    }
+    
+    convenience init(_ title: NSAttributedString?, for: UIControl.State = .normal) {
+        self.init(frame: .zero)
+        self.title(title, for: `for`)
     }
 
-    convenience init(_ title: String?, for: UIControl.State) {
-        self.init(frame: .zero)
-        self.setTitle(title, for: `for`)
-    }
-
-    convenience init(for: UIControl.State, _ titleBuilder: () -> String?) {
+    convenience init(for: UIControl.State = .normal, _ titleBuilder: () -> String?) {
         self.init(frame: .zero)
         let title = titleBuilder()
-        self.setTitle(title, for: `for`)
+        self.title(title, for: `for`)
     }
 
-    convenience init(_ image: UIImage?) {
+    convenience init(for: UIControl.State = .normal, _ titleBuilder: () -> NSAttributedString?) {
         self.init(frame: .zero)
-        self.setImage(image, for: .normal)
+        let title = titleBuilder()
+        self.title(title, for: `for`)
     }
 
-    convenience init(_ image: UIImage?, for: UIControl.State) {
+    convenience init(_ image: UIImage?, for: UIControl.State = .normal) {
         self.init(frame: .zero)
         self.setImage(image, for: `for`)
     }
 
-    convenience init(for: UIControl.State, _ imageBuilder: () -> UIImage?) {
+    convenience init(for: UIControl.State = .normal, _ imageBuilder: () -> UIImage?) {
         self.init(frame: .zero)
         let image = imageBuilder()
         self.setImage(image, for: `for`)
@@ -46,6 +48,17 @@ public extension UIButton {
     @discardableResult
     func title(_ title: String?, for: UIControl.State) -> Self {
         self.setTitle(title, for: `for`)
+        return self
+    }
+    
+    @discardableResult
+    func title(_ title: NSAttributedString?) -> Self {
+        self.title(title, for: .normal)
+    }
+
+    @discardableResult
+    func title(_ title: NSAttributedString?, for: UIControl.State) -> Self {
+        self.setAttributedTitle(title, for: `for`)
         return self
     }
 
