@@ -47,6 +47,7 @@ static func vertical(margin: UIEdgeInsets, _ builder: () -> UIView) -> UIScrollV
 |  parameter | 型 | description |
 | ---- | ---- | ---- |
 | margin | UIEdgeInset | `builder`で生成されるViewを配置する際のマージン、デフォルトは`zero` |
+| isTouchTransparency | Bool | 自身のタッチのみ透過させるか設定する、デフォルトは`false` |
 | builder | () -> UIView | スクロールさせるview |
 
 #### sample
@@ -72,6 +73,7 @@ static func horizontal(margin: UIEdgeInsets, _ builder: () -> UIView) -> UIScrol
 |  parameter | 型 | description |
 | ---- | ---- | ---- |
 | margin | UIEdgeInset | `builder`で生成されるViewを配置する際のマージン、デフォルトは`zero` |
+| isTouchTransparency | Bool | 自身のタッチのみ透過させるか設定する、デフォルトは`false` |
 | builder | () -> UIView | スクロールさせるview |
 
 #### sample
@@ -95,9 +97,55 @@ self.declarative {
 ```swift
 func isScrollEnabled(_ isScrollEnabled: Bool) -> Self
 
+func contentOffset(_ contentOffset: CGPoint) -> Self
+
+func contentSize(_ contentSize: CGSize) -> Self
+
+func contentInset(_ contentInset: UIEdgeInsets) -> Self
+
+func contentInsetAdjustmentBehavior(_ contentInsetAdjustmentBehavior: ContentInsetAdjustmentBehavior) -> Self
+
+func automaticallyAdjustsScrollIndicatorInsets(_ automaticallyAdjustsScrollIndicatorInsets: Bool) -> Self
+
+func delegate(_ delegate: UIScrollViewDelegate?) -> Self
+
+func isDirectionalLockEnabled(_ isDirectionalLockEnabled: Bool) -> Self
+
+func bounces(_ bounces: Bool) -> Self
+
+func alwaysBounceVertical(_ alwaysBounceVertical: Bool) -> Self
+
+func alwaysBounceHorizontal(_ alwaysBounceHorizontal: Bool) -> Self
+
+func isPagingEnabled(_ isPagingEnabled: Bool) -> Self
+
+func indicatorStyle(_ indicatorStyle: UIScrollView.IndicatorStyle) -> Self
+
 func showsVerticalScrollIndicator(_ showsVerticalScrollIndicator: Bool) -> Self
 
 func showsHorizontalScrollIndicator(_ showsHorizontalScrollIndicator: Bool) -> Self
+
+func scrollIndicatorInsets(_ scrollIndicatorInsets: UIEdgeInsets) -> Self
+
+func decelerationRate(_ decelerationRate: UIScrollView.DecelerationRate) -> Self
+
+func indexDisplayMode(_ indexDisplayMode: UIScrollView.IndexDisplayMode) -> Self
+
+func delaysContentTouches(_ delaysContentTouches: Bool) -> Self
+
+func canCancelContentTouches(_ canCancelContentTouches: Bool) -> Self
+
+func minimumZoomScale(_ minimumZoomScale: CGFloat) -> Self
+
+func maximumZoomScale(_ maximumZoomScale: CGFloat) -> Self
+
+func zoomScale(_ zoomScale: CGFloat) -> Self
+
+func bouncesZoom(_ bouncesZoom: Bool) -> Self
+
+func scrollsToTop(_ scrollsToTop: Bool) -> Self
+
+func keyboardDismissMode(_ keyboardDismissMode: UIScrollView.KeyboardDismissMode) -> Self
 ```
 
 #### sample

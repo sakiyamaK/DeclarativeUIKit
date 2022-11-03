@@ -33,23 +33,32 @@ public extension UIScrollView {
     
     static func vertical(
         margin: UIEdgeInsets = .zero,
+        isTouchTransparency: Bool = false,
         _ builder: () -> UIView
     ) -> UIScrollView {
-        UIScrollView(axis: .vertical, margin: margin, builder)
+        if isTouchTransparency {
+            return HelperTouchTransparencyScrollView(axis: .vertical, margin: margin, builder)
+        }
+        return UIScrollView(axis: .vertical, margin: margin, builder)
+
     }
     
     static func horizontal(
         margin: UIEdgeInsets = .zero,
+        isTouchTransparency: Bool = false,
         _ builder: () -> UIView
     ) -> UIScrollView {
-        UIScrollView(axis: .horizontal, margin: margin, builder)
+        if isTouchTransparency {
+            return HelperTouchTransparencyScrollView(axis: .horizontal, margin: margin, builder)
+        }
+        return UIScrollView(axis: .horizontal, margin: margin, builder)
     }
 }
 
 //MARK: - with superview
 public extension UIScrollView {
     
-    convenience init(axis: NSLayoutConstraint.Axis = .vertical, margin: UIEdgeInsets = .zero, _ builder: (UIView) -> UIView) {
+    convenience init(axis: NSLayoutConstraint.Axis = .vertical, margin: UIEdgeInsets = .zero, isTouchTransparency: Bool = false, _ builder: (UIView) -> UIView) {
         self.init(frame: .zero)        
         let view = builder(self)
         self.constraint(axis: axis, margin: margin, view: view)
@@ -57,16 +66,24 @@ public extension UIScrollView {
 
     static func vertical(
         margin: UIEdgeInsets = .zero,
+        isTouchTransparency: Bool = false,
         _ builder: (UIView) -> UIView
     ) -> UIScrollView {
-        UIScrollView(axis: .vertical, margin: margin, builder)
+        if isTouchTransparency {
+            return HelperTouchTransparencyScrollView(axis: .vertical, margin: margin, builder)
+        }
+        return UIScrollView(axis: .vertical, margin: margin, builder)
     }
     
     static func horizontal(
         margin: UIEdgeInsets = .zero,
+        isTouchTransparency: Bool = false,
         _ builder: (UIView) -> UIView
     ) -> UIScrollView {
-        UIScrollView(axis: .horizontal, margin: margin, builder)
+        if isTouchTransparency {
+            return HelperTouchTransparencyScrollView(axis: .horizontal, margin: margin, builder)
+        }
+        return UIScrollView(axis: .horizontal, margin: margin, builder)
     }
 }
 
