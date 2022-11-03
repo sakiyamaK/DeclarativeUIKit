@@ -1,7 +1,7 @@
 ## Documentation
 
-- Reference Version: **1.3.0**
-- Last Update: **2022/10/09**
+- Reference Version: **1.4.0**
+- Last Update: **2022/11/03**
 
 ### Table Of Contents
 

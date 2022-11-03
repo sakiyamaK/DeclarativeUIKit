@@ -574,32 +574,32 @@ self.declarative {
 `height`,`size`も同様です  
 
 ```swift
-func width(_ width: CGFloat) -> Self
+func width(_ width: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) -> Self
 
-func minWidth(_ width: CGFloat) -> Self
+func minWidth(_ width: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) -> Self
 
-func maxWidth(_ width: CGFloat) -> Self
+func maxWidth(_ width: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) -> Self
 
-func height(_ height: CGFloat) -> Self
+func height(_ height: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) -> Self
 
-func minHeight(_ height: CGFloat) -> Self
+func minHeight(_ height: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) -> Self
 
-func maxHeight(_ height: CGFloat) -> Self
+func maxHeight(_ height: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) -> Self
 
-func size(width: CGFloat, height: CGFloat) -> Self
+func size(width: CGFloat, height: CGFloat, widthPriority: UILayoutPriority = .required, heightPriority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint, NSLayoutConstraint) -> Void)? = nil) -> Self
 
-func minSize(width: CGFloat, height: CGFloat) -> Self
+func minSize(width: CGFloat, height: CGFloat, widthPriority: UILayoutPriority = .required, heightPriority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint, NSLayoutConstraint) -> Void)? = nil) -> Self
 
-func maxSize(width: CGFloat, height: CGFloat) -> Self
+func maxSize(width: CGFloat, height: CGFloat, widthPriority: UILayoutPriority = .required, heightPriority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint, NSLayoutConstraint) -> Void)? = nil) -> Self
 ```
 
 ふたつのViewを関連させた制約です  
 `constraint`は`+-*/`をサポートしています
 
 ```swift
-func widthEqual(to superview: UIView, constraint: NSLayoutDimension) -> Self
+func widthEqual(to superview: UIView, constraint: NSLayoutDimension, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) -> Self
 
-func heightEqual(to superview: UIView, constraint: NSLayoutDimension) -> Self
+func heightEqual(to superview: UIView, constraint: NSLayoutDimension, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) -> Self
 ```
 
 ### sample
@@ -608,14 +608,19 @@ func heightEqual(to superview: UIView, constraint: NSLayoutDimension) -> Self
 self.declarative {
     UIView()
         .width(100)
-        .minWidth(100)
-        .maxWidth(100)
+        .minWidth(100, priority: .defaultHight)
+        .maxWidth(100) { constraint in 
+          constraint.priority = .defaultLow
+        }
         .height(100)
         .minHeight(100)
         .maxHeight(100)
         .size(width: 100, height: 100)
-        .minSize(width: 100, height: 100)
-        .maxSize(width: 100, height: 100)
+        .minSize(width: 100, height: 100, widthPriority: .required, heightPriority: .defaultHight)
+        .maxSize(width: 100, height: 100) { (widthLayoutConstraint, heightLayoutConstraint) in 
+          widthLayoutConstraint.isActive = false
+          heightLayoutConstraint.priority = .required
+        }
 }
 ```
 
@@ -626,7 +631,9 @@ self.declarative {
     //レイアウトが構築される前なのでsuperview.frame.widthは0となるためwidthEqualを利用する
     UIView.spacer().backgroundColor(.red)
           .widthEqual(to: superview, constraint: superview.widthAnchor / 2 + 30)
-          .heightEqual(to: superview, constraint: superview.heightAnchor / 2 - 50)
+          .heightEqual(to: superview, constraint: superview.heightAnchor / 2 - 50, priority: .defaultHight) { constraint in 
+            constraint.isActive = false
+          }
 
     UIView.spacer()
   }

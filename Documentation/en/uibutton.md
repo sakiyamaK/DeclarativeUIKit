@@ -11,7 +11,7 @@ init(_ image: UIImage?, for: UIControl.State)
 
 |  parameter | 型 | description |
 | ---- | ---- | ---- |
-| title | String | Value of `title` parameter of `UIButton`. |
+| title | String or NSAttributedString | Value of `title` parameter of `UIButton`. |
 | for | UIControl.State | Value of `State` parameter of `UIButton`, default `normal`. |
 
 ### init with image
@@ -50,6 +50,8 @@ All `for` parameters are `normal` by default.
 
 ```swift
 func title(_ title: String?, for: UIControl.State) -> Self
+
+func title(_ title: NSAttributedString?, for: UIControl.State) -> Self
 
 func titleColor(_ color: UIColor?, for: UIControl.State)
 
