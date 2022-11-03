@@ -2,7 +2,7 @@ import UIKit.UIView
 
 //MARK: - instance
 public extension UIView {
-
+    
     convenience init(tag: Int = 0) {
         self.init()
         self.tag = tag
@@ -34,7 +34,7 @@ public extension UIView {
 
 //MARK: - Declarative method
 public extension UIView {
-
+    
     func declarative(priorities: UIEdgePriorities, reset: Bool, _ builder: () -> UIView) {
         let view = builder()
         if reset {
@@ -42,7 +42,7 @@ public extension UIView {
         }
         self.edgesConstraints(view, safeAreas: .init(all: false), priorities: priorities)
     }
-
+    
     func declarative(reset: Bool, _ builder: () -> UIView) {
         declarative(priorities: .init(), reset: reset, builder)
     }
@@ -54,7 +54,7 @@ public extension UIView {
     func declarative(_ builder: () -> UIView) {
         self.declarative(priorities: .init(), reset: true, builder)
     }
-
+    
     @discardableResult
     func imperative(_ imperative: ((Self) -> Void)) -> Self {
         imperative(self)
@@ -108,7 +108,7 @@ public extension UIView {
             $0.clipsToBounds = clipsToBounds
         }
     }
-
+    
     @discardableResult
     func contentMode(_ contentMode: ContentMode) -> Self {
         imperative {
@@ -158,30 +158,30 @@ public extension UIView {
             $0.addGestureRecognizer(gestureRecognizer)
         }
     }
-
+    
     @discardableResult
     func addGestureRecognizer(_ gestureBuilder: () -> UIGestureRecognizer) -> Self {
         imperative {
             $0.addGestureRecognizer(gestureBuilder())
         }
     }
-
+    
     @discardableResult
     func addSubview(margin: UIEdgeInsets = .zero, priorities: UIEdgePriorities = .init(all: .required),
-    @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> Self {
+                    @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> Self {
         self.zStack(margin: margin, priorities: priorities, builder)
     }
     
     @discardableResult
     func zStack(margin: UIEdgeInsets = .zero, priorities: UIEdgePriorities = .init(all: .required),
-    @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> Self {
+                @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> Self {
         imperative { superView in
             builder().compactMap({$0}).forEach { (view) in
                 self.edgesConstraints(view, margin: margin, safeAreas: .init(all: false), priorities: priorities)
             }
         }
     }
-        
+    
     @discardableResult
     func contentHuggingPriority(_ priority: UILayoutPriority, for axis: NSLayoutConstraint.Axis) -> Self {
         imperative {
@@ -195,7 +195,7 @@ public extension UIView {
             $0.setContentCompressionResistancePriority(priority, for: axis)
         }
     }
-
+    
     @discardableResult
     func contentPriorities(_ priorities: UIContentPriorities) -> Self {
         imperative {
@@ -213,18 +213,18 @@ public extension UIView {
             }
         }
     }
-
+    
     @discardableResult
     func assign<T>(to variable: inout T) -> Self {
         guard let casted = self as? T else {
             assertionFailure("Can't cast \(Self.self) to \(T.self)")
             return self
         }
-
+        
         variable = casted
         return self
     }
-
+    
     @discardableResult
     func touches(
         beganHandler: ((Set<UITouch>, UIEvent?) -> Void)? = nil,
@@ -252,7 +252,7 @@ public extension UIView {
     static func imperative(_ imperative: ((Self) -> Void)) -> Self {
         Self().imperative(imperative)
     }
-
+    
     @discardableResult
     func padding(insets: UIEdgeInsets, touchTransparency: Bool = true, priorities: UIEdgePriorities = .init(all: .required)) -> UIView {
         if touchTransparency {
@@ -271,7 +271,7 @@ public extension UIView {
     func offset(x: CGFloat = 0, y: CGFloat = 0, touchTransparency: Bool = true, priorities: UIEdgePriorities = .init(all: .required)) -> UIView {
         self.offset(.init(x: x, y: y), touchTransparency: touchTransparency, priorities: priorities)
     }
-
+    
     @discardableResult
     func offset(_ offset: CGPoint, touchTransparency: Bool = true, priorities: UIEdgePriorities = .init(all: .required)) -> UIView {
         self.padding(
@@ -295,14 +295,14 @@ public extension UIView {
         }
         .alignment(.center)
     }
-
+    
     @discardableResult
     func centerX() -> UIView {
         HelperTouchTransparencyStackView(axis: .vertical) {
             self
         }.alignment(.center)
     }
-
+    
     @discardableResult
     func centerY() -> UIView {
         HelperTouchTransparencyStackView(axis: .horizontal) {
@@ -317,7 +317,7 @@ public extension UIView {
             UIView.spacer()
         }
     }
-
+    
     @discardableResult
     func bottom() -> UIView {
         HelperTouchTransparencyStackView(axis: .vertical) {
@@ -325,7 +325,7 @@ public extension UIView {
             self
         }
     }
-
+    
     @discardableResult
     func left() -> UIView {
         HelperTouchTransparencyStackView(axis: .horizontal) {
@@ -333,7 +333,7 @@ public extension UIView {
             UIView.spacer()
         }
     }
-
+    
     @discardableResult
     func right() -> UIView {
         HelperTouchTransparencyStackView(axis: .horizontal) {
@@ -346,106 +346,129 @@ public extension UIView {
 //MARK: - Declarative constraint method
 public extension UIView {
     @discardableResult
-    func width(_ width: CGFloat) -> Self {
-        imperative {
-            $0.widthConstraint = width
-        }
+    func width(_ width: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
+        self.widthConstraint(width, imperative: imperative)
+        return self
     }
     
     @discardableResult
-    func minWidth(_ width: CGFloat) -> Self {
-        imperative {
-            $0.minWidthConstraint = width
-        }
-    }
-
-    @discardableResult
-    func maxWidth(_ width: CGFloat) -> Self {
-        imperative {
-            $0.maxWidthConstraint = width
-        }
-    }
-
-    @discardableResult
-    func height(_ height: CGFloat) -> Self {
-        imperative {
-            $0.heightConstraint = height
-        }
+    func minWidth(_ width: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
+        self.minWidthConstraint(width, imperative: imperative)
+        return self
     }
     
     @discardableResult
-    func minHeight(_ height: CGFloat) -> Self {
-        imperative {
-            $0.minHeightConstraint = height
-        }
-    }
-
-    @discardableResult
-    func maxHeight(_ height: CGFloat) -> Self {
-        imperative {
-            $0.maxHeightConstraint = height
-        }
-    }
-
-    @discardableResult
-    func size(width: CGFloat, height: CGFloat) -> Self {
-        imperative {
-            $0.widthConstraint = width
-            $0.heightConstraint = height
-        }
+    func maxWidth(_ width: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
+        self.maxWidthConstraint(width, imperative: imperative)
+        return self
     }
     
     @discardableResult
-    func minSize(width: CGFloat, height: CGFloat) -> Self {
-        imperative {
-            $0.minWidthConstraint = width
-            $0.minHeightConstraint = height
-        }
-    }
-
-    @discardableResult
-    func maxSize(width: CGFloat, height: CGFloat) -> Self {
-        imperative {
-            $0.maxWidthConstraint = width
-            $0.maxHeightConstraint = height
-        }
-    }
-
-    @discardableResult
-    func widthEqual(to superview: UIView, constraint: HelperConstraint) -> Self {
-        imperative {
-            if superview is UIStackView, !superview.subviews.contains($0) {
-                superview.addSubview($0)
-            }
-            $0.widthAnchor.constraint(equalTo: constraint.dimension, multiplier: constraint.multiplier, constant: constraint.constant).isActive = true
-        }
+    func height(_ height: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
+        self.heightConstraint(height, imperative: imperative)
+        return self
     }
     
     @discardableResult
-    func widthEqual(to superview: UIView, constraint: NSLayoutDimension) -> Self {
-        widthEqual(to: superview, constraint: .init(dimension: constraint))
-    }
-        
-    @discardableResult
-    func heightEqual(to superview: UIView, constraint: HelperConstraint) -> Self {
-        imperative {
-            if superview is UIStackView, !superview.subviews.contains($0) {
-                superview.addSubview($0)
-            }
-            $0.heightAnchor.constraint(equalTo: constraint.dimension, multiplier: constraint.multiplier, constant: constraint.constant).isActive = true
-        }
+    func minHeight(_ height: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
+        self.minHeightConstraint(height, imperative: imperative)
+        return self
     }
     
     @discardableResult
-    func heightEqual(to superview: UIView, constraint: NSLayoutDimension) -> Self {
-        heightEqual(to: superview, constraint: .init(dimension: constraint))
+    func maxHeight(_ height: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
+        self.maxHeightConstraint(height, imperative: imperative)
+        return self
     }
     
     @discardableResult
-    func aspectRatio(_ ratio: CGFloat) -> Self {
-        imperative {
-            $0.aspectRatioConstraint = ratio
+    func size(width: CGFloat, height: CGFloat,
+              widthPriority: UILayoutPriority = .required, heightPriority: UILayoutPriority = .required,
+              imperative: ((NSLayoutConstraint, NSLayoutConstraint) -> Void)? = nil) -> Self {
+        var widthConstraint: NSLayoutConstraint!
+        self.widthConstraint(width, priority: widthPriority) {
+            widthConstraint = $0
         }
+        var heightConstraint: NSLayoutConstraint!
+        self.heightConstraint(height, priority: heightPriority) {
+            heightConstraint = $0
+        }
+        imperative?(widthConstraint, heightConstraint)
+        return self
+    }
+    
+    @discardableResult
+    func minSize(width: CGFloat, height: CGFloat,
+                 widthPriority: UILayoutPriority = .required,
+                 heightPriority: UILayoutPriority = .required,
+                 imperative: ((NSLayoutConstraint, NSLayoutConstraint) -> Void)? = nil) -> Self {
+        var widthConstraint: NSLayoutConstraint!
+        self.minWidthConstraint(width, priority: widthPriority) {
+            widthConstraint = $0
+        }
+        var heightConstraint: NSLayoutConstraint!
+        self.minHeightConstraint(height, priority: heightPriority) {
+            heightConstraint = $0
+        }
+        imperative?(widthConstraint, heightConstraint)
+        return self
+    }
+    
+    @discardableResult
+    func maxSize(width: CGFloat, height: CGFloat,
+                 widthPriority: UILayoutPriority = .required,
+                 heightPriority: UILayoutPriority = .required,
+                 imperative: ((NSLayoutConstraint, NSLayoutConstraint) -> Void)? = nil) -> Self {
+        var widthConstraint: NSLayoutConstraint!
+        self.maxWidthConstraint(width, priority: widthPriority) {
+            widthConstraint = $0
+        }
+        var heightConstraint: NSLayoutConstraint!
+        self.maxHeightConstraint(height, priority: heightPriority) {
+            heightConstraint = $0
+        }
+        imperative?(widthConstraint, heightConstraint)
+        return self
+    }
+    
+    @discardableResult
+    func widthEqual(to superview: UIView, constraint: HelperConstraint, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
+        if superview is UIStackView, !superview.subviews.contains(self) {
+            superview.addSubview(self)
+        }
+        let layoutConstraint = self.widthAnchor.constraint(equalTo: constraint.dimension, multiplier: constraint.multiplier, constant: constraint.constant)
+        layoutConstraint.isActive = true
+        layoutConstraint.priority = priority
+        imperative?(layoutConstraint)
+        return self
+    }
+    
+    @discardableResult
+    func widthEqual(to superview: UIView, constraint: NSLayoutDimension, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
+        widthEqual(to: superview, constraint: .init(dimension: constraint), priority: priority, imperative: imperative)
+    }
+    
+    @discardableResult
+    func heightEqual(to superview: UIView, constraint: HelperConstraint, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
+        if superview is UIStackView, !superview.subviews.contains(self) {
+            superview.addSubview(self)
+        }
+        let layoutConstraint = self.heightAnchor.constraint(equalTo: constraint.dimension, multiplier: constraint.multiplier, constant: constraint.constant)
+        layoutConstraint.priority = priority
+        layoutConstraint.isActive = true
+        imperative?(layoutConstraint)
+        return self
+    }
+    
+    @discardableResult
+    func heightEqual(to superview: UIView, constraint: NSLayoutDimension, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
+        heightEqual(to: superview, constraint: .init(dimension: constraint), priority: priority, imperative: imperative)
+    }
+    
+    @discardableResult
+    func aspectRatio(_ ratio: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
+        self.aspectRatioConstraint(ratio, priority: priority, imperative: imperative)
+        return self
     }
 }
 
@@ -521,6 +544,13 @@ public extension UIView {
         }
     }
     
+    func minHeightConstraint(_ value: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) {
+        let constraint = heightAnchor.constraint(greaterThanOrEqualToConstant: value)
+        constraint.priority = priority
+        constraint.isActive = true
+        imperative?(constraint)
+    }
+    
     var minWidthConstraint: CGFloat? {
         get {
             nil //TODO:
@@ -529,6 +559,13 @@ public extension UIView {
             guard let constraint = newValue else { return }
             widthAnchor.constraint(greaterThanOrEqualToConstant: constraint).isActive = true
         }
+    }
+    
+    func minWidthConstraint(_ value: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) {
+        let constraint = widthAnchor.constraint(greaterThanOrEqualToConstant: value)
+        constraint.priority = priority
+        constraint.isActive = true
+        imperative?(constraint)
     }
     
     var maxHeightConstraint: CGFloat? {
@@ -541,6 +578,13 @@ public extension UIView {
         }
     }
     
+    func maxHeightConstraint(_ value: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) {
+        let constraint = heightAnchor.constraint(lessThanOrEqualToConstant: value)
+        constraint.priority = priority
+        constraint.isActive = true
+        imperative?(constraint)
+    }
+    
     var maxWidthConstraint: CGFloat? {
         get {
             nil //TODO:
@@ -549,6 +593,13 @@ public extension UIView {
             guard let constraint = newValue else { return }
             widthAnchor.constraint(lessThanOrEqualToConstant: constraint).isActive = true
         }
+    }
+    
+    func maxWidthConstraint(_ value: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) {
+        let constraint = widthAnchor.constraint(lessThanOrEqualToConstant: value)
+        constraint.priority = priority
+        constraint.isActive = true
+        imperative?(constraint)
     }
     
     var heightConstraint: CGFloat? {
@@ -561,6 +612,13 @@ public extension UIView {
         }
     }
     
+    func heightConstraint(_ value: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) {
+        let constraint = heightAnchor.constraint(equalToConstant: value)
+        constraint.priority = priority
+        constraint.isActive = true
+        imperative?(constraint)
+    }
+    
     var widthConstraint: CGFloat? {
         get {
             nil //TODO:
@@ -571,6 +629,13 @@ public extension UIView {
         }
     }
     
+    func widthConstraint(_ value: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) {
+        let constraint = widthAnchor.constraint(equalToConstant: value)
+        constraint.priority = priority
+        constraint.isActive = true
+        imperative?(constraint)
+    }
+    
     var aspectRatioConstraint: CGFloat? {
         get {
             nil
@@ -579,5 +644,12 @@ public extension UIView {
             guard let constraint = newValue else { return }
             heightAnchor.constraint(equalTo: widthAnchor, multiplier: constraint).isActive = true
         }
+    }
+    
+    func aspectRatioConstraint(_ value: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) {
+        let constraint = heightAnchor.constraint(equalTo: widthAnchor, multiplier: value)
+        constraint.priority = priority
+        constraint.isActive = true
+        imperative?(constraint)
     }
 }

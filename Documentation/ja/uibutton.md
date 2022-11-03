@@ -11,7 +11,7 @@ init(_ image: UIImage?, for: UIControl.State)
 
 |  parameter | 型 | description |
 | ---- | ---- | ---- |
-| title | String | `UIButton`の`title`パラメータ`の値 |
+| title | String or NSAttributedString | `UIButton`の`title`パラメータ`の値 |
 | for | UIControl.State | `UIButton`の`State`パラメータの値、デフォルトは`normal` |
 
 ### init with image
@@ -50,6 +50,8 @@ self.declarative {
 
 ```swift
 func title(_ title: String?, for: UIControl.State) -> Self
+
+func title(_ title: NSAttributedString?, for: UIControl.State) -> Self
 
 func titleColor(_ color: UIColor?, for: UIControl.State)
 
