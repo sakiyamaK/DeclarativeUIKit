@@ -6,7 +6,6 @@
 //
 
 import UIKit.UITextField
-import UIKit
 
 //MARK: -
 private extension UITextField {
@@ -80,12 +79,6 @@ public extension UITextField {
         return self
     }
     
-    @discardableResult
-    func keyboardType(_ keyboardType: UIKeyboardType) -> Self {
-        self.keyboardType = keyboardType
-        return self
-    }
-
     @discardableResult
     func textColor(_ textColor: UIColor) -> Self {
         self.textColor = textColor
@@ -180,6 +173,89 @@ public extension UITextField {
     @discardableResult
     func clearsOnInsertion(_ clearsOnInsertion: Bool) -> Self {
         self.clearsOnInsertion = clearsOnInsertion
+        return self
+    }
+}
+
+// MARK: - UITextInputTraits
+public extension UITextField {
+    
+    @discardableResult
+    func autocapitalizationType( _ autocapitalizationType: UITextAutocapitalizationType) -> Self {
+        self.autocapitalizationType = autocapitalizationType
+        return self
+    }
+
+    @discardableResult
+    func autocorrectionType(_ autocorrectionType: UITextAutocorrectionType) -> Self {
+        self.autocapitalizationType = autocapitalizationType
+        return self
+    }
+
+    @discardableResult
+    func spellCheckingType(_ spellCheckingType: UITextSpellCheckingType) -> Self {
+        self.spellCheckingType = spellCheckingType
+        return self
+    }
+
+    @discardableResult
+    func smartQuotesType(_ smartQuotesType: UITextSmartQuotesType) -> Self {
+        self.smartQuotesType = smartQuotesType
+        return self
+    }
+
+    @discardableResult
+    func smartDashesType(_ smartDashesType: UITextSmartDashesType) -> Self {
+        self.smartDashesType = smartDashesType
+        return self
+    }
+
+    @discardableResult
+    func smartInsertDeleteType(_ smartInsertDeleteType: UITextSmartInsertDeleteType) -> Self {
+        self.smartInsertDeleteType = smartInsertDeleteType
+        return self
+    }
+
+    @discardableResult
+    func keyboardType(_ keyboardType: UIKeyboardType) -> Self {
+        self.keyboardType = keyboardType
+        return self
+    }
+
+    @discardableResult
+    func keyboardAppearance(_ keyboardAppearance: UIKeyboardAppearance) -> Self {
+        self.keyboardAppearance = keyboardAppearance
+        return self
+    }
+
+    @discardableResult
+    func returnKeyType(_ returnKeyType: UIReturnKeyType) -> Self {
+        self.returnKeyType = returnKeyType
+        return self
+    }
+    
+    @discardableResult
+    func enablesReturnKeyAutomatically(_ enablesReturnKeyAutomatically: Bool) -> Self {
+        self.enablesReturnKeyAutomatically = enablesReturnKeyAutomatically
+        return self
+    }
+
+    @discardableResult
+    func isSecureTextEntry(_ isSecureTextEntry: Bool) -> Self {
+        self.isSecureTextEntry = isSecureTextEntry
+        return self
+    }
+    
+    @discardableResult
+    func textContentType(_ textContentType: UITextContentType) -> Self {
+        self.textContentType = textContentType
+        return self
+    }
+    
+    @available(iOS 12.0, *)
+    @discardableResult
+    func passwordRules(_ passwordRules: UITextInputPasswordRules?) -> Self {
+        self.passwordRules = passwordRules
         return self
     }
 }

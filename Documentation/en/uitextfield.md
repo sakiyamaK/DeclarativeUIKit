@@ -64,8 +64,6 @@ The following standard parameters can be written declaratively
 
     func textAlignment(_ textAlignment: NSTextAlignment) -> Self
 
-    func keyboardType(_ keyboardType: UIKeyboardType) -> Self
-
     func borderStyle(_ borderStyle: UITextField.BorderStyle) -> Self
 
     func placeholder(_ placeholder: String?) -> Self
@@ -91,6 +89,33 @@ The following standard parameters can be written declaratively
     func inputAccessoryView(_ inputAccessoryView: UIView?) -> Self
 
     func clearsOnInsertion(_ clearsOnInsertion: Bool) -> Self
+
+    func autocapitalizationType( _ autocapitalizationType: UITextAutocapitalizationType) -> Self 
+
+    func autocorrectionType(_ autocorrectionType: UITextAutocorrectionType) -> Self
+
+    func spellCheckingType(_ spellCheckingType: UITextSpellCheckingType) -> Self
+
+    func smartQuotesType(_ smartQuotesType: UITextSmartQuotesType) -> Self
+
+    func smartDashesType(_ smartDashesType: UITextSmartDashesType) -> Self
+
+    func smartInsertDeleteType(_ smartInsertDeleteType: UITextSmartInsertDeleteType) -> Self
+
+    func keyboardType(_ keyboardType: UIKeyboardType) -> Self
+
+    func keyboardAppearance(_ keyboardAppearance: UIKeyboardAppearance) -> Self
+
+    func returnKeyType(_ returnKeyType: UIReturnKeyType) -> Self
+    
+    func enablesReturnKeyAutomatically(_ enablesReturnKeyAutomatically: Bool) -> Self
+
+    func isSecureTextEntry(_ isSecureTextEntry: Bool) -> Self
+    
+    func textContentType(_ textContentType: UITextContentType) -> Self
+    
+    @available(iOS 12.0, *)    
+    func passwordRules(_ passwordRules: UITextInputPasswordRules?) -> Self
 ```
 
 #### sample
