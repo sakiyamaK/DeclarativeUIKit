@@ -31,7 +31,6 @@ public extension UIView {
     }
 }
 
-
 //MARK: - Declarative method
 public extension UIView {
     
@@ -63,10 +62,9 @@ public extension UIView {
     
     @discardableResult
     func cornerRadius(_ radius: CGFloat, maskedCorners: CACornerMask) -> Self {
-        imperative {
-            $0.layer.cornerRadius = radius
-            $0.layer.maskedCorners = maskedCorners
-        }
+        self.layer.cornerRadius = radius
+        self.layer.maskedCorners = maskedCorners
+        return self
     }
     
     @discardableResult
@@ -76,58 +74,50 @@ public extension UIView {
     
     @discardableResult
     func border(color: UIColor, width: CGFloat) -> Self {
-        imperative {
-            $0.layer.borderColor = color.cgColor
-            $0.layer.borderWidth = width
-        }
+        self.layer.borderColor = color.cgColor
+        self.layer.borderWidth = width
+        return self
     }
     
     @discardableResult
     func tag(_ tag: Int) -> Self {
-        imperative {
-            $0.tag = tag
-        }
+        self.tag = tag
+        return self
     }
     
     @discardableResult
     func backgroundColor(_ backgroundColor: UIColor) -> Self {
-        imperative {
-            $0.backgroundColor = backgroundColor
-        }
+        self.backgroundColor = backgroundColor
+        return self
     }
     
     @discardableResult
     func isUserInteractionEnabled(_ isUserInteractionEnabled: Bool) -> Self {
-        imperative {
-            $0.isUserInteractionEnabled = isUserInteractionEnabled
-        }
+        self.isUserInteractionEnabled = isUserInteractionEnabled
+        return self
     }
     
     func clipsToBounds(_ clipsToBounds: Bool) -> Self {
-        imperative {
-            $0.clipsToBounds = clipsToBounds
-        }
+        self.clipsToBounds = clipsToBounds
+        return self
     }
     
     @discardableResult
     func contentMode(_ contentMode: ContentMode) -> Self {
-        imperative {
-            $0.contentMode = contentMode
-        }
+        self.contentMode = contentMode
+        return self
     }
     
     @discardableResult
     func alpha(_ alpha: CGFloat) -> Self {
-        imperative {
-            $0.alpha = alpha
-        }
+        self.alpha = alpha
+        return self
     }
     
     @discardableResult
     func isHidden(_ isHidden: Bool) -> Self {
-        imperative {
-            $0.isHidden = isHidden
-        }
+        self.isHidden = isHidden
+        return self
     }
     
     @discardableResult
@@ -136,34 +126,24 @@ public extension UIView {
     }
     
     @discardableResult
-    func transform(_ transform: CGAffineTransform) -> Self {
-        imperative {
-            $0.transform = transform
-        }
-    }
-    
-    @discardableResult
     func shadow(color: UIColor = .black, radius: CGFloat = 0.0, x: CGFloat = 0.0, y: CGFloat = 0.0) -> Self {
-        imperative {
-            $0.layer.shadowColor = color.cgColor
-            $0.layer.shadowOpacity = 1.0
-            $0.layer.shadowOffset = CGSize(width: x, height: y)
-            $0.layer.shadowRadius = radius
-        }
+        self.layer.shadowColor = color.cgColor
+        self.layer.shadowOpacity = 1.0
+        self.layer.shadowOffset = CGSize(width: x, height: y)
+        self.layer.shadowRadius = radius
+        return self
     }
     
     @discardableResult
     func add(gestureRecognizer: UIGestureRecognizer) -> Self {
-        imperative {
-            $0.addGestureRecognizer(gestureRecognizer)
-        }
+        self.addGestureRecognizer(gestureRecognizer)
+        return self
     }
     
     @discardableResult
     func addGestureRecognizer(_ gestureBuilder: () -> UIGestureRecognizer) -> Self {
-        imperative {
-            $0.addGestureRecognizer(gestureBuilder())
-        }
+        self.addGestureRecognizer(gestureBuilder())
+        return self
     }
     
     @discardableResult
@@ -175,43 +155,39 @@ public extension UIView {
     @discardableResult
     func zStack(margin: UIEdgeInsets = .zero, priorities: UIEdgePriorities = .init(all: .required),
                 @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> Self {
-        imperative { superView in
-            builder().compactMap({$0}).forEach { (view) in
-                self.edgesConstraints(view, margin: margin, safeAreas: .init(all: false), priorities: priorities)
-            }
+        builder().compactMap({$0}).forEach { (view) in
+            self.edgesConstraints(view, margin: margin, safeAreas: .init(all: false), priorities: priorities)
         }
+        return self
     }
     
     @discardableResult
     func contentHuggingPriority(_ priority: UILayoutPriority, for axis: NSLayoutConstraint.Axis) -> Self {
-        imperative {
-            $0.setContentHuggingPriority(priority, for: axis)
-        }
+        self.setContentHuggingPriority(priority, for: axis)
+        return self
     }
     
     @discardableResult
     func contentCompressionResistancePriority(_ priority: UILayoutPriority, for axis: NSLayoutConstraint.Axis) -> Self {
-        imperative {
-            $0.setContentCompressionResistancePriority(priority, for: axis)
-        }
+        self.setContentCompressionResistancePriority(priority, for: axis)
+        return self
     }
     
     @discardableResult
     func contentPriorities(_ priorities: UIContentPriorities) -> Self {
-        imperative {
-            if let priority = priorities.huggingVertical {
-                $0.setContentHuggingPriority(priority, for: .vertical)
-            }
-            if let priority = priorities.huggingHorizontal {
-                $0.setContentHuggingPriority(priority, for: .horizontal)
-            }
-            if let priority = priorities.compressionResistanceVertical {
-                $0.setContentCompressionResistancePriority(priority, for: .vertical)
-            }
-            if let priority = priorities.compressionResistanceHorizontal {
-                $0.setContentCompressionResistancePriority(priority, for: .horizontal)
-            }
+        if let priority = priorities.huggingVertical {
+            self.setContentHuggingPriority(priority, for: .vertical)
         }
+        if let priority = priorities.huggingHorizontal {
+            self.setContentHuggingPriority(priority, for: .horizontal)
+        }
+        if let priority = priorities.compressionResistanceVertical {
+            self.setContentCompressionResistancePriority(priority, for: .vertical)
+        }
+        if let priority = priorities.compressionResistanceHorizontal {
+            self.setContentCompressionResistancePriority(priority, for: .horizontal)
+        }
+        return self
     }
     
     @discardableResult
@@ -470,6 +446,12 @@ public extension UIView {
         self.aspectRatioConstraint(ratio, priority: priority, imperative: imperative)
         return self
     }
+    
+    @discardableResult
+    func keyPath<T>(_ keyPath: ReferenceWritableKeyPath<UIView, T>, _ value: T) -> Self {
+        self[keyPath: keyPath] = value
+        return self
+    }
 }
 
 //MARK: - others
@@ -651,5 +633,76 @@ public extension UIView {
         constraint.priority = priority
         constraint.isActive = true
         imperative?(constraint)
+    }
+}
+
+//MARK: -
+public extension UIView {
+    @discardableResult
+    func frame(_ frame: CGRect) -> Self {
+        self.frame = frame
+        return self
+    }
+
+    @discardableResult
+    func bounds(_ bounds: CGRect) -> Self {
+        self.bounds = bounds
+        return self
+    }
+
+    @discardableResult
+    func center(_ center: CGPoint) -> Self {
+        self.center = center
+        return self
+    }
+    
+    @discardableResult
+    func transform(_ transform: CGAffineTransform) -> Self {
+        self.transform = transform
+        return self
+    }
+    
+    @available(iOS 13.0, *)
+    @discardableResult
+    func transform3D(_ transform3D: CATransform3D) -> Self {
+        self.transform3D = transform3D
+        return self
+    }
+
+    @discardableResult
+    func contentScaleFactor(_ contentScaleFactor: CGFloat) -> Self {
+        self.contentScaleFactor = contentScaleFactor
+        return self
+    }
+
+    @available(iOS 16.0, *)
+    @discardableResult
+    func anchorPoint(_ anchorPoint: CGPoint) -> Self {
+        self.anchorPoint = anchorPoint
+        return self
+    }
+
+    @discardableResult
+    func isMultipleTouchEnabled(_ isMultipleTouchEnabled: Bool) -> Self {
+        self.isMultipleTouchEnabled = isMultipleTouchEnabled
+        return self
+    }
+
+    @discardableResult
+    func isExclusiveTouch(_ isExclusiveTouch: Bool) -> Self {
+        self.isExclusiveTouch = isExclusiveTouch
+        return self
+    }
+
+    @discardableResult
+    func autoresizesSubviews(_ autoresizesSubviews: Bool) -> Self {
+        self.autoresizesSubviews = autoresizesSubviews
+        return self
+    }
+
+    @discardableResult
+    func autoresizingMask(_ autoresizingMask: UIView.AutoresizingMask) -> Self {
+        self.autoresizingMask = autoresizingMask
+        return self
     }
 }

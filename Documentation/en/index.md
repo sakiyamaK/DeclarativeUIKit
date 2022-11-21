@@ -1,7 +1,7 @@
 ## Documentation
 
-- Reference Version: **1.5.0**
-- Last Update: **2022/11/06**
+- Reference Version: **1.6.0**
+- Last Update: **2022/11/21**
 
 ### Table Of Contents
 
@@ -44,12 +44,14 @@
     - [sample](uiview.md#sample-10)
   - [center](uiview.md#center)
     - [sample](uiview.md#sample-11)
-  - [touch actions](uiview.md#touch-actions)
+  - [top,bottom,left,right](uiview.md#top,bottom,left,right)
     - [sample](uiview.md#sample-12)
-  - [drawing graphics](uiview.md#drawing-graphics)
+  - [touch actions](uiview.md#touch-actions)
     - [sample](uiview.md#sample-13)
-  - [constraint](uiview.md#constraint)
+  - [drawing graphics](uiview.md#drawing-graphics)
     - [sample](uiview.md#sample-14)
+  - [constraint](uiview.md#constraint)
+    - [sample](uiview.md#sample-15)
 
 ### [UIScrollView](uiscrollview.md#uiscrollview)
 - [initializer](uiscrollview.md#initializer)
@@ -161,3 +163,8 @@
 ### [UIMenu](uimenu.md#uimenu)
 - [initializer](uimenu.md#initializer)
   - [sample](uimenu.md#sample)
+
+### [UISearchBar](uisearchbar.md#uisearchbar)
+- [function](uisearchbar.md#uisearchbar)
+  - [some default parameters](uisearchbar.md#some-default-parameters)
+    - [sample](uisearchbar.md#sample)
