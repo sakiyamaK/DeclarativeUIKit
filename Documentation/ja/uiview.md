@@ -482,6 +482,37 @@ self.declarative {
 
 ```
 
+## top,bottom,left,right
+
+Viewを親ビューの上下左右に配置する 
+
+これはViewをStackViewのhorizontalまたはverticalを利用して設定されます
+そのため、このメソッド以降に宣言したメソッドは後ろのViewに設定されます
+
+```swift
+func top() -> UIView
+
+func bottom() -> UIView
+
+func left() -> UIView
+
+func right() -> UIView
+```
+### sample
+
+赤いViewを画面の下辺に配置します
+
+```swift
+self.declarative {
+    UIView()
+        .backgroundColor(.red)
+        .size(width: 100, height: 100)
+        .bottom()
+}
+
+```
+
+
 ## touch actions
 
 自身の上にタッチアクションを受け取るViewを乗せるメソッドです
