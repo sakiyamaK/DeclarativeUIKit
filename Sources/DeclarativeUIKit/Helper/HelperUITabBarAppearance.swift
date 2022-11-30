@@ -15,6 +15,6 @@ public enum UITabBarAppearanceType: CaseIterable {
     case standard, scrollEdge
 }
 
-public enum UITabBarLayoutAppearanceType: CaseIterable {
+public enum UITabBarItemAppearanceType: CaseIterable {
     case stackedLayoutAppearance, inlineLayoutAppearance, compactInlineLayoutAppearance
 }

@@ -68,7 +68,7 @@ public extension UITabBarItemAppearance {
 @available(iOS 13.0, *)
 public extension UITabBarItemAppearance {
     @discardableResult
-    func titleTextAttributes(_ titleTextAttributes: [NSAttributedString.Key : Any], appearanceTypes: [UITabBarItemStateAppearanceType]) -> Self {
+    func titleTextAttributes(_ titleTextAttributes: [NSAttributedString.Key : Any], appearanceTypes: [UITabBarItemStateAppearanceType] = UITabBarItemStateAppearanceType.allCases) -> Self {
         for appearanceType in appearanceTypes {
             switch appearanceType {
             case .normal:
@@ -85,7 +85,7 @@ public extension UITabBarItemAppearance {
     }
 
     @discardableResult
-    func titlePositionAdjustment(_ titlePositionAdjustment: UIOffset, appearanceTypes: [UITabBarItemStateAppearanceType]) -> Self {
+    func titlePositionAdjustment(_ titlePositionAdjustment: UIOffset, appearanceTypes: [UITabBarItemStateAppearanceType] = UITabBarItemStateAppearanceType.allCases) -> Self {
         for appearanceType in appearanceTypes {
             switch appearanceType {
             case .normal:
@@ -102,7 +102,7 @@ public extension UITabBarItemAppearance {
     }
 
     @discardableResult
-    func iconColor(_ iconColor: UIColor?, appearanceTypes: [UITabBarItemStateAppearanceType]) -> Self {
+    func iconColor(_ iconColor: UIColor?, appearanceTypes: [UITabBarItemStateAppearanceType] = UITabBarItemStateAppearanceType.allCases) -> Self {
         for appearanceType in appearanceTypes {
             switch appearanceType {
             case .normal:
@@ -119,7 +119,7 @@ public extension UITabBarItemAppearance {
     }
 
     @discardableResult
-    func badgePositionAdjustment(_ badgePositionAdjustment: UIOffset, appearanceTypes: [UITabBarItemStateAppearanceType]) -> Self {
+    func badgePositionAdjustment(_ badgePositionAdjustment: UIOffset, appearanceTypes: [UITabBarItemStateAppearanceType] = UITabBarItemStateAppearanceType.allCases) -> Self {
         for appearanceType in appearanceTypes {
             switch appearanceType {
             case .normal:
@@ -136,7 +136,7 @@ public extension UITabBarItemAppearance {
     }
 
     @discardableResult
-    func badgeBackgroundColor(_ badgeBackgroundColor: UIColor?, appearanceTypes: [UITabBarItemStateAppearanceType]) -> Self {
+    func badgeBackgroundColor(_ badgeBackgroundColor: UIColor?, appearanceTypes: [UITabBarItemStateAppearanceType] = UITabBarItemStateAppearanceType.allCases) -> Self {
         for appearanceType in appearanceTypes {
             switch appearanceType {
             case .normal:
@@ -153,7 +153,7 @@ public extension UITabBarItemAppearance {
     }
 
     @discardableResult
-    func badgeTextAttributes(_ badgeTextAttributes: [NSAttributedString.Key : Any], appearanceTypes: [UITabBarItemStateAppearanceType]) -> Self {
+    func badgeTextAttributes(_ badgeTextAttributes: [NSAttributedString.Key : Any], appearanceTypes: [UITabBarItemStateAppearanceType] = UITabBarItemStateAppearanceType.allCases) -> Self {
         for appearanceType in appearanceTypes {
             switch appearanceType {
             case .normal:
@@ -170,7 +170,7 @@ public extension UITabBarItemAppearance {
     }
 
     @discardableResult
-    func badgeTitlePositionAdjustment(_ badgeTitlePositionAdjustment: UIOffset, appearanceTypes: [UITabBarItemStateAppearanceType]) -> Self {
+    func badgeTitlePositionAdjustment(_ badgeTitlePositionAdjustment: UIOffset, appearanceTypes: [UITabBarItemStateAppearanceType] = UITabBarItemStateAppearanceType.allCases) -> Self {
         for appearanceType in appearanceTypes {
             switch appearanceType {
             case .normal:
@@ -242,7 +242,7 @@ public extension UITabBarAppearance {
 @available(iOS 13.0, *)
 public extension UITabBarAppearance {
     @discardableResult
-    func layoutAppearance(_ layoutAppearance: UITabBarItemAppearance, appearanceTypes: [UITabBarLayoutAppearanceType] = UITabBarLayoutAppearanceType.allCases) -> Self {
+    func tabBarItemAppearance(_ layoutAppearance: UITabBarItemAppearance, appearanceTypes: [UITabBarItemAppearanceType] = UITabBarItemAppearanceType.allCases) -> Self {
         for appearanceType in appearanceTypes {
             switch appearanceType {
             case .stackedLayoutAppearance:
