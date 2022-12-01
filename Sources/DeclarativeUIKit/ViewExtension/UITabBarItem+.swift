@@ -38,6 +38,16 @@ public extension UITabBarItem {
         self.setBadgeTextAttributes(textAttributes, for: state)
         return self
     }
+    
+    @discardableResult
+    func badgeTextAttributes(_ textAttributesBuilder: (() -> [NSAttributedString.Key : Any]?), for state: UIControl.State = .normal) -> Self {
+        badgeTextAttributes(textAttributesBuilder(), for: state)
+    }
+
+    @discardableResult
+    func badgeTextAttributes(for state: UIControl.State = .normal, _ textAttributesBuilder: (() -> [NSAttributedString.Key : Any]?)) -> Self {
+        badgeTextAttributes(textAttributesBuilder(), for: state)
+    }
 
     @available(iOS 13.0, *)
     @discardableResult
@@ -52,4 +62,22 @@ public extension UITabBarItem {
         self.scrollEdgeAppearance = scrollEdgeAppearance
         return self
     }
+    
+    @available(iOS 13.0, *)
+    @discardableResult
+    func appearance(apperanceTypes: [UITabBarAppearanceType] = UITabBarAppearanceType.allCases, _ appearanceBuilder: ((Self) -> UITabBarAppearance)) -> Self {
+        let apperance = appearanceBuilder(self)
+        for apperanceType in apperanceTypes {
+            switch apperanceType {
+            case .standard:
+                self.standardAppearance = apperance
+            case .scrollEdge:
+                if #available(iOS 15.0, *) {
+                    self.scrollEdgeAppearance = apperance
+                }
+            }
+        }
+        return self
+    }
+
 }

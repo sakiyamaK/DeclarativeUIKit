@@ -125,7 +125,8 @@ public extension UITabBar {
 
     @available(iOS 13.0, *)
     @discardableResult
-    func tabBarAppearance(_ apperance: UITabBarAppearance, apperanceTypes: [UITabBarAppearanceType] = UITabBarAppearanceType.allCases) -> Self {
+    func tabBarAppearance(apperanceTypes: [UITabBarAppearanceType] = UITabBarAppearanceType.allCases, _ apperanceBuilder: ((Self) -> UITabBarAppearance)) -> Self {
+        let apperance = apperanceBuilder(self)
         for apperanceType in apperanceTypes {
             switch apperanceType {
             case .standard:

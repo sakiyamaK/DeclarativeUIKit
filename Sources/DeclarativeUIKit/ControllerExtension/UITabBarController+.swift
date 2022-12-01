@@ -9,6 +9,14 @@ import UIKit.UITabBarController
 
 //MARK: - Declarative method
 public extension UITabBarController {
+    
+    static func viewControllers(_ viewControllers: [UIViewController]) -> UITabBarController {
+        UITabBarController().viewControllers(viewControllers)
+    }
+
+    static func viewControllers(@ArrayUIViewControllerBuilder _ builder: () -> [UIViewController]) -> UITabBarController {
+        UITabBarController().viewControllers(builder())
+    }
 
     @discardableResult
     func viewControllers(_ viewControllers: [UIViewController]) -> Self {
@@ -73,6 +81,15 @@ public extension UITabBarController {
     @discardableResult
     func delegate(_ delegate: UITabBarControllerDelegate?) -> Self {
         self.delegate = delegate
+        return self
+    }
+}
+
+@available(iOS 13.0, *)
+public extension UITabBarController {
+    @discardableResult
+    func tabBarAppearance(apperanceTypes: [UITabBarAppearanceType] = UITabBarAppearanceType.allCases, _ tabBarAppearanceBuilder: (() -> UITabBarAppearance)) -> Self {
+        self.tabBar.tabBarAppearance(apperanceTypes: apperanceTypes) { _ in tabBarAppearanceBuilder() }
         return self
     }
 }

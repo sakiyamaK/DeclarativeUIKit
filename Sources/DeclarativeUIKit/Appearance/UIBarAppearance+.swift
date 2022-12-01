@@ -10,6 +10,11 @@ import UIKit.UIBarAppearance
 @available(iOS 13.0, *)
 public extension UIBarAppearance {
     
+    convenience init(configureType: UIBarAppearanceConfigureType) {
+        self.init()
+        self.configure(configureType)
+    }
+    
     @discardableResult
     func imperative(_ imperative: ((Self) -> Void)) -> Self {
         imperative(self)
