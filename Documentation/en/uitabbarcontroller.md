@@ -4,7 +4,7 @@
 
 ### init with parameters
 
-初期化時に`viewControllers`を設定するパラメータ
+Parameters to set `viewControllers` at initialization
 
 ```swift
 static func viewControllers(_ viewControllers: [UIViewController]) -> UITabBarController
@@ -28,7 +28,7 @@ UITabBarController.viewControllers {
 
 ### some default parameters
 
-以下の標準パラメータは宣言的に記述できます
+The following standard parameters can be written declaratively
 
 ```swift
 func viewControllers(_ viewControllers: [UIViewController]) -> Self
@@ -56,8 +56,8 @@ func delegate(_ delegate: UITabBarControllerDelegate?) -> Self
 
 ### tabBarAppearance(appearanceTypes:, appearanceBuilder:)
 
-`tabBar`の`standardAppearance`と`scrollEdgeAppearance`を同時に設定します
-`iOS 15.0`より古い場合は`scrollEdgeAppearance`は設定されません
+Set `standardAppearance` and `scrollEdgeAppearance` of `tabBar` at the same time
+If older than `iOS 15.0`, `scrollEdgeAppearance` will not be set.
 
 ```swift
 @available(iOS 13.0, *)

@@ -178,3 +178,22 @@ Used in `UIViewController.directive` parameter.
 |  parameter | 型 | description |
 | ---- | ---- | ---- |
 | horizontal | UILayoutPriority | Sets the `UIContentPriorities` parameters `huggingHorizontal`, `compressionResistanceHorizontal` parameters. |
+
+## UITabBarAppearanceType 
+
+Enum that specifies the `appearance` type of `UITabBar`.
+You can specify `standard`, `scrollEdge`.
+
+## UITabBarItemAppearanceType
+Enum that specifies the `appearance` type of `UITabBarItem`.
+You can specify `stackedLayoutAppearance`, `inlineLayoutAppearance`, or `compactInlineLayoutAppearance`.
+
+## UITabBarItemStateAppearanceType 
+
+Enum that specifies the `state` of `appearance` of `UITabBarItem`.
+You can specify `normal`, `selected`, `disabled`, or `focused`.
+
+## UIBarAppearanceConfigureBackgroundType
+
+Enum that specifies the `appearance` type of the `UIBarAppearance` background.
+You can specify `default`, `opaqueBackground`, or `transparentBackground`.

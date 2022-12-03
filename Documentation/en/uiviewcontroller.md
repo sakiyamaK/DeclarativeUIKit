@@ -92,3 +92,49 @@ final class MainViewController: UIViewController {
     }
 }
 ```
+
+### imperative
+
+Methods to procedurally implement `UIViewController` parameters as standard
+
+```swift
+func imperative(_ imperative: ((Self) -> Void)) -> Self
+
+static func imperative(_ imperative: ((Self) -> Void)) -> Self
+```
+
+|  parameter | 型 | description |
+| ---- | ---- | ---- |
+| imperative | ((Self) -> Void) | Write parameters procedurally internally by passing themselves as arguments |
+
+
+#### sample
+```swift
+UIViewController().imperative {
+  $0.view.backgroundColor = .white
+  $0.declarative {
+      UILabel(number.description)
+          .center()
+  }
+```
+
+### tabBarItem
+
+Declaratively describe `tabBarItem` in `UIViewController`.
+
+```swift
+func tabBarItem(_ tabBarItem: UITabBarItem) -> Self
+```
+
+#### sample
+
+```swift
+UIViewController()
+  .tabBarItem(UITabBarItem(tabBarSystemItem: .mostRecent, tag: 0))
+```
+
+### present
+
+```swift
+func present(from: UIViewController, animated: Bool, completion: (() -> Void)? = nil) -> Self
+```

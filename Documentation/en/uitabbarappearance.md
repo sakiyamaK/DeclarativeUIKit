@@ -1,12 +1,12 @@
 # UITabBarAppearance
 
-`iOS 13.0`以降で利用可能です
+Available on `iOS 13.0` or later
 
 ## function
 
 ### some default parameters
 
-以下の標準パラメータは宣言的に記述できます
+The following standard parameters can be written declaratively
 
 ```swift
 func stackedLayoutAppearance(_ stackedLayoutAppearance: UITabBarItemAppearance) -> Self
@@ -28,7 +28,7 @@ func stackedItemSpacing(_ stackedItemSpacing: CGFloat) -> Self
 
 ### tabBarItemAppearance(appearanceTypes: , _ layoutAppearanceBuilder: )
 
-`stackedLayoutAppearance`, `inlineLayoutAppearance`, `compactInlineLayoutAppearance`を同時に設定します
+Set `stackedLayoutAppearance`, `inlineLayoutAppearance`, and `compactInlineLayoutAppearance` simultaneously.
 
 ```swift
 func tabBarItemAppearance(appearanceTypes: [UITabBarItemAppearanceType] = UITabBarItemAppearanceType.allCases, _ layoutAppearanceBuilder: (() -> UITabBarItemAppearance)) -> Self

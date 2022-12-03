@@ -1,12 +1,12 @@
 # UITabBarItemAppearance
 
-`iOS 13.0`以降で利用可能です
+Available on `iOS 13.0` or later
 
 ## initializer
 
 ### init with parameters
 
-初期化時に`configureWithDefault(for:)`を設定するパラメータ
+Parameter to set `configureWithDefault(for:)` at initialization
 
 ```swift
 init(configureWithDefaultFor: UITabBarItemAppearance.Style)
@@ -16,7 +16,7 @@ init(configureWithDefaultFor: UITabBarItemAppearance.Style)
 
 ### configure(_ defaultFor:)
 
-`configureWithDefault(for: )`の値を宣言的に設定できます
+You can set the value of `configureWithDefault(for: )` declaratively
 
 ```swift
 func configure(_ defaultFor: UITabBarItemAppearance.Style) -> Self
@@ -24,7 +24,7 @@ func configure(_ defaultFor: UITabBarItemAppearance.Style) -> Self
 
 ### some item states default parameters
 
-以下のパラメータは`UITabBarItemAppearance`のパラメータである`normal`, `disabled`, `focused`, `selected`を宣言的に設定できます
+The following parameters can declaratively set the `UITabBarItemAppearance` parameters `normal`, `disabled`, `focused` and `selected`.
 
 ```swift
 func titleTextAttributes(_ titleTextAttributes: [NSAttributedString.Key : Any], appearanceTypes: [UITabBarItemStateAppearanceType] = UITabBarItemStateAppearanceType.allCases) -> Self
