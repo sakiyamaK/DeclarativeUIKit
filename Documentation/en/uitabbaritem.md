@@ -28,7 +28,7 @@ func standardAppearance(_ standardAppearance: UITabBarAppearance?) -> Self
 func scrollEdgeAppearance(_ scrollEdgeAppearance: UITabBarAppearance?) -> Self
 ```
 
-### appearance(appearanceTypes:, appearanceBuilder:)
+### appearance
 
 Set `standardAppearance` and `scrollEdgeAppearance` at the same time
 If older than `iOS 15.0`, `scrollEdgeAppearance` will not be set.

@@ -54,7 +54,7 @@ func customizableViewControllers(@ArrayUIViewControllerBuilder _ builder: () -> 
 func delegate(_ delegate: UITabBarControllerDelegate?) -> Self
 ```
 
-### tabBarAppearance(appearanceTypes:, appearanceBuilder:)
+### tabBarAppearance
 
 `tabBar`の`standardAppearance`と`scrollEdgeAppearance`を同時に設定します
 `iOS 15.0`より古い場合は`scrollEdgeAppearance`は設定されません

@@ -26,7 +26,7 @@ func stackedItemWidth(_ stackedItemWidth: CGFloat) -> Self
 func stackedItemSpacing(_ stackedItemSpacing: CGFloat) -> Self
 ```
 
-### tabBarItemAppearance(appearanceTypes:, _ layoutAppearanceBuilder:)
+### tabBarItemAppearance
 
 `stackedLayoutAppearance`, `inlineLayoutAppearance`, `compactInlineLayoutAppearance`を同時に設定します
 

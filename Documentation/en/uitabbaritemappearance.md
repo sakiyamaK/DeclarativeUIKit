@@ -14,7 +14,7 @@ init(configureWithDefaultFor: UITabBarItemAppearance.Style)
 
 ## function
 
-### configure(_ defaultFor:)
+### configure
 
 You can set the value of `configureWithDefault(for: )` declaratively
 

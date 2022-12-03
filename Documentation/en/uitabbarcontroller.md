@@ -54,7 +54,7 @@ func customizableViewControllers(@ArrayUIViewControllerBuilder _ builder: () -> 
 func delegate(_ delegate: UITabBarControllerDelegate?) -> Self
 ```
 
-### tabBarAppearance(appearanceTypes:, appearanceBuilder:)
+### tabBarAppearance
 
 Set `standardAppearance` and `scrollEdgeAppearance` of `tabBar` at the same time
 If older than `iOS 15.0`, `scrollEdgeAppearance` will not be set.

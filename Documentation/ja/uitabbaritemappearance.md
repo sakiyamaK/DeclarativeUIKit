@@ -14,7 +14,7 @@ init(configureWithDefaultFor: UITabBarItemAppearance.Style)
 
 ## function
 
-### configure(_ defaultFor:)
+### configure
 
 `configureWithDefault(for: )`の値を宣言的に設定できます
 
