@@ -178,3 +178,22 @@
 |  parameter | 型 | description |
 | ---- | ---- | ---- |
 | horizontal | UILayoutPriority | `UIContentPriorities`のパラメータの`huggingHorizontal`,`compressionResistanceHorizontal`を設定する |
+
+## UITabBarAppearanceType 
+
+`UITabBar`の`appearance`の種類を指定するEnumです
+`standard`, `scrollEdge`を指定できます
+
+## UITabBarItemAppearanceType
+`UITabBarItem`の`appearance`の種類を指定するEnumです
+`stackedLayoutAppearance`, `inlineLayoutAppearance`, `compactInlineLayoutAppearance`を指定できます
+
+## UITabBarItemStateAppearanceType 
+
+`UITabBarItem`の`appearance`の`state`の種類を指定するEnumです
+`normal`, `selected`, `disabled`, `focused`を指定できます
+
+## UIBarAppearanceConfigureBackgroundType
+
+`UIBarAppearance`の背景の`appearance`の種類を指定するEnumです
+`default`, `opaqueBackground`, `transparentBackground`を指定できます
