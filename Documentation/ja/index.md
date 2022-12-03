@@ -185,7 +185,9 @@
 ### [UITabBarAppearance](uitabbarappearance.md#uitabbarappearance)
 - [function](uitabbar.md#function)
   - [some default parameters](uitabbarappearance.md#some-default-parameters)
-  - [tabBarItemAppearance(appearanceTypes: , _ layoutAppearanceBuilder: )](uitabbarappearance.md#tabBarItemAppearance(appearanceTypes:-,-_ layoutAppearanceBuilder:))
+  - [tabBarItemAppearance(appearanceTypes: , _ layoutAppearanceBuilder: )](uitabbarappearance.md#tabbaritemappearance\(appearancetypes:-,-_-layoutappearancebuilder\:\))
+
+  - [tabBarItemAppearance(appearanceTypes: , _ layoutAppearanceBuilder: )](uitabbarappearance.md#tabbaritemappearance\(appearancetypes\:-,-_-layoutappearancebuilder\:\))
   - [tabBarAppearance(apperanceTypes:, apperanceBuilder:)](uitabbarappearance.md#tabBarItemAppearance(appearanceTypes:,-_-layoutAppearanceBuilder:))
     - [sample](uitabbarappearance.md#sample)
 

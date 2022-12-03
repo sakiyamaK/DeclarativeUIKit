@@ -167,7 +167,7 @@
 ### [UISearchBar](uisearchbar.md#uisearchbar)
 - [function](uisearchbar.md#uisearchbar)
   - [some default parameters](uisearchbar.md#some-default-parameters)
-    - [sample](uisearchbar.md#sample)
+    - [sample](uisearchbar.md#sample1)
 
 ### [UITabBar](uitabbar.md#uitabbar)
 - [function](uitabbar.md#function)
@@ -185,7 +185,9 @@
 ### [UITabBarAppearance](uitabbarappearance.md#uitabbarappearance)
 - [function](uitabbar.md#function)
   - [some default parameters](uitabbarappearance.md#some-default-parameters)
-  - [tabBarItemAppearance(appearanceTypes: , _ layoutAppearanceBuilder: )](uitabbarappearance.md#tabBarItemAppearance(appearanceTypes:-,-_ layoutAppearanceBuilder:))
+  - [tabBarItemAppearance(appearanceTypes: , _ layoutAppearanceBuilder: )](uitabbarappearance.md#tabbaritemappearance\(appearancetypes:-,-_-layoutappearancebuilder\:\))
+
+  - [tabBarItemAppearance(appearanceTypes: , _ layoutAppearanceBuilder: )](uitabbarappearance.md#tabbaritemappearance\(appearancetypes\:-,-_-layoutappearancebuilder\:\))
   - [tabBarAppearance(apperanceTypes:, apperanceBuilder:)](uitabbarappearance.md#tabBarItemAppearance(appearanceTypes:,-_-layoutAppearanceBuilder:))
     - [sample](uitabbarappearance.md#sample)
 
