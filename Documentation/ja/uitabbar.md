@@ -44,7 +44,7 @@ func standardAppearance(_ standardAppearance: UITabBarAppearance) -> Self
 func scrollEdgeAppearance(_ scrollEdgeAppearance: UITabBarAppearance?) -> Self
 ```
 
-### tabBarAppearance(standard:, scrollEdge:)
+### tabBarAppearance
 
 `standardAppearance`と`scrollEdgeAppearance`を同時に設定します
 `iOS 15.0`より古い場合は`scrollEdgeAppearance`は設定されません
@@ -54,7 +54,7 @@ func scrollEdgeAppearance(_ scrollEdgeAppearance: UITabBarAppearance?) -> Self
 func tabBarAppearance(standard: UITabBarAppearance, scrollEdge: UITabBarAppearance?) -> Self
 ```
 
-### tabBarAppearance(apperanceTypes:, apperanceBuilder:)
+### tabBarAppearance
 
 `appearanceTypes`で指定したappearanceを設定します
 `iOS 15.0`より古い場合は`scrollEdgeAppearance`は設定されません
