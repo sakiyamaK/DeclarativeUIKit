@@ -218,6 +218,13 @@ public extension UIViewController {
         self.tabBarItem = tabBarItem
         return self
     }
+    
+    @discardableResult
+    func tabBarItem(_ tabBarItemBuilder: (() -> UITabBarItem)) -> Self {
+        self.tabBarItem = tabBarItemBuilder()
+        return self
+    }
+
 
     @discardableResult
     func present(from: UIViewController, animated: Bool, completion: (() -> Void)? = nil) -> Self {

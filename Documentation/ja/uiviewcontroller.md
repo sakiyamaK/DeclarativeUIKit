@@ -132,13 +132,17 @@ UIViewController().imperative {
 
 ```swift
 func tabBarItem(_ tabBarItem: UITabBarItem) -> Self
+
+func tabBarItem(_ tabBarItemBuilder: (() -> UITabBarItem)) -> Self
 ```
 
 #### sample
 
 ```swift
 UIViewController()
-  .tabBarItem(UITabBarItem(tabBarSystemItem: .mostRecent, tag: 0))
+  .tabBarItem {
+    UITabBarItem(tabBarSystemItem: .mostRecent, tag: 0)
+  }
 ```
 
 ### present
