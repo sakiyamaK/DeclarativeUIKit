@@ -206,9 +206,29 @@ public extension UIViewController {
 
 //MARK: - Declarative method
 public extension UIViewController {
+    
+    @discardableResult
+    func imperative(_ imperative: ((Self) -> Void)) -> Self {
+        imperative(self)
+        return self
+    }
+
+    @discardableResult
+    func tabBarItem(_ tabBarItem: UITabBarItem) -> Self {
+        self.tabBarItem = tabBarItem
+        return self
+    }
+    
+    @discardableResult
+    func tabBarItem(_ tabBarItemBuilder: (() -> UITabBarItem)) -> Self {
+        self.tabBarItem = tabBarItemBuilder()
+        return self
+    }
+
+
     @discardableResult
     func present(from: UIViewController, animated: Bool, completion: (() -> Void)? = nil) -> Self {
         from.present(self, animated: animated, completion: completion)
         return self
-    }
+    }    
 }

@@ -27,53 +27,47 @@ public extension UIAlertController {
 
     @discardableResult
     func title(_ title: String?) -> Self {
-        imperative {
-            $0.title = title
-        }
+        self.title = title
+        return self
     }
 
     @discardableResult
     func message(_ message: String?) -> Self {
-        imperative {
-            $0.message = message
-        }
+        self.message = message
+        return self
     }
     
     @discardableResult
     func addAction(_ builder: (() -> UIAlertAction)) -> Self {
-        imperative {
-            $0.addAction(builder())
-        }
+        self.addAction(builder())
+        return self
     }
 
     @discardableResult
     func addActions(@ArrayUIAlertActionBuilder _ builder: (() -> [UIAlertAction?])) -> Self {
-        imperative { vc in
-            builder().compactMap({$0}).forEach {
-                vc.addAction($0)
-            }
+        builder().compactMap({$0}).forEach {[weak self] action in
+            self?.addAction(action)
         }
+        return self
     }
 
     @discardableResult
     func addPreferredAction(_ builder: (() -> UIAlertAction)) -> Self {
-        imperative {
-            let action = builder()
-            $0.addAction {
-                action
-            }
-            $0.preferredAction = action
+        let action = builder()
+        self.addAction {
+            action
         }
+        self.preferredAction = action
+        return self
     }
     
     @discardableResult
     func addTextField(withHandler: @escaping ((UITextField) -> Void)) -> Self {
-        imperative {
-            guard $0.preferredStyle == .alert else {
-                debugPrint("TextField can not add, if preferredStyle is not alert")
-                return
-            }
-            $0.addTextField(configurationHandler: withHandler)
+        guard self.preferredStyle == .alert else {
+            debugPrint("TextField can not add, if preferredStyle is not alert")
+            return self
         }
+        self.addTextField(configurationHandler: withHandler)
+        return self
     }
 }

@@ -16,6 +16,7 @@
 		B61256C127D459BB00DFAC78 /* HotReloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61256C027D459BB00DFAC78 /* HotReloadViewController.swift */; };
 		B62F389D278B12D000AD2CC4 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F389C278B12D000AD2CC4 /* TableViewController.swift */; };
 		B62F38A0278B204700AD2CC4 /* PathViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F389F278B204700AD2CC4 /* PathViewController.swift */; };
+		B63B26ED293BAFAD00A866DD /* UITabBarController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63B26EC293BAFAD00A866DD /* UITabBarController+.swift */; };
 		B63FFA98277B4AE900209684 /* GithubResultWebViewContrller.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63FFA97277B4AE900209684 /* GithubResultWebViewContrller.swift */; };
 		B63FFA9A277B4C1400209684 /* GithubResultWebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63FFA99277B4C1400209684 /* GithubResultWebPresenter.swift */; };
 		B65F3F3527B8CCA400DBA44B /* Simple2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65F3F3427B8CCA400DBA44B /* Simple2ViewController.swift */; };
@@ -38,6 +39,7 @@
 		B6D0CECD277B100000031EDB /* GithubSearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D0CEC9277B100000031EDB /* GithubSearchCollectionViewController.swift */; };
 		B6D0CECE277B100000031EDB /* GithubSearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D0CECA277B100000031EDB /* GithubSearchPresenter.swift */; };
 		B6D0CED0277B120900031EDB /* GithubAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D0CECF277B120900031EDB /* GithubAPI.swift */; };
+		B6E3ADF8292BAB64007E5925 /* FlutterTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E3ADF7292BAB64007E5925 /* FlutterTutorialViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +54,7 @@
 		B61256C027D459BB00DFAC78 /* HotReloadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotReloadViewController.swift; sourceTree = "<group>"; };
 		B62F389C278B12D000AD2CC4 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		B62F389F278B204700AD2CC4 /* PathViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathViewController.swift; sourceTree = "<group>"; };
+		B63B26EC293BAFAD00A866DD /* UITabBarController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarController+.swift"; sourceTree = "<group>"; };
 		B63FFA97277B4AE900209684 /* GithubResultWebViewContrller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubResultWebViewContrller.swift; sourceTree = "<group>"; };
 		B63FFA99277B4C1400209684 /* GithubResultWebPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubResultWebPresenter.swift; sourceTree = "<group>"; };
 		B65F3F3427B8CCA400DBA44B /* Simple2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Simple2ViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +77,7 @@
 		B6D0CEC9277B100000031EDB /* GithubSearchCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubSearchCollectionViewController.swift; sourceTree = "<group>"; };
 		B6D0CECA277B100000031EDB /* GithubSearchPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubSearchPresenter.swift; sourceTree = "<group>"; };
 		B6D0CECF277B120900031EDB /* GithubAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubAPI.swift; sourceTree = "<group>"; };
+		B6E3ADF7292BAB64007E5925 /* FlutterTutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlutterTutorialViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,7 +113,6 @@
 		B601AB0F27761CA600B57E0F /* DeclarativeUIKitDemo */ = {
 			isa = PBXGroup;
 			children = (
-				B68EA53528B1EDFD00773D9C /* Samples */,
 				B601AB1027761CA600B57E0F /* AppDelegate.swift */,
 				B601AB1927761CA800B57E0F /* Assets.xcassets */,
 				B63FFA9C277BF40700209684 /* Collection */,
@@ -121,8 +124,10 @@
 				B6875FB228073D2E000404F3 /* Map */,
 				B62F389E278B203400AD2CC4 /* Path */,
 				B601AB1427761CA600B57E0F /* RootViewController.swift */,
+				B68EA53528B1EDFD00773D9C /* Samples */,
 				B601AB1227761CA600B57E0F /* SceneDelegate.swift */,
 				B63FFA9B277BF3FA00209684 /* Simple */,
+				B63B26EB293BAF9A00A866DD /* TabBarController */,
 				B62F389B278B125A00AD2CC4 /* Table */,
 			);
 			path = DeclarativeUIKitDemo;
@@ -149,6 +154,14 @@
 				B62F389F278B204700AD2CC4 /* PathViewController.swift */,
 			);
 			path = Path;
+			sourceTree = "<group>";
+		};
+		B63B26EB293BAF9A00A866DD /* TabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				B63B26EC293BAFAD00A866DD /* UITabBarController+.swift */,
+			);
+			path = TabBarController;
 			sourceTree = "<group>";
 		};
 		B63FFA9B277BF3FA00209684 /* Simple */ = {
@@ -179,6 +192,7 @@
 		B68EA53528B1EDFD00773D9C /* Samples */ = {
 			isa = PBXGroup;
 			children = (
+				B6E3ADF6292BAB64007E5925 /* FlutterTutorial */,
 				B68EA53928B2311C00773D9C /* Twitter */,
 				B68EA53828B2305C00773D9C /* Tiktok */,
 			);
@@ -287,6 +301,14 @@
 			path = GithubSearch;
 			sourceTree = "<group>";
 		};
+		B6E3ADF6292BAB64007E5925 /* FlutterTutorial */ = {
+			isa = PBXGroup;
+			children = (
+				B6E3ADF7292BAB64007E5925 /* FlutterTutorialViewController.swift */,
+			);
+			path = FlutterTutorial;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -363,11 +385,13 @@
 			files = (
 				B6D0CECD277B100000031EDB /* GithubSearchCollectionViewController.swift in Sources */,
 				B62F389D278B12D000AD2CC4 /* TableViewController.swift in Sources */,
+				B63B26ED293BAFAD00A866DD /* UITabBarController+.swift in Sources */,
 				B601AB1527761CA600B57E0F /* RootViewController.swift in Sources */,
 				B6D0CECE277B100000031EDB /* GithubSearchPresenter.swift in Sources */,
 				B69B2EB8277D8199006F1FF9 /* LandmarkDetailViewController.swift in Sources */,
 				B69B2EB4277D7630006F1FF9 /* ToggleRow.swift in Sources */,
 				B601AB1127761CA600B57E0F /* AppDelegate.swift in Sources */,
+				B6E3ADF8292BAB64007E5925 /* FlutterTutorialViewController.swift in Sources */,
 				B65F3F3527B8CCA400DBA44B /* Simple2ViewController.swift in Sources */,
 				B6875FB428073D2E000404F3 /* MapViewController.swift in Sources */,
 				B68EA53B28B2312C00773D9C /* TwitterHomeViewController.swift in Sources */,

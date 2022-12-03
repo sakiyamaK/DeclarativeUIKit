@@ -9,20 +9,7 @@ import UIKit
 import DeclarativeUIKit
 
 final class RootViewController: UIViewController {
-    
-    enum ViewTag: Int {
-        case simpleDemoButton = 1
-        case hotReload
-        case simple2DemoButton
-        case tablewViewButton
-        case collectionViewButton
-        case githubSearchButton
-        case swiftuiTutorialButton
-        case pathButton
-        case mapViewButton
-        case tiktokButton
-    }
-    
+        
     override func loadView() {
         super.loadView()
 
@@ -48,65 +35,113 @@ final class RootViewController: UIViewController {
                     
                     if true {
                         Button("ホットリロード")
-                            .add(target: self, action: #selector(tapButton), for: .touchUpInside)
-                            .tag(ViewTag.hotReload.rawValue)
+                            .add(target: self, for: .touchUpInside, {_ in
+                                let vc = HotReloadViewController()
+                                self.navigationController?.pushViewController(vc, animated: true)
+                            })
                         UIView.spacer()
                     }
                     
                     Button("レイアウトの基本")
-                        .add(target: self, action: #selector(tapButton), for: .touchUpInside)
-                        .tag(ViewTag.simpleDemoButton.rawValue)
+                        .add(target: self, for: .touchUpInside, {_ in
+                            let vc = SimpleViewController()
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        })
 
                     UIView.spacer()
 
                     Button("基本的なコンポーネント")
-                        .add(target: self, action: #selector(tapButton), for: .touchUpInside)
-                        .tag(ViewTag.simple2DemoButton.rawValue)
+                        .add(target: self, for: .touchUpInside, {_ in
+                            let vc = Simple2ViewController()
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        })
 
                     UIView.spacer()
 
                     Button("TablewView")
-                        .add(target: self, action: #selector(tapButton), for: .touchUpInside)
-                        .tag(ViewTag.tablewViewButton.rawValue)
+                        .add(target: self, for: .touchUpInside, {_ in
+                            let vc = TableViewController()
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        })
 
                     UIView.spacer()
 
                     Button("CollectionView")
-                        .add(target: self, action: #selector(tapButton), for: .touchUpInside)
-                        .tag(ViewTag.collectionViewButton.rawValue)
+                        .add(target: self, for: .touchUpInside, {_ in
+                            let vc = CollectionViewController()
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        })
 
                     UIView.spacer()
 
                     Button("Path")
-                        .add(target: self, action: #selector(tapButton), for: .touchUpInside)
-                        .tag(ViewTag.pathButton.rawValue)
+                        .add(target: self, for: .touchUpInside, {_ in
+                            let vc = PathViewController()
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        })
                         .minWidth(200)
 
                     UIView.spacer()
+                    
+                    Button("UITabBarController")
+                        .add(target: self, for: .touchUpInside, {_ in
+                            let vc = UITabBarController.rootTabBarController()
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        })
+
+                    UIView.spacer()
+
 
                     Button("GithubSearch")
-                        .add(target: self, action: #selector(tapButton), for: .touchUpInside)
-                        .tag(ViewTag.githubSearchButton.rawValue)
+                        .add(target: self, for: .touchUpInside, {_ in
+                            let vc = GithubSearchCollectionViewController()
+                            let presenter = GithubSearchPresenter(output: vc)
+                            vc.inject(presenter: presenter)
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        })
 
                     UIView.spacer()
 
                     Button("SwiftUI Tutorial")
-                        .add(target: self, action: #selector(tapButton), for: .touchUpInside)
-                        .tag(ViewTag.swiftuiTutorialButton.rawValue)
+                        .add(target: self, for: .touchUpInside, {_ in
+                            let vc = LandmarkListViewController()
+                            vc.inject(landmarks: ModelData.landmarks, isOn: false)
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        })
 
                     UIView.spacer()
                     
                     Button("MapView")
-                        .add(target: self, action: #selector(tapButton), for: .touchUpInside)
-                        .tag(ViewTag.mapViewButton.rawValue)
+                        .add(target: self, for: .touchUpInside, {_ in
+                            let vc = MapViewController()
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        })
 
                     UIView.spacer()
 
-                    Button("tiktok")
-                        .add(target: self, action: #selector(tapButton), for: .touchUpInside)
-                        .tag(ViewTag.tiktokButton.rawValue)
-
-                    UIView.spacer()
+//                    Button("tiktok")
+//                        .add(target: self, for: .touchUpInside, {_ in
+//                            let vc = TiktokHomeViewController()
+//                            self.navigationController?.pushViewController(vc, animated: true)
+//                        })
+//
+//                    UIView.spacer()
+//
+//                    Button("twitter")
+//                        .add(target: self, for: .touchUpInside, {_ in
+//                            let vc = TwitterHomeViewController()
+//                            self.navigationController?.pushViewController(vc, animated: true)
+//                        })
+//
+//                    UIView.spacer()
+//
+//                    Button("Flutter Tutorial")
+//                        .add(target: self, for: .touchUpInside, {_ in
+//                            let vc = FlutterTutorialViewController()
+//                            self.navigationController?.pushViewController(vc, animated: true)
+//                        })
+//
+//                    UIView.spacer()
                 }
                 .spacing(20)
                 .distribution(.fillEqually)
@@ -116,48 +151,6 @@ final class RootViewController: UIViewController {
         }
     }
 }
-
-@objc private extension RootViewController {
-    func tapButton(_ sender: UIButton) {
-        guard let viewTag = ViewTag(rawValue: sender.tag) else { return }
-        switch viewTag {
-        case .hotReload:
-            let vc = HotReloadViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
-        case .pathButton:
-            let vc = PathViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
-        case .simpleDemoButton:
-            let vc = SimpleViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
-        case .simple2DemoButton:
-            let vc = Simple2ViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
-        case .tablewViewButton:
-            let vc = TableViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
-        case .collectionViewButton:
-            let vc = CollectionViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
-        case .githubSearchButton:
-            let vc = GithubSearchCollectionViewController()
-            let presenter = GithubSearchPresenter(output: vc)
-            vc.inject(presenter: presenter)
-            self.navigationController?.pushViewController(vc, animated: true)
-        case .swiftuiTutorialButton:
-            let vc = LandmarkListViewController()
-            vc.inject(landmarks: ModelData.landmarks, isOn: false)
-            self.navigationController?.pushViewController(vc, animated: true)
-        case .mapViewButton:
-            let vc = MapViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
-        case .tiktokButton:
-            let vc = TiktokHomeViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
-    }
-}
-
 
 import SwiftUI
 
