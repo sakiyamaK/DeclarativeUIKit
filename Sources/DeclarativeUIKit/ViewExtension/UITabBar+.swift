@@ -125,15 +125,15 @@ public extension UITabBar {
 
     @available(iOS 13.0, *)
     @discardableResult
-    func tabBarAppearance(apperanceTypes: [UITabBarAppearanceType] = UITabBarAppearanceType.allCases, _ apperanceBuilder: ((Self) -> UITabBarAppearance)) -> Self {
-        let apperance = apperanceBuilder(self)
-        for apperanceType in apperanceTypes {
-            switch apperanceType {
+    func tabBarAppearance(appearanceTypes: [UITabBarAppearanceType] = UITabBarAppearanceType.allCases, _ appearanceBuilder: ((Self) -> UITabBarAppearance)) -> Self {
+        let appearance = appearanceBuilder(self)
+        for appearanceType in appearanceTypes {
+            switch appearanceType {
             case .standard:
-                self.standardAppearance = apperance
+                self.standardAppearance = appearance
             case .scrollEdge:
                 if #available(iOS 15.0, *) {
-                    self.scrollEdgeAppearance = apperance
+                    self.scrollEdgeAppearance = appearance
                 }
             }
         }
