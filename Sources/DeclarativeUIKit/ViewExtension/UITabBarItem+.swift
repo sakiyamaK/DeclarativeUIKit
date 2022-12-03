@@ -80,4 +80,21 @@ public extension UITabBarItem {
         return self
     }
 
+    @available(iOS 13.0, *)
+    @discardableResult
+    func appearance(appearanceTypes: [UITabBarAppearanceType] = UITabBarAppearanceType.allCases, _ appearanceBuilder: (() -> UITabBarAppearance)) -> Self {
+        let appearance = appearanceBuilder()
+        for appearanceType in appearanceTypes {
+            switch appearanceType {
+            case .standard:
+                self.standardAppearance = appearance
+            case .scrollEdge:
+                if #available(iOS 15.0, *) {
+                    self.scrollEdgeAppearance = appearance
+                }
+            }
+        }
+        return self
+    }
+
 }

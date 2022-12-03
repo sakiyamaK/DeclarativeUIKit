@@ -10,9 +10,9 @@ import UIKit.UIBarAppearance
 @available(iOS 13.0, *)
 public extension UIBarAppearance {
     
-    convenience init(configureType: UIBarAppearanceConfigureType) {
+    convenience init(configureBackgroundType: UIBarAppearanceConfigureBackgroundType) {
         self.init()
-        self.configure(configureType)
+        self.configure(configureBackgroundType)
     }
     
     @discardableResult
@@ -65,8 +65,8 @@ public extension UIBarAppearance {
 //    }
 
     @discardableResult
-    func configure(_ type: UIBarAppearanceConfigureType) -> Self {
-        switch type {
+    func configure(_ backgroundType: UIBarAppearanceConfigureBackgroundType) -> Self {
+        switch backgroundType {
         case .default:
             self.configureWithDefaultBackground()
         case .opaqueBackground:

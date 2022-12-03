@@ -7,6 +7,6 @@
 
 import UIKit.UIBarAppearance
 
-public enum UIBarAppearanceConfigureType {
+public enum UIBarAppearanceConfigureBackgroundType {
     case `default`, opaqueBackground, transparentBackground
 }
