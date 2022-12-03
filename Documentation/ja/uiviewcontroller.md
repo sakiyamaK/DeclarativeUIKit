@@ -100,3 +100,53 @@ final class MainViewController: UIViewController {
     }
 }
 ```
+
+### imperative
+
+`UIViewController`のパラメータを標準の通り手続的に実装するメソッドです
+
+```swift
+func imperative(_ imperative: ((Self) -> Void)) -> Self
+
+static func imperative(_ imperative: ((Self) -> Void)) -> Self
+```
+
+|  parameter | 型 | description |
+| ---- | ---- | ---- |
+| imperative | ((Self) -> Void) | 自身を引数として渡すことで内部で手続き的にパラメータを記述する |
+
+
+#### sample
+```swift
+UIViewController().imperative {
+  $0.view.backgroundColor = .white
+  $0.declarative {
+      UILabel(number.description)
+          .center()
+  }
+```
+
+### tabBarItem
+
+`UIViewController`の`tabBarItem`を宣言的に記述します
+
+```swift
+func tabBarItem(_ tabBarItem: UITabBarItem) -> Self
+
+func tabBarItem(_ tabBarItemBuilder: (() -> UITabBarItem)) -> Self
+```
+
+#### sample
+
+```swift
+UIViewController()
+  .tabBarItem {
+    UITabBarItem(tabBarSystemItem: .mostRecent, tag: 0)
+  }
+```
+
+### present
+
+```swift
+func present(from: UIViewController, animated: Bool, completion: (() -> Void)? = nil) -> Self
+```

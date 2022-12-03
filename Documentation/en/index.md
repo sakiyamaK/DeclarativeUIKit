@@ -1,7 +1,7 @@
 ## Documentation
 
-- Reference Version: **1.6.0**
-- Last Update: **2022/11/21**
+- Reference Version: **1.7.0**
+- Last Update: **2022/12/04**
 
 ### Table Of Contents
 
@@ -167,4 +167,39 @@
 ### [UISearchBar](uisearchbar.md#uisearchbar)
 - [function](uisearchbar.md#uisearchbar)
   - [some default parameters](uisearchbar.md#some-default-parameters)
-    - [sample](uisearchbar.md#sample)
+    - [sample](uisearchbar.md#sample1)
+
+### [UITabBar](uitabbar.md#uitabbar)
+- [function](uitabbar.md#function)
+  - [some default parameters](uitabbar.md#some-default-parameters)
+  - [tabBarAppearance](uitabbar.md#tabBarAppearance1)
+  - [tabBarAppearance](uitabbar.md#tabBarAppearance2)
+    - [sample](uitabbar.md#sample1)
+
+### [UITabBarItem](uitabbaritem.md#uitabbaritem)
+- [function](uitabbaritem.md#function)
+  - [some default parameters](uitabbaritem.md#some-default-parameters)
+  - [appearance](uitabbaritem.md#appearance)
+    - [sample](uitabbaritem.md#sample1)
+
+### [UITabBarAppearance](uitabbarappearance.md#uitabbarappearance)
+- [function](uitabbar.md#function)
+  - [some default parameters](uitabbarappearance.md#some-default-parameters)
+  - [tabBarItemAppearance](uitabbarappearance.md#tabbaritemappearance)
+
+### [UITabBarItemAppearance](uitabbaritemappearance.md#uitabbaritemappearance)
+- [initializer](uitabbaritemappearance.md#initializer)
+  - [init with parameters](uitabbaritemappearance.md#init-with-parameters)
+- [function](uitabbaritemappearance.md#function)
+  - [configure](uitabbaritemappearance.md#configure)
+  - [some item states default parameters](uitabbaritemappearance.md#some-item-states-default-parameters)
+    - [sample](uitabbaritemappearance.md#sample)
+
+### [UITabBarController](uitabbarcontroller.md#uitabbarcontroller)
+- [initializer](uitabbarcontroller.md#initializer)
+  - [init with parameters](uitabbarcontroller.md#init-with-parameters)
+    - [sample](uitabbarcontroller.md#sample)
+- [function](uitabbarcontroller.md#function)
+  - [some default parameters](uitabbarcontroller.md#some-default-parameters)
+  - [tabBarAppearance](uitabbarcontroller.md#tabBarAppearance)
+    - [sample](uitabbarcontroller.md#sample2)
