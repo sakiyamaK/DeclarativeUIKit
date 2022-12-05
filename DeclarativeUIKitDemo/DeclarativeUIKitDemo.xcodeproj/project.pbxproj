@@ -39,7 +39,6 @@
 		B6D0CECD277B100000031EDB /* GithubSearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D0CEC9277B100000031EDB /* GithubSearchCollectionViewController.swift */; };
 		B6D0CECE277B100000031EDB /* GithubSearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D0CECA277B100000031EDB /* GithubSearchPresenter.swift */; };
 		B6D0CED0277B120900031EDB /* GithubAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D0CECF277B120900031EDB /* GithubAPI.swift */; };
-		B6E3ADF8292BAB64007E5925 /* FlutterTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E3ADF7292BAB64007E5925 /* FlutterTutorialViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,7 +76,6 @@
 		B6D0CEC9277B100000031EDB /* GithubSearchCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubSearchCollectionViewController.swift; sourceTree = "<group>"; };
 		B6D0CECA277B100000031EDB /* GithubSearchPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubSearchPresenter.swift; sourceTree = "<group>"; };
 		B6D0CECF277B120900031EDB /* GithubAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubAPI.swift; sourceTree = "<group>"; };
-		B6E3ADF7292BAB64007E5925 /* FlutterTutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlutterTutorialViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,7 +190,6 @@
 		B68EA53528B1EDFD00773D9C /* Samples */ = {
 			isa = PBXGroup;
 			children = (
-				B6E3ADF6292BAB64007E5925 /* FlutterTutorial */,
 				B68EA53928B2311C00773D9C /* Twitter */,
 				B68EA53828B2305C00773D9C /* Tiktok */,
 			);
@@ -301,14 +298,6 @@
 			path = GithubSearch;
 			sourceTree = "<group>";
 		};
-		B6E3ADF6292BAB64007E5925 /* FlutterTutorial */ = {
-			isa = PBXGroup;
-			children = (
-				B6E3ADF7292BAB64007E5925 /* FlutterTutorialViewController.swift */,
-			);
-			path = FlutterTutorial;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -391,7 +380,6 @@
 				B69B2EB8277D8199006F1FF9 /* LandmarkDetailViewController.swift in Sources */,
 				B69B2EB4277D7630006F1FF9 /* ToggleRow.swift in Sources */,
 				B601AB1127761CA600B57E0F /* AppDelegate.swift in Sources */,
-				B6E3ADF8292BAB64007E5925 /* FlutterTutorialViewController.swift in Sources */,
 				B65F3F3527B8CCA400DBA44B /* Simple2ViewController.swift in Sources */,
 				B6875FB428073D2E000404F3 /* MapViewController.swift in Sources */,
 				B68EA53B28B2312C00773D9C /* TwitterHomeViewController.swift in Sources */,
