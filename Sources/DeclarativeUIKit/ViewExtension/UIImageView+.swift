@@ -24,7 +24,7 @@ public extension UIImageView {
     
     @discardableResult
     func tintColor(_ color: UIColor) -> Self {
-        self.tintColor = tintColor
+        self.tintColor = color
         return self
     }
 
