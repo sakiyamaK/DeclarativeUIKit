@@ -42,6 +42,7 @@ final class Simple2ViewController: UIViewController {
                     UIStackView.vertical {
                         UIImageView(UIImage.init(systemName: "square.and.arrow.up"))
                             .contentMode(.scaleAspectFit)
+                            .tintColor(.red)
                             .height(200)
 
                         if #available(iOS 14.0, *) {
