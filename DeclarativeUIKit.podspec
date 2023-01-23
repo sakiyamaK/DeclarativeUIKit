@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = 'DeclarativeUIKit'
-  spec.version      = '1.11.1'
+  spec.version      = '1.12.0'
   spec.summary      = <<-DESC
   Library for writing UIKit Autolayout declaratively.
   DESC
@@ -12,7 +12,7 @@ Pod::Spec.new do |spec|
   spec.license      = { :type => 'MIT', :file => 'LICENSE' }
   spec.author       = { 'Kei Sakiyama' => 'sakiyama.k@gmail.com' }
   spec.source       = { :git => 'https://github.com/sakiyamaK/DeclarativeUIKit.git', :tag => spec.version.to_s }
-  spec.ios.deployment_target = '12.0'
+  spec.ios.deployment_target = '11.0'
   spec.source_files = 'Sources/DeclarativeUIKit/**/*'
   spec.swift_versions = '5.5'
   spec.static_framework = true
