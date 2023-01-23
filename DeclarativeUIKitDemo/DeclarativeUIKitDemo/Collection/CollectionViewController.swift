@@ -9,11 +9,10 @@ final class CollectionViewController: UIViewController {
         
         self.declarative {
             UIStackView.vertical {
-                UILabel.imperative {
-                    let label = $0 as! UILabel
-                    label.text = "コレクションビューのサンプル"
-                    label.textAlignment = .center
-                    label.font = UIFont.boldSystemFont(ofSize: 20)
+                UILabel().apply {
+                    $0.text = "コレクションビューのサンプル"
+                    $0.textAlignment = .center
+                    $0.font = UIFont.boldSystemFont(ofSize: 20)
                 }
                 
                 UIView.divider()

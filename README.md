@@ -83,7 +83,7 @@ final class ViewController: UIViewController {
                 UIStackView.vertical {
 
                     UIView()
-                      .imperative { view in
+                      .apply { view in
                           print("命令的に記述も可能")
                           view.tintColor = .black
                           view.isUserInteractionEnabled = true

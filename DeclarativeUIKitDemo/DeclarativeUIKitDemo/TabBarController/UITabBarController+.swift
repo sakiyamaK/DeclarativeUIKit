@@ -13,7 +13,7 @@ extension UITabBarController {
     static func rootTabBarController(count: Int = 5) -> UITabBarController {
         return UITabBarController.viewControllers {
             Range(1...count).compactMap { number -> UIViewController in
-                UIViewController().imperative {
+                UIViewController().apply {
                     $0.view.backgroundColor = .white
                     $0.declarative {
                         UILabel(number.description)

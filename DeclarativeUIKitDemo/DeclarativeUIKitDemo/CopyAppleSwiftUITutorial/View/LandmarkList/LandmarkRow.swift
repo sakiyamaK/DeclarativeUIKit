@@ -24,7 +24,7 @@ final class LandmarkRow: UICollectionViewCell {
 
                     UIImageView(assign: &starView)
                         .image(UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysTemplate))
-                        .imperative({
+                        .apply({
                             $0.tintColor = .systemYellow
                         }).isHidden(true)
                 }

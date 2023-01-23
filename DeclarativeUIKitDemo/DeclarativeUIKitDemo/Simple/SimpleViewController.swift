@@ -35,7 +35,7 @@ final class SimpleViewController: UIViewController {
             UIScrollView.horizontal {
                 UIStackView.horizontal{ stackView in
                     UIView()
-                        .imperative { _ in
+                        .apply { _ in
                             print(stackView)
                         }
                         .width(100)
@@ -53,7 +53,7 @@ final class SimpleViewController: UIViewController {
                         .size(width: 100, height: 100)
                         .backgroundColor(.black)
                         .transform(.init(rotationAngle: 45.0/360 * Double.pi))
-                    UIView.imperative {
+                    UIView().apply {
                         $0.heightConstraint = 100
                         $0.widthConstraint = 100
                         $0.backgroundColor = .systemRed
@@ -114,7 +114,7 @@ final class SimpleViewController: UIViewController {
                             .textColor(.black)
                             .textAlignment(.center)
                     } else {
-                        return UILabel.imperative {
+                        return UILabel().apply {
                             let label = $0 as! UILabel
                             let attributes: [NSAttributedString.Key: Any] = [
                                 .foregroundColor: UIColor.orange,
