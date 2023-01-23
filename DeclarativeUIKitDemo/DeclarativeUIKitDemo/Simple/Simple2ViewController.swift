@@ -104,9 +104,8 @@ final class Simple2ViewController: UIViewController {
                     .padding(insets: .init(horizontal: 10))
                     .zStack {
                         UIActivityIndicatorView(assign: &indicator)
-                            .imperative({
-                                let indicator = $0 as! UIActivityIndicatorView
-                                indicator.startAnimating()
+                            .apply({
+                                $0.startAnimating()
                             })
                             .style(.large)
                             .color(.blue)

@@ -15,7 +15,7 @@ public extension UIView {
     
     @discardableResult
     static func spacer() -> UIView {
-        UIView.imperative {
+        UIView().apply {
             $0.isUserInteractionEnabled = false
         }
     }
@@ -55,6 +55,7 @@ public extension UIView {
     }
     
     @discardableResult
+    @available(*, deprecated, message: "imperative is deprecated. Use apply instead")
     func imperative(_ imperative: ((Self) -> Void)) -> Self {
         imperative(self)
         return self
@@ -226,7 +227,7 @@ public extension UIView {
     
     @discardableResult
     static func imperative(_ imperative: ((Self) -> Void)) -> Self {
-        Self().imperative(imperative)
+        Self().apply(imperative)
     }
     
     @discardableResult

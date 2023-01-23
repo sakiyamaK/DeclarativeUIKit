@@ -3,10 +3,11 @@ import UIKit.UIBezierPath
 public extension UIBezierPath {
     @discardableResult
     static func imperative(_ imperative: ((Self) -> Void)) -> Self {
-        Self().imperative(imperative)
+        Self().apply(imperative)
     }
 
     @discardableResult
+    @available(*, deprecated, message: "imperative is deprecated. Use apply instead")
     func imperative(_ imperative: (Self) -> Void) -> Self {
         imperative(self)
         return self

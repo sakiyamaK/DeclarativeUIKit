@@ -93,19 +93,17 @@ final class MainViewController: UIViewController {
 }
 ```
 
-### imperative
+### apply
 
 Methods to procedurally implement `UIViewController` parameters as standard
 
 ```swift
-func imperative(_ imperative: ((Self) -> Void)) -> Self
-
-static func imperative(_ imperative: ((Self) -> Void)) -> Self
+func apply(_ closure: ((Self) -> Void)) -> Self
 ```
 
 |  parameter | 型 | description |
 | ---- | ---- | ---- |
-| imperative | ((Self) -> Void) | Write parameters procedurally internally by passing themselves as arguments |
+| apply | ((Self) -> Void) | Write parameters procedurally internally by passing themselves as arguments |
 
 
 #### sample

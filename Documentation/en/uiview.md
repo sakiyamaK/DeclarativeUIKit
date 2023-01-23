@@ -108,19 +108,17 @@ final class SampleView: UIView {
 
 ```
 
-### imperative
+### apply
 
 Methods to implement `UIView` parameters procedurally as standard
 
 ```swift
-func imperative(_ imperative: ((Self) -> Void)) -> Self
-
-static func imperative(_ imperative: ((Self) -> Void)) -> Self
+func apply(_ closure: ((Self) -> Void)) -> Self
 ```
 
 |  parameter | 型 | description |
 | ---- | ---- | ---- |
-| imperative | ((Self) -> Void) | Write parameters imperatively internally by passing themselves as arguments |
+| apply | ((Self) -> Void) | Write parameters imperatively internally by passing themselves as arguments |
 
 #### sample
 
@@ -129,16 +127,10 @@ Here is a sample that sets the parameters of `UILabel` imperatively
 ```swift
 self.declarative {
     UIStackView {
-        UILabel.imperative {
-            let label = $0 as! UILabel
-            label.text = "sample1"
-            label.font = UIFont.systemFont(ofSize: 20)
-            label.textColor = .red
-        }
-        UILabel("sample2").imperative {
-            let label = $0 as! UILabel
-            label.font = UIFont.systemFont(ofSize: 20)
-            label.textColor = .blue
+        UILabel().apply {
+            $0.text = "sample1"
+            $0.font = UIFont.systemFont(ofSize: 20)
+            $0.textColor = .red
         }
         UIView.spacer()
     }
@@ -565,15 +557,10 @@ static func path(_ imperativeBezierPath: @escaping () -> Void) -> HelperPathView
 ```swift
 self.declarative {
     UIView.path {
-        UIBezierPath.imperative {
+        UIBezierPath().apply {
             $0.move(to: .init(x: 100, y: 100))
             $0.addLine(to: .init(x: 300, y: 300))
         }.stroke(.black, lineWidth: 10)
-
-        UIBezierPath.imperative {
-            $0.move(to: .init(x: 300, y: 300))
-            $0.addLine(to: .init(x: 100, y: 500))
-        }.stroke(.red, lineWidth: 10)
     }
 }
 ```

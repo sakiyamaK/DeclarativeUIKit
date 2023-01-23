@@ -110,19 +110,17 @@ final class SampleView: UIView {
 
 ```
 
-### imperative
+### apply
 
 `UIView`のパラメータを標準の通り手続的に実装するメソッドです
 
 ```swift
-func imperative(_ imperative: ((Self) -> Void)) -> Self
-
-static func imperative(_ imperative: ((Self) -> Void)) -> Self
+func apply(_ closure: ((Self) -> Void)) -> Self
 ```
 
 |  parameter | 型 | description |
 | ---- | ---- | ---- |
-| imperative | ((Self) -> Void) | 自身を引数として渡すことで内部で手続き的にパラメータを記述する |
+| apply | ((Self) -> Void) | 自身を引数として渡すことで内部で手続き的にパラメータを記述する |
 
 #### sample
 
@@ -131,19 +129,9 @@ static func imperative(_ imperative: ((Self) -> Void)) -> Self
 ```swift
 self.declarative {
     UIStackView {
-        //staticメソッドとして呼び出せる
-        UILabel.imperative {
-            //内部で手続き的に設定できる
-            let label = $0 as! UILabel
-            label.text = "sample1"
-            label.font = UIFont.systemFont(ofSize: 20)
-            label.textColor = .red
-        }
-        //インスタンス生成後にも呼び出せる
-        UILabel("sample2").imperative {
-            let label = $0 as! UILabel
-            label.font = UIFont.systemFont(ofSize: 20)
-            label.textColor = .blue
+        UILabel("sample2").apply {
+            $0.font = UIFont.systemFont(ofSize: 20)
+            $0.textColor = .blue
         }
         UIView.spacer()
     }

@@ -101,24 +101,22 @@ final class MainViewController: UIViewController {
 }
 ```
 
-### imperative
+### apply
 
 `UIViewController`のパラメータを標準の通り手続的に実装するメソッドです
 
 ```swift
-func imperative(_ imperative: ((Self) -> Void)) -> Self
-
-static func imperative(_ imperative: ((Self) -> Void)) -> Self
+func apply(_ closure: ((Self) -> Void)) -> Self
 ```
 
 |  parameter | 型 | description |
 | ---- | ---- | ---- |
-| imperative | ((Self) -> Void) | 自身を引数として渡すことで内部で手続き的にパラメータを記述する |
+| apply | ((Self) -> Void) | 自身を引数として渡すことで内部で手続き的にパラメータを記述する |
 
 
 #### sample
 ```swift
-UIViewController().imperative {
+UIViewController().apply {
   $0.view.backgroundColor = .white
   $0.declarative {
       UILabel(number.description)

@@ -2,14 +2,12 @@
 
 ## function
 
-### imperative
+### apply
 
-Methods to implement `UIBezierPath` parameters procedurally as standard.
+Methods to apply `UIBezierPath` parameters procedurally as standard.
 
 ```swift
-func imperative(_ imperative: ((Self) -> Void)) -> Self
-
-static func imperative(_ imperative: ((Self) -> Void)) -> Self
+func apply(_ apply: ((Self) -> Void)) -> Self
 ```
 
 ### storke
@@ -38,11 +36,6 @@ self.declarative {
                 $0.move(to: CGPoint(x: 0, y: size.height))
                 $0.addLine(to: CGPoint(x: size.width, y: 0))
             }.stroke(.green, lineWidth: 10)
-
-            UIBezierPath.imperative {
-                $0.move(to: CGPoint(x: 0, y: 0))
-                $0.addLine(to: CGPoint(x: size.width, y: size.height))
-            }.stroke(.red, lineWidth: 10)
 
             let path = UIBezierPath()
             path.move(to: CGPoint(x: size.width/2, y: 0))
