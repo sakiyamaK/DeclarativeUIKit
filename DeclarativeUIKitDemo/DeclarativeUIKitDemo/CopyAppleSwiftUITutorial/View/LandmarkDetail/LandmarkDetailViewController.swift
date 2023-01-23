@@ -73,15 +73,13 @@ final class LandmarkDetailViewController: UIViewController {
         self.declarative {
             UIScrollView.vertical {
                 UIStackView.vertical {
-                    MapView.imperative {
-                        let mapView = $0 as! MapView
-                        mapView.setRegion(landmark.locationCoordinate)
+                    MapView().apply {
+                        $0.setRegion(landmark.locationCoordinate)
                     }
                     .height(300)
                     .zStack {
-                        CircleImageView().imperative {
-                            let circleImageView = $0 as! CircleImageView
-                            circleImageView.setLandmark(landmark)
+                        CircleImageView().apply {
+                            $0.setLandmark(landmark)
                         }
                         .centerX()
                         .bottom()

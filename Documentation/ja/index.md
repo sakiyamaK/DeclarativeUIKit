@@ -24,7 +24,7 @@
 - [function](uiviewcontroller.md#function)
   - [declarative](uiview.md#declarative)
     - [sample](uiview.md#sample-1)
-  - [imperative](uiview.md#imperative)
+  - [apply](uiview.md#apply)
     - [sample](uiview.md#sample-2)
   - [assign](uiview.md#assign)
     - [sample](uiview.md#sample-3)
@@ -151,7 +151,7 @@
 
 ### [UIBezierPath](uibezierpath.md#uibezierpath)
   - [function](uibezierpath.md#function)
-    - [imperative](uibezierpath.md#imperative)
+    - [apply](uibezierpath.md#apply)
     - [stroke](uibezierpath.md#stroke)
       - [sample](uibezierpath.md#sample)
 

@@ -12,13 +12,13 @@ final class PathViewController: UIViewController {
                     let size = superview.frame.size
 
                     //宣言的に書けるよ
-                    UIBezierPath().imperative {
+                    UIBezierPath().apply {
                         $0.move(to: CGPoint(x: 0, y: size.height))
                         $0.addLine(to: CGPoint(x: size.width, y: 0))
                     }.stroke(.green, lineWidth: 10)
 
                     //いくらでも増やせるよ
-                    UIBezierPath.imperative {
+                    UIBezierPath().apply {
                         $0.move(to: CGPoint(x: 0, y: 0))
                         $0.addLine(to: CGPoint(x: size.width, y: size.height))
                     }.stroke(.red, lineWidth: 10)

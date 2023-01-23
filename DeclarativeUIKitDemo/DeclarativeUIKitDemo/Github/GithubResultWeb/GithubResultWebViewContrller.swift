@@ -20,18 +20,16 @@ final class GithubSearchResultViewController: UIViewController {
         
         self.declarative {
             UIStackView.vertical {
-                WKWebView.imperative {
-                    let webView = $0 as! WKWebView
-                    webView.uiDelegate = self
-                    webView.navigationDelegate = self
+                WKWebView().apply {
+                    $0.uiDelegate = self
+                    $0.navigationDelegate = self
                 }
                 .assign(to: &webView)
                 .isHidden(true)
                 
                 UIActivityIndicatorView(assign: &activityIndicator)
-                    .imperative {
-                        let indicator = $0 as! UIActivityIndicatorView
-                        indicator.startAnimating()
+                    .apply {
+                        $0.startAnimating()
                     }
                     .center()
                     .offset(y: -100)

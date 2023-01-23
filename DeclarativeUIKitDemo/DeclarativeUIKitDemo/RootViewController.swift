@@ -17,10 +17,9 @@ final class RootViewController: UIViewController {
         self.navigationItem.title = "Root"
         
         let Button = {(title: String) -> UIButton in
-            UIButton.imperative {
-                let button = $0 as! UIButton
-                button.contentEdgeInsets = .init(top: 10, left: 10, bottom: 10, right: 10)
-                button.titleLabel?.setContentCompressionResistancePriority(.required, for: .horizontal)
+            UIButton().apply {
+                $0.contentEdgeInsets = .init(top: 10, left: 10, bottom: 10, right: 10)
+                $0.titleLabel?.setContentCompressionResistancePriority(.required, for: .horizontal)
             }
             .title(title)
             .font(UIFont.systemFont(ofSize: 30))

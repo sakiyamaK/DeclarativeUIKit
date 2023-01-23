@@ -24,7 +24,7 @@ UITabBarAppearance(configureBackgroundType: .default)
 以下の標準パラメータは宣言的に記述できます
 
 ```swift
-func imperative(_ imperative: ((Self) -> Void)) -> Self
+func apply(_ closure: ((Self) -> Void)) -> Self
 
 func backgroundEffect(_ backgroundEffect: UIBlurEffect?) -> Self
 

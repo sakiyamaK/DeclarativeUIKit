@@ -16,6 +16,7 @@ public extension UIBarAppearance {
     }
     
     @discardableResult
+    @available(*, deprecated, message: "imperative is deprecated. Use apply instead")
     func imperative(_ imperative: ((Self) -> Void)) -> Self {
         imperative(self)
         return self
