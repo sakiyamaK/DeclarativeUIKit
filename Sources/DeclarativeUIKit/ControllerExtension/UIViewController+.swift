@@ -2,6 +2,7 @@ import UIKit.UIViewController
 
 public extension UIViewController {
         
+    @discardableResult
     func declarative(
         safeAreas: UIEdgeBools,
         priorities: UIEdgePriorities,
@@ -11,7 +12,7 @@ public extension UIViewController {
         @SingleUIViewBuilder outsideSafeAreaBottom outsideSafeAreaBottomBuilder: () -> UIView?,
         @SingleUIViewBuilder outsideSafeAreaTrailing outsideSafeAreaTrailingBuilder: () -> UIView?,
         @SingleUIViewBuilder _ builder: () -> UIView
-    ) {
+    ) -> Self {
         let view = builder()
         if reset {
             self.view.subviews.forEach { $0.removeFromSuperview() }
@@ -65,14 +66,17 @@ public extension UIViewController {
                 self.view.trailingAnchor.constraint(equalTo: trailingView.trailingAnchor)
             ])
         }
+        
+        return self
     }
     
+    @discardableResult
     func declarative(
         safeAreas: UIEdgeBools,
         priorities: UIEdgePriorities,
         reset: Bool,
         @SingleUIViewBuilder _ builder: () -> UIView
-    ) {
+    ) -> Self {
         self.declarative(
             safeAreas: safeAreas,
             priorities: priorities,
@@ -85,6 +89,7 @@ public extension UIViewController {
         )
     }
     
+    @discardableResult
     func declarative(
         safeAreas: UIEdgeBools,
         @SingleUIViewBuilder outsideSafeAreaTop outsideSafeAreaTopBuilder: () -> UIView?,
@@ -92,7 +97,7 @@ public extension UIViewController {
         @SingleUIViewBuilder outsideSafeAreaBottom outsideSafeAreaBottomBuilder: () -> UIView?,
         @SingleUIViewBuilder outsideSafeAreaTrailing outsideSafeAreaTrailingBuilder: () -> UIView?,
         @SingleUIViewBuilder _ builder: () -> UIView
-    ) {
+    ) -> Self {
         self.declarative(
             safeAreas: safeAreas,
             priorities: .init(all: .required),
@@ -105,6 +110,7 @@ public extension UIViewController {
         )
     }
 
+    @discardableResult
     func declarative(
         priorities: UIEdgePriorities,
         @SingleUIViewBuilder outsideSafeAreaTop outsideSafeAreaTopBuilder: () -> UIView?,
@@ -112,7 +118,7 @@ public extension UIViewController {
         @SingleUIViewBuilder outsideSafeAreaBottom outsideSafeAreaBottomBuilder: () -> UIView?,
         @SingleUIViewBuilder outsideSafeAreaTrailing outsideSafeAreaTrailingBuilder: () -> UIView?,
         @SingleUIViewBuilder _ builder: () -> UIView
-    ) {
+    ) -> Self {
         self.declarative(
             safeAreas: .init(all: true),
             priorities: priorities,
@@ -125,6 +131,7 @@ public extension UIViewController {
         )
     }
 
+    @discardableResult
     func declarative(
         reset: Bool,
         @SingleUIViewBuilder outsideSafeAreaTop outsideSafeAreaTopBuilder: () -> UIView?,
@@ -132,7 +139,7 @@ public extension UIViewController {
         @SingleUIViewBuilder outsideSafeAreaBottom outsideSafeAreaBottomBuilder: () -> UIView?,
         @SingleUIViewBuilder outsideSafeAreaTrailing outsideSafeAreaTrailingBuilder: () -> UIView?,
         @SingleUIViewBuilder _ builder: () -> UIView
-    ) {
+    ) -> Self {
         self.declarative(
             safeAreas: .init(all: true),
             priorities: .init(all: .required),
@@ -145,13 +152,14 @@ public extension UIViewController {
         )
     }
     
+    @discardableResult
     func declarative(
         @SingleUIViewBuilder outsideSafeAreaTop outsideSafeAreaTopBuilder: () -> UIView?,
         @SingleUIViewBuilder outsideSafeAreaLeading outsideSafeAreaLeadingBuilder: () -> UIView?,
         @SingleUIViewBuilder outsideSafeAreaBottom outsideSafeAreaBottomBuilder: () -> UIView?,
         @SingleUIViewBuilder outsideSafeAreaTrailing outsideSafeAreaTrailingBuilder: () -> UIView?,
         @SingleUIViewBuilder _ builder: () -> UIView
-    ) {
+    ) -> Self {
         self.declarative(
             safeAreas: .init(all: true),
             priorities: .init(all: .required),
@@ -164,39 +172,50 @@ public extension UIViewController {
         )
     }
 
+    @discardableResult
     func declarative(
         priorities: UIEdgePriorities,
         @SingleUIViewBuilder _ builder: () -> UIView
-    ) {
+    ) -> Self {
         self.declarative(safeAreas: .init(), priorities: priorities, reset: true, builder)
     }
 
+    @discardableResult
     func declarative(
         safeAreas: UIEdgeBools,
         @SingleUIViewBuilder _ builder: () -> UIView
-    ) {
+    ) -> Self {
         self.declarative(safeAreas: safeAreas, priorities: .init(), reset: true, builder)
     }
 
+    @discardableResult
     func declarative(
         safeAreas: UIEdgeBools,
         reset: Bool,
         @SingleUIViewBuilder _ builder: () -> UIView
-    ) {
+    ) -> Self {
         self.declarative(safeAreas: safeAreas, priorities: .init(), reset: reset, builder)
     }
 
+    @discardableResult
     func declarative(
         reset: Bool,
         @SingleUIViewBuilder _ builder: () -> UIView
-    ) {
+    ) -> Self {
         self.declarative(safeAreas: .init(), priorities: .init(), reset: reset, builder)
     }
 
+    @discardableResult
     func declarative(
         @SingleUIViewBuilder _ builder: () -> UIView
-    ) {
+    ) -> Self {
         self.declarative(safeAreas: .init(), priorities: .init(), reset: true, builder)
+    }
+    
+    @discardableResult
+    func configureView(_ configure: ((UIView) -> Void)) -> Self {
+        configure(self.view)
+        return self
     }
     
     func getView(tag: Int) -> UIView? {
@@ -225,7 +244,6 @@ public extension UIViewController {
         self.tabBarItem = tabBarItemBuilder()
         return self
     }
-
 
     @discardableResult
     func present(from: UIViewController, animated: Bool, completion: (() -> Void)? = nil) -> Self {
