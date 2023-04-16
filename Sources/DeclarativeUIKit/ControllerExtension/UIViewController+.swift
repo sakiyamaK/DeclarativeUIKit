@@ -251,3 +251,14 @@ public extension UIViewController {
         return self
     }    
 }
+
+@available(iOS 15.0, *)
+public extension UIViewController {
+    @discardableResult
+    func configureSheetPresentationController(_ configure: ((UISheetPresentationController) -> Void)) -> Self {
+        if let sheet = sheetPresentationController {
+            configure(sheet)
+        }
+        return self
+    }
+}
