@@ -1,15 +1,25 @@
 ## Documentation
 
-- Reference Version: **1.7.0**
-- Last Update: **2022/12/04**
+- Reference Version: **1.8.0**
+- Last Update: **2023/04/18**
 
 ### Table Of Contents
 
 ### [UIViewController](uiviewcontroller.md#uiviewcontroller)
 - [function](uiviewcontroller.md#function)
   - [declarative](uiviewcontroller.md#declarative)
-  - [sample](uiviewcontroller.md#sample)
-
+    - [sample](uiviewcontroller.md#sample)
+  - [apply](uiviewcontroller.md#apply)
+    - [sample](uiviewcontroller.md#sample-1)
+  - [tabBarItem](uiviewcontroller.md#tabBarItem)
+    - [sample](uiviewcontroller.md#sample-2)
+  - [present](uiviewcontroller.md#present)
+    - [sample](uiviewcontroller.md#sample-3)
+  - [applyView](uiviewcontroller.md#applyView)
+    - [sample](uiviewcontroller.md#sample-4)
+  - [applySheetPresentationController](uiviewcontroller.md#applySheetPresentationController)
+    - [sample](uiviewcontroller.md#sample-5)
+    
 ### [UIAlertController](uialertcontroller.md#uialertcontroller)
 - [function](uialertcontroller.md#function)
   - [sample](uialertcontroller.md#sample)
@@ -203,3 +213,6 @@
   - [some default parameters](uitabbarcontroller.md#some-default-parameters)
   - [tabBarAppearance](uitabbarcontroller.md#tabBarAppearance)
     - [sample](uitabbarcontroller.md#sample2)
+
+### [UISheetPresentationController](uisheetpresentationcontroller.md#uisheetpresentationcontroller)
+ [function](uisheetpresentationcontroller.md#function)

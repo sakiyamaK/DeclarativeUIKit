@@ -213,7 +213,7 @@ public extension UIViewController {
     }
     
     @discardableResult
-    func configureView(_ configure: ((UIView) -> Void)) -> Self {
+    func applyView(_ configure: ((UIView) -> Void)) -> Self {
         configure(self.view)
         return self
     }
@@ -255,7 +255,7 @@ public extension UIViewController {
 @available(iOS 15.0, *)
 public extension UIViewController {
     @discardableResult
-    func configureSheetPresentationController(_ configure: ((UISheetPresentationController) -> Void)) -> Self {
+    func applySheetPresentationController(_ configure: ((UISheetPresentationController) -> Void)) -> Self {
         if let sheet = sheetPresentationController {
             configure(sheet)
         }
