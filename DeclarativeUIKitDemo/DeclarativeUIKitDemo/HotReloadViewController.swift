@@ -62,61 +62,42 @@ final class HotReloadViewController: UIViewController {
 
 @objc private extension HotReloadViewController {
     func setupLayout() {
-        
-        self.view.backgroundColor = .white
-        
-        self.declarative {
-            
-            UIScrollView.vertical {
-                UIStackView.vertical {
-
-                    UIView()
-                      .apply { view in
-                          print("命令的に記述も可能")
-                          view.tintColor = .black
-                          view.isUserInteractionEnabled = true
-                      }
-//                      .size(width: 100, height: 100)
-                      .backgroundColor(.red)
-                      .transform(.init(rotationAngle: 45.0 / 360 * Double.pi))
-                      .cornerRadius(30, maskedCorners: [.layerMinXMinYCorner, .layerMaxXMaxYCorner])
-                      .border(color: .blue, width: 10)
-                      .customSpacing(40)
-
-                    UIButton()
-                        .title("button", for: .normal)
-                        .titleColor(.brown, for: .normal)
-                        .add(target: self, for: .touchUpInside, { _ in
-                            print("タッチアクション")
-                        })
-
-                    Array(1 ... 10).compactMap { num in
-                        UILabel("\(num)番目のlabel")
-                            .textColor(.black)
-                            .textAlignment(.center)
-                    }
-
-                    UIView.spacer().height(500)
-                }
-                .spacing(20)
-            }
-            .showsScrollIndicator(true)
+        guard #available(iOS 15.0, *) else {
+            fatalError()
         }
         
-        self.declarative(reset: false) {
-            UIButton("hoge")
-                .image(UIImage(systemName: "plus"))
-                .contentEdgeInsets(.init(top: 10, left: 10, bottom: 20, right: 20))
-                .imageEdgeInsets(.init(top: 0, left: -10, bottom: 0, right: 0))
-                .titleEdgeInsets(.init(top: 10, left: 10, bottom: 0, right: -10))
-                .titleColor(.brown, for: .normal)
-                .add(target: self, for: .touchUpInside, { _ in
-                    print("タッチアクション")
-                })
-                .backgroundColor(.black)
-                .bottom()
-                .right()
-                .offset(x: -10, y: 10)
+        self.declarative {
+            UIButton("モーダル出て")
+                .titleColor(.blue)
+                .add(target: self, for: .touchUpInside) { _ in
+                    UIViewController()
+                        .applyView {
+                            $0.backgroundColor(.white)
+                        }
+                        .declarative {
+                            UIScrollView.vertical {
+                                UIStackView.vertical {
+                                    (0...50).compactMap { idx in
+                                        UILabel("\(idx)でーす")
+                                            .textAlignment(.center)
+                                            .contentPriorities(.init(vertical: .required))
+                                            .customSpacing(8)
+                                    }
+                                }
+                                .padding(insets: .init(vertical: 30))
+                            }
+                        }
+                        .applySheetPresentationController {
+                            $0.detents([.large(), .medium()])
+                                .preferredCornerRadius(16)
+                                .prefersGrabberVisible(true)
+                                .prefersScrollingExpandsWhenScrolledToEdge(false)
+                                .largestUndimmedDetentIdentifier(.large)
+                        }
+                        .present(from: self, animated: true)
+                }
+                .center()
         }
     }
 }
+
