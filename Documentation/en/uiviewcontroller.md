@@ -140,3 +140,71 @@ UIViewController()
 ```swift
 func present(from: UIViewController, animated: Bool, completion: (() -> Void)? = nil) -> Self
 ```
+
+#### sample
+
+```swift
+UIViewController().declarative {
+  UIStackView.vertical {
+    UILabel("Screen after transition")
+      .center()
+  }
+}.present(from: self, animated: true) {
+  print("Screen transition has occurred.")
+}
+```
+
+### applyView
+
+Declaratively describe the `view` parameter of `UIViewController
+
+```swift
+func applyView(_ configure: ((UIView) -> Void)) -> Self
+```
+
+#### sample
+```swift
+UIViewController()
+  .applyView {
+    // view.background = .white
+    $0.backgroundColor(.white)
+  }
+  .declarative {
+    UIStackView.vertical {
+      UILabel("layout")
+        .center()
+    }
+  }
+```
+
+### applySheetPresentationController
+
+Declaratively describe the parameters of `UIViewController`'s `sheetPresentationController`.
+
+```swift
+@available(iOS 15.0, *)
+func applySheetPresentationController(_ configure: ((UISheetPresentationController) -> Self
+```
+
+#### sample
+```swift
+UIViewController()
+  .declarative {
+    UIStackView.vertical {
+        (0...50).compactMap { idx in
+            UILabel("\(idx)")
+                .textAlignment(.center)
+                .contentPriorities(.init(vertical: .required))
+                .customSpacing(8)
+        }
+    }
+  }
+  .applySheetPresentationController {
+      $0.detents([.large(), .medium()])
+          .preferredCornerRadius(16)
+          .prefersGrabberVisible(true)
+          .prefersScrollingExpandsWhenScrolledToEdge(false)
+          .largestUndimmedDetentIdentifier(.large)
+  }
+  .present(from: self, animated: true)
+```

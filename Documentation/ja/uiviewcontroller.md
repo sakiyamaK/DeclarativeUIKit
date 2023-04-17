@@ -145,6 +145,76 @@ UIViewController()
 
 ### present
 
+呼び出される`UIViewController`から画面遷移するメソッドを宣言的に記述します
+
 ```swift
 func present(from: UIViewController, animated: Bool, completion: (() -> Void)? = nil) -> Self
+```
+
+#### sample
+
+```swift
+UIViewController().declarative {
+  UIStackView.vertical {
+    UILabel("遷移後の画面")
+      .center()
+  }
+}.present(from: self, animated: true) {
+  print("画面遷移しました")
+}
+```
+
+### applyView
+
+`UIViewController`がもつ`view`のパラメータを宣言的に記述します
+
+```swift
+func applyView(_ configure: ((UIView) -> Void)) -> Self
+```
+
+#### sample
+```swift
+UIViewController()
+  .applyView {
+    // 背景を白にする
+    $0.backgroundColor(.white)
+  }
+  .declarative {
+    UIStackView.vertical {
+      UILabel("レイアウトを組みます")
+        .center()
+    }
+  }
+```
+
+### applySheetPresentationController
+
+`UIViewController`がもつ`sheetPresentationController`のパラメータを宣言的に記述します
+
+```swift
+@available(iOS 15.0, *)
+func applySheetPresentationController(_ configure: ((UISheetPresentationController) -> Self
+```
+
+#### sample
+```swift
+UIViewController()
+  .declarative {
+    UIStackView.vertical {
+        (0...50).compactMap { idx in
+            UILabel("\(idx)")
+                .textAlignment(.center)
+                .contentPriorities(.init(vertical: .required))
+                .customSpacing(8)
+        }
+    }
+  }
+  .applySheetPresentationController {
+      $0.detents([.large(), .medium()])
+          .preferredCornerRadius(16)
+          .prefersGrabberVisible(true)
+          .prefersScrollingExpandsWhenScrolledToEdge(false)
+          .largestUndimmedDetentIdentifier(.large)
+  }
+  .present(from: self, animated: true)
 ```
