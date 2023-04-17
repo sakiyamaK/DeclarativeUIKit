@@ -28,30 +28,30 @@ final class HotReloadViewController: UIViewController {
         NotificationCenter.default.addInjectionObserver(self, selector: #selector(setupLayout), object: nil)
         setupLayout()
     }
-
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        super.touchesBegan(touches, with: event)
-//        let touche = touches.first!
-//        let point = shadowPoint(from: touche.location(in: cardView))
-//        cardView.shadow(color: .black, radius: 10, x: point.x, y: point.y)
-//    }
-//
-//    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        super.touchesCancelled(touches, with: event)
-//        cardView.shadow(color: .black, radius: 10, x: 0, y: 10)
-//    }
-//
-//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        super.touchesEnded(touches, with: event)
-//        cardView.shadow(color: .black, radius: 10, x: 0, y: 10)
-//    }
-//
-//    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        super.touchesMoved(touches, with: event)
-//        let touche = touches.first!
-//        let point = shadowPoint(from: touche.location(in: cardView))
-//        cardView.shadow(color: .black, radius: 10, x: point.x, y: point.y)
-//    }
+    
+    //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    //        super.touchesBegan(touches, with: event)
+    //        let touche = touches.first!
+    //        let point = shadowPoint(from: touche.location(in: cardView))
+    //        cardView.shadow(color: .black, radius: 10, x: point.x, y: point.y)
+    //    }
+    //
+    //    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+    //        super.touchesCancelled(touches, with: event)
+    //        cardView.shadow(color: .black, radius: 10, x: 0, y: 10)
+    //    }
+    //
+    //    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    //        super.touchesEnded(touches, with: event)
+    //        cardView.shadow(color: .black, radius: 10, x: 0, y: 10)
+    //    }
+    //
+    //    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    //        super.touchesMoved(touches, with: event)
+    //        let touche = touches.first!
+    //        let point = shadowPoint(from: touche.location(in: cardView))
+    //        cardView.shadow(color: .black, radius: 10, x: point.x, y: point.y)
+    //    }
     
     private func shadowPoint(from point: CGPoint) -> CGPoint {
         let x = (point.x - 250/2)/10
@@ -66,7 +66,9 @@ final class HotReloadViewController: UIViewController {
             fatalError()
         }
         
-        self.declarative {
+        self.applyView {
+            $0.backgroundColor(.white)
+        }.declarative {
             UIButton("モーダル出て")
                 .titleColor(.blue)
                 .add(target: self, for: .touchUpInside) { _ in
