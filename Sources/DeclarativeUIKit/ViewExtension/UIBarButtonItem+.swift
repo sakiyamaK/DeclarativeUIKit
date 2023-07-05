@@ -45,19 +45,7 @@ public extension UIBarButtonItem {
         self.customView = customView
         return self
     }
-    
-    @discardableResult
-    func primaryAction(_ primaryAction: UIAction?) -> Self {
-        self.primaryAction = primaryAction
-        return self
-    }
-    
-    @discardableResult
-    func changesSelectionAsPrimaryAction(_ changesSelectionAsPrimaryAction: Bool) -> Self {
-        self.changesSelectionAsPrimaryAction = changesSelectionAsPrimaryAction
-        return self
-    }
-    
+        
     @discardableResult
     func action(_ action: Selector?) -> Self {
         self.action = action
@@ -149,11 +137,26 @@ public extension UIBarButtonItem {
     }
 }
 
+@available(iOS 14.0, *)
+public extension UIBarButtonItem {
+    @discardableResult
+    func primaryAction(_ primaryAction: UIAction?) -> Self {
+        self.primaryAction = primaryAction
+        return self
+    }
+}
+
 @available(iOS 15.0, *)
 public extension UIBarButtonItem {
     @discardableResult
     func isSelected(_ isSelected: Bool) -> Self {
         self.isSelected = isSelected
+        return self
+    }
+    
+    @discardableResult
+    func changesSelectionAsPrimaryAction(_ changesSelectionAsPrimaryAction: Bool) -> Self {
+        self.changesSelectionAsPrimaryAction = changesSelectionAsPrimaryAction
         return self
     }
 }
