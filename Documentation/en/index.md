@@ -217,16 +217,14 @@
 ### [UISheetPresentationController](uisheetpresentationcontroller.md#uisheetpresentationcontroller)
  [function](uisheetpresentationcontroller.md#function)
 
-### [UIBarButtonItem]
-(uibarbuttonitem.md#uibarbuttonitem)
+### [UIBarButtonItem](uibarbuttonitem.md#uibarbuttonitem)
 - [initializer](uibarbuttonitem.md#initializer)
 - [function](uibarbuttonitem.md#function)
   - [add action](uibarbuttonitem.md#add-action)
   - [some default parameters](uibarbuttonitem.md#some-default-parameters)
     - [sample](uibarbuttonitem.md#sample)
 
-### [UIBarItem]
-(uibaritem.md#uibaritem)
+### [UIBarItem](uibaritem.md#uibaritem)
 - [function](uibaritem.md#function)
   - [some default parameters](uibaritem.md#some-default-parameters)
     - [sample](uibaritem.md#sample)
