@@ -187,6 +187,45 @@ UIViewController()
   }
 ```
 
+### applyNavigationItem
+
+`UIViewController`がもつ`navigationItem`のパラメータを宣言的に記述します
+
+```swift
+func applyNavigationItem(_ configure: ((UINavigationItem) -> Void)) -> Self
+```
+
+#### sample
+```swift
+        self.applyView {
+            $0.backgroundColor(.white)
+        }
+        .applyNavigationItem({
+            //navigationItemのrightBarButtonItemsを設定する
+            $0.rightBarButtonItems = [
+                UIBarButtonItem(barButtonSystemItem: .action)
+                    .target(self)
+                    .backgroundImage(UIImage(systemName: "trash"), for: .normal, barMetrics: .default)
+                    .action({_ in
+                        print("tap1")
+                    }),
+                UIBarButtonItem()
+                    .title("test")
+                    .style(.plain)
+                    .target(self)
+                    .tintColor(.brown)
+                    .action({ _ in
+                        print("tap2")
+                    }),
+            ]
+        })
+        .declarative {
+            UILabel("レイアウトを組みます")
+                .center()
+        }
+
+```
+
 ### applySheetPresentationController
 
 `UIViewController`がもつ`sheetPresentationController`のパラメータを宣言的に記述します
