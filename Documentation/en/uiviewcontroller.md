@@ -177,6 +177,45 @@ UIViewController()
   }
 ```
 
+### applyNavigationItem
+
+Declaratively describe the `navigationItem` parameter of `UIViewController
+
+```swift
+func applyNavigationItem(_ configure: ((UINavigationItem) -> Void)) -> Self
+```
+
+#### sample
+```swift
+        self.applyView {
+            $0.backgroundColor(.white)
+        }
+        .applyNavigationItem({
+            // navigationItem.rightBarButtonItems
+            $0.rightBarButtonItems = [
+                UIBarButtonItem(barButtonSystemItem: .action)
+                    .target(self)
+                    .backgroundImage(UIImage(systemName: "trash"), for: .normal, barMetrics: .default)
+                    .action({_ in
+                        print("tap1")
+                    }),
+                UIBarButtonItem()
+                    .title("test")
+                    .style(.plain)
+                    .target(self)
+                    .tintColor(.brown)
+                    .action({ _ in
+                        print("tap2")
+                    }),
+            ]
+        })
+        .declarative {
+            UILabel("layou")
+                .center()
+        }
+
+```
+
 ### applySheetPresentationController
 
 Declaratively describe the parameters of `UIViewController`'s `sheetPresentationController`.

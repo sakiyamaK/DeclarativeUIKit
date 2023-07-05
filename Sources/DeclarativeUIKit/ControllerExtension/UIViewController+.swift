@@ -218,6 +218,13 @@ public extension UIViewController {
         return self
     }
     
+    @discardableResult
+    func applyNavigationItem(_ configure: ((UINavigationItem) -> Void)) -> Self {
+        configure(self.navigationItem)
+        return self
+    }
+
+    
     func getView(tag: Int) -> UIView? {
         self.view.getView(tag: tag)
     }
