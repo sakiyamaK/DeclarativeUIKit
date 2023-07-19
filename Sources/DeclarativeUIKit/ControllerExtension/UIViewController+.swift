@@ -212,6 +212,10 @@ public extension UIViewController {
         self.declarative(safeAreas: .init(), priorities: .init(), reset: true, builder)
     }
     
+    func getView(tag: Int) -> UIView? {
+        self.view.getView(tag: tag)
+    }
+    
     @discardableResult
     func applyView(_ configure: ((UIView) -> Void)) -> Self {
         configure(self.view)
@@ -223,10 +227,11 @@ public extension UIViewController {
         configure(self.navigationItem)
         return self
     }
-
-    
-    func getView(tag: Int) -> UIView? {
-        self.view.getView(tag: tag)
+            
+    @discardableResult
+    func applyPopoverPresentationController(_ configure: (UIPopoverPresentationController?) -> Void) -> Self {
+        configure(self.popoverPresentationController)
+        return self
     }
 }
 
@@ -249,6 +254,24 @@ public extension UIViewController {
     @discardableResult
     func tabBarItem(_ tabBarItemBuilder: (() -> UITabBarItem)) -> Self {
         self.tabBarItem = tabBarItemBuilder()
+        return self
+    }
+    
+    @discardableResult
+    func modalPresentationStyle(_ modalPresentationStyle: UIModalPresentationStyle) -> Self {
+        self.modalPresentationStyle = modalPresentationStyle
+        return self
+    }
+    
+    @discardableResult
+    func modalTransitionStyle(_ modalTransitionStyle: UIModalTransitionStyle) -> Self {
+        self.modalTransitionStyle = modalTransitionStyle
+        return self
+    }
+    
+    @discardableResult
+    func preferredContentSize(_ preferredContentSize: CGSize) -> Self {
+        self.preferredContentSize = preferredContentSize
         return self
     }
 
