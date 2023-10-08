@@ -135,8 +135,8 @@ extension GithubSearchCollectionViewController: UICollectionViewDataSource {
 
 import SwiftUI
 
-private struct ViewController_Wrapper: UIViewControllerRepresentable {
-    typealias ViewController = GithubSearchCollectionViewController
+#Preview {
+
     
     final class GithubSearchPresenterMock: GithubSearchPresenterInput {
         
@@ -158,25 +158,11 @@ private struct ViewController_Wrapper: UIViewControllerRepresentable {
         func didSelect(index: Int) {
             print(index)
         }
-        
     }
     
-    func makeUIViewController(context: Context) -> ViewController {
-        let vc = ViewController()
-        let presenter = GithubSearchPresenterMock(output: vc)
-        vc.inject(presenter: presenter)
-        vc.update(loading: false)
-        return vc
-    }
-    
-    func updateUIViewController(_ vc: ViewController, context: Context) {
-    }
-}
-
-struct GithubSearchCollectionViewController_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            ViewController_Wrapper()
-        }
-    }
+    let vc = GithubSearchCollectionViewController()
+    let presenter = GithubSearchPresenterMock(output: vc)
+    vc.inject(presenter: presenter)
+    vc.update(loading: false)
+    return vc
 }

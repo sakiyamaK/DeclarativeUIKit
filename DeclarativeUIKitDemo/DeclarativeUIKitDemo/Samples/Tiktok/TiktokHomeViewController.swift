@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  TiktokHomeViewController.swift
 //  
 //
 //  Created by sakiyamaK on 2022/08/21.
@@ -144,21 +144,6 @@ final class TiktokHomeViewController: UIViewController {
 
 import SwiftUI
 
-struct TiktokHomeViewController_Wrapper: UIViewControllerRepresentable {
-    typealias ViewController = TiktokHomeViewController
-    func makeUIViewController(context: Context) -> ViewController {
-        let vc = ViewController()
-        return vc
-    }
-
-    func updateUIViewController(_ vc: ViewController, context: Context) {
-    }
-}
-
-struct TiktokHomeViewController_Previews: PreviewProvider {
-  static var previews: some View {
-      Group {
-          TiktokHomeViewController_Wrapper()
-      }
-  }
+#Preview {
+    TiktokHomeViewController()
 }

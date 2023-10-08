@@ -50,30 +50,14 @@ final class LandmarkRow: UICollectionViewCell {
 
 import SwiftUI
 
-private struct View_Wrapper: UIViewRepresentable {
-    typealias View = LandmarkRow
-    
-    var landmark: Landmark
-    
-    func makeUIView(context: Context) -> View {
-        return View.init(frame: .zero)
-    }
-    
-    func updateUIView(_ cell: View, context: Context) {
-        cell.configure(landmark: landmark)
-    }
+#Preview(traits: .fixedLayout(width: 300, height: 70)) {
+    let cell = LandmarkRow()
+    cell.configure(landmark: ModelData.landmarks[0])
+    return cell
 }
 
-struct LandmarkRow_Previews: PreviewProvider {
-    
-    static var landmarks = ModelData.landmarks
-    
-    static var previews: some View {
-        Group {
-            ForEach(0..<2) { idx in
-                View_Wrapper(landmark: landmarks[idx])
-            }
-        }
-        .previewLayout(.fixed(width: 300, height: 70))
-    }
+#Preview(traits: .fixedLayout(width: 300, height: 70)) {
+    let cell = LandmarkRow()
+    cell.configure(landmark: ModelData.landmarks[1])
+    return cell
 }

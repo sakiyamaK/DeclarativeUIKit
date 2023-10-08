@@ -116,25 +116,9 @@ extension LandmarkListViewController: UICollectionViewDataSource {
 
 import SwiftUI
 
-private struct ViewController_Wrapper: UIViewControllerRepresentable {
-    typealias ViewController = LandmarkListViewController
-    
-    var landmarks: [Landmark]
-    
-    func makeUIViewController(context: Context) -> ViewController {
-        let vc = ViewController()
-        vc.inject(landmarks: landmarks, isOn: false)
-        return vc
-    }
-    
-    func updateUIViewController(_ vc: ViewController, context: Context) {
-    }
-}
-
-struct LandmarkListViewController_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            ViewController_Wrapper(landmarks: ModelData.landmarks)
-        }
-    }
+#Preview {
+    let landmarks = ModelData.landmarks
+    let vc = LandmarkListViewController()
+    vc.inject(landmarks: landmarks, isOn: false)
+    return vc
 }

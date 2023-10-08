@@ -153,21 +153,6 @@ final class RootViewController: UIViewController {
 
 import SwiftUI
 
-struct RootViewController_Wrapper: UIViewControllerRepresentable {
-    typealias ViewController = RootViewController
-    func makeUIViewController(context: Context) -> ViewController {
-        let vc = ViewController()
-        return vc
-    }
-
-    func updateUIViewController(_ vc: ViewController, context: Context) {
-    }
-}
-
-struct RootViewController_Previews: PreviewProvider {
-  static var previews: some View {
-      Group {
-          RootViewController_Wrapper()
-      }
-  }
+#Preview {
+    RootViewController()
 }

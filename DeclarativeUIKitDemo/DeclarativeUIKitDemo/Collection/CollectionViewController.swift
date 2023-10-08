@@ -47,23 +47,6 @@ extension CollectionViewController: UICollectionViewDataSource {
 
 import SwiftUI
 
-struct CollectionViewController_Wrapper: UIViewControllerRepresentable {
-    typealias ViewController = CollectionViewController
-    // 初期化メソッド
-    func makeUIViewController(context: Context) -> ViewController {
-        let vc = ViewController()
-        return vc
-    }
-    
-    // 更新用のメソッド
-    func updateUIViewController(_ vc: ViewController, context: Context) {
-    }
-}
-
-struct CollectionViewController_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            CollectionViewController_Wrapper()
-        }
-    }
+#Preview {
+    CollectionViewController()
 }

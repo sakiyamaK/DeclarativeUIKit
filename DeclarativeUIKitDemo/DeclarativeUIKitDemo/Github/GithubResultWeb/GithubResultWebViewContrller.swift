@@ -79,8 +79,7 @@ extension GithubSearchResultViewController: WKNavigationDelegate {
 
 import SwiftUI
 
-private struct ViewController_Wrapper: UIViewControllerRepresentable {
-    typealias ViewController = GithubSearchResultViewController
+#Preview {
     
     final class GithubResultWebPresenterMock: GithubResultWebPresenterInput {
         
@@ -95,22 +94,9 @@ private struct ViewController_Wrapper: UIViewControllerRepresentable {
             output.load(request: URLRequest(url: url))
         }
     }
-    
-    func makeUIViewController(context: Context) -> ViewController {
-        let vc = ViewController()
-        let presenter = GithubResultWebPresenterMock(output: vc)
-        vc.inject(presenter: presenter)
-        return vc
-    }
-    
-    func updateUIViewController(_ vc: ViewController, context: Context) {
-    }
-}
 
-struct GithubSearchResultViewController_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            ViewController_Wrapper()
-        }
-    }
+    let vc = GithubSearchResultViewController()
+    let presenter = GithubResultWebPresenterMock(output: vc)
+    vc.inject(presenter: presenter)
+    return vc
 }

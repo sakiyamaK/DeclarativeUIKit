@@ -105,26 +105,9 @@ final class LandmarkDetailViewController: UIViewController {
 
 import SwiftUI
 
-private struct ViewController_Wrapper: UIViewControllerRepresentable {
-    typealias ViewController = LandmarkDetailViewController
-
-    var landmark: Landmark
-
-    func makeUIViewController(context: Context) -> ViewController {
-        let vc = ViewController()
-        vc.inject(landmark: landmark)
-        return vc
-    }
-
-    func updateUIViewController(_ vc: ViewController, context: Context) {
-    }
-}
-
-struct LandmarkDetailViewController_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            ViewController_Wrapper(landmark: ModelData.landmarks.first!).previewDevice("iPhone 13")
-            ViewController_Wrapper(landmark: ModelData.landmarks.first!).previewDevice("iPhone SE (2nd generation)")
-        }
-    }
+#Preview {
+    // TODO: 複数端末で表示させる
+    let vc = LandmarkDetailViewController()
+    vc.inject(landmark: ModelData.landmarks.first!)
+    return vc
 }
