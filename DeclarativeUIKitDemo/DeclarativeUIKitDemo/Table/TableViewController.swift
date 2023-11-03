@@ -68,23 +68,6 @@ extension TableViewController: UITableViewDataSource {
 
 import SwiftUI
 
-struct TableViewController_Wrapper: UIViewControllerRepresentable {
-    typealias ViewController = TableViewController
-    // 初期化メソッド
-    func makeUIViewController(context: Context) -> ViewController {
-        let vc = ViewController()
-        return vc
-    }
-    
-    // 更新用のメソッド
-    func updateUIViewController(_ vc: ViewController, context: Context) {
-    }
-}
-
-struct TableViewController_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            TableViewController_Wrapper()
-        }
-    }
+#Preview {
+    TableViewController()
 }

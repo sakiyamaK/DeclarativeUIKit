@@ -1,5 +1,7 @@
-- Reference Version: **1.9.0**
-- Last Update: **2023/07/05**
+## Documentation
+
+- Reference Version: **1.10.0**
+- Last Update: **2023/11/03**
 
 ### Table Of Contents
 
@@ -115,6 +117,10 @@
 - [function](uitextview.md#function)
   - [some default parameters](uitextview.md#some-default-parameters)
     - [sample](uitextview.md#sample-1)
+
+### [UIButtonConfiguration](uibuttonconfiguration.md#uibuttonconfiguration)
+- [function](uibuttonconfiguration.md#function)
+  - [some default parameters](uibuttonconfiguration.md#some-default-parameters)
 
 ### [UIButton](uibutton.md#uibutton)
 - [initializer](uibutton.md#initializer)

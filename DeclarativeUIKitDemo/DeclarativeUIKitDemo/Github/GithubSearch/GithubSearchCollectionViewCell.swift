@@ -111,21 +111,8 @@ final class GithubSearchCollectionViewCell: UICollectionViewCell {
 
 import SwiftUI
 
-private struct View_Wrapper: UIViewRepresentable {
-    typealias View = GithubSearchCollectionViewCell
-    func makeUIView(context: Context) -> View {
-        return View.init(frame: .zero)
-    }
-    
-    func updateUIView(_ cell: View, context: Context) {
-        cell.configure(github: .sample)
-    }
-}
-
-struct GithubSearchCollectionViewCell_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            View_Wrapper().previewLayout(.fixed(width: 400, height: 200))
-        }
-    }
+#Preview(traits: .fixedLayout(width: 400, height: 200)) {
+    let cell = GithubSearchCollectionViewCell()
+    cell.configure(github: .sample)
+    return cell
 }

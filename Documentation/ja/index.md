@@ -118,6 +118,10 @@
   - [some default parameters](uitextview.md#some-default-parameters)
     - [sample](uitextview.md#sample-1)
 
+### [UIButtonConfiguration](uibuttonconfiguration.md#uibuttonconfiguration)
+- [function](uibuttonconfiguration.md#function)
+  - [some default parameters](uibuttonconfiguration.md#some-default-parameters)
+
 ### [UIButton](uibutton.md#uibutton)
 - [initializer](uibutton.md#initializer)
   - [init with title](uibutton.md#init-with-title)

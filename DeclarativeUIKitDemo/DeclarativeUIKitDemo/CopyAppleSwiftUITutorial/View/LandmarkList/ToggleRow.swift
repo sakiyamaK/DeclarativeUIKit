@@ -47,27 +47,8 @@ final class ToggleRow: UICollectionViewCell {
 
 import SwiftUI
 
-private struct View_Wrapper: UIViewRepresentable {
-    typealias View = ToggleRow
-    var isOn: Bool
-    
-    func makeUIView(context: Context) -> View {
-        return View.init(frame: .zero)
-    }
-    
-    func updateUIView(_ cell: View, context: Context) {
-        cell.configure(isOn: isOn)
-    }
-}
-
-struct ToggleRow_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        Group {
-            ForEach(0..<2) { idx in
-                View_Wrapper(isOn: idx%2 == 0)
-            }
-        }
-        .previewLayout(.fixed(width: 300, height: 50))
-    }
-}
+#Preview(traits: .fixedLayout(width: 300, height: 50), body: {
+    let row = ToggleRow()
+    row.configure(isOn: true)
+    return row
+})

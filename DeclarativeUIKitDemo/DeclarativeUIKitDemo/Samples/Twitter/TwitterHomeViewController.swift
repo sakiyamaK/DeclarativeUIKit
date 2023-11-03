@@ -163,21 +163,6 @@ extension TwitterHomeViewController: UICollectionViewDataSource {
 
 import SwiftUI
 
-struct TwitterHomeViewController_Wrapper: UIViewControllerRepresentable {
-    typealias ViewController = TwitterHomeViewController
-    func makeUIViewController(context: Context) -> ViewController {
-        let vc = ViewController()
-        return vc
-    }
-    
-    func updateUIViewController(_ vc: ViewController, context: Context) {
-    }
-}
-
-struct TiwtterHomeViewController_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            TwitterHomeViewController_Wrapper()
-        }
-    }
+#Preview {
+    TwitterHomeViewController()
 }
