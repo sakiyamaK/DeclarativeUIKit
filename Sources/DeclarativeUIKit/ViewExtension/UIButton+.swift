@@ -105,6 +105,25 @@ public extension UIButton {
     }
 }
 
+//MARK: - available iOS 15.0
+@available(iOS 15.0, *)
+public extension UIButton {
+    convenience init(configurationBuilder: (() -> UIButton.Configuration), primaryAction: UIAction?) {
+        self.init(configuration: configurationBuilder(), primaryAction: primaryAction)
+    }
+    
+    func configuration(_ configuration: UIButton.Configuration) -> Self {
+        self.configuration = configuration
+        return self
+    }
+    
+    func configuration(_ configurationBuilder: (() -> UIButton.Configuration)) -> Self {
+        self.configuration = configurationBuilder()
+        return self
+    }
+}
+
+
 //MARK: - Declarative method
 @available(iOS, deprecated: 15.0, message: "This property is ignored when using UIButtonConfiguration")
 public extension UIButton {
