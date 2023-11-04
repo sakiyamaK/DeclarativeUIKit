@@ -20,9 +20,8 @@ public extension UIAlertController {
 //MARK: - Declarative method
 public extension UIAlertController {
     @discardableResult
-    @available(*, deprecated, message: "imperative is deprecated. Use apply instead")
-    func imperative(_ imperative: ((Self) -> Void)) -> Self {
-        imperative(self)
+    func apply(_ apply: ((Self) -> Void)) -> Self {
+        apply(self)
         return self
     }
 

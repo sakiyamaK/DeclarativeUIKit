@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = 'DeclarativeUIKit'
-  spec.version      = '1.14.0'
+  spec.version      = '1.15.0'
   spec.summary      = <<-DESC
   Library for writing UIKit Autolayout declaratively.
   DESC
