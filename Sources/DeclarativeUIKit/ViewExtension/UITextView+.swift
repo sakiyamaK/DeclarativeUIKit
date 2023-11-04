@@ -27,10 +27,10 @@ public extension UITextView {
         self.text(text)
     }
         
-    convenience init(_ text: String?, _ imperative: (Self) -> Void) {
+    convenience init(_ text: String?, _ apply: (Self) -> Void) {
         self.init(frame: .zero)
         self.text(text)
-        imperative(self)
+        apply(self)
     }
 
     convenience init(_ text: NSAttributedString?) {
@@ -38,10 +38,10 @@ public extension UITextView {
         self.text(text)
     }
     
-    convenience init(_ text: NSAttributedString?, _ imperative: (Self) -> Void) {
+    convenience init(_ text: NSAttributedString?, _ apply: (Self) -> Void) {
         self.init(frame: .zero)
         self.text(text)
-        imperative(self)
+        apply(self)
     }
 }
 
