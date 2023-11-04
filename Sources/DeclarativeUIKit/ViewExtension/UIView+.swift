@@ -26,8 +26,8 @@ public extension UIView {
     }
     
     @discardableResult
-    static func path(_ imperativeBezierPath: @escaping () -> Void) -> HelperPathView {
-        HelperPathView(imperativeBezierPath)
+    static func path(_ applyBezierPath: @escaping () -> Void) -> HelperPathView {
+        HelperPathView(applyBezierPath)
     }
 }
 
@@ -53,14 +53,7 @@ public extension UIView {
     func declarative(_ builder: () -> UIView) {
         self.declarative(priorities: .init(), reset: true, builder)
     }
-    
-    @discardableResult
-    @available(*, deprecated, message: "imperative is deprecated. Use apply instead")
-    func imperative(_ imperative: ((Self) -> Void)) -> Self {
-        imperative(self)
-        return self
-    }
-    
+        
     @discardableResult
     func cornerRadius(_ radius: CGFloat, maskedCorners: CACornerMask) -> Self {
         self.layer.cornerRadius = radius
@@ -226,10 +219,10 @@ public extension UIView {
 public extension UIView {
     
     @discardableResult
-    static func imperative(_ imperative: ((Self) -> Void)) -> Self {
-        Self().apply(imperative)
+    static func apply(_ apply: ((Self) -> Void)) -> Self {
+        Self().apply(apply)
     }
-    
+
     @discardableResult
     func padding(insets: UIEdgeInsets, touchTransparency: Bool = true, priorities: UIEdgePriorities = .init(all: .required)) -> UIView {
         if touchTransparency {
@@ -323,45 +316,45 @@ public extension UIView {
 //MARK: - Declarative constraint method
 public extension UIView {
     @discardableResult
-    func width(_ width: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
-        self.widthConstraint(width, imperative: imperative)
+    func width(_ width: CGFloat, priority: UILayoutPriority = .required, apply: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
+        self.widthConstraint(width, apply: apply)
         return self
     }
     
     @discardableResult
-    func minWidth(_ width: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
-        self.minWidthConstraint(width, imperative: imperative)
+    func minWidth(_ width: CGFloat, priority: UILayoutPriority = .required, apply: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
+        self.minWidthConstraint(width, apply: apply)
         return self
     }
     
     @discardableResult
-    func maxWidth(_ width: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
-        self.maxWidthConstraint(width, imperative: imperative)
+    func maxWidth(_ width: CGFloat, priority: UILayoutPriority = .required, apply: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
+        self.maxWidthConstraint(width, apply: apply)
         return self
     }
     
     @discardableResult
-    func height(_ height: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
-        self.heightConstraint(height, imperative: imperative)
+    func height(_ height: CGFloat, priority: UILayoutPriority = .required, apply: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
+        self.heightConstraint(height, apply: apply)
         return self
     }
     
     @discardableResult
-    func minHeight(_ height: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
-        self.minHeightConstraint(height, imperative: imperative)
+    func minHeight(_ height: CGFloat, priority: UILayoutPriority = .required, apply: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
+        self.minHeightConstraint(height, apply: apply)
         return self
     }
     
     @discardableResult
-    func maxHeight(_ height: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
-        self.maxHeightConstraint(height, imperative: imperative)
+    func maxHeight(_ height: CGFloat, priority: UILayoutPriority = .required, apply: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
+        self.maxHeightConstraint(height, apply: apply)
         return self
     }
     
     @discardableResult
     func size(width: CGFloat, height: CGFloat,
               widthPriority: UILayoutPriority = .required, heightPriority: UILayoutPriority = .required,
-              imperative: ((NSLayoutConstraint, NSLayoutConstraint) -> Void)? = nil) -> Self {
+              apply: ((NSLayoutConstraint, NSLayoutConstraint) -> Void)? = nil) -> Self {
         var widthConstraint: NSLayoutConstraint!
         self.widthConstraint(width, priority: widthPriority) {
             widthConstraint = $0
@@ -370,7 +363,7 @@ public extension UIView {
         self.heightConstraint(height, priority: heightPriority) {
             heightConstraint = $0
         }
-        imperative?(widthConstraint, heightConstraint)
+        apply?(widthConstraint, heightConstraint)
         return self
     }
     
@@ -378,7 +371,7 @@ public extension UIView {
     func minSize(width: CGFloat, height: CGFloat,
                  widthPriority: UILayoutPriority = .required,
                  heightPriority: UILayoutPriority = .required,
-                 imperative: ((NSLayoutConstraint, NSLayoutConstraint) -> Void)? = nil) -> Self {
+                 apply: ((NSLayoutConstraint, NSLayoutConstraint) -> Void)? = nil) -> Self {
         var widthConstraint: NSLayoutConstraint!
         self.minWidthConstraint(width, priority: widthPriority) {
             widthConstraint = $0
@@ -387,7 +380,7 @@ public extension UIView {
         self.minHeightConstraint(height, priority: heightPriority) {
             heightConstraint = $0
         }
-        imperative?(widthConstraint, heightConstraint)
+        apply?(widthConstraint, heightConstraint)
         return self
     }
     
@@ -395,7 +388,7 @@ public extension UIView {
     func maxSize(width: CGFloat, height: CGFloat,
                  widthPriority: UILayoutPriority = .required,
                  heightPriority: UILayoutPriority = .required,
-                 imperative: ((NSLayoutConstraint, NSLayoutConstraint) -> Void)? = nil) -> Self {
+                 apply: ((NSLayoutConstraint, NSLayoutConstraint) -> Void)? = nil) -> Self {
         var widthConstraint: NSLayoutConstraint!
         self.maxWidthConstraint(width, priority: widthPriority) {
             widthConstraint = $0
@@ -404,47 +397,47 @@ public extension UIView {
         self.maxHeightConstraint(height, priority: heightPriority) {
             heightConstraint = $0
         }
-        imperative?(widthConstraint, heightConstraint)
+        apply?(widthConstraint, heightConstraint)
         return self
     }
     
     @discardableResult
-    func widthEqual(to superview: UIView, constraint: HelperConstraint, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
+    func widthEqual(to superview: UIView, constraint: HelperConstraint, priority: UILayoutPriority = .required, apply: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
         if superview is UIStackView, !superview.subviews.contains(self) {
             superview.addSubview(self)
         }
         let layoutConstraint = self.widthAnchor.constraint(equalTo: constraint.dimension, multiplier: constraint.multiplier, constant: constraint.constant)
         layoutConstraint.isActive = true
         layoutConstraint.priority = priority
-        imperative?(layoutConstraint)
+        apply?(layoutConstraint)
         return self
     }
     
     @discardableResult
-    func widthEqual(to superview: UIView, constraint: NSLayoutDimension, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
-        widthEqual(to: superview, constraint: .init(dimension: constraint), priority: priority, imperative: imperative)
+    func widthEqual(to superview: UIView, constraint: NSLayoutDimension, priority: UILayoutPriority = .required, apply: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
+        widthEqual(to: superview, constraint: .init(dimension: constraint), priority: priority, apply: apply)
     }
     
     @discardableResult
-    func heightEqual(to superview: UIView, constraint: HelperConstraint, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
+    func heightEqual(to superview: UIView, constraint: HelperConstraint, priority: UILayoutPriority = .required, apply: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
         if superview is UIStackView, !superview.subviews.contains(self) {
             superview.addSubview(self)
         }
         let layoutConstraint = self.heightAnchor.constraint(equalTo: constraint.dimension, multiplier: constraint.multiplier, constant: constraint.constant)
         layoutConstraint.priority = priority
         layoutConstraint.isActive = true
-        imperative?(layoutConstraint)
+        apply?(layoutConstraint)
         return self
     }
     
     @discardableResult
-    func heightEqual(to superview: UIView, constraint: NSLayoutDimension, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
-        heightEqual(to: superview, constraint: .init(dimension: constraint), priority: priority, imperative: imperative)
+    func heightEqual(to superview: UIView, constraint: NSLayoutDimension, priority: UILayoutPriority = .required, apply: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
+        heightEqual(to: superview, constraint: .init(dimension: constraint), priority: priority, apply: apply)
     }
     
     @discardableResult
-    func aspectRatio(_ ratio: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
-        self.aspectRatioConstraint(ratio, priority: priority, imperative: imperative)
+    func aspectRatio(_ ratio: CGFloat, priority: UILayoutPriority = .required, apply: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
+        self.aspectRatioConstraint(ratio, priority: priority, apply: apply)
         return self
     }
     
@@ -527,11 +520,11 @@ public extension UIView {
         }
     }
     
-    func minHeightConstraint(_ value: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) {
+    func minHeightConstraint(_ value: CGFloat, priority: UILayoutPriority = .required, apply: ((NSLayoutConstraint) -> Void)? = nil) {
         let constraint = heightAnchor.constraint(greaterThanOrEqualToConstant: value)
         constraint.priority = priority
         constraint.isActive = true
-        imperative?(constraint)
+        apply?(constraint)
     }
     
     var minWidthConstraint: CGFloat? {
@@ -544,11 +537,11 @@ public extension UIView {
         }
     }
     
-    func minWidthConstraint(_ value: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) {
+    func minWidthConstraint(_ value: CGFloat, priority: UILayoutPriority = .required, apply: ((NSLayoutConstraint) -> Void)? = nil) {
         let constraint = widthAnchor.constraint(greaterThanOrEqualToConstant: value)
         constraint.priority = priority
         constraint.isActive = true
-        imperative?(constraint)
+        apply?(constraint)
     }
     
     var maxHeightConstraint: CGFloat? {
@@ -561,11 +554,11 @@ public extension UIView {
         }
     }
     
-    func maxHeightConstraint(_ value: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) {
+    func maxHeightConstraint(_ value: CGFloat, priority: UILayoutPriority = .required, apply: ((NSLayoutConstraint) -> Void)? = nil) {
         let constraint = heightAnchor.constraint(lessThanOrEqualToConstant: value)
         constraint.priority = priority
         constraint.isActive = true
-        imperative?(constraint)
+        apply?(constraint)
     }
     
     var maxWidthConstraint: CGFloat? {
@@ -578,11 +571,11 @@ public extension UIView {
         }
     }
     
-    func maxWidthConstraint(_ value: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) {
+    func maxWidthConstraint(_ value: CGFloat, priority: UILayoutPriority = .required, apply: ((NSLayoutConstraint) -> Void)? = nil) {
         let constraint = widthAnchor.constraint(lessThanOrEqualToConstant: value)
         constraint.priority = priority
         constraint.isActive = true
-        imperative?(constraint)
+        apply?(constraint)
     }
     
     var heightConstraint: CGFloat? {
@@ -595,11 +588,11 @@ public extension UIView {
         }
     }
     
-    func heightConstraint(_ value: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) {
+    func heightConstraint(_ value: CGFloat, priority: UILayoutPriority = .required, apply: ((NSLayoutConstraint) -> Void)? = nil) {
         let constraint = heightAnchor.constraint(equalToConstant: value)
         constraint.priority = priority
         constraint.isActive = true
-        imperative?(constraint)
+        apply?(constraint)
     }
     
     var widthConstraint: CGFloat? {
@@ -612,11 +605,11 @@ public extension UIView {
         }
     }
     
-    func widthConstraint(_ value: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) {
+    func widthConstraint(_ value: CGFloat, priority: UILayoutPriority = .required, apply: ((NSLayoutConstraint) -> Void)? = nil) {
         let constraint = widthAnchor.constraint(equalToConstant: value)
         constraint.priority = priority
         constraint.isActive = true
-        imperative?(constraint)
+        apply?(constraint)
     }
     
     var aspectRatioConstraint: CGFloat? {
@@ -629,11 +622,11 @@ public extension UIView {
         }
     }
     
-    func aspectRatioConstraint(_ value: CGFloat, priority: UILayoutPriority = .required, imperative: ((NSLayoutConstraint) -> Void)? = nil) {
+    func aspectRatioConstraint(_ value: CGFloat, priority: UILayoutPriority = .required, apply: ((NSLayoutConstraint) -> Void)? = nil) {
         let constraint = heightAnchor.constraint(equalTo: widthAnchor, multiplier: value)
         constraint.priority = priority
         constraint.isActive = true
-        imperative?(constraint)
+        apply?(constraint)
     }
 }
 

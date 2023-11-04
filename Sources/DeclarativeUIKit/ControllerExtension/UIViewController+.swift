@@ -101,7 +101,7 @@ public extension UIViewController {
         self.declarative(
             safeAreas: safeAreas,
             priorities: .init(all: .required),
-            reset: true,
+            reset: false,
             outsideSafeAreaTop: outsideSafeAreaTopBuilder,
             outsideSafeAreaLeading: outsideSafeAreaLeadingBuilder,
             outsideSafeAreaBottom: outsideSafeAreaBottomBuilder,
@@ -122,7 +122,7 @@ public extension UIViewController {
         self.declarative(
             safeAreas: .init(all: true),
             priorities: priorities,
-            reset: true,
+            reset: false,
             outsideSafeAreaTop: outsideSafeAreaTopBuilder,
             outsideSafeAreaLeading: outsideSafeAreaLeadingBuilder,
             outsideSafeAreaBottom: outsideSafeAreaBottomBuilder,
@@ -163,7 +163,7 @@ public extension UIViewController {
         self.declarative(
             safeAreas: .init(all: true),
             priorities: .init(all: .required),
-            reset: true,
+            reset: false,
             outsideSafeAreaTop: outsideSafeAreaTopBuilder,
             outsideSafeAreaLeading: outsideSafeAreaLeadingBuilder,
             outsideSafeAreaBottom: outsideSafeAreaBottomBuilder,
@@ -177,7 +177,7 @@ public extension UIViewController {
         priorities: UIEdgePriorities,
         @SingleUIViewBuilder _ builder: () -> UIView
     ) -> Self {
-        self.declarative(safeAreas: .init(), priorities: priorities, reset: true, builder)
+        self.declarative(safeAreas: .init(), priorities: priorities, reset: false, builder)
     }
 
     @discardableResult
@@ -185,7 +185,7 @@ public extension UIViewController {
         safeAreas: UIEdgeBools,
         @SingleUIViewBuilder _ builder: () -> UIView
     ) -> Self {
-        self.declarative(safeAreas: safeAreas, priorities: .init(), reset: true, builder)
+        self.declarative(safeAreas: safeAreas, priorities: .init(), reset: false, builder)
     }
 
     @discardableResult
@@ -209,7 +209,7 @@ public extension UIViewController {
     func declarative(
         @SingleUIViewBuilder _ builder: () -> UIView
     ) -> Self {
-        self.declarative(safeAreas: .init(), priorities: .init(), reset: true, builder)
+        self.declarative(safeAreas: .init(), priorities: .init(), reset: false, builder)
     }
     
     @discardableResult
@@ -223,7 +223,12 @@ public extension UIViewController {
         configure(self.navigationItem)
         return self
     }
-
+    
+    @discardableResult
+    func reset() -> Self {
+        self.view.subviews.forEach { $0.removeFromSuperview() }
+        return self
+    }
     
     func getView(tag: Int) -> UIView? {
         self.view.getView(tag: tag)
@@ -234,9 +239,8 @@ public extension UIViewController {
 public extension UIViewController {
     
     @discardableResult
-    @available(*, deprecated, message: "imperative is deprecated. Use apply instead")
-    func imperative(_ imperative: ((Self) -> Void)) -> Self {
-        imperative(self)
+    func apply(_ apply: ((Self) -> Void)) -> Self {
+        apply(self)
         return self
     }
 

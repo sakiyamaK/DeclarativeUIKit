@@ -2,9 +2,9 @@ import UIKit.UISwitch
 
 // MARK: -
 public extension UISwitch {
-    convenience init(_ frame: CGRect = .zero, _ imperative: (Self) -> Void) {
+    convenience init(_ frame: CGRect = .zero, _ apply: (Self) -> Void) {
         self.init(frame: .zero)
-        imperative(self)
+        apply(self)
     }
 }
 
