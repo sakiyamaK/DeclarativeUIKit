@@ -47,11 +47,11 @@ public extension UIView {
     }
     
     func declarative(priorities: UIEdgePriorities, _ builder: () -> UIView) {
-        declarative(priorities: priorities, reset: true, builder)
+        declarative(priorities: priorities, reset: false, builder)
     }
     
     func declarative(_ builder: () -> UIView) {
-        self.declarative(priorities: .init(), reset: true, builder)
+        self.declarative(priorities: .init(), reset: false, builder)
     }
         
     @discardableResult
