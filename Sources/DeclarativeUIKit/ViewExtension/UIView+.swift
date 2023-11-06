@@ -202,7 +202,7 @@ public extension UIView {
         movedHandler: ((Set<UITouch>, UIEvent?) -> Void)? = nil,
         cancelledHandler: ((Set<UITouch>, UIEvent?) -> Void)? = nil,
         estimatedPropertiesUpdatedHandler: ((Set<UITouch>) -> Void)? = nil
-    ) -> UIView {
+    ) -> Self {
         self.zStack {
             HelperTouchView(
                 touchesBeganHandler: beganHandler,
@@ -212,6 +212,12 @@ public extension UIView {
                 touchesEstimatedPropertiesUpdatedHandler: estimatedPropertiesUpdatedHandler
             )
         }
+    }
+    
+    @discardableResult
+    func reset() -> Self {
+        self.subviews.forEach({ $0.removeFromSuperview() })
+        return self
     }
 }
 
