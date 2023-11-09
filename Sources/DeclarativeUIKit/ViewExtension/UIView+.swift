@@ -34,26 +34,16 @@ public extension UIView {
 //MARK: - Declarative method
 public extension UIView {
     
-    func declarative(priorities: UIEdgePriorities, reset: Bool, _ builder: () -> UIView) {
+    @discardableResult
+    func declarative(priorities: UIEdgePriorities = .init(), reset: Bool = false, _ builder: () -> UIView) -> Self {
         let view = builder()
         if reset {
             self.subviews.forEach { $0.removeFromSuperview() }
         }
         self.edgesConstraints(view, safeAreas: .init(all: false), priorities: priorities)
+        return self
     }
-    
-    func declarative(reset: Bool, _ builder: () -> UIView) {
-        declarative(priorities: .init(), reset: reset, builder)
-    }
-    
-    func declarative(priorities: UIEdgePriorities, _ builder: () -> UIView) {
-        declarative(priorities: priorities, reset: false, builder)
-    }
-    
-    func declarative(_ builder: () -> UIView) {
-        self.declarative(priorities: .init(), reset: false, builder)
-    }
-        
+            
     @discardableResult
     func cornerRadius(_ radius: CGFloat, maskedCorners: CACornerMask) -> Self {
         self.layer.cornerRadius = radius
@@ -215,7 +205,7 @@ public extension UIView {
     }
     
     @discardableResult
-    func reset() -> Self {
+    func resetDeclarativeUIKitLayout() -> Self {
         self.subviews.forEach({ $0.removeFromSuperview() })
         return self
     }

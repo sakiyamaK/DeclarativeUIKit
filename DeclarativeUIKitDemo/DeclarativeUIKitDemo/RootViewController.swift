@@ -13,32 +13,39 @@ final class RootViewController: UIViewController {
     override func loadView() {
         super.loadView()
 
-        self.view.backgroundColor = .white
-        self.navigationItem.title = "Root"
-        
         let Button = {(title: String) -> UIButton in
-            UIButton().apply {
-                $0.contentEdgeInsets = .init(top: 10, left: 10, bottom: 10, right: 10)
-                $0.titleLabel?.setContentCompressionResistancePriority(.required, for: .horizontal)
-            }
-            .title(title)
-            .font(UIFont.systemFont(ofSize: 30))
-            .backgroundColor(.systemBlue)
-            .cornerRadius(10)
+            UIButton(configurationBuilder: {
+                UIButton.Configuration.filled()
+                    .baseForegroundColor(.white)
+                    .baseBackgroundColor(.systemBlue)
+                    .cornerStyle(.capsule)
+                    .attributedTitle(
+                        AttributedString(
+                            title,
+                            attributes: .init([
+                                .font: UIFont.systemFont(ofSize: 20)
+                            ]
+                            )
+                        )
+                    )
+            }, primaryAction: nil)
         }
                 
-        self.declarative {
+        self
+            .resetDeclarativeUIKitLayout()
+            .applyView({ $0.backgroundColor = .white })
+            .applyNavigationItem({ $0.title = "Root" })
+            .declarative {
             UIScrollView {
                 UIStackView {
                     UIView.spacer()
                     
-                    if true {
+                    if false {
                         Button("ホットリロード")
                             .add(target: self, for: .touchUpInside, {_ in
                                 let vc = HotReloadViewController()
                                 self.navigationController?.pushViewController(vc, animated: true)
                             })
-                        UIView.spacer()
                     }
                     
                     Button("レイアウトの基本")
@@ -47,15 +54,11 @@ final class RootViewController: UIViewController {
                             self.navigationController?.pushViewController(vc, animated: true)
                         })
 
-                    UIView.spacer()
-
                     Button("基本的なコンポーネント")
                         .add(target: self, for: .touchUpInside, {_ in
                             let vc = Simple2ViewController()
                             self.navigationController?.pushViewController(vc, animated: true)
                         })
-
-                    UIView.spacer()
 
                     Button("TablewView")
                         .add(target: self, for: .touchUpInside, {_ in
@@ -63,15 +66,11 @@ final class RootViewController: UIViewController {
                             self.navigationController?.pushViewController(vc, animated: true)
                         })
 
-                    UIView.spacer()
-
                     Button("CollectionView")
                         .add(target: self, for: .touchUpInside, {_ in
                             let vc = CollectionViewController()
                             self.navigationController?.pushViewController(vc, animated: true)
                         })
-
-                    UIView.spacer()
 
                     Button("Path")
                         .add(target: self, for: .touchUpInside, {_ in
@@ -79,16 +78,12 @@ final class RootViewController: UIViewController {
                             self.navigationController?.pushViewController(vc, animated: true)
                         })
                         .minWidth(200)
-
-                    UIView.spacer()
                     
                     Button("UITabBarController")
                         .add(target: self, for: .touchUpInside, {_ in
                             let vc = UITabBarController.rootTabBarController()
                             self.navigationController?.pushViewController(vc, animated: true)
                         })
-
-                    UIView.spacer()
 
 
                     Button("GithubSearch")
@@ -99,16 +94,12 @@ final class RootViewController: UIViewController {
                             self.navigationController?.pushViewController(vc, animated: true)
                         })
 
-                    UIView.spacer()
-
                     Button("SwiftUI Tutorial")
                         .add(target: self, for: .touchUpInside, {_ in
                             let vc = LandmarkListViewController()
                             vc.inject(landmarks: ModelData.landmarks, isOn: false)
                             self.navigationController?.pushViewController(vc, animated: true)
                         })
-
-                    UIView.spacer()
                     
                     Button("MapView")
                         .add(target: self, for: .touchUpInside, {_ in
@@ -151,8 +142,8 @@ final class RootViewController: UIViewController {
     }
 }
 
-import SwiftUI
-
-#Preview {
-    RootViewController()
-}
+//import SwiftUI
+//
+//#Preview {
+//    RootViewController()
+//}

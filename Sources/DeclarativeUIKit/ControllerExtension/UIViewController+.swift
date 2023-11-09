@@ -225,7 +225,7 @@ public extension UIViewController {
     }
     
     @discardableResult
-    func reset() -> Self {
+    func resetDeclarativeUIKitLayout() -> Self {
         self.view.subviews.forEach { $0.removeFromSuperview() }
         return self
     }
