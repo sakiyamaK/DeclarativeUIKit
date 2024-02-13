@@ -74,11 +74,16 @@ public extension UIButton {
     }
     
     @discardableResult
-    func font(_ font: UIFont?) -> Self {
-        self.titleLabel?.font = font
+    func titleShadowColor(_ color: UIColor?) -> Self {
+        self.titleShadowColor(color, for: .normal)
+    }
+
+    @discardableResult
+    func titleShadowColor(_ color: UIColor?, for state: UIControl.State) -> Self {
+        self.setTitleShadowColor(color, for: state)
         return self
     }
-    
+
     @discardableResult
     func image(_ image: UIImage?) -> Self {
         self.image(image, for: .normal)
@@ -87,6 +92,34 @@ public extension UIButton {
     @discardableResult
     func image(_ image: UIImage?, for: UIControl.State) -> Self {
         self.setImage(image, for: `for`)
+        return self
+    }
+
+    @discardableResult
+    func backgroundImage(_ image: UIImage?) -> Self {
+        self.backgroundImage(image, for: .normal)
+    }
+
+    @discardableResult
+    func backgroundImage(_ image: UIImage?, for state: UIControl.State) -> Self {
+        self.setBackgroundImage(image, for: state)
+        return self
+    }
+
+    @discardableResult
+    func preferredSymbolConfiguration(_ configuration: UIImage.SymbolConfiguration?) -> Self {
+        self.preferredSymbolConfiguration(configuration, forImageIn: .normal)
+    }
+
+    @discardableResult
+    func preferredSymbolConfiguration(_ configuration: UIImage.SymbolConfiguration?, forImageIn state: UIControl.State) -> Self {
+        self.setPreferredSymbolConfiguration(configuration, forImageIn: state)
+        return self
+    }
+    
+    @discardableResult
+    func font(_ font: UIFont?) -> Self {
+        self.titleLabel?.font = font
         return self
     }
 }

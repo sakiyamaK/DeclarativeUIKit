@@ -126,24 +126,8 @@ Xcode Preview allows you to check the layout without building
 ```swift
 import SwiftUI
 
-struct DeclarativeViewController_Wrapper: UIViewControllerRepresentable {
-    typealias ViewController = DeclarativeViewController
-
-    func makeUIViewController(context: Context) -> ViewController {
-        let vc = ViewController()
-        return vc
-    }
-    
-    func updateUIViewController(_ vc: ViewController, context: Context) {
-    }
-}
-
-struct DeclarativeViewController_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            DeclarativeViewController_Wrapper()
-        }
-    }
+#Preview {
+  DeclarativeViewController()
 }
 ```
 
@@ -153,19 +137,18 @@ struct DeclarativeViewController_Previews: PreviewProvider {
 
   [All Demo Index](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo)
 
-  * Basic Samples
-    
-    基礎的な使い方のサンプルです
+  * Copy SwiftUI Tutorial Chapter 1
+      
+    [Apple公式のSwiftUIチュートリアルのChapter 1](https://developer.apple.com/tutorials/swiftui)を真似た[サンプル](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/CopyAppleSwiftUITutorial)です
 
-    Here is a sample of basic usage
+    This is a [sample](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/CopyAppleSwiftUITutorial) that mimics [Chapter 1 of Apple's official SwiftUI tutorial](https://developer.apple.com/tutorials/swiftui).
 
-    - [Index](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/Simple)
-
-      - [SimpleViewController](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/Simple/SimpleViewController.swift)
-      - [Simple2ViewController](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/Simple/Simple2ViewController.swift)
+    - [Index](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/CopyAppleSwiftUITutorial)
+      - [LandmarkListViewController](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/CopyAppleSwiftUITutorial/LandmarkList/LandmarkListViewController.swift)
+      - [LandmarkDetailViewController](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/CopyAppleSwiftUITutorial/LandmarkDetail/LandmarkDetailViewController.swift)
 
     _
-    <img src="https://i.gyazo.com/620c480905f256485fd84b528f0cfcf6.png" width=300>
+    <img src="https://i.gyazo.com/02b4e0eca90a99d891575fc11af54e6b.png" width=300>
 
   * CollectionView
     
@@ -179,7 +162,7 @@ struct DeclarativeViewController_Previews: PreviewProvider {
      _
     <img src="https://i.gyazo.com/804a05bb8263911cd38fcde91635a6dc.png" width=300>
     
-  * MVP Architecture
+  * Github API
 
     MVPアーキテクチャでGithub APIを実行するサンプルです
 
@@ -192,15 +175,4 @@ struct DeclarativeViewController_Previews: PreviewProvider {
     _
     <img src="https://i.gyazo.com/f56db1f88b943d4c3b32840adc9235d0.png" width=300>
 
-  * Copy SwiftUI Tutorial Chapter 1
-      
-    [Apple公式のSwiftUIチュートリアルのChapter 1](https://developer.apple.com/tutorials/swiftui)を真似たサンプルです
 
-    This is a sample that mimics [Chapter 1 of Apple's official SwiftUI tutorial](https://developer.apple.com/tutorials/swiftui).
-
-    - [Index](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/CopyAppleSwiftUITutorial)
-      - [LandmarkListViewController](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/CopyAppleSwiftUITutorial/LandmarkList/LandmarkListViewController.swift)
-      - [LandmarkDetailViewController](https://github.com/sakiyamaK/DeclarativeUIKit/tree/main/DeclarativeUIKitDemo/DeclarativeUIKitDemo/CopyAppleSwiftUITutorial/LandmarkDetail/LandmarkDetailViewController.swift)
-
-    _
-    <img src="https://i.gyazo.com/02b4e0eca90a99d891575fc11af54e6b.png" width=300>

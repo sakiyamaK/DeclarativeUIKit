@@ -60,11 +60,17 @@ func title(_ title: String?, for: UIControl.State) -> Self
 
 func title(_ title: NSAttributedString?, for: UIControl.State) -> Self
 
-func titleColor(_ color: UIColor?, for: UIControl.State)
+func titleColor(_ color: UIColor?, for: UIControl.State) -> Self
 
-func font(_ font: UIFont?) -> Self
+func titleShadowColor(_ color: UIColor?, for state: UIControl.State) -> Self
+
+func backgroundImage(_ image: UIImage?, for state: UIControl.State) -> Self
 
 func image(_ image: UIImage?, for: UIControl.State) -> Self
+
+func preferredSymbolConfiguration(_ configuration: UIImage.SymbolConfiguration?, forImageIn state: UIControl.State) -> Self
+
+func font(_ font: UIFont?) -> Self
 
 func contentEdgeInset(_ contentEdgeInsets: UIEdgeInsets) -> Self
 
