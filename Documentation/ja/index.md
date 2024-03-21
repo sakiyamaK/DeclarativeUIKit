@@ -165,6 +165,15 @@
   - [some default parameters](uicollectionview.md#some-default-parameters)
     - [sample](uicollectionview.md#sample)
 
+### [UICollectionLayoutListConfiguration](uicollectionlayoutlistconfiguration.md#uicollectionlayoutlistconfiguration)
+  - [some default parameters](uicollectionlayoutlistconfiguration.md#some-default-parameters)
+
+### [UIContextualAction](uicontextualaction.md#uicontextualaction)
+  - [some default parameters](uicontextualaction.md#some-default-parameters)
+
+### [UISwipeActionsConfiguration](uiswipeactionsconfiguration.md#uiswipeactionsconfiguration)
+  - [some default parameters](uiswipeactionsconfiguration.md#some-default-parameters)
+
 ### [UIBezierPath](uibezierpath.md#uibezierpath)
   - [function](uibezierpath.md#function)
     - [apply](uibezierpath.md#apply)
