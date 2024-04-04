@@ -549,6 +549,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
+				DOCC_HOSTING_BASE_PATH = declarativeuikit;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DeclarativeUIKitDemo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -577,6 +578,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
+				DOCC_HOSTING_BASE_PATH = declarativeuikit;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DeclarativeUIKitDemo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
