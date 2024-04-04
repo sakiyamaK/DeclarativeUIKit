@@ -1,5 +1,6 @@
 import Foundation
 
+/// ユーザの操作を宣言的に書くためのヘルパークラス
 final class ActionHandler {
     weak var sender: AnyObject!
     private let action: (Any) -> Void

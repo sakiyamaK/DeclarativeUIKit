@@ -3,6 +3,17 @@ import UIKit.UIViewController
 public extension UIViewController {
         
     @discardableResult
+    /// レイアウトを宣言的に書くメソッド
+    /// - Parameters:
+    ///   - safeAreas: 四隅をセーフエリア内に収めるか
+    ///   - priorities: 四隅の制約の優先度
+    ///   - reset: すでに設定済みのViewを全て外すか
+    ///   - outsideSafeAreaTop: セーフエリアの上辺の外側のレイアウト
+    ///   - outsideSafeAreaLeading: セーフエリアの文頭辺の外側のレイアウト
+    ///   - outsideSafeAreaBottom: セーフエリアの文末辺の外側のレイアウト
+    ///   - outsideSafeAreaTrailing: セーフエリアの下辺の外側のレイアウト
+    ///   - _: セーフエリ内のレイアウト
+    /// - Returns: Self
     func declarative(
         safeAreas: UIEdgeBools,
         priorities: UIEdgePriorities,
@@ -206,6 +217,9 @@ public extension UIViewController {
     }
 
     @discardableResult
+    /// レイアウトを宣言的に書くメソッド
+    /// - Parameter _: セーフエリ内のレイアウト
+    /// - Returns: Self
     func declarative(
         @SingleUIViewBuilder _ builder: () -> UIView
     ) -> Self {
