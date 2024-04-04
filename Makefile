@@ -1,11 +1,19 @@
+DOCC_TARGET = DeclarativeUIKit
+DOCC_DIR = ./docs
+GIT_RIPOSITORY_NAME = DeclarativeUIKit
+
+.PHONY: push
 push:
 	bundle exec pod trunk push
-.PHONY: push
 
+.PHONY: setup
 setup:
 	bundle install
-.PHONY: setup
 
-document:
-	bundle exec jazzy --config .jazzy.yml --source-directory Sources/DeclarativeUIKit
-.PHONY: document
+.PHONY: doc
+doc:
+	xcodebuild docbuild -scheme $(DOCC_TARGET) \
+			-destination generic/platform=iOS \
+			OTHER_DOCC_FLAGS="--transform-for-static-hosting --hosting-base-path $(GIT_RIPOSITORY_NAME)" \
+			DOCC_OUTPUT_DIR=./
+	cp -Rn DeclarativeUIKit.doccarchive docs
