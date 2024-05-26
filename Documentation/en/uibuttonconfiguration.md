@@ -3,7 +3,10 @@
 @available(iOS 15.0, *)
 
 ## function
+
 ### some default parameters
+
+The following standard parameters can be written declaratively.
 
 ```swift
 func background(_ background: UIBackgroundConfiguration) -> Self 
