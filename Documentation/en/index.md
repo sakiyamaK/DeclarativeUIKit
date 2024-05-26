@@ -243,3 +243,7 @@
 - [function](uibaritem.md#function)
   - [some default parameters](uibaritem.md#some-default-parameters)
     - [sample](uibaritem.md#sample)
+
+### [UIListContentConfiguration](uilistcontentconfiguration.md#uilistcontentconfiguration)
+- [function](uilistcontentconfiguration.md#function)
+  - [some default parameters](uilistcontentconfiguration.md#some-default-parameters)

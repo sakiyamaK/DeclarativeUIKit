@@ -3,7 +3,10 @@
 @available(iOS 15.0, *)
 
 ## function
+
 ### some default parameters
+
+以下の標準パラメータは宣言的に記述できます
 
 ```swift
 func background(_ background: UIBackgroundConfiguration) -> Self 
