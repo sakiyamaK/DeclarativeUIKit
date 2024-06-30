@@ -119,7 +119,13 @@ public extension UIScrollView {
         self.refreshControl = refreshControl()
         return self
     }
-        
+    
+    @discardableResult
+    func refreshControl(_ refreshControl: UIRefreshControl) -> Self {
+        self.refreshControl = refreshControl
+        return self
+    }
+
     @discardableResult
     func contentOffset(_ contentOffset: CGPoint) -> Self {
         self.contentOffset = contentOffset
