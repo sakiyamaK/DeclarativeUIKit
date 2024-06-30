@@ -1,23 +1,4 @@
 import Foundation
-import UIKit.UILayoutGuide
-
-public extension UIEdgeInsets {
-    init(all: CGFloat) {
-        self.init(top: all, left: all, bottom: all, right: all)
-    }
-
-    init(vertical: CGFloat) {
-        self.init(top: vertical, left: 0, bottom: vertical, right: 0)
-    }
-    
-    init(horizontal: CGFloat) {
-        self.init(top: 0, left: horizontal, bottom: 0, right: horizontal)
-    }
-    
-    init(vertical: CGFloat, horizontal: CGFloat) {
-        self.init(top: vertical, left: horizontal, bottom: vertical, right: horizontal)
-    }    
-}
 
 public struct UIEdgeBools {
     public var top: Bool = true
@@ -44,3 +25,4 @@ public struct UIEdgeBools {
         self.init(top: true, leading: horizontal, bottom: true, trailing: horizontal)
     }
 }
+
