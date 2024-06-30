@@ -462,6 +462,81 @@ public extension UIView {
 
 //MARK: - double components constraint
 public extension UIView {
+    @available(iOS 15.0, *)
+    func edgesConstraints(
+        _ view: UIView,
+        margin: UIEdgeInsets = .zero,
+        layoutGuides: UIEdgeLayoutGuides,
+        priorities: UIEdgePriorities
+    ) {
+        view.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(view)
+        
+        let top = switch layoutGuides.top {
+        case .safeArea, .keyboard:
+            view.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor)
+        case .margins:
+            view.topAnchor.constraint(equalTo: self.layoutMarginsGuide.topAnchor)
+        case .readableContent:
+            view.topAnchor.constraint(equalTo: self.readableContentGuide.topAnchor)
+        case .normal:
+            view.topAnchor.constraint(equalTo: self.topAnchor)
+        }
+
+        let leading = switch layoutGuides.leading {
+        case .safeArea:
+            view.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor)
+        case .margins:
+            view.leadingAnchor.constraint(equalTo: self.layoutMarginsGuide.leadingAnchor)
+        case .readableContent:
+            view.leadingAnchor.constraint(equalTo: self.readableContentGuide.leadingAnchor)
+        case .keyboard:
+            view.leadingAnchor.constraint(equalTo: self.keyboardLayoutGuide.leadingAnchor)
+        case .normal:
+            view.leadingAnchor.constraint(equalTo: self.leadingAnchor)
+        }
+        
+        let bottom = switch layoutGuides.bottom {
+        case .safeArea:
+            view.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor)
+        case .margins:
+            view.bottomAnchor.constraint(equalTo: self.layoutMarginsGuide.bottomAnchor)
+        case .readableContent:
+            view.bottomAnchor.constraint(equalTo: self.readableContentGuide.bottomAnchor)
+        case .keyboard:
+            view.bottomAnchor.constraint(equalTo: self.keyboardLayoutGuide.topAnchor)
+        case .normal:
+            view.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+        }
+
+        let trailing = switch layoutGuides.trailing {
+        case .safeArea:
+            view.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor)
+        case .margins:
+            view.trailingAnchor.constraint(equalTo: self.layoutMarginsGuide.trailingAnchor)
+        case .readableContent:
+            view.trailingAnchor.constraint(equalTo: self.readableContentGuide.trailingAnchor)
+        case .keyboard:
+            view.trailingAnchor.constraint(equalTo: self.keyboardLayoutGuide.trailingAnchor)
+        case .normal:
+            view.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+        }
+
+        top.constant = margin.top
+        leading.constant = margin.left
+        bottom.constant = margin.bottom
+        trailing.constant = margin.right
+        
+        top.priority = priorities.top
+        leading.priority = priorities.leading
+        bottom.priority = priorities.bottom
+        trailing.priority = priorities.trailing
+        
+        NSLayoutConstraint.activate([
+            top, leading, trailing, bottom
+        ])
+    }
+    
     func edgesConstraints(
         _ view: UIView,
         margin: UIEdgeInsets = .zero,
