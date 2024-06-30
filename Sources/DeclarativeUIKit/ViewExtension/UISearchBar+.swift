@@ -114,7 +114,7 @@ public extension UISearchBar {
     
     @available(iOS 13.0, *)
     @discardableResult
-    func showsScope(_ show: Bool, animated animate: Bool) -> Self {
+    func showsCanselButton(_ show: Bool, animated animate: Bool) -> Self {
         self.setShowsCancelButton(show, animated: animate)
         return self
     }

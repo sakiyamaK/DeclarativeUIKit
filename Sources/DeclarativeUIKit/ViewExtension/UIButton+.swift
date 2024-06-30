@@ -127,11 +127,13 @@ public extension UIButton {
 //MARK: - available iOS 14.0
 @available(iOS 14.0, *)
 public extension UIButton {
+    @discardableResult
     func menu(_ menu: UIMenu) -> Self {
         self.menu = menu
         return self
     }
     
+    @discardableResult
     func showsMenuAsPrimaryAction(_ showsMenuAsPrimaryAction: Bool) -> Self {
         self.showsMenuAsPrimaryAction = showsMenuAsPrimaryAction
         return self
@@ -145,11 +147,13 @@ public extension UIButton {
         self.init(configuration: configurationBuilder(), primaryAction: primaryAction)
     }
     
+    @discardableResult
     func configuration(_ configuration: UIButton.Configuration) -> Self {
         self.configuration = configuration
         return self
     }
     
+    @discardableResult
     func configuration(_ configurationBuilder: (() -> UIButton.Configuration)) -> Self {
         self.configuration = configurationBuilder()
         return self

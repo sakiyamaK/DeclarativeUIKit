@@ -58,6 +58,7 @@ public extension UIBarItem {
 }
 
 public extension UIBarItem {
+    @discardableResult
     func titleTextAttributes(_ attributes: [NSAttributedString.Key: Any]?, for: UIControl.State) -> Self {
         self.setTitleTextAttributes(attributes, for: `for`)
         return self

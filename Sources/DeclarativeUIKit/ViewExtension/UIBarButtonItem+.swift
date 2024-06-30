@@ -101,36 +101,43 @@ public extension UIBarButtonItem {
         return self
     }
     
+    @discardableResult
     func backButtonBackgroundImage(_ backButtonBackgroundImage: UIImage?, for: UIControl.State, barMetrics: UIBarMetrics) -> Self {
         self.setBackButtonBackgroundImage(backButtonBackgroundImage, for: `for`, barMetrics: barMetrics)
         return self
     }
     
+    @discardableResult
     func backButtonTitlePositionAdjustment(_ adjustment: UIOffset, for: UIBarMetrics) -> Self {
         self.setBackButtonTitlePositionAdjustment(adjustment, for: `for`)
         return self
     }
     
+    @discardableResult
     func backButtonBackgroundVerticalPositionAdjustment(_ adjustment: CGFloat, for: UIBarMetrics) -> Self {
         self.setBackButtonBackgroundVerticalPositionAdjustment(adjustment, for: `for`)
         return self
     }
     
+    @discardableResult
     func backgroundVerticalPositionAdjustment(_ adjustment: CGFloat, for: UIBarMetrics) -> Self {
         self.setBackgroundVerticalPositionAdjustment(adjustment, for: `for`)
         return self
     }
     
+    @discardableResult
     func backgroundImage(_ backgroundImage: UIImage?, for: UIControl.State, barMetrics: UIBarMetrics) -> Self {
         self.setBackgroundImage(backgroundImage, for: `for`, barMetrics: barMetrics)
         return self
     }
     
+    @discardableResult
     func backgroundImage(_ backgroundImage: UIImage?, for: UIControl.State, style: UIBarButtonItem.Style, barMetrics: UIBarMetrics) -> Self {
         self.setBackgroundImage(backgroundImage, for: `for`, style: style, barMetrics: barMetrics)
         return self
     }
     
+    @discardableResult
     func titlePositionAdjustment(_ adjustment: UIOffset, for: UIBarMetrics) -> Self {
         self.setTitlePositionAdjustment(adjustment, for: `for`)
         return self
