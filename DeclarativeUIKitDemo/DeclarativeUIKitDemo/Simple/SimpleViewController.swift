@@ -160,10 +160,66 @@ final class SimpleViewController: UIViewController {
             }
             .padding(insets: .init(all: 20))
         }
+
+        let UISliderView = {
+            UIStackView.vertical {
+                UISlider()
+                    .minimumValue(0)
+                    .maximumValue(10)
+                    .value(5)
+                    .tintColor(.systemRed)
+            }
+            .padding(insets: .init(all: 20))
+        }
+
+        let UISearchTextFieldView = {
+            UIStackView.vertical {
+                UISearchTextField()
+                    .tokes(
+                        [.init(
+                            icon: nil,
+                            text: "aaa"
+                        ),
+                         .init(
+                             icon: nil,
+                             text: "bbbb"
+                         ),
+                        ]
+                    )
+            }
+            .padding(insets: .init(all: 20))
+        }
+        let UISegmentedControlView = {
+            UIScrollView.horizontal {
+                UISegmentedControl(
+                    items: ["offsetをずらすタイトル",
+                            "あとで変更するタイトル",
+                            UIAction(title: "action付きタイトル", handler: { _ in
+                                print("action")
+                            })
+                           ]
+                )
+                .selectedSegmentIndex(0)
+                .contentOffset(
+                    .init(
+                        width: -10,
+                        height: 0
+                    ),
+                    forSegmentAt: 0
+                )
+                .width(200, forSegmentAt: 0)
+                .title("変更したタイトル", forSegmentAt: 1)
+                .selectedSegmentTintColor(.systemBlue)
+                .padding(insets: .init(all: 20))
+            }
+        }
         
         self.declarative {
             UIScrollView.vertical {
                 UIStackView.vertical {
+                    Header("UISegmentControl")
+                    UISegmentedControlView()
+
                     Header("UIViewの設定")
                     ScrollBlocksView()
                     Header("Z方向の設定")
@@ -176,7 +232,10 @@ final class SimpleViewController: UIViewController {
                     UISwitchViews()
                     Header("UIPageControl")
                     UIPageControlView()
-
+                    Header("UISlider")
+                    UISliderView()
+                    Header("UISearchTextField")
+                    UISearchTextFieldView()
                 }
             }
         }
