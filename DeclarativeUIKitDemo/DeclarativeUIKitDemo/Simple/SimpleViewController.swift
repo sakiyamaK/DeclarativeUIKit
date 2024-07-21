@@ -132,12 +132,33 @@ final class SimpleViewController: UIViewController {
                 UISwitch()
                     .isOn(true)
                     .onTintColor(.red)
-                    .add(target: self, action: #selector(self.uiSwitchValueChanged(sender:)), for: .valueChanged)
+                    .addAction(.valueChanged, handler: {[weak self] action in
+                        guard let self, let switchButton = action.sender as? UISwitch else { return }
+                        self.label.text = switchButton.isOn ? "ON" : "OFF"
+                    })
                     .customSpacing(50)
                 UILabel()
                     .text("ON")
                     .assign(to: &self.label)
             }.padding(insets: .init(all: 20))
+        }
+        
+        let UIPageControlView = {
+            UIStackView.vertical {
+                UIPageControl()
+                    .numberOfPages(16)
+                    .currentPage(8)
+                    .currentPageIndicatorTintColor(.black)
+                    .pageIndicatorTintColor(.gray)
+                UIPageControl()
+                    .numberOfPages(16)
+                    .currentPage(8)
+                    .currentPageIndicatorTintColor(.brown)
+                    .pageIndicatorTintColor(.black)
+                    .backgroundStyle(.prominent)
+                    .direction(.topToBottom)
+            }
+            .padding(insets: .init(all: 20))
         }
         
         self.declarative {
@@ -153,12 +174,15 @@ final class SimpleViewController: UIViewController {
                     SomeViews()
                     Header("UISwitch")
                     UISwitchViews()
+                    Header("UIPageControl")
+                    UIPageControlView()
+
                 }
             }
         }
     }
+}
 
-    @objc private func uiSwitchValueChanged(sender: UISwitch) {
-        label.text = sender.isOn ? "ON" : "OFF"
-    }
+#Preview {
+    SimpleViewController()
 }

@@ -44,7 +44,7 @@ public extension UILabel {
 
     @discardableResult
     func text(_ text: String?) -> Self {
-        guard let text = text else {
+        guard let text else {
             return self.setup(attrText: nil)
         }
         return self.setup(attrText: NSAttributedString(string: text))
