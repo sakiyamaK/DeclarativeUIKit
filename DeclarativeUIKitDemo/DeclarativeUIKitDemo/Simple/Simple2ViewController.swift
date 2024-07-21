@@ -40,10 +40,12 @@ final class Simple2ViewController: UIViewController {
                 Header("その他のViewの設定")
                 UIScrollView.vertical {
                     UIStackView.vertical {
+
                         UIImageView(UIImage.init(systemName: "square.and.arrow.up"))
                             .contentMode(.scaleAspectFit)
                             .tintColor(.red)
                             .height(200)
+                        
 
                         if #available(iOS 14.0, *) {
                             UIButton("button")
@@ -115,12 +117,18 @@ final class Simple2ViewController: UIViewController {
                     }
 
                 }
-                .refreshControl {
+                .refreshControl(
                     UIRefreshControl()
-                        .addControlAction(target: self, for: .valueChanged) {
-                            #selector(refresh)
-                        }
-                }
+                        .addAction(.valueChanged, handler: {[weak self] action in
+                            guard let self, let refreshControl = action as? UIRefreshControl else { return }
+                            print("リフレッシュするよ")
+                            if refreshControl.isRefreshing {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                    refreshControl.endRefreshing()
+                                }
+                            }
+                        })
+                )
             }
             .spacing(20)
         }
@@ -163,13 +171,8 @@ final class Simple2ViewController: UIViewController {
             self.indicator.isHidden = true
         }
     }
-    
-    func refresh(_ sender: UIRefreshControl) {
-        print("リフレッシュするよ")
-        if sender.isRefreshing {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                sender.endRefreshing()
-            }
-        }
-    }
+}
+
+#Preview {
+    Simple2ViewController()
 }

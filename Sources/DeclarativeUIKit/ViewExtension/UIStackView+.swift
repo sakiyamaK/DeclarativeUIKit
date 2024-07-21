@@ -24,9 +24,10 @@ public extension UIStackView {
 
     static func vertical(alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, isTouchTransparency: Bool = false, @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> UIStackView {
         if isTouchTransparency {
-            return HelperTouchTransparencyStackView(axis: .vertical, alignment: alignment, distribution: distribution, spacing: spacing, builder)
+            HelperTouchTransparencyStackView(axis: .vertical, alignment: alignment, distribution: distribution, spacing: spacing, builder)
+        } else {
+            UIStackView(axis: .vertical, alignment: alignment, distribution: distribution, spacing: spacing, builder)
         }
-        return UIStackView(axis: .vertical, alignment: alignment, distribution: distribution, spacing: spacing, builder)
     }
     
     static func vStack(alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, isTouchTransparency: Bool = false, @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> UIStackView {
@@ -35,9 +36,10 @@ public extension UIStackView {
     
     static func horizontal(alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, isTouchTransparency: Bool = false, @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> UIStackView {
         if isTouchTransparency {
-            return HelperTouchTransparencyStackView(axis: .horizontal, alignment: alignment, distribution: distribution, spacing: spacing, builder)
+            HelperTouchTransparencyStackView(axis: .horizontal, alignment: alignment, distribution: distribution, spacing: spacing, builder)
+        } else {
+            UIStackView(axis: .horizontal, alignment: alignment, distribution: distribution, spacing: spacing, builder)
         }
-        return UIStackView(axis: .horizontal, alignment: alignment, distribution: distribution, spacing: spacing, builder)
     }
     static func hStack(alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, isTouchTransparency: Bool = false, @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> UIStackView {
         UIStackView.horizontal(alignment: alignment, distribution: distribution, spacing: spacing, isTouchTransparency: isTouchTransparency, builder)

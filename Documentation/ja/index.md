@@ -1,7 +1,7 @@
 ## Documentation
 
-- Reference Version: **1.10.0**
-- Last Update: **2023/11/03**
+- Reference Version: **1.12.0**
+- Last Update: **2024/07/21**
 
 ### Table Of Contents
 
@@ -247,3 +247,23 @@
 ### [UIListContentConfiguration](uilistcontentconfiguration.md#uilistcontentconfiguration)
 - [function](uilistcontentconfiguration.md#function)
   - [some default parameters](uilistcontentconfiguration.md#some-default-parameters)
+
+### [UIPageControl](uipagecontrol.md#uiswitch)
+- [function](uipagecontrol.md#function)
+  - [some default parameters](uipagecontrol.md#some-default-parameters)
+    - [sample](uipagecontrol.md#sample-1)
+
+### [UISearchTextField](uisearchtextfield.md#uiswitch)
+- [function](uisearchtextfield.md#function)
+  - [some default parameters](uisearchtextfield.md#some-default-parameters)
+    - [sample](uisearchtextfield.md#sample-1)
+
+### [UISegmentedControl](uisegmentedcontrol.md#uiswitch)
+- [function](uisegmentedcontrol.md#function)
+  - [some default parameters](uisegmentedcontrol.md#some-default-parameters)
+    - [sample](uisegmentedcontrol.md#sample-1)
+
+### [UISlider](uislider.md#uiswitch)
+- [function](uislider.md#function)
+  - [some default parameters](uislider.md#some-default-parameters)
+    - [sample](uislider.md#sample-1)

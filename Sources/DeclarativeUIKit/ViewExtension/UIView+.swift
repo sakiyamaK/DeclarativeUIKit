@@ -91,7 +91,7 @@ public extension UIView {
         self.contentMode = contentMode
         return self
     }
-    
+
     @discardableResult
     func alpha(_ alpha: CGFloat) -> Self {
         self.alpha = alpha
@@ -118,6 +118,36 @@ public extension UIView {
         return self
     }
     
+    @discardableResult
+    func tintColor(_ tintColor: UIColor) -> Self {
+        self.tintColor = tintColor
+        return self
+    }
+
+    @discardableResult
+    func isOpaque(_ isOpaque: Bool) -> Self {
+        self.isOpaque = isOpaque
+        return self
+    }
+
+    @discardableResult
+    func clearsContextBeforeDrawing(_ clearsContextBeforeDrawing: Bool) -> Self {
+        self.clearsContextBeforeDrawing = clearsContextBeforeDrawing
+        return self
+    }
+
+    @discardableResult
+    func mask(_ mask: UIView?) -> Self {
+        self.mask = mask
+        return self
+    }
+
+    @discardableResult
+    func tintAdjustmentMode(_ tintAdjustmentMode: UIView.TintAdjustmentMode) -> Self {
+        self.tintAdjustmentMode = tintAdjustmentMode
+        return self
+    }
+
     @discardableResult
     func add(gestureRecognizer: UIGestureRecognizer) -> Self {
         self.addGestureRecognizer(gestureRecognizer)
