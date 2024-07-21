@@ -83,7 +83,7 @@ public extension UIPageControl {
     }
 
     @available(iOS 14.0, *)
-    func indicator(image: UIImage?) -> Self {
+    func indicatorAllPage(image: UIImage?) -> Self {
         for page in 0..<numberOfPages {
             setIndicatorImage(image, forPage: page)
         }
@@ -107,7 +107,7 @@ public extension UIPageControl {
 
     @discardableResult
     @available(iOS 16.0, *)
-    func currentPageIndicator(image: UIImage?) -> Self {
+    func currentPageIndicatorAllPage(image: UIImage?) -> Self {
         for page in 0..<numberOfPages {
             setCurrentPageIndicatorImage(image, forPage: page)
         }

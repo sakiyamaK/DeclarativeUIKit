@@ -69,13 +69,7 @@ public extension UISearchBar {
         self.setShowsCancelButton(showsCancelButton, animated: animated)
         return self
     }
-    
-    @discardableResult
-    func tintColor(_ tintColor: UIColor) -> Self {
-        self.tintColor = tintColor
-        return self
-    }
-    
+        
     @discardableResult
     func barTintColor(_ barTintColor: UIColor?) -> Self {
         self.barTintColor = barTintColor

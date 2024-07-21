@@ -34,12 +34,6 @@ public extension UITabBar {
     }
     
     @discardableResult
-    func tintColor(_ tintColor: UIColor) -> Self {
-        self.tintColor = tintColor
-        return self
-    }
-
-    @discardableResult
     func barTintColor(_ barTintColor: UIColor?) -> Self {
         self.barTintColor = barTintColor
         return self
