@@ -81,6 +81,7 @@ public extension UIView {
         return self
     }
     
+    @discardableResult
     func clipsToBounds(_ clipsToBounds: Bool) -> Self {
         self.clipsToBounds = clipsToBounds
         return self
@@ -343,37 +344,37 @@ public extension UIView {
 public extension UIView {
     @discardableResult
     func width(_ width: CGFloat, priority: UILayoutPriority = .required, apply: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
-        self.widthConstraint(width, apply: apply)
+        self.widthConstraint(width, priority: priority, apply: apply)
         return self
     }
     
     @discardableResult
     func minWidth(_ width: CGFloat, priority: UILayoutPriority = .required, apply: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
-        self.minWidthConstraint(width, apply: apply)
+        self.minWidthConstraint(width, priority: priority, apply: apply)
         return self
     }
     
     @discardableResult
     func maxWidth(_ width: CGFloat, priority: UILayoutPriority = .required, apply: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
-        self.maxWidthConstraint(width, apply: apply)
+        self.maxWidthConstraint(width, priority: priority, apply: apply)
         return self
     }
     
     @discardableResult
     func height(_ height: CGFloat, priority: UILayoutPriority = .required, apply: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
-        self.heightConstraint(height, apply: apply)
+        self.heightConstraint(height, priority: priority, apply: apply)
         return self
     }
     
     @discardableResult
     func minHeight(_ height: CGFloat, priority: UILayoutPriority = .required, apply: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
-        self.minHeightConstraint(height, apply: apply)
+        self.minHeightConstraint(height, priority: priority, apply: apply)
         return self
     }
     
     @discardableResult
     func maxHeight(_ height: CGFloat, priority: UILayoutPriority = .required, apply: ((NSLayoutConstraint) -> Void)? = nil) -> Self {
-        self.maxHeightConstraint(height, apply: apply)
+        self.maxHeightConstraint(height, priority: priority, apply: apply)
         return self
     }
     
