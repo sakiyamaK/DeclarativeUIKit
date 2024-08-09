@@ -108,4 +108,22 @@ public extension UIStackView {
         self.spacing = spacing
         return self
     }
+    
+    @discardableResult
+    func isBaselineRelativeArrangement(_ isBaselineRelativeArrangement: Bool) -> Self {
+        self.isBaselineRelativeArrangement = isBaselineRelativeArrangement
+        return self
+    }
+
+    @discardableResult
+    func isLayoutMarginsRelativeArrangement(_ isLayoutMarginsRelativeArrangement: Bool) -> Self {
+        self.isLayoutMarginsRelativeArrangement = isLayoutMarginsRelativeArrangement
+        return self
+    }
+    
+    @discardableResult
+    func margins(_ margins: NSDirectionalEdgeInsets) -> Self {
+        self.isLayoutMarginsRelativeArrangement(true)
+            .directionalLayoutMargins(margins)
+    }
 }

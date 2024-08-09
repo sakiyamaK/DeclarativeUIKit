@@ -240,6 +240,30 @@ public extension UIView {
         self.subviews.forEach({ $0.removeFromSuperview() })
         return self
     }
+    
+    @discardableResult
+    func layoutMargins(_ layoutMargins: UIEdgeInsets) -> Self {
+        self.layoutMargins = layoutMargins
+        return self
+    }
+    
+    @discardableResult
+    func directionalLayoutMargins(_ margins: NSDirectionalEdgeInsets) -> Self {
+        self.directionalLayoutMargins = margins
+        return self
+    }
+
+    @discardableResult
+    func preservesSuperviewLayoutMargins(_ preservesSuperviewLayoutMargins: Bool) -> Self {
+        self.preservesSuperviewLayoutMargins = preservesSuperviewLayoutMargins
+        return self
+    }
+
+    @discardableResult
+    func insetsLayoutMarginsFromSafeArea(_ insetsLayoutMarginsFromSafeArea: Bool) -> Self {
+        self.insetsLayoutMarginsFromSafeArea = insetsLayoutMarginsFromSafeArea
+        return self
+    }
 }
 
 //MARK: - other instanse
