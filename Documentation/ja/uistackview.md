@@ -190,6 +190,10 @@ func alignment(_ alignment: Alignment) -> Self
 func distribution(_ distribution: Distribution) -> Self
 
 func spacing(_ spacing: CGFloat) -> Self
+
+func isBaselineRelativeArrangement(_ isBaselineRelativeArrangement: Bool) -> Self
+
+func isLayoutMarginsRelativeArrangement(_ isLayoutMarginsRelativeArrangement: Bool) -> Self
 ```
 
 #### sample
@@ -228,5 +232,29 @@ self.declarative {
     .alignment(.fill)
     .distribution(.fillEqually)
     .spacing(10)
+}
+```
+
+### margins
+
+UIStackViewにマージンを設定することができます
+
+```swift
+func margins(_ margins: NSDirectionalEdgeInsets) -> Self
+```
+
+#### sample
+
+```swift
+self.declarative {
+    UIStackView {
+        UIView.spacer().backgroundColor(.blue)
+        UIView.spacer().backgroundColor(.green)
+        UIView.spacer().backgroundColor(.red)
+    }
+    .alignment(.fill)
+    .distribution(.fillEqually)
+    .spacing(10)
+    .margins(.init(horizontal: 30))
 }
 ```
