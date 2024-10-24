@@ -186,14 +186,44 @@ public extension UIButton.Configuration {
         _self.titleLineBreakMode = titleLineBreakMode
         return _self
     }
+
+    @discardableResult
+    func automaticallyUpdateForSelection(_ automaticallyUpdateForSelection: Bool) -> Self {
+        var _self = self
+        _self.automaticallyUpdateForSelection = automaticallyUpdateForSelection
+        return _self
+    }
+}
+
+@available(iOS 15.0, *)
+public extension UIButton.Configuration {
     
+    @discardableResult
+    func attributedTitle(_ attributedTitle: NSAttributedString?) -> Self {
+        guard let attributedTitle else { return self }
+        var _self = self
+        return _self.attributedTitle(AttributedString(attributedTitle))
+    }
+
     @discardableResult
     func attributedTitle(_ attributedTitle: NSMutableAttributedString?) -> Self {
         guard let attributedTitle else { return self }
         var _self = self
-        let nsAttributedString = NSAttributedString(attributedString: attributedTitle)
-        let attributedString = AttributedString(nsAttributedString)
-        _self.attributedTitle = attributedString
-        return _self
+        return _self.attributedTitle(NSAttributedString(attributedString: attributedTitle))
+    }
+    
+    @discardableResult
+    func attributedSubtitle(_ attributedSubtitle: NSAttributedString?) -> Self {
+        guard let attributedSubtitle else { return self }
+        var _self = self
+        return _self.attributedSubtitle(AttributedString(attributedSubtitle))
+    }
+
+        
+    @discardableResult
+    func attributedSubtitle(_ attributedSubtitle: NSMutableAttributedString?) -> Self {
+        guard let attributedSubtitle else { return self }
+        var _self = self
+        return _self.attributedSubtitle(NSAttributedString(attributedString: attributedSubtitle))
     }
 }
