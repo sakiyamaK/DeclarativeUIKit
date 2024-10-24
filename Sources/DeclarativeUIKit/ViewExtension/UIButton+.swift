@@ -158,6 +158,12 @@ public extension UIButton {
         self.configuration = configurationBuilder()
         return self
     }
+    
+    @discardableResult
+    func configurationUpdateHandler(_ handler: UIButton.ConfigurationUpdateHandler?) -> Self {
+        self.configurationUpdateHandler = handler
+        return self
+    }
 }
 
 

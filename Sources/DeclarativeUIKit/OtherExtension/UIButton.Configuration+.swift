@@ -9,6 +9,7 @@ import UIKit
 
 @available(iOS 15.0, *)
 public extension UIButton.Configuration {
+    
     @discardableResult
     func background(_ background: UIBackgroundConfiguration) -> Self {
         var _self = self
@@ -176,6 +177,23 @@ public extension UIButton.Configuration {
     func titleAlignment(_ titleAlignment: UIButton.Configuration.TitleAlignment) -> Self {
         var _self = self
         _self.titleAlignment = titleAlignment
+        return _self
+    }
+    
+    @discardableResult
+    func titleLineBreakMode(_ titleLineBreakMode: NSLineBreakMode) -> Self {
+        var _self = self
+        _self.titleLineBreakMode = titleLineBreakMode
+        return _self
+    }
+    
+    @discardableResult
+    func attributedTitle(_ attributedTitle: NSMutableAttributedString?) -> Self {
+        guard let attributedTitle else { return self }
+        var _self = self
+        let nsAttributedString = NSAttributedString(attributedString: attributedTitle)
+        let attributedString = AttributedString(nsAttributedString)
+        _self.attributedTitle = attributedString
         return _self
     }
 }
