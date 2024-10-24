@@ -35,4 +35,5 @@ func imagePlacement(_ imagePlacement: NSDirectionalRectEdge) -> Self
 func imagePadding(_ imagePadding: CGFloat) -> Self
 func titlePadding(_ titlePadding: CGFloat) -> Self
 func titleAlignment(_ titleAlignment: UIButton.Configuration.TitleAlignment) -> Self
+func automaticallyUpdateForSelection(_ automaticallyUpdateForSelection: Bool) -> Self
 ```
