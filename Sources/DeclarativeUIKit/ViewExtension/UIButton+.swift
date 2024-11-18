@@ -131,13 +131,7 @@ public extension UIButton {
     func menu(_ menu: UIMenu) -> Self {
         self.menu = menu
         return self
-    }
-    
-    @discardableResult
-    func showsMenuAsPrimaryAction(_ showsMenuAsPrimaryAction: Bool) -> Self {
-        self.showsMenuAsPrimaryAction = showsMenuAsPrimaryAction
-        return self
-    }
+    }    
 }
 
 //MARK: - available iOS 15.0
