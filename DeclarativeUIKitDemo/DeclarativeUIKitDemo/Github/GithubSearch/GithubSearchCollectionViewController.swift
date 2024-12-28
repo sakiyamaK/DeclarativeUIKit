@@ -23,15 +23,16 @@ final class GithubSearchCollectionViewController: UIViewController {
         self.declarative {
             UIStackView.vertical {
                 UIStackView.horizontal {
-                    UISearchTextField(assign: &searchTextField)
+                    UISearchTextField(assign: &self.searchTextField)
                         .placeholder("検索してね")
 
                     UIButton(UIImage(systemName: "magnifyingglass.circle"))
-                        .add(target: self, for: .touchUpInside) {
-                            #selector(tapButton)
-                        }
+                        .addAction(.touchUpInside, handler: { [weak self] _ in
+                            let searchParameter: GithubSearchParameters = .init(searchWord: self!.searchTextField.text)
+                            self!.presenter.search(parameters: searchParameter)
+                        })
                         .contentMode(.scaleAspectFit)
-                        .assign(to: &searchButton)
+                        .assign(to: &self.searchButton)
                 }
                 .spacing(12)
                 .padding(insets: .init(horizontal: 12))
@@ -43,12 +44,12 @@ final class GithubSearchCollectionViewController: UIViewController {
                     .dataSource(self)
                     .registerCellClass(GithubSearchCollectionViewCell.self, forCellWithReuseIdentifier: GithubSearchCollectionViewCell.reuseIdentifier)
                     .isHidden(true)
-                    .assign(to: &collectionView)
+                    .assign(to: &self.collectionView)
 
-                UIActivityIndicatorView(assign: &activityIndicator)
+                UIActivityIndicatorView(assign: &self.activityIndicator)
                     .center()
                     .offset(y: -100)
-                    .assign(to: &activityIndicatorContianerView)
+                    .assign(to: &self.activityIndicatorContianerView)
                     .isHidden(true)
                 
                 UIStackView.vertical {
@@ -56,7 +57,7 @@ final class GithubSearchCollectionViewController: UIViewController {
                     UILabel("検索ワードを入力してください")
                         .textAlignment(.center)
                     UIView.spacer()
-                }.assign(to: &startStack)
+                }.assign(to: &self.startStack)
             }.spacing(10)
         }
     }
@@ -98,13 +99,6 @@ extension GithubSearchCollectionViewController: GithubSearchPresenterOutput {
             vc.inject(presenter: presenter)
             self.navigationController?.pushViewController(vc, animated: true)
         }
-    }
-}
-
-@objc extension GithubSearchCollectionViewController {
-    func tapButton(_ sender: UIButton) {
-        let searchParameter: GithubSearchParameters = .init(searchWord: searchTextField.text)
-        presenter.search(parameters: searchParameter)
     }
 }
 

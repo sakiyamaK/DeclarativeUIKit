@@ -105,7 +105,7 @@ final class Simple2ViewController: UIViewController {
                     .spacing(40)
                     .padding(insets: .init(horizontal: 10))
                     .zStack {
-                        UIActivityIndicatorView(assign: &indicator)
+                        UIActivityIndicatorView(assign: &self.indicator)
                             .apply({
                                 $0.startAnimating()
                             })
@@ -131,13 +131,11 @@ final class Simple2ViewController: UIViewController {
                 )
             }
             .spacing(20)
-        }
-                
-        //セーフエリアを無視したレイアウトをさらに上に追加
-        self.declarative(safeAreas: .init(all: false), reset: false) {
+        }.declarative(safeAreas: .init(all: false)) {
+            //セーフエリアを無視したレイアウトをさらに上に追加
             UIView.spacer()
                 .backgroundColor(.black.withAlphaComponent(0.3))
-                .assign(to: &overlapView)
+                .assign(to: &self.overlapView)
                 .isHidden(true)
                 
         }

@@ -15,14 +15,14 @@ final class LandmarkRow: UICollectionViewCell {
                 UIView.spacer()
                 
                 UIStackView.horizontal {
-                    UIImageView(assign: &iconView)
+                    UIImageView(assign: &self.iconView)
                         .size(width: 50, height: 50)
 
-                    UILabel(assign: &textLabel)
+                    UILabel(assign: &self.textLabel)
 
                     UIView.spacer()
 
-                    UIImageView(assign: &starView)
+                    UIImageView(assign: &self.starView)
                         .image(UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysTemplate))
                         .apply({
                             $0.tintColor = .systemYellow

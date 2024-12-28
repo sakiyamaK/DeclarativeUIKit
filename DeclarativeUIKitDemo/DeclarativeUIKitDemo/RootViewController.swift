@@ -42,69 +42,74 @@ final class RootViewController: UIViewController {
                     
                     if false {
                         Button("ホットリロード")
-                            .add(target: self, for: .touchUpInside, {_ in
+                            .addAction(.touchUpInside, handler: {[weak self] _ in
                                 let vc = HotReloadViewController()
-                                self.navigationController?.pushViewController(vc, animated: true)
+                                self!.navigationController?.pushViewController(vc, animated: true)
                             })
                     }
                     
                     Button("レイアウトの基本")
-                        .add(target: self, for: .touchUpInside, {_ in
+                        .addAction(.touchUpInside, handler: {[weak self] _ in
                             let vc = SimpleViewController()
-                            self.navigationController?.pushViewController(vc, animated: true)
+                            self!.navigationController?.pushViewController(vc, animated: true)
                         })
 
                     Button("基本的なコンポーネント")
-                        .add(target: self, for: .touchUpInside, {_ in
+                        .addAction(.touchUpInside, handler: {[weak self] _ in
                             let vc = Simple2ViewController()
-                            self.navigationController?.pushViewController(vc, animated: true)
+                            self!.navigationController?.pushViewController(vc, animated: true)
                         })
 
                     Button("TablewView")
-                        .add(target: self, for: .touchUpInside, {_ in
+                        .addAction(.touchUpInside, handler: {[weak self] _ in
                             let vc = TableViewController()
-                            self.navigationController?.pushViewController(vc, animated: true)
+                            self!.navigationController?.pushViewController(vc, animated: true)
                         })
 
                     Button("CollectionView")
-                        .add(target: self, for: .touchUpInside, {_ in
+                        .addAction(.touchUpInside, handler: {[weak self] _ in
                             let vc = CollectionViewController()
-                            self.navigationController?.pushViewController(vc, animated: true)
+                            self!.navigationController?.pushViewController(vc, animated: true)
                         })
 
                     Button("Path")
-                        .add(target: self, for: .touchUpInside, {_ in
+                        .addAction(.touchUpInside, handler: {[weak self] _ in
                             let vc = PathViewController()
-                            self.navigationController?.pushViewController(vc, animated: true)
+                            self!.navigationController?.pushViewController(vc, animated: true)
                         })
                         .minWidth(200)
                     
                     Button("UITabBarController")
-                        .add(target: self, for: .touchUpInside, {_ in
+                        .addAction(.touchUpInside, handler: {[weak self] _ in
                             let vc = UITabBarController.rootTabBarController()
-                            self.navigationController?.pushViewController(vc, animated: true)
+                            self!.navigationController?.pushViewController(vc, animated: true)
                         })
 
-
                     Button("GithubSearch")
-                        .add(target: self, for: .touchUpInside, {_ in
+                        .addAction(.touchUpInside, handler: {[weak self] _ in
                             let vc = GithubSearchCollectionViewController()
                             let presenter = GithubSearchPresenter(output: vc)
                             vc.inject(presenter: presenter)
-                            self.navigationController?.pushViewController(vc, animated: true)
+                            self!.navigationController?.pushViewController(vc, animated: true)
                         })
 
                     Button("SwiftUI Tutorial")
-                        .add(target: self, for: .touchUpInside, {_ in
+                        .addAction(.touchUpInside, handler: {[weak self] _ in
                             let vc = LandmarkListViewController()
                             vc.inject(landmarks: ModelData.landmarks, isOn: false)
-                            self.navigationController?.pushViewController(vc, animated: true)
+                            self!.navigationController?.pushViewController(vc, animated: true)
                         })
                     
                     Button("MapView")
-                        .add(target: self, for: .touchUpInside, {_ in
+                        .addAction(.touchUpInside, handler: {[weak self] _ in
                             let vc = MapViewController()
-                            self.navigationController?.pushViewController(vc, animated: true)
+                            self!.navigationController?.pushViewController(vc, animated: true)
+                        })
+
+                    Button("Actor")
+                        .addAction(.touchUpInside, handler: {[weak self] _ in
+                            let vc = ActorViewController()
+                            self!.navigationController?.pushViewController(vc, animated: true)
                         })
 
                     UIView.spacer()

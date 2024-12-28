@@ -24,16 +24,16 @@ final class GithubSearchResultViewController: UIViewController {
                     $0.uiDelegate = self
                     $0.navigationDelegate = self
                 }
-                .assign(to: &webView)
+                .assign(to: &self.webView)
                 .isHidden(true)
                 
-                UIActivityIndicatorView(assign: &activityIndicator)
+                UIActivityIndicatorView(assign: &self.activityIndicator)
                     .apply {
                         $0.startAnimating()
                     }
                     .center()
                     .offset(y: -100)
-                    .assign(to: &activityIndicatorContianerView)
+                    .assign(to: &self.activityIndicatorContianerView)
                     .isHidden(true)
             }
         }

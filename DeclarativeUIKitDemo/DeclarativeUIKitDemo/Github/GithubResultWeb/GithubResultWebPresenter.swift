@@ -1,9 +1,11 @@
 import Foundation
 
+@MainActor
 protocol GithubResultWebPresenterInput {
     func viewDidLoad()
 }
 
+@MainActor
 protocol GithubResultWebPresenterOutput: AnyObject {
     func load(request: URLRequest)
 }

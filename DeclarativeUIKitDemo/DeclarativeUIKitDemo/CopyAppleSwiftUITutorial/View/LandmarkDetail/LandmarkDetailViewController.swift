@@ -70,16 +70,16 @@ final class LandmarkDetailViewController: UIViewController {
         let imageOffset: CGFloat = 100
         let textHorizontalMargin: CGFloat = 12
         
-        self.declarative {
+        self.declarative { [self] in
             UIScrollView.vertical {
                 UIStackView.vertical {
                     MapView().apply {
-                        $0.setRegion(landmark.locationCoordinate)
+                        $0.setRegion(self.landmark.locationCoordinate)
                     }
                     .height(300)
                     .zStack {
                         CircleImageView().apply {
-                            $0.setLandmark(landmark)
+                            $0.setLandmark(self.landmark)
                         }
                         .centerX()
                         .bottom()
@@ -89,11 +89,11 @@ final class LandmarkDetailViewController: UIViewController {
 
                     UIStackView.vertical {
 
-                        NameView(landmark)
+                        NameView(self.landmark)
 
                         UIView.divider()
 
-                        TextsView(landmark)
+                        TextsView(self.landmark)
                     }
                     .spacing(10)
                     .padding(insets: .init(horizontal: textHorizontalMargin))

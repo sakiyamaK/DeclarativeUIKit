@@ -20,8 +20,13 @@ final class ToggleRow: UICollectionViewCell {
                     
                     UIView.spacer()
                     
-                    UISwitch(assign: &switchView)
-                    .add(target: self, action: #selector(_toggleAction), for: .valueChanged)
+                    UISwitch(assign: &self.switchView)
+                        .addAction(.valueChanged, handler: { [weak self] action in
+                            guard let switchView = action.sender as? UISwitch else {
+                                return
+                            }
+                            self!.toggleAction?(switchView.isOn)
+                        })
                 }
                 .alignment(.center)
                 
@@ -38,10 +43,6 @@ final class ToggleRow: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    @objc private func _toggleAction(_ sender: UISwitch){
-        self.toggleAction?(sender.isOn)
     }
 }
 
