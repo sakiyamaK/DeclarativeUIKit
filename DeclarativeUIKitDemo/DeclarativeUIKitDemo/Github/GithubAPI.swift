@@ -46,7 +46,7 @@ protocol GithubAPIProtocol: AnyObject {
              completion: ((Result<[GithubModel], GithubError>) -> Void)?)
 }
 
-final class GithubAPI: GithubAPIProtocol {
+final class GithubAPI: GithubAPIProtocol, Sendable {
     static let shared = GithubAPI()
     private init() {}
     

@@ -58,30 +58,29 @@ final class LandmarkListViewController: UIViewController {
                     return section
                 }
             }
-            .assign(to: &collectionView)
+            .assign(to: &self.collectionView)
             .delegate(self)
             .dataSource(self)
             .registerCellClass(ToggleRow.self, forCellWithReuseIdentifier: "ToggleRow")
             .registerCellClass(LandmarkRow.self, forCellWithReuseIdentifier: "LandmarkRow")
             .refreshControl {
                 UIRefreshControl()
-                    .add(target: self, action: #selector(refresh), for: .valueChanged)
+                    .addAction(.valueChanged, handler: { action in
+                        print("refresh")
+                        guard let refresh = action.sender as? UIRefreshControl
+                        else {
+                            return
+                        }
+                        if refresh.isRefreshing {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                refresh.endRefreshing()
+                            }
+                        }
+                    })
             }
         }
     }
 }
-
-@objc private extension LandmarkListViewController {
-    func refresh(_ sender: UIRefreshControl) {
-        print("refresh")
-        if sender.isRefreshing {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                sender.endRefreshing()
-            }
-        }
-    }
-}
-
 extension LandmarkListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard indexPath.row > 0 else { return }

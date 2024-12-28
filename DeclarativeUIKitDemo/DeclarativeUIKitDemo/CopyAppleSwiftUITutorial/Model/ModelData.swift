@@ -2,7 +2,7 @@ import Foundation
 import Combine
 
 final class ModelData {
-  static var landmarks: [Landmark] = load("landmarkData.json")
+  static let landmarks: [Landmark] = load("landmarkData.json")
 }
 
 func load<T: Decodable>(_ filename: String) -> T {

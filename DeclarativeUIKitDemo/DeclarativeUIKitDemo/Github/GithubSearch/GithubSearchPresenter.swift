@@ -1,5 +1,6 @@
 import Foundation
 
+@MainActor
 protocol GithubSearchPresenterInput {
     var numberOfItems: Int { get }
     func item(index: Int) -> GithubModel
@@ -7,6 +8,7 @@ protocol GithubSearchPresenterInput {
     func didSelect(index: Int)
 }
 
+@MainActor
 protocol GithubSearchPresenterOutput: AnyObject {
     func update(loading: Bool)
     func update(githubModels: [GithubModel])

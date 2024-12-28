@@ -17,47 +17,53 @@ final class GithubSearchCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
                         
-        let BottomIconView = { (iconName: String, assign: inout UILabel?) -> UIView in
-            UIStackView.horizontal {
-                UIImageView(
-                    UIImage(systemName: iconName)?.withRenderingMode(.alwaysTemplate).withTintColor(.black)
-                ).contentMode(.scaleAspectFit)
-                UILabel(assign: &assign)
-                    .textAlignment(.left)
-                    .font(UIFont.systemFont(ofSize: 15))
-                    .contentHuggingPriority(.required, for: .vertical)
-                    .contentCompressionResistancePriority(.required, for: .vertical)
-            }
-            .spacing(5)
-        }
-        
         self.contentView.declarative(priorities: .init(bottom: .defaultLow)) {
             UIStackView.vertical {
                 UIStackView.vertical {
-                    UILabel(assign: &fullNameLabel)
+                    UILabel(assign: &self.fullNameLabel)
                         .textAlignment(.left)
                         .font(UIFont.systemFont(ofSize: 28))
                         .contentHuggingPriority(.required, for: .vertical)
                         .contentCompressionResistancePriority(.required, for: .vertical)
                     
-                    UILabel(assign: &descriptionLabel)
+                    UILabel(assign: &self.descriptionLabel)
                         .textAlignment(.left)
                         .font(UIFont.systemFont(ofSize: 18))
                         .contentHuggingPriority(.required, for: .vertical)
                         .contentCompressionResistancePriority(.required, for: .vertical)
                     
                     UIStackView.horizontal {
-                        BottomIconView("star", &starIconLabel)
+                        UIStackView.horizontal {
+                            UIImageView(
+                                UIImage(systemName: "star")?.withRenderingMode(.alwaysTemplate).withTintColor(.black)
+                            ).contentMode(.scaleAspectFit)
+                            UILabel(assign: &self.starIconLabel)
+                                .textAlignment(.left)
+                                .font(UIFont.systemFont(ofSize: 15))
+                                .contentHuggingPriority(.required, for: .vertical)
+                                .contentCompressionResistancePriority(.required, for: .vertical)
+                        }
+                        .spacing(5)
+
+                        UIStackView.horizontal {
+                            UIImageView(
+                                UIImage(systemName: "circle")?.withRenderingMode(.alwaysTemplate).withTintColor(.black)
+                            ).contentMode(.scaleAspectFit)
+                            UILabel(assign: &self.languageIconLabel)
+                                .textAlignment(.left)
+                                .font(UIFont.systemFont(ofSize: 15))
+                                .contentHuggingPriority(.required, for: .vertical)
+                                .contentCompressionResistancePriority(.required, for: .vertical)
+                        }
+                        .spacing(5)
                         
-                        BottomIconView("circle", &languageIconLabel)
-                        
-                        UILabel(assign: &licenseLabel)
+                        UILabel(assign: &self.licenseLabel)
                             .textAlignment(.left)
                             .font(UIFont.systemFont(ofSize: 15))
                             .contentHuggingPriority(.required, for: .vertical)
                             .contentCompressionResistancePriority(.required, for: .vertical)
                         
-                        UILabel(assign: &dateLabel)
+                        UILabel(assign: &self.dateLabel)
                             .textAlignment(.left)
                             .font(UIFont.systemFont(ofSize: 15))
                             .contentHuggingPriority(.required, for: .vertical)
