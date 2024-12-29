@@ -35,8 +35,8 @@ public extension UIView {
 public extension UIView {
     
     @discardableResult
-    func declarativeAsync(priorities: UIEdgePriorities = .init(), reset: Bool = false, _ builder: @escaping () async -> UIView) async -> Self {
-        let view = await builder()
+    func declarative(priorities: UIEdgePriorities = .init(), reset: Bool = false, _ builderAsync: @escaping () async -> UIView) async -> Self {
+        let view = await builderAsync()
         if reset {
             self.subviews.forEach { $0.removeFromSuperview() }
         }

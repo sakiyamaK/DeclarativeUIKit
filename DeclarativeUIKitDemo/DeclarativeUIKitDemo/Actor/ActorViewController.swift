@@ -15,6 +15,36 @@ actor User {
     }
 }
 
+final class ActorView: UIView {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        Task {
+            let user = User(name: "name")
+            await self.declarative {
+                await UIScrollView.vertical {
+                    await UIStackView.vertical {
+                        await (0...100).compactMapAsync { _ in
+                            await UILabel(await user.name)
+                        }
+                    }
+                }
+            }
+            
+            after()
+            
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func after() {
+        print("after")
+    }
+}
+
 final class ActorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +61,9 @@ final class ActorViewController: UIViewController {
                     }
                 }
             }
+//            .declarative {
+//                ActorView()
+//            }
             
             after()
         }
@@ -49,7 +82,7 @@ extension Collection where Element: Sendable {
                     await transform(element)
                 }
             }
-
+            
             var results = [T]()
             for await result in group {
                 results.append(result)
@@ -59,22 +92,22 @@ extension Collection where Element: Sendable {
     }
     
     func compactMapAsync<T: Sendable>(transform: @escaping @Sendable (Element) async -> T?) async -> [T] {
-            await withTaskGroup(of: T?.self) { group in
-                for element in self {
-                    group.addTask {
-                        await transform(element)
-                    }
+        await withTaskGroup(of: T?.self) { group in
+            for element in self {
+                group.addTask {
+                    await transform(element)
                 }
-
-                var results = [T]()
-                for await result in group {
-                    if let result {
-                        results.append(result)
-                    }
-                }
-                return results
             }
+            
+            var results = [T]()
+            for await result in group {
+                if let result {
+                    results.append(result)
+                }
+            }
+            return results
         }
+    }
 }
 
 #Preview {

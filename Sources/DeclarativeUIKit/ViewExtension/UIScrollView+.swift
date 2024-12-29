@@ -34,7 +34,6 @@ public extension UIScrollView {
     convenience init(axis: NSLayoutConstraint.Axis = .vertical, margin: UIEdgeInsets = .zero, _ builderAsync: @escaping () async -> UIView) async {
         self.init(frame: .zero)
         let view = await builderAsync()
-        print("builder")
         self.constraint(axis: axis, margin: margin, view: view)
     }
     
