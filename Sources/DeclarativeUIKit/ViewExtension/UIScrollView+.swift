@@ -25,35 +25,53 @@ public extension UIScrollView {
         ])
     }
     
-    convenience init(axis: NSLayoutConstraint.Axis = .vertical, margin: UIEdgeInsets = .zero, _ builder: @escaping () async -> UIView) {
+    convenience init(axis: NSLayoutConstraint.Axis = .vertical, margin: UIEdgeInsets = .zero, _ builder: @escaping () -> UIView) {
         self.init(frame: .zero)
-        Task { @MainActor in
-            let view = await builder()
-            self.constraint(axis: axis, margin: margin, view: view)
+        let view = builder()
+        self.constraint(axis: axis, margin: margin, view: view)
+    }
+    
+    convenience init(axis: NSLayoutConstraint.Axis = .vertical, margin: UIEdgeInsets = .zero, _ builderAsync: @escaping () async -> UIView) async {
+        self.init(frame: .zero)
+        let view = await builderAsync()
+        print("builder")
+        self.constraint(axis: axis, margin: margin, view: view)
+    }
+    
+    static func vertical(
+        margin: UIEdgeInsets = .zero,
+        isTouchTransparency: Bool = false,
+        _ builder: @escaping () -> UIView
+    ) -> UIScrollView {
+        if isTouchTransparency {
+            HelperTouchTransparencyScrollView(axis: .vertical, margin: margin, builder)
+        } else {
+            UIScrollView(axis: .vertical, margin: margin, builder)
         }
     }
     
     static func vertical(
         margin: UIEdgeInsets = .zero,
         isTouchTransparency: Bool = false,
-        _ builder: @escaping () async -> UIView
-    ) -> UIScrollView {
+        _ builderAsync: @escaping () async -> UIView
+    ) async -> UIScrollView {
         if isTouchTransparency {
-            return HelperTouchTransparencyScrollView(axis: .vertical, margin: margin, builder)
+            await HelperTouchTransparencyScrollView(axis: .vertical, margin: margin, builderAsync)
+        } else {
+            await UIScrollView(axis: .vertical, margin: margin, builderAsync)
         }
-        return UIScrollView(axis: .vertical, margin: margin, builder)
-
     }
     
     static func horizontal(
         margin: UIEdgeInsets = .zero,
         isTouchTransparency: Bool = false,
-        _ builder: @escaping () async -> UIView
+        _ builder: @escaping () -> UIView
     ) -> UIScrollView {
         if isTouchTransparency {
-            return HelperTouchTransparencyScrollView(axis: .horizontal, margin: margin, builder)
+            HelperTouchTransparencyScrollView(axis: .horizontal, margin: margin, builder)
+        } else {
+            UIScrollView(axis: .horizontal, margin: margin, builder)
         }
-        return UIScrollView(axis: .horizontal, margin: margin, builder)
     }
 }
 

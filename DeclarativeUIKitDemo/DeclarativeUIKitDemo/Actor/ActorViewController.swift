@@ -22,9 +22,14 @@ final class ActorViewController: UIViewController {
             let user = User(name: "name")
             await self.applyView({ view in
                 view.backgroundColor(.white)
-            }).declarativeAsync {
-                UILabel(await user.name)
-                    .textAlignment(.center)
+            }).declarative {
+                await UIScrollView.vertical {
+                    await UIStackView.vertical {
+                        await (0...100).compactMapAsync { _ in
+                            await UILabel(await user.name)
+                        }
+                    }
+                }
             }
             
             after()

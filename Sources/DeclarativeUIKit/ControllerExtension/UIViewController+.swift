@@ -14,7 +14,7 @@ public extension UIViewController {
     ///   - outsideLayoutGuideTrailing: layoutGuidesの下辺の外側のレイアウト
     ///   - _: layoutGuides内のレイアウト
     /// - Returns: Self
-    func declarativeAsync(
+    func declarative(
         layoutGuides: UIEdgeLayoutGuides,
         priorities: UIEdgePriorities = .init(all: .required),
         reset: Bool = false,
@@ -387,7 +387,7 @@ public extension UIViewController {
 public extension UIViewController {
 
     @discardableResult
-    func declarativeAsync(
+    func declarative(
         safeAreas: UIEdgeBools = .init(all: true),
         priorities: UIEdgePriorities = .init(all: .required),
         reset: Bool = false,
@@ -453,6 +453,7 @@ public extension UIViewController {
         return self
     }
     
+    @discardableResult
     func declarative(
         safeAreas: UIEdgeBools = .init(all: true),
         priorities: UIEdgePriorities = .init(all: .required),
