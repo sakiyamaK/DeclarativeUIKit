@@ -68,6 +68,8 @@ pod 'DeclarativeUIKit'
 
 ## Quick Start
 
+### sync method
+
 ```swift
 import UIKit
 import DeclarativeUIKit
@@ -114,6 +116,38 @@ final class ViewController: UIViewController {
                 .spacing(20)
             }
         }
+    }
+}
+```
+
+### async method
+
+```swift
+actor User {
+    var name: String
+    init(name: String) {
+        self.name = name
+    }
+}
+
+final class ActorViewController: UIViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        Task {
+            let user = User(name: "name")
+            await self.applyView({ view in
+                view.backgroundColor(.white)
+            }).declarativeAsync {
+                UILabel(await user.name)
+                    .textAlignment(.center)
+            }
+            
+            after()
+        }
+    }
+    
+    func after() {
+        print("after")
     }
 }
 ```

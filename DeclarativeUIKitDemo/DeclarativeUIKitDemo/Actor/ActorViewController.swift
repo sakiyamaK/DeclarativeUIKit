@@ -18,20 +18,21 @@ actor User {
 final class ActorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        let user = User(name: "hoge")
-        self.applyView({ view in
-            view.backgroundColor(.white)
-        }).declarative {
-            UIScrollView.vertical {
-                UIStackView.vertical {
-                    await (0...100).compactMapAsync { _ in
-                        await UILabel(await user.name)
-                            .textAlignment(.center)
-                    }
-                }
-                .distribution(.fillEqually)
+        Task {
+            let user = User(name: "name")
+            await self.applyView({ view in
+                view.backgroundColor(.white)
+            }).declarativeAsync {
+                UILabel(await user.name)
+                    .textAlignment(.center)
             }
+            
+            after()
         }
+    }
+    
+    func after() {
+        print("after")
     }
 }
 

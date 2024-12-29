@@ -1,7 +1,7 @@
 import UIKit.UIViewController
 
 @available(iOS 15.0, *)
-extension UIViewController {
+public extension UIViewController {
     @discardableResult
     /// レイアウトを宣言的に書くメソッド
     /// - Parameters:
@@ -14,8 +14,8 @@ extension UIViewController {
     ///   - outsideLayoutGuideTrailing: layoutGuidesの下辺の外側のレイアウト
     ///   - _: layoutGuides内のレイアウト
     /// - Returns: Self
-    func _declarative(
-        layoutGuides: UIEdgeLayoutGuides = .init(all: .normal),
+    func declarativeAsync(
+        layoutGuides: UIEdgeLayoutGuides,
         priorities: UIEdgePriorities = .init(all: .required),
         reset: Bool = false,
         @SingleUIViewBuilder outsideLayoutGuideTop outsideLayoutGuideTopBuilder: @escaping () async -> UIView? = { nil },
@@ -23,183 +23,175 @@ extension UIViewController {
         @SingleUIViewBuilder outsideLayoutGuideBottom outsideLayoutGuideBottomBuilder: @escaping () async -> UIView? = { nil },
         @SingleUIViewBuilder outsideLayoutGuideTrailing outsideLayoutGuideTrailingBuilder: @escaping () async -> UIView? = { nil },
         @SingleUIViewBuilder _ builder: @escaping () async -> UIView
-    ) -> Self {
-        Task { @MainActor in
+    ) async -> Self {
+        let view = await builder()
+        if reset {
+            self.view.subviews.forEach { $0.removeFromSuperview() }
+        }
+        self.view.edgesConstraints(view, layoutGuides: layoutGuides, priorities: priorities)
+        
+        //LayoutGuidesの上の外側
+        if let topView = await outsideLayoutGuideTopBuilder() {
             
-            let view = await builder()
-            if reset {
-                self.view.subviews.forEach { $0.removeFromSuperview() }
-            }
-            self.view.edgesConstraints(view, layoutGuides: layoutGuides, priorities: priorities)
+            topView.translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview(topView)
             
-            //LayoutGuidesの上の外側
-            if let topView = await outsideLayoutGuideTopBuilder() {
-
-                topView.translatesAutoresizingMaskIntoConstraints = false
-                self.view.addSubview(topView)
-
-                let bottomConstraint = switch layoutGuides.top {
-                case .safeArea:
-                    self.view.safeAreaLayoutGuide.topAnchor.constraint(equalTo: topView.bottomAnchor)
-                case .margins:
-                    self.view.layoutMarginsGuide.topAnchor.constraint(equalTo: topView.bottomAnchor)
-                case .readableContent:
-                    self.view.readableContentGuide.topAnchor.constraint(equalTo: topView.bottomAnchor)
-                case .keyboard:
-                    self.view.keyboardLayoutGuide.topAnchor.constraint(equalTo: topView.bottomAnchor)
-                case .normal:
-                    self.view.topAnchor.constraint(equalTo: topView.bottomAnchor)
-                }
-
-                NSLayoutConstraint.activate([
-                    topView.topAnchor.constraint(equalTo: self.view.topAnchor),
-                    topView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-                    bottomConstraint,
-                    self.view.trailingAnchor.constraint(equalTo: topView.trailingAnchor)
-                ])
+            let bottomConstraint = switch layoutGuides.top {
+            case .safeArea:
+                self.view.safeAreaLayoutGuide.topAnchor.constraint(equalTo: topView.bottomAnchor)
+            case .margins:
+                self.view.layoutMarginsGuide.topAnchor.constraint(equalTo: topView.bottomAnchor)
+            case .readableContent:
+                self.view.readableContentGuide.topAnchor.constraint(equalTo: topView.bottomAnchor)
+            case .keyboard:
+                self.view.keyboardLayoutGuide.topAnchor.constraint(equalTo: topView.bottomAnchor)
+            case .normal:
+                self.view.topAnchor.constraint(equalTo: topView.bottomAnchor)
             }
             
-            //セーフエリアの左の外側
-            if let leadingView = await outsideLayoutGuideLeadingBuilder() {
-
-                leadingView.translatesAutoresizingMaskIntoConstraints = false
-                self.view.addSubview(leadingView)
-
-                let leadingConstraint = switch layoutGuides.leading {
-                case .safeArea:
-                    leadingView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
-                case .margins:
-                    leadingView.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor)
-                case .readableContent:
-                    leadingView.topAnchor.constraint(equalTo: self.view.readableContentGuide.topAnchor)
-                case .keyboard:
-                    leadingView.topAnchor.constraint(equalTo: self.view.keyboardLayoutGuide.topAnchor)
-                case .normal:
-                    leadingView.topAnchor.constraint(equalTo: self.view.topAnchor)
-                }
-
-                let bottomConstraint = switch layoutGuides.leading {
-                case .safeArea:
-                    self.view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: leadingView.bottomAnchor)
-                case .margins:
-                    self.view.layoutMarginsGuide.bottomAnchor.constraint(equalTo: leadingView.bottomAnchor)
-                case .readableContent:
-                    self.view.readableContentGuide.bottomAnchor.constraint(equalTo: leadingView.bottomAnchor)
-                case .keyboard:
-                    self.view.keyboardLayoutGuide.bottomAnchor.constraint(equalTo: leadingView.bottomAnchor)
-                case .normal:
-                    self.view.bottomAnchor.constraint(equalTo: leadingView.bottomAnchor)
-                }
-
-                let trailingConstraint = switch layoutGuides.leading {
-                case .safeArea:
-                    self.view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: leadingView.trailingAnchor)
-                case .margins:
-                    self.view.layoutMarginsGuide.leadingAnchor.constraint(equalTo: leadingView.trailingAnchor)
-                case .readableContent:
-                    self.view.readableContentGuide.leadingAnchor.constraint(equalTo: leadingView.trailingAnchor)
-                case .keyboard:
-                    self.view.keyboardLayoutGuide.leadingAnchor.constraint(equalTo: leadingView.trailingAnchor)
-                case .normal:
-                    self.view.leadingAnchor.constraint(equalTo: leadingView.trailingAnchor)
-                }
-
-                NSLayoutConstraint.activate([
-                    leadingConstraint,
-                    leadingView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-                    bottomConstraint,
-                    trailingConstraint
-                ])
-            }
-            
-            //セーフエリアの下の外側
-            if let bottomView = await outsideLayoutGuideBottomBuilder() {
-                
-                bottomView.translatesAutoresizingMaskIntoConstraints = false
-                self.view.addSubview(bottomView)
-                
-                let topConstraint = switch layoutGuides.bottom {
-                case .safeArea:
-                    bottomView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
-                case .margins:
-                    bottomView.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor)
-                case .readableContent:
-                    bottomView.topAnchor.constraint(equalTo: self.view.readableContentGuide.bottomAnchor)
-                case .keyboard:
-                    bottomView.topAnchor.constraint(equalTo: self.view.keyboardLayoutGuide.bottomAnchor)
-                case .normal:
-                    bottomView.topAnchor.constraint(equalTo: self.view.bottomAnchor)
-                }
-                
-                NSLayoutConstraint.activate([
-                    topConstraint,
-                    bottomView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-                    self.view.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor),
-                    self.view.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor)
-                ])
-            }
-            
-            //セーフエリアの右の外側
-            if let trailingView = await outsideLayoutGuideTrailingBuilder() {
-                
-                trailingView.translatesAutoresizingMaskIntoConstraints = false
-                self.view.addSubview(trailingView)
-
-                let topConstraint = switch layoutGuides.trailing {
-                case .safeArea:
-                    trailingView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
-                case .margins:
-                    trailingView.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor)
-                case .readableContent:
-                    trailingView.topAnchor.constraint(equalTo: self.view.readableContentGuide.topAnchor)
-                case .keyboard:
-                    trailingView.topAnchor.constraint(equalTo: self.view.keyboardLayoutGuide.topAnchor)
-                case .normal:
-                    trailingView.topAnchor.constraint(equalTo: self.view.topAnchor)
-                }
-
-                let leadingConstraint = switch layoutGuides.trailing {
-                case .safeArea:
-                    trailingView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
-                case .margins:
-                    trailingView.leadingAnchor.constraint(equalTo: self.view.layoutMarginsGuide.trailingAnchor)
-                case .readableContent:
-                    trailingView.leadingAnchor.constraint(equalTo: self.view.readableContentGuide.trailingAnchor)
-                case .keyboard:
-                    trailingView.leadingAnchor.constraint(equalTo: self.view.keyboardLayoutGuide.trailingAnchor)
-                case .normal:
-                    trailingView.leadingAnchor.constraint(equalTo: self.view.trailingAnchor)
-                }
-
-                let bottomConstraint = switch layoutGuides.trailing {
-                case .safeArea:
-                    self.view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: trailingView.bottomAnchor)
-                case .margins:
-                    self.view.layoutMarginsGuide.bottomAnchor.constraint(equalTo: trailingView.bottomAnchor)
-                case .readableContent:
-                    self.view.readableContentGuide.bottomAnchor.constraint(equalTo: trailingView.bottomAnchor)
-                case .keyboard:
-                    self.view.keyboardLayoutGuide.bottomAnchor.constraint(equalTo: trailingView.bottomAnchor)
-                case .normal:
-                    self.view.bottomAnchor.constraint(equalTo: trailingView.bottomAnchor)
-                }
-
-                NSLayoutConstraint.activate([
-                    topConstraint,
-                    leadingConstraint,
-                    bottomConstraint,
-                    self.view.trailingAnchor.constraint(equalTo: trailingView.trailingAnchor)
-                ])
-            }
+            NSLayoutConstraint.activate([
+                topView.topAnchor.constraint(equalTo: self.view.topAnchor),
+                topView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                bottomConstraint,
+                self.view.trailingAnchor.constraint(equalTo: topView.trailingAnchor)
+            ])
         }
         
+        //セーフエリアの左の外側
+        if let leadingView = await outsideLayoutGuideLeadingBuilder() {
+            
+            leadingView.translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview(leadingView)
+            
+            let leadingConstraint = switch layoutGuides.leading {
+            case .safeArea:
+                leadingView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
+            case .margins:
+                leadingView.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor)
+            case .readableContent:
+                leadingView.topAnchor.constraint(equalTo: self.view.readableContentGuide.topAnchor)
+            case .keyboard:
+                leadingView.topAnchor.constraint(equalTo: self.view.keyboardLayoutGuide.topAnchor)
+            case .normal:
+                leadingView.topAnchor.constraint(equalTo: self.view.topAnchor)
+            }
+            
+            let bottomConstraint = switch layoutGuides.leading {
+            case .safeArea:
+                self.view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: leadingView.bottomAnchor)
+            case .margins:
+                self.view.layoutMarginsGuide.bottomAnchor.constraint(equalTo: leadingView.bottomAnchor)
+            case .readableContent:
+                self.view.readableContentGuide.bottomAnchor.constraint(equalTo: leadingView.bottomAnchor)
+            case .keyboard:
+                self.view.keyboardLayoutGuide.bottomAnchor.constraint(equalTo: leadingView.bottomAnchor)
+            case .normal:
+                self.view.bottomAnchor.constraint(equalTo: leadingView.bottomAnchor)
+            }
+            
+            let trailingConstraint = switch layoutGuides.leading {
+            case .safeArea:
+                self.view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: leadingView.trailingAnchor)
+            case .margins:
+                self.view.layoutMarginsGuide.leadingAnchor.constraint(equalTo: leadingView.trailingAnchor)
+            case .readableContent:
+                self.view.readableContentGuide.leadingAnchor.constraint(equalTo: leadingView.trailingAnchor)
+            case .keyboard:
+                self.view.keyboardLayoutGuide.leadingAnchor.constraint(equalTo: leadingView.trailingAnchor)
+            case .normal:
+                self.view.leadingAnchor.constraint(equalTo: leadingView.trailingAnchor)
+            }
+            
+            NSLayoutConstraint.activate([
+                leadingConstraint,
+                leadingView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                bottomConstraint,
+                trailingConstraint
+            ])
+        }
+        
+        //セーフエリアの下の外側
+        if let bottomView = await outsideLayoutGuideBottomBuilder() {
+            
+            bottomView.translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview(bottomView)
+            
+            let topConstraint = switch layoutGuides.bottom {
+            case .safeArea:
+                bottomView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+            case .margins:
+                bottomView.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor)
+            case .readableContent:
+                bottomView.topAnchor.constraint(equalTo: self.view.readableContentGuide.bottomAnchor)
+            case .keyboard:
+                bottomView.topAnchor.constraint(equalTo: self.view.keyboardLayoutGuide.bottomAnchor)
+            case .normal:
+                bottomView.topAnchor.constraint(equalTo: self.view.bottomAnchor)
+            }
+            
+            NSLayoutConstraint.activate([
+                topConstraint,
+                bottomView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                self.view.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor),
+                self.view.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor)
+            ])
+        }
+        
+        //セーフエリアの右の外側
+        if let trailingView = await outsideLayoutGuideTrailingBuilder() {
+            
+            trailingView.translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview(trailingView)
+            
+            let topConstraint = switch layoutGuides.trailing {
+            case .safeArea:
+                trailingView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
+            case .margins:
+                trailingView.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor)
+            case .readableContent:
+                trailingView.topAnchor.constraint(equalTo: self.view.readableContentGuide.topAnchor)
+            case .keyboard:
+                trailingView.topAnchor.constraint(equalTo: self.view.keyboardLayoutGuide.topAnchor)
+            case .normal:
+                trailingView.topAnchor.constraint(equalTo: self.view.topAnchor)
+            }
+            
+            let leadingConstraint = switch layoutGuides.trailing {
+            case .safeArea:
+                trailingView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
+            case .margins:
+                trailingView.leadingAnchor.constraint(equalTo: self.view.layoutMarginsGuide.trailingAnchor)
+            case .readableContent:
+                trailingView.leadingAnchor.constraint(equalTo: self.view.readableContentGuide.trailingAnchor)
+            case .keyboard:
+                trailingView.leadingAnchor.constraint(equalTo: self.view.keyboardLayoutGuide.trailingAnchor)
+            case .normal:
+                trailingView.leadingAnchor.constraint(equalTo: self.view.trailingAnchor)
+            }
+            
+            let bottomConstraint = switch layoutGuides.trailing {
+            case .safeArea:
+                self.view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: trailingView.bottomAnchor)
+            case .margins:
+                self.view.layoutMarginsGuide.bottomAnchor.constraint(equalTo: trailingView.bottomAnchor)
+            case .readableContent:
+                self.view.readableContentGuide.bottomAnchor.constraint(equalTo: trailingView.bottomAnchor)
+            case .keyboard:
+                self.view.keyboardLayoutGuide.bottomAnchor.constraint(equalTo: trailingView.bottomAnchor)
+            case .normal:
+                self.view.bottomAnchor.constraint(equalTo: trailingView.bottomAnchor)
+            }
+            
+            NSLayoutConstraint.activate([
+                topConstraint,
+                leadingConstraint,
+                bottomConstraint,
+                self.view.trailingAnchor.constraint(equalTo: trailingView.trailingAnchor)
+            ])
+        }
         return self
     }
-}
-
-@available(iOS 15.0, *)
-public extension UIViewController {
-
+    
     @discardableResult
     /// レイアウトを宣言的に書くメソッド
     /// - Parameters:
@@ -214,87 +206,188 @@ public extension UIViewController {
     /// - Returns: Self
     func declarative(
         layoutGuides: UIEdgeLayoutGuides,
-        priorities: UIEdgePriorities,
-        reset: Bool,
-        @SingleUIViewBuilder outsideLayoutGuideTop outsideLayoutGuideTopBuilder: @escaping () async -> UIView? = { nil },
-        @SingleUIViewBuilder outsideLayoutGuideLeading outsideLayoutGuideLeadingBuilder: @escaping () async -> UIView? = { nil },
-        @SingleUIViewBuilder outsideLayoutGuideBottom outsideLayoutGuideBottomBuilder: @escaping () async -> UIView? = { nil },
-        @SingleUIViewBuilder outsideLayoutGuideTrailing outsideLayoutGuideTrailingBuilder: @escaping () async -> UIView? = { nil },
-        @SingleUIViewBuilder _ builder: @escaping () async -> UIView
+        priorities: UIEdgePriorities = .init(all: .required),
+        reset: Bool = false,
+        @SingleUIViewBuilder outsideLayoutGuideTop outsideLayoutGuideTopBuilder: @escaping () -> UIView? = { nil },
+        @SingleUIViewBuilder outsideLayoutGuideLeading outsideLayoutGuideLeadingBuilder: @escaping () -> UIView? = { nil },
+        @SingleUIViewBuilder outsideLayoutGuideBottom outsideLayoutGuideBottomBuilder: @escaping () -> UIView? = { nil },
+        @SingleUIViewBuilder outsideLayoutGuideTrailing outsideLayoutGuideTrailingBuilder: @escaping () -> UIView? = { nil },
+        @SingleUIViewBuilder _ builder: @escaping () -> UIView
     ) -> Self {
-        _declarative(
-            layoutGuides: layoutGuides,
-            priorities: priorities,
-            reset: reset,
-            outsideLayoutGuideTop: outsideLayoutGuideTopBuilder,
-            outsideLayoutGuideLeading: outsideLayoutGuideLeadingBuilder,
-            outsideLayoutGuideBottom: outsideLayoutGuideBottomBuilder,
-            outsideLayoutGuideTrailing: outsideLayoutGuideTrailingBuilder,
-            builder
-        )
-    }
-    
-    @discardableResult
-    func declarative(
-        layoutGuides: UIEdgeLayoutGuides,
-        priorities: UIEdgePriorities,
-        reset: Bool,
-        @SingleUIViewBuilder _ builder: @escaping () async -> UIView
-    ) -> Self {
-        _declarative(
-            layoutGuides: layoutGuides,
-            priorities: priorities,
-            reset: reset,
-            builder
-        )
-    }
-    
-    @discardableResult
-    func declarative(
-        layoutGuides: UIEdgeLayoutGuides,
-        priorities: UIEdgePriorities,
-        @SingleUIViewBuilder _ builder: @escaping () async -> UIView
-    ) -> Self {
-        _declarative(
-            layoutGuides: layoutGuides,
-            priorities: priorities,
-            builder
-        )
-    }
-
-    @discardableResult
-    func declarative(
-        layoutGuides: UIEdgeLayoutGuides,
-        @SingleUIViewBuilder outsideLayoutGuideTop outsideLayoutGuideTopBuilder: @escaping () async -> UIView? = { nil },
-        @SingleUIViewBuilder outsideLayoutGuideLeading outsideLayoutGuideLeadingBuilder: @escaping () async -> UIView? = { nil },
-        @SingleUIViewBuilder outsideLayoutGuideBottom outsideLayoutGuideBottomBuilder: @escaping () async -> UIView? = { nil },
-        @SingleUIViewBuilder outsideLayoutGuideTrailing outsideLayoutGuideTrailingBuilder: @escaping () async -> UIView? = { nil },
-        @SingleUIViewBuilder _ builder: @escaping () async -> UIView
-    ) -> Self {
-        _declarative(
-            layoutGuides: layoutGuides,
-            outsideLayoutGuideTop: outsideLayoutGuideTopBuilder,
-            outsideLayoutGuideLeading: outsideLayoutGuideLeadingBuilder,
-            outsideLayoutGuideBottom: outsideLayoutGuideBottomBuilder,
-            outsideLayoutGuideTrailing: outsideLayoutGuideTrailingBuilder,
-            builder
-        )
-    }
-    
-    @discardableResult
-    func declarative(
-        layoutGuides: UIEdgeLayoutGuides,
-        @SingleUIViewBuilder _ builder: @escaping () async -> UIView
-    ) -> Self {
-        _declarative(
-            layoutGuides: layoutGuides,
-            builder
-        )
+        
+        let view = builder()
+        if reset {
+            self.view.subviews.forEach { $0.removeFromSuperview() }
+        }
+        self.view.edgesConstraints(view, layoutGuides: layoutGuides, priorities: priorities)
+        
+        //LayoutGuidesの上の外側
+        if let topView = outsideLayoutGuideTopBuilder() {
+            
+            topView.translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview(topView)
+            
+            let bottomConstraint = switch layoutGuides.top {
+            case .safeArea:
+                self.view.safeAreaLayoutGuide.topAnchor.constraint(equalTo: topView.bottomAnchor)
+            case .margins:
+                self.view.layoutMarginsGuide.topAnchor.constraint(equalTo: topView.bottomAnchor)
+            case .readableContent:
+                self.view.readableContentGuide.topAnchor.constraint(equalTo: topView.bottomAnchor)
+            case .keyboard:
+                self.view.keyboardLayoutGuide.topAnchor.constraint(equalTo: topView.bottomAnchor)
+            case .normal:
+                self.view.topAnchor.constraint(equalTo: topView.bottomAnchor)
+            }
+            
+            NSLayoutConstraint.activate([
+                topView.topAnchor.constraint(equalTo: self.view.topAnchor),
+                topView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                bottomConstraint,
+                self.view.trailingAnchor.constraint(equalTo: topView.trailingAnchor)
+            ])
+        }
+        
+        //セーフエリアの左の外側
+        if let leadingView = outsideLayoutGuideLeadingBuilder() {
+            
+            leadingView.translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview(leadingView)
+            
+            let leadingConstraint = switch layoutGuides.leading {
+            case .safeArea:
+                leadingView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
+            case .margins:
+                leadingView.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor)
+            case .readableContent:
+                leadingView.topAnchor.constraint(equalTo: self.view.readableContentGuide.topAnchor)
+            case .keyboard:
+                leadingView.topAnchor.constraint(equalTo: self.view.keyboardLayoutGuide.topAnchor)
+            case .normal:
+                leadingView.topAnchor.constraint(equalTo: self.view.topAnchor)
+            }
+            
+            let bottomConstraint = switch layoutGuides.leading {
+            case .safeArea:
+                self.view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: leadingView.bottomAnchor)
+            case .margins:
+                self.view.layoutMarginsGuide.bottomAnchor.constraint(equalTo: leadingView.bottomAnchor)
+            case .readableContent:
+                self.view.readableContentGuide.bottomAnchor.constraint(equalTo: leadingView.bottomAnchor)
+            case .keyboard:
+                self.view.keyboardLayoutGuide.bottomAnchor.constraint(equalTo: leadingView.bottomAnchor)
+            case .normal:
+                self.view.bottomAnchor.constraint(equalTo: leadingView.bottomAnchor)
+            }
+            
+            let trailingConstraint = switch layoutGuides.leading {
+            case .safeArea:
+                self.view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: leadingView.trailingAnchor)
+            case .margins:
+                self.view.layoutMarginsGuide.leadingAnchor.constraint(equalTo: leadingView.trailingAnchor)
+            case .readableContent:
+                self.view.readableContentGuide.leadingAnchor.constraint(equalTo: leadingView.trailingAnchor)
+            case .keyboard:
+                self.view.keyboardLayoutGuide.leadingAnchor.constraint(equalTo: leadingView.trailingAnchor)
+            case .normal:
+                self.view.leadingAnchor.constraint(equalTo: leadingView.trailingAnchor)
+            }
+            
+            NSLayoutConstraint.activate([
+                leadingConstraint,
+                leadingView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                bottomConstraint,
+                trailingConstraint
+            ])
+        }
+        
+        //セーフエリアの下の外側
+        if let bottomView = outsideLayoutGuideBottomBuilder() {
+            
+            bottomView.translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview(bottomView)
+            
+            let topConstraint = switch layoutGuides.bottom {
+            case .safeArea:
+                bottomView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+            case .margins:
+                bottomView.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor)
+            case .readableContent:
+                bottomView.topAnchor.constraint(equalTo: self.view.readableContentGuide.bottomAnchor)
+            case .keyboard:
+                bottomView.topAnchor.constraint(equalTo: self.view.keyboardLayoutGuide.bottomAnchor)
+            case .normal:
+                bottomView.topAnchor.constraint(equalTo: self.view.bottomAnchor)
+            }
+            
+            NSLayoutConstraint.activate([
+                topConstraint,
+                bottomView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                self.view.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor),
+                self.view.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor)
+            ])
+        }
+        
+        //セーフエリアの右の外側
+        if let trailingView = outsideLayoutGuideTrailingBuilder() {
+            
+            trailingView.translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview(trailingView)
+            
+            let topConstraint = switch layoutGuides.trailing {
+            case .safeArea:
+                trailingView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
+            case .margins:
+                trailingView.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor)
+            case .readableContent:
+                trailingView.topAnchor.constraint(equalTo: self.view.readableContentGuide.topAnchor)
+            case .keyboard:
+                trailingView.topAnchor.constraint(equalTo: self.view.keyboardLayoutGuide.topAnchor)
+            case .normal:
+                trailingView.topAnchor.constraint(equalTo: self.view.topAnchor)
+            }
+            
+            let leadingConstraint = switch layoutGuides.trailing {
+            case .safeArea:
+                trailingView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
+            case .margins:
+                trailingView.leadingAnchor.constraint(equalTo: self.view.layoutMarginsGuide.trailingAnchor)
+            case .readableContent:
+                trailingView.leadingAnchor.constraint(equalTo: self.view.readableContentGuide.trailingAnchor)
+            case .keyboard:
+                trailingView.leadingAnchor.constraint(equalTo: self.view.keyboardLayoutGuide.trailingAnchor)
+            case .normal:
+                trailingView.leadingAnchor.constraint(equalTo: self.view.trailingAnchor)
+            }
+            
+            let bottomConstraint = switch layoutGuides.trailing {
+            case .safeArea:
+                self.view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: trailingView.bottomAnchor)
+            case .margins:
+                self.view.layoutMarginsGuide.bottomAnchor.constraint(equalTo: trailingView.bottomAnchor)
+            case .readableContent:
+                self.view.readableContentGuide.bottomAnchor.constraint(equalTo: trailingView.bottomAnchor)
+            case .keyboard:
+                self.view.keyboardLayoutGuide.bottomAnchor.constraint(equalTo: trailingView.bottomAnchor)
+            case .normal:
+                self.view.bottomAnchor.constraint(equalTo: trailingView.bottomAnchor)
+            }
+            
+            NSLayoutConstraint.activate([
+                topConstraint,
+                leadingConstraint,
+                bottomConstraint,
+                self.view.trailingAnchor.constraint(equalTo: trailingView.trailingAnchor)
+            ])
+        }
+        return self
     }
 }
 
-extension UIViewController {
-    func _declarative(
+public extension UIViewController {
+
+    @discardableResult
+    func declarativeAsync(
         safeAreas: UIEdgeBools = .init(all: true),
         priorities: UIEdgePriorities = .init(all: .required),
         reset: Bool = false,
@@ -303,245 +396,132 @@ extension UIViewController {
         @SingleUIViewBuilder outsideSafeAreaBottom outsideSafeAreaBottomBuilder: @escaping () async -> UIView? = { nil },
         @SingleUIViewBuilder outsideSafeAreaTrailing outsideSafeAreaTrailingBuilder: @escaping () async -> UIView? = { nil },
         @SingleUIViewBuilder _ builder: @escaping () async -> UIView
-    ) -> Self {
-        Task { @MainActor in
-            let view = await builder()
-            if reset {
-                self.view.subviews.forEach { $0.removeFromSuperview() }
-            }
-            self.view.edgesConstraints(view, safeAreas: safeAreas, priorities: priorities)
-            
-            //セーフエリアの上の外側
-            if let topView = await outsideSafeAreaTopBuilder() {
-                topView.translatesAutoresizingMaskIntoConstraints = false
-                self.view.addSubview(topView)
-                NSLayoutConstraint.activate([
-                    topView.topAnchor.constraint(equalTo: self.view.topAnchor),
-                    topView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-                    self.view.safeAreaLayoutGuide.topAnchor.constraint(equalTo: topView.bottomAnchor),
-                    self.view.trailingAnchor.constraint(equalTo: topView.trailingAnchor)
-                ])
-            }
-            
-            //セーフエリアの左の外側
-            if let leadingView = await outsideSafeAreaLeadingBuilder() {
-                leadingView.translatesAutoresizingMaskIntoConstraints = false
-                self.view.addSubview(leadingView)
-                NSLayoutConstraint.activate([
-                    leadingView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-                    leadingView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-                    self.view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: leadingView.bottomAnchor),
-                    self.view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: leadingView.trailingAnchor)
-                ])
-            }
-            
-            //セーフエリアの下の外側
-            if let bottomView = await outsideSafeAreaBottomBuilder() {
-                bottomView.translatesAutoresizingMaskIntoConstraints = false
-                self.view.addSubview(bottomView)
-                NSLayoutConstraint.activate([
-                    bottomView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-                    bottomView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-                    self.view.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor),
-                    self.view.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor)
-                ])
-            }
-            
-            //セーフエリアの右の外側
-            if let trailingView = await outsideSafeAreaTrailingBuilder() {
-                trailingView.translatesAutoresizingMaskIntoConstraints = false
-                self.view.addSubview(trailingView)
-                NSLayoutConstraint.activate([
-                    trailingView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-                    trailingView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-                    self.view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: trailingView.bottomAnchor),
-                    self.view.trailingAnchor.constraint(equalTo: trailingView.trailingAnchor)
-                ])
-            }
+    ) async -> Self {
+        let view = await builder()
+        if reset {
+            self.view.subviews.forEach { $0.removeFromSuperview() }
         }
+        self.view.edgesConstraints(view, safeAreas: safeAreas, priorities: priorities)
+        
+        //セーフエリアの上の外側
+        if let topView = await outsideSafeAreaTopBuilder() {
+            topView.translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview(topView)
+            NSLayoutConstraint.activate([
+                topView.topAnchor.constraint(equalTo: self.view.topAnchor),
+                topView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                self.view.safeAreaLayoutGuide.topAnchor.constraint(equalTo: topView.bottomAnchor),
+                self.view.trailingAnchor.constraint(equalTo: topView.trailingAnchor)
+            ])
+        }
+        
+        //セーフエリアの左の外側
+        if let leadingView = await outsideSafeAreaLeadingBuilder() {
+            leadingView.translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview(leadingView)
+            NSLayoutConstraint.activate([
+                leadingView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+                leadingView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                self.view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: leadingView.bottomAnchor),
+                self.view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: leadingView.trailingAnchor)
+            ])
+        }
+        
+        //セーフエリアの下の外側
+        if let bottomView = await outsideSafeAreaBottomBuilder() {
+            bottomView.translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview(bottomView)
+            NSLayoutConstraint.activate([
+                bottomView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+                bottomView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                self.view.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor),
+                self.view.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor)
+            ])
+        }
+        
+        //セーフエリアの右の外側
+        if let trailingView = await outsideSafeAreaTrailingBuilder() {
+            trailingView.translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview(trailingView)
+            NSLayoutConstraint.activate([
+                trailingView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+                trailingView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+                self.view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: trailingView.bottomAnchor),
+                self.view.trailingAnchor.constraint(equalTo: trailingView.trailingAnchor)
+            ])
+        }
+        return self
+    }
+    
+    func declarative(
+        safeAreas: UIEdgeBools = .init(all: true),
+        priorities: UIEdgePriorities = .init(all: .required),
+        reset: Bool = false,
+        @SingleUIViewBuilder outsideSafeAreaTop outsideSafeAreaTopBuilder: @escaping () -> UIView? = { nil },
+        @SingleUIViewBuilder outsideSafeAreaLeading outsideSafeAreaLeadingBuilder: @escaping () -> UIView? = { nil },
+        @SingleUIViewBuilder outsideSafeAreaBottom outsideSafeAreaBottomBuilder: @escaping () -> UIView? = { nil },
+        @SingleUIViewBuilder outsideSafeAreaTrailing outsideSafeAreaTrailingBuilder: @escaping () -> UIView? = { nil },
+        @SingleUIViewBuilder _ builder: @escaping () -> UIView
+    ) -> Self {
+        let view = builder()
+        if reset {
+            self.view.subviews.forEach { $0.removeFromSuperview() }
+        }
+        self.view.edgesConstraints(view, safeAreas: safeAreas, priorities: priorities)
+        
+        //セーフエリアの上の外側
+        if let topView = outsideSafeAreaTopBuilder() {
+            topView.translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview(topView)
+            NSLayoutConstraint.activate([
+                topView.topAnchor.constraint(equalTo: self.view.topAnchor),
+                topView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                self.view.safeAreaLayoutGuide.topAnchor.constraint(equalTo: topView.bottomAnchor),
+                self.view.trailingAnchor.constraint(equalTo: topView.trailingAnchor)
+            ])
+        }
+        
+        //セーフエリアの左の外側
+        if let leadingView = outsideSafeAreaLeadingBuilder() {
+            leadingView.translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview(leadingView)
+            NSLayoutConstraint.activate([
+                leadingView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+                leadingView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                self.view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: leadingView.bottomAnchor),
+                self.view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: leadingView.trailingAnchor)
+            ])
+        }
+        
+        //セーフエリアの下の外側
+        if let bottomView = outsideSafeAreaBottomBuilder() {
+            bottomView.translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview(bottomView)
+            NSLayoutConstraint.activate([
+                bottomView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+                bottomView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                self.view.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor),
+                self.view.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor)
+            ])
+        }
+        
+        //セーフエリアの右の外側
+        if let trailingView = outsideSafeAreaTrailingBuilder() {
+            trailingView.translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview(trailingView)
+            NSLayoutConstraint.activate([
+                trailingView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+                trailingView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+                self.view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: trailingView.bottomAnchor),
+                self.view.trailingAnchor.constraint(equalTo: trailingView.trailingAnchor)
+            ])
+        }
+        
         return self
     }
 }
 
 public extension UIViewController {
-    
-    @discardableResult
-    /// レイアウトを宣言的に書くメソッド
-    /// - Parameters:
-    ///   - safeAreas: 四隅をセーフエリア内に収めるか
-    ///   - priorities: 四隅の制約の優先度
-    ///   - reset: すでに設定済みのViewを全て外すか
-    ///   - outsideSafeAreaTop: セーフエリアの上辺の外側のレイアウト
-    ///   - outsideSafeAreaLeading: セーフエリアの文頭辺の外側のレイアウト
-    ///   - outsideSafeAreaBottom: セーフエリアの文末辺の外側のレイアウト
-    ///   - outsideSafeAreaTrailing: セーフエリアの下辺の外側のレイアウト
-    ///   - _: セーフエリ内のレイアウト
-    /// - Returns: Self
-    func declarative(
-        safeAreas: UIEdgeBools,
-        priorities: UIEdgePriorities,
-        reset: Bool,
-        @SingleUIViewBuilder outsideSafeAreaTop outsideSafeAreaTopBuilder: @escaping () async -> UIView?,
-        @SingleUIViewBuilder outsideSafeAreaLeading outsideSafeAreaLeadingBuilder: @escaping () async -> UIView?,
-        @SingleUIViewBuilder outsideSafeAreaBottom outsideSafeAreaBottomBuilder: @escaping () async -> UIView?,
-        @SingleUIViewBuilder outsideSafeAreaTrailing outsideSafeAreaTrailingBuilder: @escaping () async -> UIView?,
-        @SingleUIViewBuilder _ builder: @escaping () async -> UIView
-    ) -> Self {
-        _declarative(
-            safeAreas: safeAreas,
-            priorities: priorities,
-            reset: reset,
-            outsideSafeAreaTop: outsideSafeAreaTopBuilder,
-            outsideSafeAreaLeading: outsideSafeAreaLeadingBuilder,
-            outsideSafeAreaBottom: outsideSafeAreaBottomBuilder,
-            outsideSafeAreaTrailing: outsideSafeAreaTrailingBuilder,
-            builder
-        )
-    }
-    
-    @discardableResult
-    func declarative(
-        safeAreas: UIEdgeBools,
-        priorities: UIEdgePriorities,
-        reset: Bool,
-        @SingleUIViewBuilder _ builder: @escaping () async -> UIView
-    ) -> Self {
-        _declarative(
-            safeAreas: safeAreas,
-            priorities: priorities,
-            reset: reset,
-            builder
-        )
-    }
-    
-    @discardableResult
-    func declarative(
-        safeAreas: UIEdgeBools,
-        @SingleUIViewBuilder outsideSafeAreaTop outsideSafeAreaTopBuilder: @escaping () async -> UIView?,
-        @SingleUIViewBuilder outsideSafeAreaLeading outsideSafeAreaLeadingBuilder: @escaping () async -> UIView?,
-        @SingleUIViewBuilder outsideSafeAreaBottom outsideSafeAreaBottomBuilder: @escaping () async -> UIView?,
-        @SingleUIViewBuilder outsideSafeAreaTrailing outsideSafeAreaTrailingBuilder: @escaping () async -> UIView?,
-        @SingleUIViewBuilder _ builder: @escaping () async -> UIView
-    ) -> Self {
-        _declarative(
-            safeAreas: safeAreas,
-            outsideSafeAreaTop: outsideSafeAreaTopBuilder,
-            outsideSafeAreaLeading: outsideSafeAreaLeadingBuilder,
-            outsideSafeAreaBottom: outsideSafeAreaBottomBuilder,
-            outsideSafeAreaTrailing: outsideSafeAreaTrailingBuilder,
-            builder
-        )
-    }
-    
-    @discardableResult
-    func declarative(
-        priorities: UIEdgePriorities,
-        @SingleUIViewBuilder outsideSafeAreaTop outsideSafeAreaTopBuilder: @escaping () async -> UIView?,
-        @SingleUIViewBuilder outsideSafeAreaLeading outsideSafeAreaLeadingBuilder: @escaping () async -> UIView?,
-        @SingleUIViewBuilder outsideSafeAreaBottom outsideSafeAreaBottomBuilder: @escaping () async -> UIView?,
-        @SingleUIViewBuilder outsideSafeAreaTrailing outsideSafeAreaTrailingBuilder: @escaping () async -> UIView?,
-        @SingleUIViewBuilder _ builder: @escaping () async -> UIView
-    ) -> Self {
-        _declarative(
-            priorities: priorities,
-            outsideSafeAreaTop: outsideSafeAreaTopBuilder,
-            outsideSafeAreaLeading: outsideSafeAreaLeadingBuilder,
-            outsideSafeAreaBottom: outsideSafeAreaBottomBuilder,
-            outsideSafeAreaTrailing: outsideSafeAreaTrailingBuilder,
-            builder
-        )
-    }
-    
-    @discardableResult
-    func declarative(
-        reset: Bool,
-        @SingleUIViewBuilder outsideSafeAreaTop outsideSafeAreaTopBuilder: @escaping () async -> UIView?,
-        @SingleUIViewBuilder outsideSafeAreaLeading outsideSafeAreaLeadingBuilder: @escaping () async -> UIView?,
-        @SingleUIViewBuilder outsideSafeAreaBottom outsideSafeAreaBottomBuilder: @escaping () async -> UIView?,
-        @SingleUIViewBuilder outsideSafeAreaTrailing outsideSafeAreaTrailingBuilder: @escaping () async -> UIView?,
-        @SingleUIViewBuilder _ builder: @escaping () async -> UIView
-    ) -> Self {
-        _declarative(
-            reset: reset,
-            outsideSafeAreaTop: outsideSafeAreaTopBuilder,
-            outsideSafeAreaLeading: outsideSafeAreaLeadingBuilder,
-            outsideSafeAreaBottom: outsideSafeAreaBottomBuilder,
-            outsideSafeAreaTrailing: outsideSafeAreaTrailingBuilder,
-            builder
-        )
-    }
-    
-    @discardableResult
-    func declarative(
-        @SingleUIViewBuilder outsideSafeAreaTop outsideSafeAreaTopBuilder: @escaping () async -> UIView?,
-        @SingleUIViewBuilder outsideSafeAreaLeading outsideSafeAreaLeadingBuilder: @escaping () async -> UIView?,
-        @SingleUIViewBuilder outsideSafeAreaBottom outsideSafeAreaBottomBuilder: @escaping () async -> UIView?,
-        @SingleUIViewBuilder outsideSafeAreaTrailing outsideSafeAreaTrailingBuilder: @escaping () async -> UIView?,
-        @SingleUIViewBuilder _ builder: @escaping () async -> UIView
-    ) -> Self {
-        _declarative(
-            outsideSafeAreaTop: outsideSafeAreaTopBuilder,
-            outsideSafeAreaLeading: outsideSafeAreaLeadingBuilder,
-            outsideSafeAreaBottom: outsideSafeAreaBottomBuilder,
-            outsideSafeAreaTrailing: outsideSafeAreaTrailingBuilder,
-            builder
-        )
-    }
-    
-    @discardableResult
-    func declarative(
-        priorities: UIEdgePriorities,
-        @SingleUIViewBuilder _ builder: @escaping () async -> UIView
-    ) -> Self {
-        _declarative(
-            priorities: priorities,
-            builder
-        )
-    }
-    
-    @discardableResult
-    func declarative(
-        safeAreas: UIEdgeBools,
-        @SingleUIViewBuilder _ builder: @escaping () async -> UIView
-    ) -> Self {
-        _declarative(
-            safeAreas: safeAreas,
-            builder
-        )
-    }
-    
-    @discardableResult
-    func declarative(
-        safeAreas: UIEdgeBools,
-        reset: Bool,
-        @SingleUIViewBuilder _ builder: @escaping () async -> UIView
-    ) -> Self {
-        _declarative(
-            safeAreas: safeAreas,
-            reset: reset,
-            builder
-        )
-    }
-    
-    @discardableResult
-    func declarative(
-        reset: Bool,
-        @SingleUIViewBuilder _ builder: @escaping () async -> UIView
-    ) -> Self {
-        _declarative(
-            reset: reset,
-            builder
-        )
-    }
-    
-    @discardableResult
-    func declarative(
-        @SingleUIViewBuilder _ builder: @escaping () async -> UIView
-    ) -> Self {
-        _declarative(
-            builder
-        )
-    }
         
     @discardableResult
     func applyView(_ configure: ((UIView) -> Void)) -> Self {
