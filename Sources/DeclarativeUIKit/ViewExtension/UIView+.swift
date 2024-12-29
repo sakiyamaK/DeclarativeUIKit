@@ -35,6 +35,16 @@ public extension UIView {
 public extension UIView {
     
     @discardableResult
+    func declarativeAsync(priorities: UIEdgePriorities = .init(), reset: Bool = false, _ builder: @escaping () async -> UIView) async -> Self {
+        let view = await builder()
+        if reset {
+            self.subviews.forEach { $0.removeFromSuperview() }
+        }
+        self.edgesConstraints(view, safeAreas: .init(all: false), priorities: priorities)
+        return self
+    }
+    
+    @discardableResult
     func declarative(priorities: UIEdgePriorities = .init(), reset: Bool = false, _ builder: () -> UIView) -> Self {
         let view = builder()
         if reset {
