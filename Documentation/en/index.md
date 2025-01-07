@@ -1,8 +1,5 @@
 ## Documentation
 
-- Reference Version: **1.14.0**
-- Last Update: **2024/10/24**
-
 ### Table Of Contents
 
 ### [UIViewController](uiviewcontroller.md#uiviewcontroller)

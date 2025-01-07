@@ -257,3 +257,38 @@ UIViewController()
   }
   .present(from: self, animated: true)
 ```
+
+### floatingActionView
+
+`FloatingActionView`を宣言的に記述します
+
+```swift
+@available(iOS 15.0, *)
+@discardableResult
+func floatingActionView(
+    layoutGuides: UIEdgeLayoutGuides = .init(all: .safeArea),
+    position: FloatingActionViewPosition = .trailingBottom(CGPoint(x: 16, y: 16)),
+    @SingleUIViewBuilder _ builder: @escaping () -> UIView
+) -> Self
+```
+
+#### sample
+```swift
+        self.applyView {
+            $0.backgroundColor(.white)
+        }.floatingActionView {
+            UIButton(
+                configuration:
+                        .bordered()
+                        .image(UIImage(systemName: "plus"))
+                        .cornerStyle(.capsule)
+                        .buttonSize(.large)
+            )
+        }.floatingActionView(position: .centerTop(CGPoint(x: 30, y: 30))) {
+            UIStackView.vertical(spacing: 16) {
+                UILabel("label")
+                UILabel("label")
+                UILabel("label")
+            }
+        }
+```
