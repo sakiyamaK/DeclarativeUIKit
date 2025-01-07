@@ -60,6 +60,9 @@ final class ActorViewController: UIViewController {
                         }
                     }
                 }
+            }.floatingActionView {
+                UIButton(configuration: .plain().title(await user.name))
+
             }
 //            .declarative {
 //                ActorView()

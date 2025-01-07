@@ -660,7 +660,20 @@ public extension UIView {
         
         return self
     }
-    
+
+    @discardableResult
+    func floatingActionView(
+        layoutGuides: UIEdgeLayoutGuides = .init(all: .safeArea),
+        position: FloatingActionViewPosition = .trailingBottom(CGPoint(x: 16, y: 16)),
+        @SingleUIViewBuilder _ builderAsync: @escaping () async -> UIView
+    ) async -> Self {
+        let view = await builderAsync()
+        self.floatingActionView(layoutGuides: layoutGuides, position: position) {
+            view
+        }
+        return self
+    }
+
     @discardableResult
     func floatingActionView(
         layoutGuides: UIEdgeLayoutGuides = .init(all: .safeArea),

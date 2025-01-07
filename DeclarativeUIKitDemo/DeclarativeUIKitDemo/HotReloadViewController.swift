@@ -103,3 +103,7 @@ final class HotReloadViewController: UIViewController {
     }
 }
 
+#Preview {
+    HotReloadViewController()
+}
+
