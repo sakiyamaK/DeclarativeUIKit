@@ -115,7 +115,9 @@ final class ViewController: UIViewController {
                 }
                 .spacing(20)
             }
-        }
+        }.floatingActionView {
+            UIButton(configuration: .plain().title("Floating Action Button"))
+        }            
     }
 }
 ```
@@ -137,9 +139,12 @@ final class ActorViewController: UIViewController {
             let user = User(name: "name")
             await self.applyView({ view in
                 view.backgroundColor(.white)
-            }).declarativeAsync {
+            }).declarative {
                 UILabel(await user.name)
                     .textAlignment(.center)
+            }.floatingActionView {
+                UIButton(configuration: .plain().title(await user.name))
+
             }
             
             after()
