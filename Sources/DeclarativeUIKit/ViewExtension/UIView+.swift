@@ -526,14 +526,192 @@ public extension UIView {
 }
 
 //MARK: - double components constraint
+@available(iOS 15.0, *)
 public extension UIView {
-    @available(iOS 15.0, *)
+    
+    @discardableResult
+    func leadingConstraint(view: UIView, constant: CGFloat = .zero, layoutGuide: LayoutGuideType) -> Self {
+        let anchor = switch layoutGuide {
+        case .safeArea:
+            self.safeAreaLayoutGuide.leadingAnchor
+        case .margins:
+            self.layoutMarginsGuide.leadingAnchor
+        case .readableContent:
+            self.readableContentGuide.leadingAnchor
+        case .keyboard:
+            self.keyboardLayoutGuide.leadingAnchor
+        case .normal:
+            self.leadingAnchor
+        }
+        
+        let const = view.leadingAnchor.constraint(equalTo: anchor)
+        const.constant = constant
+        const.isActive = true
+        
+        return self
+    }
+
+    @discardableResult
+    func trailingConstraint(view: UIView, constant: CGFloat = .zero, layoutGuide: LayoutGuideType) -> Self {
+        let anchor = switch layoutGuide {
+        case .safeArea:
+            self.safeAreaLayoutGuide.trailingAnchor
+        case .margins:
+            self.layoutMarginsGuide.trailingAnchor
+        case .readableContent:
+            self.readableContentGuide.trailingAnchor
+        case .keyboard:
+            self.keyboardLayoutGuide.trailingAnchor
+        case .normal:
+            self.trailingAnchor
+        }
+        
+        let const = anchor.constraint(equalTo: view.trailingAnchor)
+        const.constant = constant
+        const.isActive = true
+
+        return self
+    }
+
+    @discardableResult
+    func topConstraint(view: UIView, constant: CGFloat = .zero, layoutGuide: LayoutGuideType) -> Self {
+        let anchor = switch layoutGuide {
+        case .safeArea:
+            self.safeAreaLayoutGuide.topAnchor
+        case .margins:
+            self.layoutMarginsGuide.topAnchor
+        case .readableContent:
+            self.readableContentGuide.topAnchor
+        case .keyboard:
+            self.keyboardLayoutGuide.topAnchor
+        case .normal:
+            self.topAnchor
+        }
+
+        let const = view.topAnchor.constraint(equalTo: anchor)
+        const.constant = constant
+        const.isActive = true
+        
+        return self
+    }
+    
+    @discardableResult
+    func bottomConstraint(view: UIView, constant: CGFloat = .zero, layoutGuide: LayoutGuideType) -> Self {
+        let anchor = switch layoutGuide {
+        case .safeArea:
+            self.safeAreaLayoutGuide.bottomAnchor
+        case .margins:
+            self.layoutMarginsGuide.bottomAnchor
+        case .readableContent:
+            self.readableContentGuide.bottomAnchor
+        case .keyboard:
+            self.keyboardLayoutGuide.bottomAnchor
+        case .normal:
+            self.bottomAnchor
+        }
+
+        let const = anchor.constraint(equalTo: view.bottomAnchor)
+        const.constant = constant
+        const.isActive = true
+        
+        return self
+    }
+    
+    @discardableResult
+    func centerXConstraint(view: UIView, constant: CGFloat = .zero, layoutGuide: LayoutGuideType) -> Self {
+        let anchor = switch layoutGuide {
+        case .safeArea:
+            self.safeAreaLayoutGuide.centerXAnchor
+        case .margins:
+            self.layoutMarginsGuide.centerXAnchor
+        case .readableContent:
+            self.readableContentGuide.centerXAnchor
+        case .keyboard:
+            self.keyboardLayoutGuide.centerXAnchor
+        case .normal:
+            self.centerXAnchor
+        }
+
+        let const = view.centerXAnchor.constraint(equalTo: anchor)
+        const.constant = constant
+        const.isActive = true
+        
+        return self
+    }
+    
+    @discardableResult
+    func centerYConstraint(view: UIView, constant: CGFloat = .zero, layoutGuide: LayoutGuideType) -> Self {
+        let anchor = switch layoutGuide {
+        case .safeArea:
+            self.safeAreaLayoutGuide.centerYAnchor
+        case .margins:
+            self.layoutMarginsGuide.centerYAnchor
+        case .readableContent:
+            self.readableContentGuide.centerYAnchor
+        case .keyboard:
+            self.keyboardLayoutGuide.centerYAnchor
+        case .normal:
+            self.centerYAnchor
+        }
+
+        let const = view.centerYAnchor.constraint(equalTo: anchor)
+        const.constant = constant
+        const.isActive = true
+        
+        return self
+    }
+    
+    @discardableResult
+    func floatingActionView(
+        layoutGuides: UIEdgeLayoutGuides = .init(all: .safeArea),
+        position: FloatingActionViewPosition = .trailingBottom(CGPoint(x: 16, y: 16)),
+        @SingleUIViewBuilder _ builder: @escaping () -> UIView
+    ) -> Self {
+        
+        let view = builder()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(view)
+                
+        switch position {
+        case .leadingTop(let point):
+            leadingConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.leading)
+            topConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.top)
+        case .centerTop(let point):
+            centerXConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.centerX)
+            topConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.top)
+        case .trailingTop(let point):
+            trailingConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.centerX)
+            topConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.top)
+        case .leadingCenter(let point):
+            leadingConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.leading)
+            topConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.top)
+        case .centerCenter(let point):
+            centerXConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.centerX)
+            centerYConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.centerY)
+        case .trailingCenter(let point):
+            trailingConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.centerX)
+            centerYConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.centerY)
+        case .leadingBttom(let point):
+            leadingConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.leading)
+            bottomConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.bottom)
+        case .centerBottom(let point):
+            centerXConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.centerX)
+            bottomConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.bottom)
+        case .trailingBottom(let point):
+            trailingConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.centerX)
+            bottomConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.bottom)
+        }
+        
+        return self
+    }
+
+    @discardableResult
     func edgesConstraints(
         _ view: UIView,
         margin: UIEdgeInsets = .zero,
         layoutGuides: UIEdgeLayoutGuides,
         priorities: UIEdgePriorities
-    ) {
+    ) -> Self {
         view.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(view)
         
@@ -600,14 +778,22 @@ public extension UIView {
         NSLayoutConstraint.activate([
             top, leading, trailing, bottom
         ])
+        
+        return self
     }
-    
+}
+
+//MARK: - double components constraint
+
+public extension UIView {
+
+    @discardableResult
     func edgesConstraints(
         _ view: UIView,
         margin: UIEdgeInsets = .zero,
         safeAreas: UIEdgeBools,
         priorities: UIEdgePriorities
-    ) {
+    ) -> Self {
         view.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(view)
         
@@ -640,6 +826,8 @@ public extension UIView {
         NSLayoutConstraint.activate([
             top, leading, trailing, bottom
         ])
+        
+        return self
     }
 }
 

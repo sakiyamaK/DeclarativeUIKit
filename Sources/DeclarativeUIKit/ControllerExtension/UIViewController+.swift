@@ -584,4 +584,48 @@ public extension UIViewController {
         }
         return self
     }
+    
+    @discardableResult
+    func floatingActionView(
+        layoutGuides: UIEdgeLayoutGuides = .init(all: .safeArea),
+        position: FloatingActionViewPosition = .trailingBottom(CGPoint(x: 16, y: 16)),
+        @SingleUIViewBuilder _ builder: @escaping () -> UIView
+    ) -> Self {
+        
+        let view = builder()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(view)
+
+        switch position {
+        case .leadingTop(let point):
+            self.view.leadingConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.leading)
+            self.view.topConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.top)
+        case .centerTop(let point):
+            self.view.centerXConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.centerX)
+            self.view.topConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.top)
+        case .trailingTop(let point):
+            self.view.trailingConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.centerX)
+            self.view.topConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.top)
+        case .leadingCenter(let point):
+            self.view.leadingConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.leading)
+            self.view.centerYConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.centerY)
+        case .centerCenter(let point):
+            self.view.centerXConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.centerX)
+            self.view.centerYConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.centerY)
+        case .trailingCenter(let point):
+            self.view.trailingConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.centerX)
+            self.view.centerYConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.centerY)
+        case .leadingBttom(let point):
+            self.view.leadingConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.leading)
+            self.view.bottomConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.bottom)
+        case .centerBottom(let point):
+            self.view.centerXConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.centerX)
+            self.view.bottomConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.bottom)
+        case .trailingBottom(let point):
+            self.view.trailingConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.centerX)
+            self.view.bottomConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.bottom)
+        }
+        
+        return self
+    }
 }
