@@ -68,37 +68,13 @@ final class HotReloadViewController: UIViewController {
         
         self.applyView {
             $0.backgroundColor(.white)
-        }.declarative {
-            UIButton("モーダル出て")
-                .titleColor(.blue)
-                .add(target: self, for: .touchUpInside) { _ in
-                    UIViewController()
-                        .applyView {
-                            $0.backgroundColor(.white)
-                        }
-                        .declarative {
-                            UIScrollView.vertical {
-                                UIStackView.vertical {
-                                    (0...50).compactMap { idx in
-                                        UILabel("\(idx)でーす")
-                                            .textAlignment(.center)
-                                            .contentPriorities(.init(vertical: .required))
-                                            .customSpacing(8)
-                                    }
-                                }
-                                .padding(insets: .init(vertical: 30))
-                            }
-                        }
-                        .applySheetPresentationController {
-                            $0.detents([.large(), .medium()])
-                                .preferredCornerRadius(16)
-                                .prefersGrabberVisible(true)
-                                .prefersScrollingExpandsWhenScrolledToEdge(false)
-                                .largestUndimmedDetentIdentifier(.large)
-                        }
-                        .present(from: self, animated: true)
-                }
-                .center()
+        }.declarative(layoutGuides: .init(all: .normal)) {
+            UIView
+                .spacer()
+                .declarative(layoutGuides: .init(all: .margins)) {
+                UIView.spacer().backgroundColor(.green)
+            }
+                .backgroundColor(.gray)
         }
     }
 }

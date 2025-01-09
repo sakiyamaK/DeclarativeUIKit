@@ -32,8 +32,119 @@ public extension UIView {
 }
 
 //MARK: - Declarative method
+
+@available(iOS 15.0, *)
 public extension UIView {
-    
+    @discardableResult
+    func declarative(
+        layoutGuides: UIEdgeLayoutGuides,
+        priorities: UIEdgePriorities = .init(),
+        reset: Bool = false,
+        _ builderAsync: @escaping () async -> UIView
+    ) async -> Self {
+        let view = await builderAsync()
+        if reset {
+            self.subviews.forEach { $0.removeFromSuperview() }
+        }
+        self.edgesConstraints(
+            view,
+            layoutGuides: layoutGuides,
+            priorities: priorities
+        )
+        return self
+    }
+
+    @discardableResult
+    func declarative(
+        layoutGuides: UIEdgeLayoutGuides,
+        priorities: UIEdgePriorities = .init(),
+        reset: Bool = false,
+        _ builder: () -> UIView
+    ) -> Self {
+        let view = builder()
+        if reset {
+            self.subviews.forEach { $0.removeFromSuperview() }
+        }
+        self.edgesConstraints(
+            view,
+            layoutGuides: layoutGuides,
+            priorities: priorities
+        )
+        return self
+    }
+
+    @discardableResult
+    func zStack(
+        layoutGuides: UIEdgeLayoutGuides,
+        margin: UIEdgeInsets = .zero,
+        priorities: UIEdgePriorities = .init(all: .required),
+        @ArrayUIViewBuilder _ builderAsync: () async -> [UIView?]
+    ) async -> Self {
+        await builderAsync()
+            .compactMap({$0})
+            .forEach { (view) in
+                self.edgesConstraints(
+                    view,
+                    margin: margin,
+                    layoutGuides: layoutGuides,
+                    priorities: priorities
+                )
+        }
+        return self
+    }
+
+    @discardableResult
+    func zStack(
+        layoutGuides: UIEdgeLayoutGuides,
+        margin: UIEdgeInsets = .zero,
+        priorities: UIEdgePriorities = .init(
+            all: .required
+        ),
+        @ArrayUIViewBuilder _ builder: () -> [UIView?]
+    ) -> Self {
+        builder().compactMap({$0}).forEach { (view) in
+            self.edgesConstraints(
+                view,
+                margin: margin,
+                layoutGuides: layoutGuides,
+                priorities: priorities
+            )
+        }
+        return self
+    }
+
+    @discardableResult
+    func addSubview(
+        layoutGuides: UIEdgeLayoutGuides,
+        margin: UIEdgeInsets = .zero,
+        priorities: UIEdgePriorities = .init(all: .required),
+        @ArrayUIViewBuilder _ builderAsync: () async -> [UIView?]
+    ) async -> Self {
+        await self.zStack(
+            layoutGuides: layoutGuides,
+            margin: margin,
+            priorities: priorities,
+            builderAsync
+        )
+    }
+
+    @discardableResult
+    func addSubview(
+        layoutGuides: UIEdgeLayoutGuides,
+        margin: UIEdgeInsets = .zero,
+        priorities: UIEdgePriorities = .init(all: .required),
+        @ArrayUIViewBuilder _ builder: () -> [UIView?]
+    ) -> Self {
+        self.zStack(
+            layoutGuides: layoutGuides,
+            margin: margin,
+            priorities: priorities,
+            builder
+        )
+    }
+}
+
+public extension UIView {
     @discardableResult
     func declarative(priorities: UIEdgePriorities = .init(), reset: Bool = false, _ builderAsync: @escaping () async -> UIView) async -> Self {
         let view = await builderAsync()
@@ -43,7 +154,7 @@ public extension UIView {
         self.edgesConstraints(view, safeAreas: .init(all: false), priorities: priorities)
         return self
     }
-    
+
     @discardableResult
     func declarative(priorities: UIEdgePriorities = .init(), reset: Bool = false, _ builder: () -> UIView) -> Self {
         let view = builder()
@@ -53,6 +164,40 @@ public extension UIView {
         self.edgesConstraints(view, safeAreas: .init(all: false), priorities: priorities)
         return self
     }
+
+    @discardableResult
+    func zStack(margin: UIEdgeInsets = .zero, priorities: UIEdgePriorities = .init(all: .required),
+                @ArrayUIViewBuilder _ builderAsync: () async -> [UIView?]) async -> Self {
+        await builderAsync().compactMap({$0}).forEach { (view) in
+            self.edgesConstraints(view, margin: margin, safeAreas: .init(all: false), priorities: priorities)
+        }
+        return self
+    }
+
+    @discardableResult
+    func zStack(margin: UIEdgeInsets = .zero, priorities: UIEdgePriorities = .init(all: .required),
+                @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> Self {
+        builder().compactMap({$0}).forEach { (view) in
+            self.edgesConstraints(view, margin: margin, safeAreas: .init(all: false), priorities: priorities)
+        }
+        return self
+    }
+
+    @discardableResult
+    func addSubview(margin: UIEdgeInsets = .zero, priorities: UIEdgePriorities = .init(all: .required),
+                    @ArrayUIViewBuilder _ builderAsync: () async -> [UIView?]) async -> Self {
+        await self.zStack(margin: margin, priorities: priorities, builderAsync)
+    }
+
+    @discardableResult
+    func addSubview(margin: UIEdgeInsets = .zero, priorities: UIEdgePriorities = .init(all: .required),
+                    @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> Self {
+        self.zStack(margin: margin, priorities: priorities, builder)
+    }
+}
+
+public extension UIView {
+
             
     @discardableResult
     func cornerRadius(_ radius: CGFloat, maskedCorners: CACornerMask) -> Self {
@@ -170,22 +315,7 @@ public extension UIView {
         self.addGestureRecognizer(gestureBuilder())
         return self
     }
-    
-    @discardableResult
-    func addSubview(margin: UIEdgeInsets = .zero, priorities: UIEdgePriorities = .init(all: .required),
-                    @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> Self {
-        self.zStack(margin: margin, priorities: priorities, builder)
-    }
-    
-    @discardableResult
-    func zStack(margin: UIEdgeInsets = .zero, priorities: UIEdgePriorities = .init(all: .required),
-                @ArrayUIViewBuilder _ builder: () -> [UIView?]) -> Self {
-        builder().compactMap({$0}).forEach { (view) in
-            self.edgesConstraints(view, margin: margin, safeAreas: .init(all: false), priorities: priorities)
-        }
-        return self
-    }
-    
+
     @discardableResult
     func contentHuggingPriority(_ priority: UILayoutPriority, for axis: NSLayoutConstraint.Axis) -> Self {
         self.setContentHuggingPriority(priority, for: axis)

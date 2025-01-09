@@ -57,6 +57,9 @@ final class ActorViewController: UIViewController {
                     await UIStackView.vertical {
                         await (0...100).compactMapAsync { _ in
                             await UILabel(await user.name)
+                                .zStack(layoutGuides: .init(all: .margins)) {
+                                    await UILabel(await user.name)
+                                }
                         }
                     }
                 }
