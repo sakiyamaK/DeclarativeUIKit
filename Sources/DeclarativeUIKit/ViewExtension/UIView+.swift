@@ -26,7 +26,7 @@ public extension UIView {
     }
     
     @discardableResult
-    static func path(_ applyBezierPath: @escaping () -> Void) -> HelperPathView {
+    static func path(_ applyBezierPath: @escaping (CGRect) -> Void) -> HelperPathView {
         HelperPathView(applyBezierPath)
     }
 }

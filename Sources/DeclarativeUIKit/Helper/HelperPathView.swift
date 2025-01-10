@@ -1,9 +1,9 @@
 import UIKit.UIView
 
 public class HelperPathView: UIView {
-    private var applyBezierPath: (() -> Void)?
+    private var applyBezierPath: ((CGRect) -> Void)?
 
-    convenience init(_ applyBezierPath: @escaping () -> Void) {
+    convenience init(_ applyBezierPath: @escaping (CGRect) -> Void) {
         self.init(frame: .zero)
         self.backgroundColor = .clear
         self.applyBezierPath = applyBezierPath
@@ -12,9 +12,9 @@ public class HelperPathView: UIView {
     public override func draw(_ rect: CGRect) {
         super.draw(rect)
         guard
-        let applyBezierPath = applyBezierPath else {
+        let applyBezierPath else {
             return
         }
-        applyBezierPath()
+        applyBezierPath(rect)
     }
 }
