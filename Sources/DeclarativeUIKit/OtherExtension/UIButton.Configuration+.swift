@@ -200,30 +200,25 @@ public extension UIButton.Configuration {
     
     @discardableResult
     func attributedTitle(_ attributedTitle: NSAttributedString?) -> Self {
-        guard let attributedTitle else { return self }
-        var _self = self
-        return _self.attributedTitle(AttributedString(attributedTitle))
+        guard let attributedTitle else { return self }        
+        return self.attributedTitle(AttributedString(attributedTitle))
     }
 
     @discardableResult
     func attributedTitle(_ attributedTitle: NSMutableAttributedString?) -> Self {
         guard let attributedTitle else { return self }
-        var _self = self
-        return _self.attributedTitle(NSAttributedString(attributedString: attributedTitle))
+        return self.attributedTitle(NSAttributedString(attributedString: attributedTitle))
     }
     
     @discardableResult
     func attributedSubtitle(_ attributedSubtitle: NSAttributedString?) -> Self {
         guard let attributedSubtitle else { return self }
-        var _self = self
-        return _self.attributedSubtitle(AttributedString(attributedSubtitle))
+        return self.attributedSubtitle(AttributedString(attributedSubtitle))
     }
 
-        
     @discardableResult
     func attributedSubtitle(_ attributedSubtitle: NSMutableAttributedString?) -> Self {
         guard let attributedSubtitle else { return self }
-        var _self = self
-        return _self.attributedSubtitle(NSAttributedString(attributedString: attributedSubtitle))
+        return self.attributedSubtitle(NSAttributedString(attributedString: attributedSubtitle))
     }
 }
