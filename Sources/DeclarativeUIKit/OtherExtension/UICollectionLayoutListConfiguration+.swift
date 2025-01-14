@@ -26,6 +26,12 @@ public extension UICollectionLayoutListConfiguration {
 
     @available(iOS 14.5, *)
     @discardableResult
+    func applySeparatorConfiguration(_ configure: ((UIListSeparatorConfiguration) -> UIListSeparatorConfiguration)) -> Self {
+        self.separatorConfiguration(configure(self.separatorConfiguration))
+    }
+
+    @available(iOS 14.5, *)
+    @discardableResult
     func itemSeparatorHandler(_ itemSeparatorHandler: UICollectionLayoutListConfiguration.ItemSeparatorHandler?) -> Self {
         var _self = self
         _self.itemSeparatorHandler = itemSeparatorHandler
