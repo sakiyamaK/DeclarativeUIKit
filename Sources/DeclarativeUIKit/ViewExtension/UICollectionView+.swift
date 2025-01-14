@@ -13,6 +13,40 @@ public extension UICollectionView {
 
 //MARK: - Declarative method
 public extension UICollectionView {
+
+    @discardableResult
+    func collectionViewLayout(_ collectionViewLayout: UICollectionViewLayout) -> Self {
+        self.collectionViewLayout = collectionViewLayout
+        return self
+    }
+
+    @discardableResult
+    func collectionViewLayout(_ collectionViewLayoutBuilder: (() -> UICollectionViewLayout)) -> Self {
+        self.collectionViewLayout = collectionViewLayoutBuilder()
+        return self
+    }
+
+    @discardableResult
+    func collectionViewLayout(_ collectionViewLayoutBuilderAsync: (() async -> UICollectionViewLayout)) async -> Self {
+        self.collectionViewLayout = await collectionViewLayoutBuilderAsync()
+        return self
+    }
+
+    @discardableResult
+    func layout(_ collectionViewLayout: UICollectionViewLayout) -> Self {
+        self.collectionViewLayout(collectionViewLayout)
+    }
+
+    @discardableResult
+    func layout(_ collectionViewLayoutBuilder: (() -> UICollectionViewLayout)) -> Self {
+        self.collectionViewLayout(collectionViewLayoutBuilder)
+    }
+
+    @discardableResult
+    func layout(_ collectionViewLayoutBuilderAsync: (() async -> UICollectionViewLayout)) async -> Self {
+        await self.collectionViewLayout(collectionViewLayoutBuilderAsync)
+    }
+
     @discardableResult
     func dataSource(_ dataSource: NSObject & UICollectionViewDataSource) -> Self {
         self.dataSource = dataSource
