@@ -87,6 +87,42 @@ public extension UIStackView {
     static func hStack(alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, isTouchTransparency: Bool = false, @ArrayUIViewBuilder _ builderAsync: @escaping () async -> [UIView?]) async -> UIStackView {
         await UIStackView.horizontal(alignment: alignment, distribution: distribution, spacing: spacing, isTouchTransparency: isTouchTransparency, builderAsync)
     }
+
+    @discardableResult
+    func addArrangedSubviews(@ArrayUIViewBuilder _ builder: () -> [UIView]) -> Self {
+        builder().forEach {
+            self.addArrangedSubview($0)
+        }
+        return self
+    }
+
+    @discardableResult
+    func addArrangedSubviews(@ArrayUIViewBuilder _ builderAsync: () async -> [UIView]) async -> Self {
+        let views = await builderAsync()
+        return self.addArrangedSubviews { views }
+    }
+
+    @discardableResult
+    func replaceArrangedSubviews(offset: Int = 0, @ArrayUIViewBuilder _ builder: () -> [UIView]) -> Self {
+        let offset = max(0, min(offset, self.arrangedSubviews.count-1))
+        self.arrangedSubviews[offset...].forEach {
+            $0.removeFromSuperview()
+        }
+        return self.addArrangedSubviews {
+            builder()
+        }
+    }
+
+    @discardableResult
+    func replaceArrangedSubviews(offset: Int = 0, @ArrayUIViewBuilder _ builderAsync: () async -> [UIView]) async -> Self {
+        let offset = max(0, min(offset, self.arrangedSubviews.count-1))
+        self.arrangedSubviews[offset...].forEach {
+            $0.removeFromSuperview()
+        }
+        return await self.addArrangedSubviews {
+            await builderAsync()
+        }
+    }
 }
 
 //MARK: - with superview
@@ -175,6 +211,44 @@ public extension UIStackView {
     
     static func hStack(alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, isTouchTransparency: Bool = false, @ArrayUIViewBuilder _ builderAsync: @escaping (UIStackView) async -> [UIView?]) async -> UIStackView {
         await UIStackView.horizontal(alignment: alignment, distribution: distribution, spacing: spacing, isTouchTransparency: isTouchTransparency, builderAsync)
+    }
+
+    @discardableResult
+    func addArrangedSubviews(@ArrayUIViewBuilder _ builder: (UIStackView) -> [UIView]) -> Self {
+        builder(self).forEach {
+            self.addArrangedSubview($0)
+        }
+        return self
+    }
+
+    @discardableResult
+    func addArrangedSubviews(@ArrayUIViewBuilder _ builderAsync: (UIStackView) async -> [UIView]) async -> Self {
+        await builderAsync(self).forEach {
+            self.addArrangedSubview($0)
+        }
+        return self
+    }
+
+    @discardableResult
+    func replaceArrangedSubviews(offset: Int = 0, @ArrayUIViewBuilder _ builder: (UIStackView) -> [UIView]) -> Self {
+        let offset = max(0, min(offset, self.arrangedSubviews.count-1))
+        self.arrangedSubviews[offset...].forEach {
+            $0.removeFromSuperview()
+        }
+        return self.addArrangedSubviews {
+            builder(self)
+        }
+    }
+
+    @discardableResult
+    func replaceArrangedSubviews(offset: Int = 0, @ArrayUIViewBuilder _ builderAsync: (UIStackView) async -> [UIView]) async -> Self {
+        let offset = max(0, min(offset, self.arrangedSubviews.count-1))
+        self.arrangedSubviews[offset...].forEach {
+            $0.removeFromSuperview()
+        }
+        return await self.addArrangedSubviews {
+            await builderAsync(self)
+        }
     }
 }
 
