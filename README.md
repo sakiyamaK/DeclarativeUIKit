@@ -52,6 +52,9 @@ And choose the version you want
 
 ### CocoaPods
 
+⚠️ **Note:**  CocoaPods support has been discontinued from version 5.0.0 onwards. Please use Swift Package Manager to integrate DeclarativeUIKit from version 5.0.0 and above.
+Please use Swift Package Manager to integrate DeclarativeUIKit from version 5.0.0 and above.
+
 [CocoaPods](https://cocoapods.org) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate DeclarativeUIKit into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ```ruby
