@@ -2,7 +2,52 @@ import UIKit.UIStackView
 import UIKit
 
 public extension UIStackView {
-    convenience init(axis: NSLayoutConstraint.Axis = .vertical, alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, @ArrayUIViewBuilder _ builder: @escaping () -> [UIView?]) {
+
+    private func _addArrangedSubview(_ _view: UIView, _ _font: UIFont? = nil) {
+        if let customSpacingView = _view as? HelperCustomSpacingView, let view = customSpacingView.subviews.first {
+            view.translatesAutoresizingMaskIntoConstraints = false
+            self.addArrangedSubview(view)
+            self.setCustomSpacing(customSpacingView.customSpacing, after: view)
+            self._addArrangedSubview(view, _font)
+        } else if let _font, let fontableView = _view as? Fontable {
+            fontableView.translatesAutoresizingMaskIntoConstraints = false
+            fontableView.set(font: _font)
+            self.addArrangedSubview(_view)
+        }
+//        else if let button = _view as? UIButton {
+//            if #available(iOS 15.0, *) {
+//                if let _font, button.titleLabel?.font == UILabel().font {
+//                    button.font(_font)
+//                } else if let _font, var config = button.configuration {
+//                    config.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attributes in
+//                        let isDefaultSize = attributes.font?.pointSize == UIFont.buttonFontSize || attributes.font == nil
+//                        print("isDefaultSize")
+//                        print(attributes.font?.pointSize)
+//                        print(UIFont.buttonFontSize)
+////                        || attributes.font == nil
+//                        // デフォルトフォントの場合のみ新しいフォントを設定
+//                        if isDefaultSize {
+//                            var attributes = attributes
+//                            attributes.font = _font
+//                        }
+//                        return attributes
+//                    }
+//                    button.configuration = config
+//                }
+//            } else {
+//                if let _font, button.titleLabel?.font == UILabel().font {
+//                    button.font(_font)
+//                }
+//            }
+//            self.addArrangedSubview(_view)
+//        }
+        else {
+            _view.translatesAutoresizingMaskIntoConstraints = false
+            self.addArrangedSubview(_view)
+        }
+    }
+
+    convenience init(axis: NSLayoutConstraint.Axis = .vertical, alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, font: UIFont? = nil, @ArrayUIViewBuilder _ builder: @escaping () -> [UIView?]) {
         self.init(frame: .zero)
         self.backgroundColor = .clear
         self.axis = axis
@@ -10,14 +55,15 @@ public extension UIStackView {
         self.distribution = distribution
         self.spacing = spacing
         builder().compactMap { $0 }.forEach {
-            if let customSpacingView = $0 as? HelperCustomSpacingView, let view = customSpacingView.subviews.first {
-                view.translatesAutoresizingMaskIntoConstraints = false
-                self.addArrangedSubview(view)
-                self.setCustomSpacing(customSpacingView.customSpacing, after: view)
-            } else {
-                $0.translatesAutoresizingMaskIntoConstraints = false
-                self.addArrangedSubview($0)
-            }
+            _addArrangedSubview($0, font)
+//            if let customSpacingView = $0 as? HelperCustomSpacingView, let view = customSpacingView.subviews.first {
+//                view.translatesAutoresizingMaskIntoConstraints = false
+//                self.addArrangedSubview(view)
+//                self.setCustomSpacing(customSpacingView.customSpacing, after: view)
+//            } else {
+//                $0.translatesAutoresizingMaskIntoConstraints = false
+//                self.addArrangedSubview($0)
+//            }
         }
     }
     
@@ -29,6 +75,8 @@ public extension UIStackView {
         self.distribution = distribution
         self.spacing = spacing
         await builderAsync().compactMap { $0 }.forEach {
+            print("\(#file): \(#line)")
+
             if let customSpacingView = $0 as? HelperCustomSpacingView, let view = customSpacingView.subviews.first {
                 view.translatesAutoresizingMaskIntoConstraints = false
                 self.addArrangedSubview(view)

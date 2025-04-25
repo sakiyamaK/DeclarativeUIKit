@@ -855,6 +855,7 @@ public extension UIView {
         layoutGuides: UIEdgeLayoutGuides,
         priorities: UIEdgePriorities
     ) -> Self {
+
         view.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(view)
         
@@ -937,6 +938,7 @@ public extension UIView {
         safeAreas: UIEdgeBools,
         priorities: UIEdgePriorities
     ) -> Self {
+
         view.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(view)
         

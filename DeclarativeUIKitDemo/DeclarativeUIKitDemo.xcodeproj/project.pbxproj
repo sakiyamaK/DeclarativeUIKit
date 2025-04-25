@@ -7,12 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B601AB2727761D4600B57E0F /* DeclarativeUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = B601AB2627761D4600B57E0F /* DeclarativeUIKit */; };
+		B638B7C52DBBE486001E9462 /* DeclarativeUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = B638B7C42DBBE486001E9462 /* DeclarativeUIKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B601AB0D27761CA600B57E0F /* DeclarativeUIKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeclarativeUIKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B601AB2427761CFB00B57E0F /* DeclarativeUIKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DeclarativeUIKit; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -37,7 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B601AB2727761D4600B57E0F /* DeclarativeUIKit in Frameworks */,
+				B638B7C52DBBE486001E9462 /* DeclarativeUIKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,7 +46,6 @@
 		B601AB0427761CA600B57E0F = {
 			isa = PBXGroup;
 			children = (
-				B601AB2427761CFB00B57E0F /* DeclarativeUIKit */,
 				B690C2E12D2025E400AD1B62 /* DeclarativeUIKitDemo */,
 				B601AB2527761D4600B57E0F /* Frameworks */,
 				B601AB0E27761CA600B57E0F /* Products */,
@@ -90,6 +88,7 @@
 			name = DeclarativeUIKitDemo;
 			packageProductDependencies = (
 				B601AB2627761D4600B57E0F /* DeclarativeUIKit */,
+				B638B7C42DBBE486001E9462 /* DeclarativeUIKit */,
 			);
 			productName = DeclarativeUIKitDemo;
 			productReference = B601AB0D27761CA600B57E0F /* DeclarativeUIKitDemo.app */;
@@ -118,6 +117,9 @@
 				Base,
 			);
 			mainGroup = B601AB0427761CA600B57E0F;
+			packageReferences = (
+				B638B7C32DBBE486001E9462 /* XCLocalSwiftPackageReference "../../DeclarativeUIKit" */,
+			);
 			preferredProjectObjectVersion = 55;
 			productRefGroup = B601AB0E27761CA600B57E0F /* Products */;
 			projectDirPath = "";
@@ -354,8 +356,19 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		B638B7C32DBBE486001E9462 /* XCLocalSwiftPackageReference "../../DeclarativeUIKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../DeclarativeUIKit;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		B601AB2627761D4600B57E0F /* DeclarativeUIKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DeclarativeUIKit;
+		};
+		B638B7C42DBBE486001E9462 /* DeclarativeUIKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = DeclarativeUIKit;
 		};
