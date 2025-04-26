@@ -24,6 +24,16 @@ extension UILabel: Fontable {
     }
 }
 
+extension UITextField: Fontable {
+    @discardableResult
+    func set(font: UIFont) -> Self {
+        if self.font == UITextField().font {
+            self.font = font
+        }
+        return self
+    }
+}
+
 extension UITextView: Fontable {
     @discardableResult
     func set(font: UIFont) -> Self {
@@ -34,20 +44,12 @@ extension UITextView: Fontable {
     }
 }
 
-extension UISearchTextField: Fontable {
-    @discardableResult
-    func set(font: UIFont) -> Self {
-        if self.font  == UISearchTextField().font {
-            self.font = font
-        }
-        return self
-    }
-}
-
-extension UISearchBar: Fontable {
-    @discardableResult
-    func set(font: UIFont) -> Self {
-        self.searchTextField.set(font: font)
-        return self
-    }
-}
+//extension UISearchTextField: Fontable {
+//    @discardableResult
+//    func set(font: UIFont) -> Self {
+//        if self.font  == UISearchTextField().font {
+//            self.font = font
+//        }
+//        return self
+//    }
+//}

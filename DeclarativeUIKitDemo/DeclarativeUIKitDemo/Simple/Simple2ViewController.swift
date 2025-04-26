@@ -1,27 +1,30 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by sakiyamaK on 2022/02/13.
 //
 
 import UIKit
 import DeclarativeUIKit
+import SwiftUI
 
 final class Simple2ViewController: UIViewController {
-        
+
     private weak var button: UIButton!
     private weak var tapLabel: UILabel!
     private weak var overlapView: UIView!
     private weak var indicator: UIActivityIndicatorView!
-    
+
+    private let vStack = UIStackView.vertical { }
+
     override func loadView() {
         super.loadView()
-        
+
         self.view.backgroundColor = .white
-                                
+
         let Header = { (title: String) -> UIView in
-            UIStackView.vertical {
+            self.vStack.addArrangedSubviews {
                 UILabel(title)
                     .textColor(.black)
                     .textAlignment(.center)
@@ -31,7 +34,7 @@ final class Simple2ViewController: UIViewController {
                 UIView.divider()
             }
         }
-        
+
         self.declarative {
             UIStackView.vertical {
                 UIProgressView(progressViewStyle: .bar)
@@ -45,7 +48,7 @@ final class Simple2ViewController: UIViewController {
                             .contentMode(.scaleAspectFit)
                             .tintColor(.red)
                             .height(200)
-                        
+
 
                         if #available(iOS 14.0, *) {
                             UIButton("button")
@@ -64,13 +67,13 @@ final class Simple2ViewController: UIViewController {
                                 }
                                 .assign(to: &self.button)
                         }
-                        
+
                         UITextField()
                             .placeholder(NSAttributedString(string: "プレースホルダー", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black]))
                             .borderStyle(.line)
                             .keyboardType(.alphabet)
                             .delegate(self)
-                        
+
                         UILabel(assign: &self.tapLabel)
                             .text("タップジェスチャーのあるラベル")
                             .textAlignment(.center)
@@ -119,15 +122,20 @@ final class Simple2ViewController: UIViewController {
                 }
                 .refreshControl(
                     UIRefreshControl()
-                        .addAction(.valueChanged, handler: {[weak self] action in
-                            guard let self, let refreshControl = action as? UIRefreshControl else { return }
-                            print("リフレッシュするよ")
-                            if refreshControl.isRefreshing {
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                                    refreshControl.endRefreshing()
+                        .addAction(
+                            .valueChanged,
+                            handler: {[weak self] action in
+                                guard let self,
+                                      let refreshControl = action.sender as? UIRefreshControl else {
+                                    return
                                 }
-                            }
-                        })
+                                print("リフレッシュするよ")
+                                if refreshControl.isRefreshing {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                        refreshControl.endRefreshing()
+                                    }
+                                }
+                            })
                 )
             }
             .spacing(20)
@@ -137,7 +145,7 @@ final class Simple2ViewController: UIViewController {
                 .backgroundColor(.black.withAlphaComponent(0.3))
                 .assign(to: &self.overlapView)
                 .isHidden(true)
-                
+
         }
     }
 }
@@ -146,7 +154,7 @@ final class Simple2ViewController: UIViewController {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print("テキストフィールドのデリゲートだね")
     }
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
@@ -154,16 +162,16 @@ final class Simple2ViewController: UIViewController {
 }
 
 @objc private extension Simple2ViewController {
-    
+
     func tapButton(_ sender: UIButton) {
         print("ボタンをタップしたね")
         if button == sender {
             print(self.button.titleLabel?.text ?? "")
         }
-        
+
         self.overlapView.isHidden.toggle()
         self.indicator.isHidden = false
-        
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.overlapView.isHidden.toggle()
             self.indicator.isHidden = true

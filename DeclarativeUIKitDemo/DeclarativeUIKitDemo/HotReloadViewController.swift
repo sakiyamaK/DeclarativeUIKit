@@ -6,79 +6,90 @@
 //
 
 import UIKit
-import MapKit
 import DeclarativeUIKit
+//                UIButton(
+//                    configuration:
+//                            .plain()
+//                            .title("stackview1 font 20")
+////                            .buttonSize(.large)
+//                    ,
+//                    primaryAction: nil
+//                )
 
-extension Notification.Name {
-    static let injection = Notification.Name("INJECTION_BUNDLE_NOTIFICATION")
-}
-
-extension NotificationCenter {
-    func addInjectionObserver(_ observer: Any, selector: Selector, object: Any?) {
-        NotificationCenter.default.addObserver(observer, selector: selector, name: .injection, object: object)
-    }
-}
+//                    UIButton(
+//                        configuration:
+//                                .plain()
+//                                .title("stackview2 font 30")
+////                                .buttonSize(.large)
+//                        ,
+//                        primaryAction: nil
+//                    )
 
 final class HotReloadViewController: UIViewController {
-    
-    private weak var cardView: UIView!
-    
-    override func loadView() {
-        super.loadView()
-        NotificationCenter.default.addInjectionObserver(self, selector: #selector(setupLayout), object: nil)
-        setupLayout()
-    }
-    
-    //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    //        super.touchesBegan(touches, with: event)
-    //        let touche = touches.first!
-    //        let point = shadowPoint(from: touche.location(in: cardView))
-    //        cardView.shadow(color: .black, radius: 10, x: point.x, y: point.y)
-    //    }
-    //
-    //    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-    //        super.touchesCancelled(touches, with: event)
-    //        cardView.shadow(color: .black, radius: 10, x: 0, y: 10)
-    //    }
-    //
-    //    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-    //        super.touchesEnded(touches, with: event)
-    //        cardView.shadow(color: .black, radius: 10, x: 0, y: 10)
-    //    }
-    //
-    //    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-    //        super.touchesMoved(touches, with: event)
-    //        let touche = touches.first!
-    //        let point = shadowPoint(from: touche.location(in: cardView))
-    //        cardView.shadow(color: .black, radius: 10, x: point.x, y: point.y)
-    //    }
-    
-    private func shadowPoint(from point: CGPoint) -> CGPoint {
-        let x = (point.x - 250/2)/10
-        let y = (point.y - 200/2)/10 + 10
-        return .init(x: x, y: y)
-    }
-}
 
-@objc private extension HotReloadViewController {
-    func setupLayout() {
-        guard #available(iOS 15.0, *) else {
-            fatalError()
-        }
-        
-        self.applyView {
-            $0.backgroundColor(.white)
-        }.declarative(layoutGuides: .init(all: .normal)) {
-            UIView
-                .spacer()
-                .declarative(layoutGuides: .init(all: .margins)) {
-                UIView.spacer().backgroundColor(.green)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        UILabel.appearance(whenContainedInInstancesOf: [Self.self])
+            .font(.boldSystemFont(ofSize: 20))
+            .textColor(.red)
+            .contentPriorities(.init(vertical: .required))
+
+        self.declarative {
+
+            UIStackView(
+                spacing: 8,
+                arrangedSubViewConfiguration: .init(
+                    contentPriorities: .init(vertical: .required)
+                )
+            ) {
+
+                UISearchTextField("stack1 label 20")
+
+                UITextView("stack1 text 13")
+                    .font(.systemFont(ofSize: 13))
+                    .isScrollEnabled(false)
+                    .textColor(.black)
+
+                UILabel("stack1 label 20")
+                    .textColor(.black)
+
+                UILabel("stack1 label 30")
+                    .font(.systemFont(ofSize: 30))
+
+                UIButton(configuration: .bordered().buttonSize(.medium).title("uhooo"))
+                    .customSpacing(40)
+
+                UIStackView(
+                    spacing: 8,
+                    arrangedSubViewConfiguration: .init(
+                        font: .systemFont(ofSize: 30),
+                        contentPriorities: .init(vertical: .required)
+                    )
+                ) {
+
+                    UISearchTextField("stack2 textfield 30")
+
+                    UILabel("stack2 label 30")
+                    UILabel("stack2 label 30")
+                    UILabel("stack2 label 40")
+                        .font(.systemFont(ofSize: 40))
+                }
+                .backgroundColor(.red.withAlphaComponent(0.2))
+                .customSpacing(40)
+
+                UILabel("stack1 label 20")
+                UILabel("stack1 label 20")
+
+                UIView.spacer()
+                    .height(2, priority: .defaultHigh)
             }
-                .backgroundColor(.gray)
+            .isLayoutMarginsRelativeArrangement(true)
+            .margins(.init(horizontal: 20))
+            .backgroundColor(.blue.withAlphaComponent(0.2))
         }
     }
 }
-
 #Preview {
     HotReloadViewController()
 }
