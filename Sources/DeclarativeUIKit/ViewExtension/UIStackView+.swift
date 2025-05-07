@@ -2,6 +2,17 @@ import UIKit.UIStackView
 import UIKit
 
 public extension UIStackView {
+    private func addArrangedSubViewHandlingHelperCustomSpacing(_ view: UIView) {
+        if let customSpacingView = view as? HelperCustomSpacingView, let inView = customSpacingView.subviews.first {
+            inView.translatesAutoresizingMaskIntoConstraints = false
+            self.addArrangedSubview(inView)
+            self.setCustomSpacing(customSpacingView.customSpacing, after: inView)
+        } else {
+            view.translatesAutoresizingMaskIntoConstraints = false
+            self.addArrangedSubview(view)
+        }
+    }
+
     convenience init(axis: NSLayoutConstraint.Axis = .vertical, alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, @ArrayUIViewBuilder _ builder: @escaping () -> [UIView?]) {
         self.init(frame: .zero)
         self.backgroundColor = .clear
@@ -10,14 +21,7 @@ public extension UIStackView {
         self.distribution = distribution
         self.spacing = spacing
         builder().compactMap { $0 }.forEach {
-            if let customSpacingView = $0 as? HelperCustomSpacingView, let view = customSpacingView.subviews.first {
-                view.translatesAutoresizingMaskIntoConstraints = false
-                self.addArrangedSubview(view)
-                self.setCustomSpacing(customSpacingView.customSpacing, after: view)
-            } else {
-                $0.translatesAutoresizingMaskIntoConstraints = false
-                self.addArrangedSubview($0)
-            }
+            self.addArrangedSubViewHandlingHelperCustomSpacing($0)
         }
     }
     
@@ -29,14 +33,7 @@ public extension UIStackView {
         self.distribution = distribution
         self.spacing = spacing
         await builderAsync().compactMap { $0 }.forEach {
-            if let customSpacingView = $0 as? HelperCustomSpacingView, let view = customSpacingView.subviews.first {
-                view.translatesAutoresizingMaskIntoConstraints = false
-                self.addArrangedSubview(view)
-                self.setCustomSpacing(customSpacingView.customSpacing, after: view)
-            } else {
-                $0.translatesAutoresizingMaskIntoConstraints = false
-                self.addArrangedSubview($0)
-            }
+            self.addArrangedSubViewHandlingHelperCustomSpacing($0)
         }
     }
 
@@ -91,7 +88,7 @@ public extension UIStackView {
     @discardableResult
     func addArrangedSubviews(@ArrayUIViewBuilder _ builder: () -> [UIView]) -> Self {
         builder().forEach {
-            self.addArrangedSubview($0)
+            self.addArrangedSubViewHandlingHelperCustomSpacing($0)
         }
         return self
     }
@@ -135,14 +132,7 @@ public extension UIStackView {
         self.distribution = distribution
         self.spacing = spacing
         builder(self).compactMap { $0 }.forEach {
-            if let customSpacingView = $0 as? HelperCustomSpacingView, let view = customSpacingView.subviews.first {
-                view.translatesAutoresizingMaskIntoConstraints = false
-                self.addArrangedSubview(view)
-                self.setCustomSpacing(customSpacingView.customSpacing, after: view)
-            } else {
-                $0.translatesAutoresizingMaskIntoConstraints = false
-                self.addArrangedSubview($0)
-            }
+            self.addArrangedSubViewHandlingHelperCustomSpacing($0)
         }
     }
     
@@ -154,14 +144,7 @@ public extension UIStackView {
         self.distribution = distribution
         self.spacing = spacing
         await builderAsync(self).compactMap { $0 }.forEach {
-            if let customSpacingView = $0 as? HelperCustomSpacingView, let view = customSpacingView.subviews.first {
-                view.translatesAutoresizingMaskIntoConstraints = false
-                self.addArrangedSubview(view)
-                self.setCustomSpacing(customSpacingView.customSpacing, after: view)
-            } else {
-                $0.translatesAutoresizingMaskIntoConstraints = false
-                self.addArrangedSubview($0)
-            }
+            self.addArrangedSubViewHandlingHelperCustomSpacing($0)
         }
     }
 
@@ -216,7 +199,7 @@ public extension UIStackView {
     @discardableResult
     func addArrangedSubviews(@ArrayUIViewBuilder _ builder: (UIStackView) -> [UIView]) -> Self {
         builder(self).forEach {
-            self.addArrangedSubview($0)
+            self.addArrangedSubViewHandlingHelperCustomSpacing($0)
         }
         return self
     }
@@ -224,7 +207,7 @@ public extension UIStackView {
     @discardableResult
     func addArrangedSubviews(@ArrayUIViewBuilder _ builderAsync: (UIStackView) async -> [UIView]) async -> Self {
         await builderAsync(self).forEach {
-            self.addArrangedSubview($0)
+            self.addArrangedSubViewHandlingHelperCustomSpacing($0)
         }
         return self
     }
