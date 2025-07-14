@@ -27,3 +27,4 @@ extension NSString: Applyable {}
 @available(iOS 15.0, *)
 extension AttributedString: Applyable {}
 extension NSAttributedString: Applyable {}
+extension NSLayoutConstraint: Applyable {}

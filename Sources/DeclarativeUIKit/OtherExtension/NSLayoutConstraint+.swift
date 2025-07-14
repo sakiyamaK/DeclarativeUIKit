@@ -8,6 +8,25 @@
 import UIKit
 
 public extension NSLayoutConstraint {
+
+    @resultBuilder
+    struct ActivateBuilder {
+        public static func buildBlock(_ constraints: NSLayoutConstraint...) -> [NSLayoutConstraint] {
+            constraints
+        }
+        public static func buildBlock(_ constraints: NSLayoutConstraint?...) -> [NSLayoutConstraint] {
+            constraints.compactMap({$0})
+        }
+    }
+
+    static func activate(@ActivateBuilder builder: () -> [NSLayoutConstraint]) {
+        let constraints = builder()
+        constraints.compactMap({ $0.firstItem as? UIView }).forEach { view in
+            view.translatesAutoresizingMaskIntoConstraints = false
+        }
+        NSLayoutConstraint.activate(constraints)
+    }
+
     @discardableResult
     func isActive(_ isActive: Bool) -> Self {
         self.isActive = isActive
