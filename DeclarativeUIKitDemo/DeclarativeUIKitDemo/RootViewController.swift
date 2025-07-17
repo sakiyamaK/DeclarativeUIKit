@@ -112,6 +112,12 @@ final class RootViewController: UIViewController {
                             self!.navigationController?.pushViewController(vc, animated: true)
                         })
 
+                    Button("WKWebView")
+                        .addAction(.touchUpInside, handler: {[weak self] _ in
+                            let vc = WebViewController()
+                            self!.navigationController?.pushViewController(vc, animated: true)
+                        })
+
                     UIView.spacer()
 
 //                    Button("tiktok")

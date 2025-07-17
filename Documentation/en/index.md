@@ -79,3 +79,11 @@
 ### [UISegmentedControl](uisegmentedcontrol.md#uiswitch)
 
 ### [UISlider](uislider.md#uiswitch)
+
+### [WKWebView](wkwebview.md#wkwebview)
+
+### [WKWebViewConfiguration](wkwebviewconfiguration.md#wkwebviewconfiguration)
+
+### [WKPreferences](wkpreferences.md#wkpreferences)
+
+### [WKUserContentController](wkusercontentcontroller.md#wkusercontentcontroller)

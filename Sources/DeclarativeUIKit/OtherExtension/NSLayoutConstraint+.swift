@@ -24,6 +24,9 @@ public extension NSLayoutConstraint {
         constraints.compactMap({ $0.firstItem as? UIView }).forEach { view in
             view.translatesAutoresizingMaskIntoConstraints = false
         }
+        constraints.compactMap({ $0.secondItem as? UIView }).forEach { view in
+            view.translatesAutoresizingMaskIntoConstraints = false
+        }
         NSLayoutConstraint.activate(constraints)
     }
 
