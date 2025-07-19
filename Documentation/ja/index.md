@@ -50,6 +50,8 @@
 
 ### [UIActivityIndicatorView](uiactivityindicatorview.md#uiactivityindicatorview)
 
+### [UIProgressView](uiprogressview.md#uiprogressview)
+
 ### [UIPickerView](uipickerview.md#uipickerview)
 
 ### [UIMenu](uimenu.md#uimenu)

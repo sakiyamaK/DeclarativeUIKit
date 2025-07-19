@@ -124,6 +124,12 @@ final class RootViewController: UIViewController {
                             self!.navigationController?.pushViewController(vc, animated: true)
                         })
 
+                    Button("ProgressView")
+                        .addAction(.touchUpInside, handler: {[weak self] _ in
+                            let vc = ProgressViewViewController()
+                            self!.navigationController?.pushViewController(vc, animated: true)
+                        })
+
                     UIView.spacer()
 
 //                    Button("tiktok")
