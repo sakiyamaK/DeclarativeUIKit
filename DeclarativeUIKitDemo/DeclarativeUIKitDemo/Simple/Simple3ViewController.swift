@@ -10,8 +10,8 @@ import DeclarativeUIKit
 
 final class Simple3ViewController: UIViewController {
 
-    private let pickerView = UIPickerView()
-    private let label = UILabel()
+    private let pickerLabel = UILabel()
+    private let stepperLabel = UILabel()
 
     private let pickerData = ["Apple", "Banana", "Grape", "Orange"]
 
@@ -23,36 +23,13 @@ final class Simple3ViewController: UIViewController {
 
             UIScrollView {
                 UIStackView {
-                    UILabel("UIPickerView")
-                        .font(UIFont.boldSystemFont(ofSize: 20))
-                        .contentPriorities(.init(vertical: .required))
-
-                    self.pickerView
-                        .dataSource(self)
-                        .delegate(self)
-
-                    self.label
-                        .contentPriorities(.init(vertical: .required))
-
-                    UIView.divider()
-
-                    UILabel("UIDatePicker")
-                        .font(UIFont.boldSystemFont(ofSize: 20))
-
-                    UIDatePicker()
-                        .calendar(Calendar(identifier: .gregorian))
-                        .preferredDatePickerStyle(.wheels)
-                        .datePickerMode(.dateAndTime)
 
                     UIActivityIndicatorView()
                         .style(.large)
                         .color(.systemBlue)
                         .animating(true)
 
-                    UIActivityIndicatorView()
-                        .style(.medium)
-                        .color(.systemRed)
-                        .animating(true)
+                    UIView.divider()
 
                     UIColorWell(primaryActionHandler: { action in
                         guard let view = action.sender as? UIColorWell else {
@@ -60,14 +37,52 @@ final class Simple3ViewController: UIViewController {
                         }
                         print(view.selectedColor ?? .clear)
                     })
+
+                    UIView.divider()
+
+                    UIStepper()
+                        .value(0.0)
+                        .minimumValue(0.0)
+                        .maximumValue(10.0)
+                        .stepValue(1.0)
+                        .isContinuous(true)
+                        .wraps(false)
+                        .backgroundImage(UIImage(systemName: "rectangle.fill"))
+                        .incrementImage(UIImage(systemName: "plus.circle.fill"))
+                        .decrementImage(UIImage(systemName: "minus.circle.fill"))
+                        .dividerImage(UIImage(systemName: "line.horizontal.3"))
+                        .addAction(.valueChanged) { [weak self] action in
+                            guard let self, let stepper = action.sender as? UIStepper else { return }
+                            self.stepperLabel.text = "Value: \(stepper.value)"
+                        }
+                        .centerX()
+
+                    self.stepperLabel
+                        .textAlignment(.center)
+                        .contentPriorities(.init(vertical: .required))
+
+                    UIView.divider()
+
+                    UIPickerView()
+                        .dataSource(self)
+                        .delegate(self)
+
+                    self.pickerLabel
+                        .textAlignment(.center)
+                        .text(self.pickerData[0])
+                        .contentPriorities(.init(vertical: .required))
+
+                    UIView.divider()
+
+                    UIDatePicker()
+                        .calendar(Calendar(identifier: .gregorian))
+                        .preferredDatePickerStyle(.wheels)
+                        .datePickerMode(.dateAndTime)
                 }
                 .spacing(20)
                 .margins(.init(horizontal: 20))
             }
         }
-        
-        pickerView.selectRow(0, inComponent: 0, animated: false)
-        label.text = pickerData[0]
     }
 }
 
@@ -86,6 +101,6 @@ extension Simple3ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        label.text = pickerData[row]
+        pickerLabel.text = pickerData[row]
     }
 }

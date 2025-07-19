@@ -130,11 +130,6 @@ final class RootViewController: UIViewController {
                             self!.navigationController?.pushViewController(vc, animated: true)
                         })
 
-                    Button("Stepper")
-                        .addAction(.touchUpInside, handler: {[weak self] _ in
-                            let vc = StepperViewController()
-                            self!.navigationController?.pushViewController(vc, animated: true)
-                        })
 
                     UIView.spacer()
 
