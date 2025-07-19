@@ -48,6 +48,8 @@
 
 ### [UIBezierPath](uibezierpath.md#uibezierpath)
 
+### [UIActivityIndicatorView](uiactivityindicatorview.md#uiactivityindicatorview)
+
 ### [UIPickerView](uipickerview.md#uipickerview)
 
 ### [UIMenu](uimenu.md#uimenu)

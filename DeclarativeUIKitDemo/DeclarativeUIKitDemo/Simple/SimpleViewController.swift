@@ -115,12 +115,11 @@ final class SimpleViewController: UIViewController {
                             .textAlignment(.center)
                     } else {
                         return UILabel().apply {
-                            let label = $0 as! UILabel
                             let attributes: [NSAttributedString.Key: Any] = [
                                 .foregroundColor: UIColor.orange,
                                 .strokeColor: UIColor.red
                             ]
-                            label.attributedText = NSAttributedString(string: "\(num)番目のlabel", attributes: attributes)
+                            $0.attributedText = NSAttributedString(string: "\(num)番目のlabel", attributes: attributes)
                         }.textAlignment(.center)
                     }
                 }
