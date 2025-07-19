@@ -54,9 +54,15 @@ final class RootViewController: UIViewController {
                             self!.navigationController?.pushViewController(vc, animated: true)
                         })
 
-                    Button("基本的なコンポーネント")
+                    Button("基本的なコンポーネント1")
                         .addAction(.touchUpInside, handler: {[weak self] _ in
                             let vc = Simple2ViewController()
+                            self!.navigationController?.pushViewController(vc, animated: true)
+                        })
+
+                    Button("基本的なコンポーネン2")
+                        .addAction(.touchUpInside, handler: {[weak self] _ in
+                            let vc = Simple3ViewController()
                             self!.navigationController?.pushViewController(vc, animated: true)
                         })
 
@@ -115,12 +121,6 @@ final class RootViewController: UIViewController {
                     Button("WKWebView")
                         .addAction(.touchUpInside, handler: {[weak self] _ in
                             let vc = WebViewController()
-                            self!.navigationController?.pushViewController(vc, animated: true)
-                        })
-
-                    Button("PickerView")
-                        .addAction(.touchUpInside, handler: {[weak self] _ in
-                            let vc = PickerViewController()
                             self!.navigationController?.pushViewController(vc, animated: true)
                         })
 
