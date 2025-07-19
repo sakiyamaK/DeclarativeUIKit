@@ -52,6 +52,8 @@
 
 ### [UIProgressView](uiprogressview.md#uiprogressview)
 
+### [UIColorWell](uicolorwell.md#uicolorwell)
+
 ### [UIPickerView](uipickerview.md#uipickerview)
 
 ### [UIMenu](uimenu.md#uimenu)

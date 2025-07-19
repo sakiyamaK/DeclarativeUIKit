@@ -53,6 +53,13 @@ final class Simple3ViewController: UIViewController {
                         .style(.medium)
                         .color(.systemRed)
                         .animating(true)
+
+                    UIColorWell(primaryActionHandler: { action in
+                        guard let view = action.sender as? UIColorWell else {
+                            return
+                        }
+                        print(view.selectedColor ?? .clear)
+                    })
                 }
                 .spacing(20)
                 .margins(.init(horizontal: 20))
