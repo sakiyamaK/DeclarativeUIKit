@@ -1,18 +1,76 @@
 # UIControl
 
+## initializer
+
+### init with primaryAction
+
+```swift
+@available(iOS 14.0, *)
+convenience init(primaryAction: UIAction?)
+```
+
+|  parameter | 型 | description |
+| ---- | ---- | ---- |
+| primaryAction | UIAction? | The primary action for the control. |
+
+### init with primaryActionHandler
+
+```swift
+@available(iOS 14.0, *)
+convenience init(primaryActionHandler: @escaping UIActionHandler)
+```
+
+|  parameter | 型 | description |
+| ---- | ---- | ---- |
+| primaryActionHandler | UIActionHandler | The closure to be executed as the primary action. |
+
 ## function
+
+### some default parameters
+
+The following standard parameters can be written declaratively.
+
+```swift
+func isEnabled(_ isEnabled: Bool) -> Self
+
+func isSelected(_ isSelected: Bool) -> Self
+
+func isHighlighted(_ isHighlighted: Bool) -> Self
+
+func contentVerticalAlignment(_ contentVerticalAlignment: UIControl.ContentVerticalAlignment) -> Self
+
+func contentHorizontalAlignment(_ contentHorizontalAlignment: UIControl.ContentHorizontalAlignment) -> Self
+
+@available(iOS 14.0, *)
+func isContextMenuInteractionEnabled(_ isContextMenuInteractionEnabled: Bool) -> Self
+
+@available(iOS 14.0, *)
+func showsMenuAsPrimaryAction(_ showsMenuAsPrimaryAction: Bool) -> Self
+
+@available(iOS 15.0, *)
+func toolTip(_ toolTip: String?) -> Self
+
+@available(iOS 17.0, *)
+func isSymbolAnimationEnabled(_ isSymbolAnimationEnabled: Bool) -> Self
+```
 
 ### add target action
 
 ```swift
-    func add(target: Any?, action: Selector, for controlEvents: UIControl.Event) -> Self
+@available(iOS, deprecated: 14.0, message: "This function is deprecated. Use addAction instead")
+func add(target: Any?, action: Selector, for controlEvents: UIControl.Event) -> Self
 
-    func add(target: Any?, for controlEvents: UIControl.Event, _ actionBuilder: () -> Selector) -> Self
+@available(iOS, deprecated: 14.0, message: "This function is deprecated. Use addAction instead")
+func add(target: Any?, for controlEvents: UIControl.Event, _ actionBuilder: () -> Selector) -> Self
 
-    func add(target: Any, for controlEvents: UIControl.Event, _ action: @escaping ((Any) -> Void)) -> Self
+@available(iOS, deprecated: 14.0, message: "This function is deprecated. Use addAction instead")
+func addControlAction(target: Any?, for controlEvents: UIControl.Event, _ actionBuilder: () -> Selector) -> Self
 
-    @available(iOS 14.0, *)
-    func addAction(_ controlEvents: UIControl.Event, handler: @escaping UIActionHandler) -> Self
+@available(iOS, deprecated: 14.0, message: "This function is deprecated. Use addAction instead")
+func add(target: Any, for controlEvents: UIControl.Event, _ action: @escaping ((Any) -> Void)) -> Self
+
+@available(iOS 14.0, *)
+func addAction(_ controlEvents: UIControl.Event, handler: @escaping UIActionHandler) -> Self
 ```
 
 #### sample
@@ -20,23 +78,10 @@
 ```swift
 self.declarative {
     UIStackView.vertical {
-        UIButton("tap")
-            .add(target: self, for: .touchUpInside) {
-                #selector(tapAction)
-            }
-        
-        UIButton("tap")
-            .add(target: self, action: #selector(tapAction), for: .touchUpInside)
-
-        UIButton("tap")
-            .add(target: self, for: .touchUpInside) { sender in 
-              print(sender)
-            }
-
         if #available(iOS 14.0, *) {
           UIButton("tap")
             .addAction(.touchUpInside) { [weak self] action in
-              print(sender)
+              print(action)
             }
         }
     }.alignment(.center)

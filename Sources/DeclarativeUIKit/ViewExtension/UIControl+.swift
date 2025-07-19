@@ -1,5 +1,17 @@
 import UIKit.UIControl
 
+public extension UIControl {
+    @available(iOS 14.0, *)
+    convenience init(primaryAction: UIAction?) {
+        self.init(frame: .zero, primaryAction: primaryAction)
+    }
+
+    @available(iOS 14.0, *)
+    convenience init(primaryActionHandler: @escaping UIActionHandler) {
+        self.init(frame: .zero, primaryAction: .init(handler: primaryActionHandler))
+    }
+}
+
 //MARK: - Declarative method
 public extension UIControl {
     
