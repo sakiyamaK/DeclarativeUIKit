@@ -134,26 +134,12 @@ final class RootViewController: UIViewController {
                             self!.navigationController?.pushViewController(vc, animated: true)
                         })
 
-//                    Button("tiktok")
-//                        .addAction(.touchUpInside, handler: {[weak self] _ in
-//                            let vc = TiktokHomeViewController()
-//                            self!.navigationController?.pushViewController(vc, animated: true)
-//                        })
-//
-//                    Button("twitter")
-//                        .add(target: self, for: .touchUpInside, {_ in
-//                            let vc = TwitterHomeViewController()
-//                            self.navigationController?.pushViewController(vc, animated: true)
-//                        })
-//
-//                    UIView.spacer()
-//
-//                    Button("Flutter Tutorial")
-//                        .add(target: self, for: .touchUpInside, {_ in
-//                            let vc = FlutterTutorialViewController()
-//                            self.navigationController?.pushViewController(vc, animated: true)
-//                        })
-//
+                    Button("ContentUnavailableView")
+                        .addAction(.touchUpInside, handler: {[weak self] _ in
+                            let vc = ContentUnavailableViewController()
+                            self!.navigationController?.pushViewController(vc, animated: true)
+                        })
+
                     UIView.spacer()
                 }
                 .spacing(20)
