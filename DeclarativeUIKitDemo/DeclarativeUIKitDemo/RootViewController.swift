@@ -39,7 +39,7 @@ final class RootViewController: UIViewController {
             UIScrollView {
                 UIStackView {
                     UIView.spacer()
-                    
+
                     if false {
                         Button("ホットリロード")
                             .addAction(.touchUpInside, handler: {[weak self] _ in
@@ -130,16 +130,18 @@ final class RootViewController: UIViewController {
                             self!.navigationController?.pushViewController(vc, animated: true)
                         })
 
+                    Button("VisualEffectView")
+                        .addAction(.touchUpInside, handler: {[weak self] _ in
+                            let vc = VisualEffectViewController()
+                            self!.navigationController?.pushViewController(vc, animated: true)
+                        })
 
-                    UIView.spacer()
 
 //                    Button("tiktok")
-//                        .add(target: self, for: .touchUpInside, {_ in
+//                        .addAction(.touchUpInside, handler: {[weak self] _ in
 //                            let vc = TiktokHomeViewController()
-//                            self.navigationController?.pushViewController(vc, animated: true)
+//                            self!.navigationController?.pushViewController(vc, animated: true)
 //                        })
-//
-//                    UIView.spacer()
 //
 //                    Button("twitter")
 //                        .add(target: self, for: .touchUpInside, {_ in
@@ -155,7 +157,7 @@ final class RootViewController: UIViewController {
 //                            self.navigationController?.pushViewController(vc, animated: true)
 //                        })
 //
-//                    UIView.spacer()
+                    UIView.spacer()
                 }
                 .spacing(20)
                 .distribution(.fillEqually)
