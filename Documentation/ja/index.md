@@ -99,3 +99,5 @@
 ### [WKPreferences](wkpreferences.md#wkpreferences)
 
 ### [WKUserContentController](wkusercontentcontroller.md#wkusercontentcontroller)
+
+### [WKUserContentController](wkusercontentcontroller.md#wkusercontentcontroller)
