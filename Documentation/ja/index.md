@@ -72,13 +72,13 @@
 
 ### [UIListContentConfiguration](uilistcontentconfiguration.md#uilistcontentconfiguration)
 
-### [UIPageControl](uipagecontrol.md#uiswitch)
+### [UIPageControl](uipagecontrol.md#uipagecontrol)
 
-### [UISearchTextField](uisearchtextfield.md#uiswitch)
+### [UISearchTextField](uisearchtextfield.md#uisearchtextfield)
 
-### [UISegmentedControl](uisegmentedcontrol.md#uiswitch)
+### [UISegmentedControl](uisegmentedcontrol.md#uisegmentedcontrol)
 
-### [UISlider](uislider.md#uiswitch)
+### [UISlider](uislider.md#uislider)
 
 ### [WKWebView](wkwebview.md#wkwebview)
 

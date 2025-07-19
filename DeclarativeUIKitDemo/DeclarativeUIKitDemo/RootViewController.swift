@@ -118,6 +118,12 @@ final class RootViewController: UIViewController {
                             self!.navigationController?.pushViewController(vc, animated: true)
                         })
 
+                    Button("PickerView")
+                        .addAction(.touchUpInside, handler: {[weak self] _ in
+                            let vc = PickerViewController()
+                            self!.navigationController?.pushViewController(vc, animated: true)
+                        })
+
                     UIView.spacer()
 
 //                    Button("tiktok")
