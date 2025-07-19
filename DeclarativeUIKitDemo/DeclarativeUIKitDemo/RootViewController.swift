@@ -39,14 +39,6 @@ final class RootViewController: UIViewController {
             UIScrollView {
                 UIStackView {
                     UIView.spacer()
-
-                    if false {
-                        Button("ホットリロード")
-                            .addAction(.touchUpInside, handler: {[weak self] _ in
-                                let vc = HotReloadViewController()
-                                self!.navigationController?.pushViewController(vc, animated: true)
-                            })
-                    }
                     
                     Button("レイアウトの基本")
                         .addAction(.touchUpInside, handler: {[weak self] _ in
@@ -136,6 +128,11 @@ final class RootViewController: UIViewController {
                             self!.navigationController?.pushViewController(vc, animated: true)
                         })
 
+                    Button("CalendarView")
+                        .addAction(.touchUpInside, handler: {[weak self] _ in
+                            let vc = CalendarViewController()
+                            self!.navigationController?.pushViewController(vc, animated: true)
+                        })
 
 //                    Button("tiktok")
 //                        .addAction(.touchUpInside, handler: {[weak self] _ in

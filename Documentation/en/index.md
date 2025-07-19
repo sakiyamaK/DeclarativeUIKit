@@ -56,6 +56,8 @@
 
 ### [UIStepper](uistepper.md#uistepper)
 
+### [UICalendarView](uicalendarview.md#uicalendarview)
+
 ### [UIColorWell](uicolorwell.md#uicolorwell)
 
 ### [UIPickerView](uipickerview.md#uipickerview)
