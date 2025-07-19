@@ -20,7 +20,6 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				/Localized/LaunchScreen.storyboard,
-				Assets.xcassets,
 				CopyAppleSwiftUITutorial/Resource/landmarkData.json,
 				Info.plist,
 			);

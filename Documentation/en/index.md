@@ -52,6 +52,8 @@
 
 ### [UIProgressView](uiprogressview.md#uiprogressview)
 
+### [UIVisualEffectView](uivisualeffectview.md#uivisualeffectview)
+
 ### [UIStepper](uistepper.md#uistepper)
 
 ### [UIColorWell](uicolorwell.md#uicolorwell)
