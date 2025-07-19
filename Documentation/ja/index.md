@@ -52,6 +52,8 @@
 
 ### [UIProgressView](uiprogressview.md#uiprogressview)
 
+### [UIStepper](uistepper.md#uistepper)
+
 ### [UIColorWell](uicolorwell.md#uicolorwell)
 
 ### [UIPickerView](uipickerview.md#uipickerview)
