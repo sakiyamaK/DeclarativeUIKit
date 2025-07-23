@@ -9,13 +9,24 @@ import UIKit.UITextView
 
 private extension UITextView {
     @discardableResult
-    func setup(attrText: NSAttributedString?) -> Self {
-        guard let attrText = attrText else {
+    func setup(text: String?) -> Self {
+        guard let text else {
             self.text = nil
             self.attributedText = nil
             return self
         }
-        self.attributedText = attrText
+        self.text = text
+        return self
+    }
+
+    @discardableResult
+    func setup(attributedText: NSAttributedString?) -> Self {
+        guard let attributedText else {
+            self.text = nil
+            self.attributedText = nil
+            return self
+        }
+        self.attributedText = attributedText
         return self
     }
 }
@@ -24,23 +35,23 @@ private extension UITextView {
 public extension UITextView {
     convenience init(_ text: String?) {
         self.init(frame: .zero)
-        self.text(text)
+        self.setup(text: text)
     }
         
     convenience init(_ text: String?, _ apply: (Self) -> Void) {
         self.init(frame: .zero)
-        self.text(text)
+        self.setup(text: text)
         apply(self)
     }
 
     convenience init(_ text: NSAttributedString?) {
         self.init(frame: .zero)
-        self.text(text)
+        self.setup(attributedText: text)
     }
     
     convenience init(_ text: NSAttributedString?, _ apply: (Self) -> Void) {
         self.init(frame: .zero)
-        self.text(text)
+        self.setup(attributedText: text)
         apply(self)
     }
 }
@@ -56,18 +67,12 @@ public extension UITextView {
     
     @discardableResult
     func text(_ text: String?) -> Self {
-        guard let text = text else {
-            return self.setup(attrText: nil)
-        }
-        return self.setup(attrText: NSAttributedString(string: text))
+        self.setup(text: text)
     }
     
     @discardableResult
-    func text(_ attrText: NSAttributedString?) -> Self {
-        guard let attrText = attrText else {
-            return self.setup(attrText: nil)
-        }
-        return self.setup(attrText: attrText)
+    func text(_ attributedText: NSAttributedString?) -> Self {
+        self.setup(attributedText: attributedText)
     }
     
     @discardableResult
