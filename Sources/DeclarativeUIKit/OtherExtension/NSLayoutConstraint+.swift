@@ -19,13 +19,17 @@ public extension NSLayoutConstraint {
         }
     }
 
-    static func activate(@ActivateBuilder builder: () -> [NSLayoutConstraint]) {
+    static func activate(
+        firstItemtranslatesAutoresizingMaskIntoConstraints: Bool = false,
+        secondItemtranslatesAutoresizingMaskIntoConstraints: Bool = false,
+        @ActivateBuilder builder: () -> [NSLayoutConstraint]
+    ) {
         let constraints = builder()
         constraints.compactMap({ $0.firstItem as? UIView }).forEach { view in
-            view.translatesAutoresizingMaskIntoConstraints = false
+            view.translatesAutoresizingMaskIntoConstraints = firstItemtranslatesAutoresizingMaskIntoConstraints
         }
         constraints.compactMap({ $0.secondItem as? UIView }).forEach { view in
-            view.translatesAutoresizingMaskIntoConstraints = false
+            view.translatesAutoresizingMaskIntoConstraints = secondItemtranslatesAutoresizingMaskIntoConstraints
         }
         NSLayoutConstraint.activate(constraints)
     }
