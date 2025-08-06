@@ -10,10 +10,10 @@ import DeclarativeUIKit
 
 final class SimpleViewController: UIViewController {
 
-    var label = UILabel()
-    
-    override func loadView() {
-        super.loadView()
+    private var label = UILabel()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
         self.view.backgroundColor = .white
         
@@ -30,7 +30,7 @@ final class SimpleViewController: UIViewController {
             .spacing(10)
             .backgroundColor(.gray)
         }
-        
+
         let ScrollBlocksView = {
             UIScrollView.horizontal {
                 UIStackView.horizontal{ stackView in
@@ -188,6 +188,7 @@ final class SimpleViewController: UIViewController {
             }
             .padding(insets: .init(all: 20))
         }
+
         let UISegmentedControlView = {
             UIScrollView.horizontal {
                 UISegmentedControl(
