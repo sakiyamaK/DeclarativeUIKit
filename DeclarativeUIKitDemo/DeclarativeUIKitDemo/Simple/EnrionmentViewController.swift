@@ -36,17 +36,6 @@ final class CustomView: UIView {
     }
 }
 
-///* ********************
-// 環境変数のkey
-//******************** */
-//private struct ThemeColorKey: UIKitEnvironmentKey {
-//    static let defaultValue: UIColor = .systemBlue
-//}
-//
-//private struct ThemeColorKey2: SwiftUI.EnvironmentKey {
-//    static let defaultValue: UIColor = .systemBlue
-//}
-
 final class EnvironmentViewController: UIViewController {
 
     override func viewDidLoad() {
