@@ -441,12 +441,7 @@ public extension UIView {
             priorities: priorities
         )
     }
-    
-    @discardableResult
-    func customSpacing(_ customSpacing: CGFloat) -> UIView {
-        HelperCustomSpacingView(customSpacing: customSpacing).zStack{ self }
-    }
-    
+        
     @discardableResult
     func center() -> UIView {
         HelperTouchTransparencyStackView(axis: .horizontal) {

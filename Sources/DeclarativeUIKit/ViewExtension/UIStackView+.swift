@@ -3,13 +3,22 @@ import UIKit
 
 public extension UIStackView {
     private func addArrangedSubViewHandlingHelperCustomSpacing(_ view: UIView) {
-        if let customSpacingView = view as? HelperCustomSpacingView, let inView = customSpacingView.subviews.first {
-            inView.translatesAutoresizingMaskIntoConstraints = false
-            self.addArrangedSubview(inView)
-            self.setCustomSpacing(customSpacingView.customSpacing, after: inView)
-        } else {
-            view.translatesAutoresizingMaskIntoConstraints = false
-            self.addArrangedSubview(view)
+
+        view.translatesAutoresizingMaskIntoConstraints = false
+        self.addArrangedSubview(view)
+
+        // 最後のcustomSpacingを取得
+        let customSpacingViews = view.subviews.compactMap({ $0 as? HelperCustomSpacingView })
+
+        guard let customSpacingView = customSpacingViews.last else {
+            return
+        }
+
+        self.setCustomSpacing(customSpacingView.customSpacing, after: view)
+
+        // customSpacingを全て削除
+        customSpacingViews.forEach {
+            $0.removeFromSuperview()
         }
     }
 
