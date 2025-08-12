@@ -8,12 +8,17 @@ public extension UIStackView {
         self.addArrangedSubview(view)
 
         // 最後のcustomSpacingを取得
-        if let customSpacingView = view.subviews.compactMap({ $0 as? HelperCustomSpacingView }).last {
-            self.setCustomSpacing(customSpacingView.customSpacing, after: view)
-            // customSpacingを全て削除
-            view.subviews.compactMap({ $0 as? HelperCustomSpacingView }).forEach {
-                $0.removeFromSuperview()
-            }
+        let customSpacingViews = view.subviews.compactMap({ $0 as? HelperCustomSpacingView })
+
+        guard let customSpacingView = customSpacingViews.last else {
+            return
+        }
+
+        self.setCustomSpacing(customSpacingView.customSpacing, after: view)
+
+        // customSpacingを全て削除
+        customSpacingViews.forEach {
+            $0.removeFromSuperview()
         }
     }
 
