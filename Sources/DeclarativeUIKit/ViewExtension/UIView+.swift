@@ -877,35 +877,35 @@ public extension UIView {
         
         let bottom = switch layoutGuides.bottom {
         case .safeArea:
-            view.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor)
+            self.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         case .margins:
-            view.bottomAnchor.constraint(equalTo: self.layoutMarginsGuide.bottomAnchor)
+            self.layoutMarginsGuide.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         case .readableContent:
-            view.bottomAnchor.constraint(equalTo: self.readableContentGuide.bottomAnchor)
+            self.readableContentGuide.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         case .keyboard:
-            view.bottomAnchor.constraint(equalTo: self.keyboardLayoutGuide.topAnchor)
+            self.keyboardLayoutGuide.topAnchor.constraint(equalTo: view.bottomAnchor)
         case .normal:
-            view.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            self.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         }
 
         let trailing = switch layoutGuides.trailing {
         case .safeArea:
-            view.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor)
+            self.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         case .margins:
-            view.trailingAnchor.constraint(equalTo: self.layoutMarginsGuide.trailingAnchor)
+            self.layoutMarginsGuide.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         case .readableContent:
-            view.trailingAnchor.constraint(equalTo: self.readableContentGuide.trailingAnchor)
+            self.readableContentGuide.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         case .keyboard:
-            view.trailingAnchor.constraint(equalTo: self.keyboardLayoutGuide.trailingAnchor)
+            self.keyboardLayoutGuide.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         case .normal:
-            view.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+            self.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         }
 
         var constraints: [NSLayoutConstraint] = []
-        
+
         if priorities.top.rawValue > 0 {
             top.constant = margin.top
-            top.priority = priorities.top
+            top.priority = priorities.top            
             constraints.append(top)
         }
         if priorities.leading.rawValue > 0 {
@@ -937,12 +937,12 @@ public extension UIView {
         priorities: UIEdgePriorities
     ) -> Self {
 
-        self.edgesConstraints(view, margin: margin, layoutGuides: .init(
-            top: safeAreas.top ? .safeArea : .normal,
-            leading: safeAreas.leading ? .safeArea : .normal,
-            bottom: safeAreas.bottom ? .safeArea : .normal,
-            trailing: safeAreas.trailing ? .safeArea : .normal
-        ), priorities: priorities)
+        self.edgesConstraints(
+            view,
+            margin: margin,
+            layoutGuides: safeAreas.layoutGuides,
+            priorities: priorities
+        )
     }
 }
 

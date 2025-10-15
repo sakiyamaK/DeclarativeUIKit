@@ -56,7 +56,7 @@ public extension UIViewController {
             ])
         }
         
-        //セーフエリアの左の外側
+        //LayoutGuidesの左の外側
         if let leadingView = await outsideLayoutGuideLeadingBuilder() {
             
             leadingView.translatesAutoresizingMaskIntoConstraints = false
@@ -109,7 +109,7 @@ public extension UIViewController {
             ])
         }
         
-        //セーフエリアの下の外側
+        //LayoutGuidesの下の外側
         if let bottomView = await outsideLayoutGuideBottomBuilder() {
             
             bottomView.translatesAutoresizingMaskIntoConstraints = false
@@ -136,7 +136,7 @@ public extension UIViewController {
             ])
         }
         
-        //セーフエリアの右の外側
+        //LayoutGuidesの右の外側
         if let trailingView = await outsideLayoutGuideTrailingBuilder() {
             
             trailingView.translatesAutoresizingMaskIntoConstraints = false
@@ -247,7 +247,7 @@ public extension UIViewController {
             ])
         }
         
-        //セーフエリアの左の外側
+        //LayoutGuidesの左の外側
         if let leadingView = outsideLayoutGuideLeadingBuilder() {
             
             leadingView.translatesAutoresizingMaskIntoConstraints = false
@@ -300,7 +300,7 @@ public extension UIViewController {
             ])
         }
         
-        //セーフエリアの下の外側
+        //LayoutGuidesの下の外側
         if let bottomView = outsideLayoutGuideBottomBuilder() {
             
             bottomView.translatesAutoresizingMaskIntoConstraints = false
@@ -327,7 +327,7 @@ public extension UIViewController {
             ])
         }
         
-        //セーフエリアの右の外側
+        //LayoutGuidesの右の外側
         if let trailingView = outsideLayoutGuideTrailingBuilder() {
             
             trailingView.translatesAutoresizingMaskIntoConstraints = false
@@ -379,6 +379,7 @@ public extension UIViewController {
                 self.view.trailingAnchor.constraint(equalTo: trailingView.trailingAnchor)
             ])
         }
+
         return self
     }
 }
@@ -396,60 +397,16 @@ public extension UIViewController {
         @SingleUIViewBuilder outsideSafeAreaTrailing outsideSafeAreaTrailingBuilder: @escaping () async -> UIView? = { nil },
         @SingleUIViewBuilder _ builder: @escaping () async -> UIView
     ) async -> Self {
-        let view = await builder()
-        if reset {
-            self.view.subviews.forEach { $0.removeFromSuperview() }
-        }
-        self.view.edgesConstraints(view, safeAreas: safeAreas, priorities: priorities)
-        
-        //セーフエリアの上の外側
-        if let topView = await outsideSafeAreaTopBuilder() {
-            topView.translatesAutoresizingMaskIntoConstraints = false
-            self.view.addSubview(topView)
-            NSLayoutConstraint.activate([
-                topView.topAnchor.constraint(equalTo: self.view.topAnchor),
-                topView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-                self.view.safeAreaLayoutGuide.topAnchor.constraint(equalTo: topView.bottomAnchor),
-                self.view.trailingAnchor.constraint(equalTo: topView.trailingAnchor)
-            ])
-        }
-        
-        //セーフエリアの左の外側
-        if let leadingView = await outsideSafeAreaLeadingBuilder() {
-            leadingView.translatesAutoresizingMaskIntoConstraints = false
-            self.view.addSubview(leadingView)
-            NSLayoutConstraint.activate([
-                leadingView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-                leadingView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-                self.view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: leadingView.bottomAnchor),
-                self.view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: leadingView.trailingAnchor)
-            ])
-        }
-        
-        //セーフエリアの下の外側
-        if let bottomView = await outsideSafeAreaBottomBuilder() {
-            bottomView.translatesAutoresizingMaskIntoConstraints = false
-            self.view.addSubview(bottomView)
-            NSLayoutConstraint.activate([
-                bottomView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-                bottomView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-                self.view.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor),
-                self.view.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor)
-            ])
-        }
-        
-        //セーフエリアの右の外側
-        if let trailingView = await outsideSafeAreaTrailingBuilder() {
-            trailingView.translatesAutoresizingMaskIntoConstraints = false
-            self.view.addSubview(trailingView)
-            NSLayoutConstraint.activate([
-                trailingView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-                trailingView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-                self.view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: trailingView.bottomAnchor),
-                self.view.trailingAnchor.constraint(equalTo: trailingView.trailingAnchor)
-            ])
-        }
-        return self
+        await self.declarative(
+            layoutGuides: safeAreas.layoutGuides,
+            priorities: priorities,
+            reset: reset,
+            outsideLayoutGuideTop: outsideSafeAreaTopBuilder,
+            outsideLayoutGuideLeading: outsideSafeAreaLeadingBuilder,
+            outsideLayoutGuideBottom: outsideSafeAreaBottomBuilder,
+            outsideLayoutGuideTrailing: outsideSafeAreaBottomBuilder,
+            builder
+        )
     }
     
     @discardableResult
@@ -463,61 +420,16 @@ public extension UIViewController {
         @SingleUIViewBuilder outsideSafeAreaTrailing outsideSafeAreaTrailingBuilder: @escaping () -> UIView? = { nil },
         @SingleUIViewBuilder _ builder: @escaping () -> UIView
     ) -> Self {
-        let view = builder()
-        if reset {
-            self.view.subviews.forEach { $0.removeFromSuperview() }
-        }
-        self.view.edgesConstraints(view, safeAreas: safeAreas, priorities: priorities)
-        
-        //セーフエリアの上の外側
-        if let topView = outsideSafeAreaTopBuilder() {
-            topView.translatesAutoresizingMaskIntoConstraints = false
-            self.view.addSubview(topView)
-            NSLayoutConstraint.activate([
-                topView.topAnchor.constraint(equalTo: self.view.topAnchor),
-                topView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-                self.view.safeAreaLayoutGuide.topAnchor.constraint(equalTo: topView.bottomAnchor),
-                self.view.trailingAnchor.constraint(equalTo: topView.trailingAnchor)
-            ])
-        }
-        
-        //セーフエリアの左の外側
-        if let leadingView = outsideSafeAreaLeadingBuilder() {
-            leadingView.translatesAutoresizingMaskIntoConstraints = false
-            self.view.addSubview(leadingView)
-            NSLayoutConstraint.activate([
-                leadingView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-                leadingView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-                self.view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: leadingView.bottomAnchor),
-                self.view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: leadingView.trailingAnchor)
-            ])
-        }
-        
-        //セーフエリアの下の外側
-        if let bottomView = outsideSafeAreaBottomBuilder() {
-            bottomView.translatesAutoresizingMaskIntoConstraints = false
-            self.view.addSubview(bottomView)
-            NSLayoutConstraint.activate([
-                bottomView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-                bottomView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-                self.view.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor),
-                self.view.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor)
-            ])
-        }
-        
-        //セーフエリアの右の外側
-        if let trailingView = outsideSafeAreaTrailingBuilder() {
-            trailingView.translatesAutoresizingMaskIntoConstraints = false
-            self.view.addSubview(trailingView)
-            NSLayoutConstraint.activate([
-                trailingView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-                trailingView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-                self.view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: trailingView.bottomAnchor),
-                self.view.trailingAnchor.constraint(equalTo: trailingView.trailingAnchor)
-            ])
-        }
-        
-        return self
+        self.declarative(
+            layoutGuides: safeAreas.layoutGuides,
+            priorities: priorities,
+            reset: reset,
+            outsideLayoutGuideTop: outsideSafeAreaTopBuilder,
+            outsideLayoutGuideLeading: outsideSafeAreaLeadingBuilder,
+            outsideLayoutGuideBottom: outsideSafeAreaBottomBuilder,
+            outsideLayoutGuideTrailing: outsideSafeAreaBottomBuilder,
+            builder
+        )
     }
 }
 

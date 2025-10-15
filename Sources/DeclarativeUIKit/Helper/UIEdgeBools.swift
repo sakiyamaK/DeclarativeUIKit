@@ -1,5 +1,6 @@
 import Foundation
 
+@MainActor
 public struct UIEdgeBools {
     public var top: Bool = true
     public var leading: Bool = true
@@ -26,3 +27,14 @@ public struct UIEdgeBools {
     }
 }
 
+@MainActor
+extension UIEdgeBools {
+    var layoutGuides: UIEdgeLayoutGuides {
+        UIEdgeLayoutGuides(
+            top: self.top ? .safeArea : .normal,
+            leading: self.leading ? .safeArea : .normal,
+            bottom: self.bottom ? .safeArea : .normal,
+            trailing: self.trailing ? .safeArea : .normal
+        )
+    }
+}
