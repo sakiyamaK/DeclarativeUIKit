@@ -252,7 +252,6 @@ public extension UITextField {
         return self
     }
     
-    @available(iOS 12.0, *)
     @discardableResult
     func passwordRules(_ passwordRules: UITextInputPasswordRules?) -> Self {
         self.passwordRules = passwordRules

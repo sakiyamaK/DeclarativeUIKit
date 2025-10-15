@@ -1,6 +1,5 @@
 import UIKit.UIViewController
 
-@available(iOS 15.0, *)
 public extension UIViewController {
     @discardableResult
     /// レイアウトを宣言的に書くメソッド
@@ -575,7 +574,6 @@ public extension UIViewController {
     }
 }
 
-@available(iOS 15.0, *)
 public extension UIViewController {
     @discardableResult
     func applySheetPresentationController(_ configure: ((UISheetPresentationController) -> Void)) -> Self {
@@ -610,31 +608,31 @@ public extension UIViewController {
         self.view.addSubview(view)
 
         switch position {
-        case .leadingTop(let point):
+        case .leadingTop(let point), .topLeading(let point):
             self.view.leadingConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.leading)
             self.view.topConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.top)
-        case .centerTop(let point):
+        case .centerTop(let point), .topCenter(let point):
             self.view.centerXConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.centerX)
             self.view.topConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.top)
-        case .trailingTop(let point):
+        case .trailingTop(let point), .topTrailing(let point):
             self.view.trailingConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.centerX)
             self.view.topConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.top)
-        case .leadingCenter(let point):
+        case .leadingCenter(let point), .centerLeading(let point):
             self.view.leadingConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.leading)
             self.view.centerYConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.centerY)
         case .centerCenter(let point):
             self.view.centerXConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.centerX)
             self.view.centerYConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.centerY)
-        case .trailingCenter(let point):
+        case .trailingCenter(let point), .centerTrailing(let point):
             self.view.trailingConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.centerX)
             self.view.centerYConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.centerY)
-        case .leadingBttom(let point):
+        case .leadingBottom(let point), .bottomLeading(let point):
             self.view.leadingConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.leading)
             self.view.bottomConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.bottom)
-        case .centerBottom(let point):
+        case .centerBottom(let point), .bottomCenter(let point):
             self.view.centerXConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.centerX)
             self.view.bottomConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.bottom)
-        case .trailingBottom(let point):
+        case .trailingBottom(let point), .bottomTrailing(let point):
             self.view.trailingConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.centerX)
             self.view.bottomConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.bottom)
         }

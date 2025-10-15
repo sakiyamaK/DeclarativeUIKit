@@ -221,7 +221,6 @@ func applyNavigationItem(_ configure: ((UINavigationItem) -> Void)) -> Self
 Declaratively describe the parameters of `UIViewController`'s `sheetPresentationController`.
 
 ```swift
-@available(iOS 15.0, *)
 func applySheetPresentationController(_ configure: ((UISheetPresentationController) -> Self
 ```
 
@@ -252,7 +251,6 @@ UIViewController()
 Declaratively describes the FloatingActionView.
 
 ```swift
-@available(iOS 15.0, *)
 @discardableResult
 func floatingActionView(
     layoutGuides: UIEdgeLayoutGuides = .init(all: .safeArea),

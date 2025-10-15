@@ -17,14 +17,12 @@ public extension UISwitch {
         return self
     }
 
-    @available(iOS 14.0, *)
     @discardableResult
     func preferredStyle(_ preferredStyle: UISwitch.Style) -> Self {
         self.preferredStyle = preferredStyle
         return self
     }
 
-    @available(iOS 14.0, *)
     @discardableResult
     func title(_ title: String?) -> Self {
         self.title = title

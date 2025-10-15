@@ -7,10 +7,8 @@
 以下の標準パラメータは宣言的に記述できます
 
 ```swift    
-    @available(iOS 14.0, *)
     func insertSegmentAction(_ action: UIAction, at segment: Int, animated: Bool = true) -> Self
 
-    @available(iOS 14.0, *)
     func action(_ action: UIAction, forSegmentAt segment: Int) -> Self
 
     func isMomentary(_ isMomentary: Bool) -> Self

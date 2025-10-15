@@ -5,7 +5,6 @@
 ### init with primaryAction
 
 ```swift
-@available(iOS 14.0, *)
 convenience init(primaryAction: UIAction?)
 ```
 
@@ -16,7 +15,6 @@ convenience init(primaryAction: UIAction?)
 ### init with primaryActionHandler
 
 ```swift
-@available(iOS 14.0, *)
 convenience init(primaryActionHandler: @escaping UIActionHandler)
 ```
 
@@ -41,13 +39,10 @@ func contentVerticalAlignment(_ contentVerticalAlignment: UIControl.ContentVerti
 
 func contentHorizontalAlignment(_ contentHorizontalAlignment: UIControl.ContentHorizontalAlignment) -> Self
 
-@available(iOS 14.0, *)
 func isContextMenuInteractionEnabled(_ isContextMenuInteractionEnabled: Bool) -> Self
 
-@available(iOS 14.0, *)
 func showsMenuAsPrimaryAction(_ showsMenuAsPrimaryAction: Bool) -> Self
 
-@available(iOS 15.0, *)
 func toolTip(_ toolTip: String?) -> Self
 
 @available(iOS 17.0, *)
@@ -69,7 +64,6 @@ func addControlAction(target: Any?, for controlEvents: UIControl.Event, _ action
 @available(iOS, deprecated: 14.0, message: "This function is deprecated. Use addAction instead")
 func add(target: Any, for controlEvents: UIControl.Event, _ action: @escaping ((Any) -> Void)) -> Self
 
-@available(iOS 14.0, *)
 func addAction(_ controlEvents: UIControl.Event, handler: @escaping UIActionHandler) -> Self
 ```
 

@@ -7,7 +7,6 @@
 
 import UIKit.UIBarAppearance
 
-@available(iOS 13.0, *)
 @available(*, deprecated, message: "imperative is deprecated. Use apply instead")
 public extension UIBarAppearance {
     @discardableResult

@@ -7,10 +7,8 @@
 The following standard parameters can be written declaratively.
 
 ```swift    
-    @available(iOS 14.0, *)
     func insertSegmentAction(_ action: UIAction, at segment: Int, animated: Bool = true) -> Self
 
-    @available(iOS 14.0, *)
     func action(_ action: UIAction, forSegmentAt segment: Int) -> Self
 
     func isMomentary(_ isMomentary: Bool) -> Self

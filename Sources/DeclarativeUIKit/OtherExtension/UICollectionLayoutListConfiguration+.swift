@@ -7,7 +7,6 @@
 
 import UIKit
 
-@available(iOS 14.0, *)
 public extension UICollectionLayoutListConfiguration {
     @discardableResult
     func showsSeparators(_ showsSeparators: Bool) -> Self {
@@ -16,7 +15,6 @@ public extension UICollectionLayoutListConfiguration {
         return _self
     }
     
-    @available(iOS 14.5, *)
     @discardableResult
     func separatorConfiguration(_ separatorConfiguration: UIListSeparatorConfiguration) -> Self {
         var _self = self
@@ -24,13 +22,11 @@ public extension UICollectionLayoutListConfiguration {
         return _self
     }
 
-    @available(iOS 14.5, *)
     @discardableResult
     func applySeparatorConfiguration(_ configure: ((UIListSeparatorConfiguration) -> UIListSeparatorConfiguration)) -> Self {
         self.separatorConfiguration(configure(self.separatorConfiguration))
     }
 
-    @available(iOS 14.5, *)
     @discardableResult
     func itemSeparatorHandler(_ itemSeparatorHandler: UICollectionLayoutListConfiguration.ItemSeparatorHandler?) -> Self {
         var _self = self
@@ -77,7 +73,6 @@ public extension UICollectionLayoutListConfiguration {
         return _self
     }
     
-    @available(iOS 15.0, *)
     @discardableResult
     func headerTopPadding(_ headerTopPadding: CGFloat?) -> Self {
         var _self = self

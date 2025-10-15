@@ -112,21 +112,18 @@ public extension WKWebView {
         return self
     }
 
-    @available(iOS 14.0, *)
     @discardableResult
     func pageZoom(_ zoom: CGFloat) -> Self {
         self.pageZoom = zoom
         return self
     }
 
-    @available(iOS 14.0, *)
     @discardableResult
     func mediaType(_ type: String?) -> Self {
         self.mediaType = type
         return self
     }
 
-    @available(iOS 15.0, *)
     @discardableResult
     func underPageBackgroundColor(_ color: UIColor?) -> Self {
         self.underPageBackgroundColor = color

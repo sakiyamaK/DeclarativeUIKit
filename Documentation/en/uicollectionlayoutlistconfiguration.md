@@ -7,10 +7,8 @@
 ```swift
     func showsSeparators(_ showsSeparators: Bool) -> Self
     
-    @available(iOS 14.5, *)
     func separatorConfiguration(_ separatorConfiguration: UIListSeparatorConfiguration) -> Self
 
-    @available(iOS 14.5, *)
     func itemSeparatorHandler(_ itemSeparatorHandler: UICollectionLayoutListConfiguration.ItemSeparatorHandler?) -> Self
 
     func backgroundColor(_ backgroundColor: UIColor?) -> Self
@@ -27,6 +25,5 @@
         _ trailingSwipeActionsConfigurationProvider: UICollectionLayoutListConfiguration.SwipeActionsConfigurationProvider?
     ) -> Self
     
-    @available(iOS 15.0, *)
     func headerTopPadding(_ headerTopPadding: CGFloat?) -> Self
 ```

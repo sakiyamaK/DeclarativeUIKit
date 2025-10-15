@@ -42,7 +42,8 @@ final class RootViewController: UIViewController {
                     
                     Button("レイアウトの基本")
                         .addAction(.touchUpInside, handler: {[weak self] _ in
-                            let vc = SimpleViewController()
+//                            let vc = SimpleViewController()
+                            let vc = PreviewViewController()
                             self!.navigationController?.pushViewController(vc, animated: true)
                         })
 

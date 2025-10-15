@@ -39,28 +39,24 @@ public extension UIStepper {
     }
 
     @discardableResult
-    @available(iOS 6.0, *)
     func backgroundImage(_ image: UIImage?, for state: UIControl.State = .normal) -> Self {
         self.setBackgroundImage(image, for: state)
         return self
     }
 
     @discardableResult
-    @available(iOS 6.0, *)
     func dividerImage(_ image: UIImage?, forLeftSegmentState leftState: UIControl.State = .normal, rightSegmentState rightState: UIControl.State = .normal) -> Self {
         self.setDividerImage(image, forLeftSegmentState: leftState, rightSegmentState: rightState)
         return self
     }
 
     @discardableResult
-    @available(iOS 6.0, *)
     func incrementImage(_ image: UIImage?, for state: UIControl.State = .normal) -> Self {
         self.setIncrementImage(image, for: state)
         return self
     }
 
     @discardableResult
-    @available(iOS 6.0, *)
     func decrementImage(_ image: UIImage?, for state: UIControl.State = .normal) -> Self {
         self.setDecrementImage(image, for: state)
         return self

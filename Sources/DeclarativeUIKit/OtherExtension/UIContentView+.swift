@@ -7,7 +7,6 @@
 
 import UIKit
 
-@available(iOS 14.0, *)
 public extension UIContentView {
     @discardableResult
     func configuration(_ configuration: UIContentConfiguration) -> Self {

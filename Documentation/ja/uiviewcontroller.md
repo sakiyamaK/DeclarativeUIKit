@@ -231,7 +231,6 @@ func applyNavigationItem(_ configure: ((UINavigationItem) -> Void)) -> Self
 `UIViewController`がもつ`sheetPresentationController`のパラメータを宣言的に記述します
 
 ```swift
-@available(iOS 15.0, *)
 func applySheetPresentationController(_ configure: ((UISheetPresentationController) -> Self
 ```
 
@@ -263,7 +262,6 @@ UIViewController()
 `FloatingActionView`を宣言的に記述します
 
 ```swift
-@available(iOS 15.0, *)
 @discardableResult
 func floatingActionView(
     layoutGuides: UIEdgeLayoutGuides = .init(all: .safeArea),

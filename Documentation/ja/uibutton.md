@@ -44,7 +44,6 @@ self.declarative {
 ### init with configurationBuilder
 
 ```swift
-@available(iOS 15.0, *)
 init(configurationBuilder: (() -> UIButton.Configuration), primaryAction: UIAction?)
 ```
 
@@ -78,16 +77,12 @@ func titleEdgeInsets(_ titleEdgeInsets: UIEdgeInsets) -> Self
 
 func imageEdgeInsets(_ imageEdgeInsets: UIEdgeInsets) -> Self
 
-@available(iOS 14.0, *)
 func menu(_ menu: UIMenu) -> Self
 
-@available(iOS 14.0, *)
 func showsMenuAsPrimaryAction(_ showsMenuAsPrimaryAction: Bool) -> Self
 
-@available(iOS 15.0, *)
 func configuration(_ configuration: UIButton.Configuration) -> Self
 
-@available(iOS 15.0, *)
 func configuration(_ configurationBuilder: (() -> UIButton.Configuration)) -> Self
 ```
 

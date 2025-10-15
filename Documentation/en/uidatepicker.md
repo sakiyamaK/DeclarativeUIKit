@@ -9,7 +9,6 @@ The following standard parameters can be written declaratively.
 ```swift
 func datePickerMode(_ datePickerMode: UIDatePicker.Mode) -> Self
 
-@available(iOS 13.4, *)
 func preferredDatePickerStyle(_ style: UIDatePickerStyle) -> Self
 
 func date(_ date: Date, animated: Bool = false) -> Self
@@ -26,7 +25,6 @@ func calendar(_ calendar: Calendar) -> Self
 
 func timeZone(_ timeZone: TimeZone?) -> Self
 
-@available(iOS 15.0, *)
 func roundsToMinuteInterval(_ roundsToMinuteInterval: Bool) -> Self
 ```
 

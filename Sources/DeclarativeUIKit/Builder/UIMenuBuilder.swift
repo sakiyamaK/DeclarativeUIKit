@@ -7,7 +7,6 @@
 
 import UIKit.UIMenuElement
 
-@available(iOS 13.0, *)
 @resultBuilder
 public enum ArrayUIMenuElementBuilder {
     public typealias Component = [Expression]
@@ -47,7 +46,6 @@ public enum ArrayUIMenuElementBuilder {
     }
 }
 
-@available(iOS 13.0, *)
 @resultBuilder
 public enum SingleUIMenuElementBuilder {
     public typealias Component = UIMenuElement

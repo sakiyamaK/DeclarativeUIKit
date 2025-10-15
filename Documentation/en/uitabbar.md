@@ -37,10 +37,8 @@ func barStyle(_ barStyle: UIBarStyle) -> Self
 
 func isTranslucent(_ isTranslucent: Bool) -> Self
 
-@available(iOS 13.0, *)
 func standardAppearance(_ standardAppearance: UITabBarAppearance) -> Self
 
-@available(iOS 15.0, *)
 func scrollEdgeAppearance(_ scrollEdgeAppearance: UITabBarAppearance?) -> Self
 ```
 
@@ -50,7 +48,6 @@ Set `standardAppearance` and `scrollEdgeAppearance` at the same time
 If older than `iOS 15.0`, `scrollEdgeAppearance` will not be set.
 
 ```swift
-@available(iOS 13.0, *)
 func tabBarAppearance(standard: UITabBarAppearance, scrollEdge: UITabBarAppearance?) -> Self
 ```
 
@@ -60,10 +57,8 @@ Sets the appearance specified by `appearanceTypes
 If older than `iOS 15.0`, `scrollEdgeAppearance` will not be set.
 
 ```swift
-@available(iOS 13.0, *)
 func tabBarAppearance(appearanceTypes: [UITabBarAppearanceType] = UITabBarAppearanceType.allCases, _ appearanceBuilder: ((Self) -> UITabBarAppearance)) -> Self
 
-@available(iOS 13.0, *)
 func tabBarAppearance(appearanceTypes: [UITabBarAppearanceType] = UITabBarAppearanceType.allCases, _ appearanceBuilder: (() -> UITabBarAppearance)) -> Self
 ```
 

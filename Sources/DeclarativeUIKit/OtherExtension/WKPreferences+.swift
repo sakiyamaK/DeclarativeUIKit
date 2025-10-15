@@ -8,10 +8,18 @@ public extension WKPreferences {
         return self
     }
 
+    @available(iOS, deprecated: 14.0, message: "Use WKWebpagePreferences.allowsContentJavaScript to disable content JavaScript on a per-navigation basis.")
     @discardableResult
     func javaScriptEnabled(_ enabled: Bool) -> Self {
-        self.javaScriptEnabled = enabled
-        return self
+        // WKPreferences.javaScriptEnabled is deprecated on iOS 14+. Avoid touching it to prevent warnings.
+        if #available(iOS 14.0, *) {
+            // No-op: Configure per-navigation via WKWebpagePreferences on the WKWebView load request.
+            return self
+        } else {
+            // Prior to iOS 14, this property controlled content JavaScript globally.
+            self.javaScriptEnabled = enabled
+            return self
+        }
     }
 
     @discardableResult
@@ -26,7 +34,6 @@ public extension WKPreferences {
         return self
     }
 
-    @available(iOS 14.5, *)
     @discardableResult
     func isTextInteractionEnabled(_ enabled: Bool) -> Self {
         self.isTextInteractionEnabled = enabled

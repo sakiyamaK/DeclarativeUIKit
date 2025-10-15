@@ -20,7 +20,26 @@ public struct UIEdgePriorities {
         self.bottom = bottom
         self.trailing = trailing
     }
-    
+
+    public init(
+        top: Float = 1000,
+        leading: Float = 1000,
+        bottom: Float = 1000,
+        trailing: Float = 1000
+    ) {
+        self.top = .init(top)
+        self.leading = .init(leading)
+        self.bottom = .init(bottom)
+        self.trailing = .init(trailing)
+    }
+
+    public init() {
+        self.top = .init(1000)
+        self.leading =  .init(1000)
+        self.bottom =  .init(1000)
+        self.trailing =  .init(1000)
+    }
+
     /// 四隅の優先度を決めて初期化
     /// - Parameter all: 四隅の優先度
     public init(all: UILayoutPriority) {

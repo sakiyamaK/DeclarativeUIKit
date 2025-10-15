@@ -6,7 +6,6 @@
 
 以下の標準パラメータは宣言的に記述できます
 
-@available(iOS 15.0, *)
 ```swift
 func delegate(_ delegate: UISheetPresentationControllerDelegate?) -> Self
 

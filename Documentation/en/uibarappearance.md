@@ -53,10 +53,8 @@ Sets the appearance specified by `appearanceTypes
 If older than `iOS15`, `scrollEdgeAppearance` will not be set
 
 ```swift
-@available(iOS 13.0, *)
 func tabBarAppearance(appearanceTypes: [UITabBarAppearanceType] = UITabBarAppearanceType.allCases, _ appearanceBuilder: ((Self) -> UITabBarAppearance)) -> Self
 
-@available(iOS 13.0, *)
 func tabBarAppearance(appearanceTypes: [UITabBarAppearanceType] = UITabBarAppearanceType.allCases, _ appearanceBuilder: (() -> UITabBarAppearance)) -> Self
 ```
 

@@ -46,7 +46,6 @@ public extension NSCollectionLayoutSection {
         return self
     }
 
-    @available(iOS 14.0, *)
     @discardableResult
     func contentInsetsReference(_ contentInsetsReference: UIContentInsetsReference) -> Self {
         self.contentInsetsReference = contentInsetsReference

@@ -49,21 +49,18 @@ public extension UITabBarItem {
         badgeTextAttributes(textAttributesBuilder(), for: state)
     }
 
-    @available(iOS 13.0, *)
     @discardableResult
     func standardAppearance(_ standardAppearance: UITabBarAppearance?) -> Self {
         self.standardAppearance = standardAppearance
         return self
     }
 
-    @available(iOS 15.0, *)
     @discardableResult
     func scrollEdgeAppearance(_ scrollEdgeAppearance: UITabBarAppearance?) -> Self {
         self.scrollEdgeAppearance = scrollEdgeAppearance
         return self
     }
     
-    @available(iOS 13.0, *)
     @discardableResult
     func appearance(appearanceTypes: [UITabBarAppearanceType] = UITabBarAppearanceType.allCases, _ appearanceBuilder: ((Self) -> UITabBarAppearance)) -> Self {
         let appearance = appearanceBuilder(self)
@@ -72,15 +69,12 @@ public extension UITabBarItem {
             case .standard:
                 self.standardAppearance = appearance
             case .scrollEdge:
-                if #available(iOS 15.0, *) {
-                    self.scrollEdgeAppearance = appearance
-                }
+                self.scrollEdgeAppearance = appearance
             }
         }
         return self
     }
 
-    @available(iOS 13.0, *)
     @discardableResult
     func appearance(appearanceTypes: [UITabBarAppearanceType] = UITabBarAppearanceType.allCases, _ appearanceBuilder: (() -> UITabBarAppearance)) -> Self {
         let appearance = appearanceBuilder()

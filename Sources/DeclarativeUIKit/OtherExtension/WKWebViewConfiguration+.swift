@@ -74,14 +74,12 @@ public extension WKWebViewConfiguration {
         return self
     }
 
-    @available(iOS 14.5, *)
     @discardableResult
     func upgradeKnownHostsToHTTPS(_ upgrade: Bool) -> Self {
         self.upgradeKnownHostsToHTTPS = upgrade
         return self
     }
 
-    @available(iOS 14.0, *)
     @discardableResult
     func limitsNavigationsToAppBoundDomains(_ limits: Bool) -> Self {
         self.limitsNavigationsToAppBoundDomains = limits

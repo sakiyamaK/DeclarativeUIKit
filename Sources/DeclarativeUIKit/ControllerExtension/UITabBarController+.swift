@@ -85,7 +85,6 @@ public extension UITabBarController {
     }
 }
 
-@available(iOS 13.0, *)
 public extension UITabBarController {
     @discardableResult
     func tabBarAppearance(appearanceTypes: [UITabBarAppearanceType] = UITabBarAppearanceType.allCases, _ tabBarAppearanceBuilder: (() -> UITabBarAppearance)) -> Self {

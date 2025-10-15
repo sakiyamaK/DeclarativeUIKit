@@ -21,10 +21,8 @@ func badgeTextAttributes(_ textAttributesBuilder: (() -> [NSAttributedString.Key
 
 func badgeTextAttributes(for state: UIControl.State = .normal, _ textAttributesBuilder: (() -> [NSAttributedString.Key : Any]?)) -> Self
 
-@available(iOS 13.0, *)
 func standardAppearance(_ standardAppearance: UITabBarAppearance?) -> Self
 
-@available(iOS 15.0, *)
 func scrollEdgeAppearance(_ scrollEdgeAppearance: UITabBarAppearance?) -> Self
 ```
 
@@ -34,9 +32,7 @@ func scrollEdgeAppearance(_ scrollEdgeAppearance: UITabBarAppearance?) -> Self
 `iOS 15.0`より古い場合は`scrollEdgeAppearance`は設定されません
 
 ```swift
-@available(iOS 13.0, *)
 func appearance(appearanceTypes: [UITabBarAppearanceType] = UITabBarAppearanceType.allCases, _ appearanceBuilder: ((Self) -> UITabBarAppearance)) -> Self
-@available(iOS 13.0, *)
 func appearance(appearanceTypes: [UITabBarAppearanceType] = UITabBarAppearanceType.allCases, _ appearanceBuilder: (() -> UITabBarAppearance)) -> Self
 ```
 

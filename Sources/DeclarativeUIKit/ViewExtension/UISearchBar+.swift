@@ -51,7 +51,13 @@ public extension UISearchBar {
         self.showsCancelButton = showsCancelButton
         return self
     }
-    
+
+    @discardableResult
+    func showsCancelButton(_ showsCancelButton: Bool, animated: Bool) -> Self {
+        self.setShowsCancelButton(showsCancelButton, animated: animated)
+        return self
+    }
+
     @discardableResult
     func showsSearchResultsButton(_ showsSearchResultsButton: Bool) -> Self {
         self.showsSearchResultsButton = showsSearchResultsButton
@@ -63,13 +69,7 @@ public extension UISearchBar {
         self.isSearchResultsButtonSelected = isSearchResultsButtonSelected
         return self
     }
-    
-    @discardableResult
-    func showsCancelButton(_ showsCancelButton: Bool, animated: Bool) -> Self {
-        self.setShowsCancelButton(showsCancelButton, animated: animated)
-        return self
-    }
-        
+
     @discardableResult
     func barTintColor(_ barTintColor: UIColor?) -> Self {
         self.barTintColor = barTintColor
@@ -105,14 +105,7 @@ public extension UISearchBar {
         self.showsScopeBar = showsScopeBar
         return self
     }
-    
-    @available(iOS 13.0, *)
-    @discardableResult
-    func showsCanselButton(_ show: Bool, animated animate: Bool) -> Self {
-        self.setShowsCancelButton(show, animated: animate)
-        return self
-    }
-    
+        
     @discardableResult
     func inputAccessoryView(_ inputAccessoryView: UIView?) -> Self {
         self.inputAccessoryView = inputAccessoryView

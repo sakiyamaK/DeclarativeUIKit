@@ -7,14 +7,12 @@ import UIKit.UISegmentedControl
 public extension UISegmentedControl {
     
     @discardableResult
-    @available(iOS 14.0, *)
     func insertSegmentAction(_ action: UIAction, at segment: Int, animated: Bool = true) -> Self {
         self.insertSegment(action: action, at: segment, animated: animated)
         return self
     }
 
     @discardableResult
-    @available(iOS 14.0, *)
     func action(_ action: UIAction, forSegmentAt segment: Int) -> Self {
         self.setAction(action, forSegmentAt: segment)
         return self

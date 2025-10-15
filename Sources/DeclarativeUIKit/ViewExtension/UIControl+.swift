@@ -1,12 +1,10 @@
 import UIKit.UIControl
 
 public extension UIControl {
-    @available(iOS 14.0, *)
     convenience init(primaryAction: UIAction?) {
         self.init(frame: .zero, primaryAction: primaryAction)
     }
 
-    @available(iOS 14.0, *)
     convenience init(primaryActionHandler: @escaping UIActionHandler) {
         self.init(frame: .zero, primaryAction: .init(handler: primaryActionHandler))
     }
@@ -46,7 +44,6 @@ public extension UIControl {
     }
 }
 
-@available(iOS 14.0, *)
 public extension UIControl {
     @discardableResult
     func isContextMenuInteractionEnabled(_ isContextMenuInteractionEnabled: Bool) -> Self {
@@ -67,7 +64,6 @@ public extension UIControl {
     }
 }
 
-@available(iOS 15.0, *)
 public extension UIControl {
     @discardableResult
     func toolTip(_ toolTip: String?) -> Self {

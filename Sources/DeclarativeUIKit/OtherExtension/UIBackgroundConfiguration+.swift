@@ -1,6 +1,5 @@
 import UIKit
 
-@available(iOS 14.0, *)
 public extension UIBackgroundConfiguration {
     
     @discardableResult
@@ -52,7 +51,6 @@ public extension UIBackgroundConfiguration {
         return _self
     }
 
-    @available(iOS 15.0, *)
     @discardableResult
     func image(_ value: UIImage?) -> Self {
         var _self = self
@@ -60,7 +58,6 @@ public extension UIBackgroundConfiguration {
         return _self
     }
 
-    @available(iOS 15.0, *)
     @discardableResult
     func imageContentMode(_ value: UIView.ContentMode) -> Self {
         var _self = self

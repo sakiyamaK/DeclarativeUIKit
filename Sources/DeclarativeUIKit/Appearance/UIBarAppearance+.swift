@@ -7,7 +7,6 @@
 
 import UIKit.UIBarAppearance
 
-@available(iOS 13.0, *)
 public extension UIBarAppearance {
     
     convenience init(configureBackgroundType: UIBarAppearanceConfigureBackgroundType) {

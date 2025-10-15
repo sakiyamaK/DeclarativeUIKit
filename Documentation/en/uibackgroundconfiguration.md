@@ -1,7 +1,5 @@
 # UIBackgroundConfiguration
 
-@available(iOS 15.0, *)
-
 ## function
 
 ### some default parameters
@@ -30,11 +28,9 @@ The following standard parameters can be written declaratively.
     @discardableResult
     func visualEffect(_ value: UIVisualEffect?) -> Self
 
-    @available(iOS 15.0, *)
     @discardableResult
     func image(_ value: UIImage?) -> Self
 
-    @available(iOS 15.0, *)
     @discardableResult
     func imageContentMode(_ value: UIView.ContentMode) -> Self
 

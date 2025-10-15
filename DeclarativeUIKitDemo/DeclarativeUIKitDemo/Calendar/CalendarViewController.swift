@@ -31,7 +31,7 @@ final class CalendarViewController: UIViewController {
 }
 
 @available(iOS 16.0, *)
-extension CalendarViewController: @preconcurrency UICalendarViewDelegate {
+extension CalendarViewController: UICalendarViewDelegate {
     func calendarView(_ calendarView: UICalendarView, decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration? {
         // 例: 今日の日付にマークを付ける
         if dateComponents.day == Calendar.current.dateComponents([.day], from: Date()).day {
@@ -42,7 +42,7 @@ extension CalendarViewController: @preconcurrency UICalendarViewDelegate {
 }
 
 @available(iOS 16.0, *)
-extension CalendarViewController: @preconcurrency UICalendarSelectionSingleDateDelegate {
+extension CalendarViewController: UICalendarSelectionSingleDateDelegate {
     func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
         if let date = Calendar.current.date(from: dateComponents!) {
             let formatter = DateFormatter()

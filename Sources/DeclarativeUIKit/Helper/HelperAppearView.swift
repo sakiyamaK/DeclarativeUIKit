@@ -1,6 +1,7 @@
 
 import UIKit
 
+@MainActor
 final class HelperAppearView<T: UIView>: UIView {
     private(set) var onAppear: ((T) -> Void)?
 
@@ -26,7 +27,9 @@ final class HelperAppearView<T: UIView>: UIView {
 }
 
 // customSpacingと違ってonAppearクロージャで自身の型を送る必要があるためprotocol extensionで実装している
+@MainActor
 public protocol OnAppearable {}
+@MainActor
 public extension OnAppearable where Self: UIView {
     @discardableResult
     func onAppear(_ onAppear: @escaping (Self) -> Void) -> Self {

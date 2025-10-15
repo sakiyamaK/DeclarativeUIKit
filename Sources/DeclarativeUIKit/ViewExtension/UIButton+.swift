@@ -124,8 +124,6 @@ public extension UIButton {
     }
 }
 
-//MARK: - available iOS 14.0
-@available(iOS 14.0, *)
 public extension UIButton {
     @discardableResult
     func menu(_ menu: UIMenu) -> Self {
@@ -134,8 +132,6 @@ public extension UIButton {
     }    
 }
 
-//MARK: - available iOS 15.0
-@available(iOS 15.0, *)
 public extension UIButton {
     convenience init(configurationBuilder: (() -> UIButton.Configuration), primaryAction: UIAction?) {
         self.init(configuration: configurationBuilder(), primaryAction: primaryAction)

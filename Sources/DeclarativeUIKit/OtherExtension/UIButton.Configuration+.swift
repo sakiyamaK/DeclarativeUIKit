@@ -7,7 +7,6 @@
 
 import UIKit
 
-@available(iOS 15.0, *)
 public extension UIButton.Configuration {
     
     @discardableResult
@@ -195,7 +194,6 @@ public extension UIButton.Configuration {
     }
 }
 
-@available(iOS 15.0, *)
 public extension UIButton.Configuration {
     
     @discardableResult

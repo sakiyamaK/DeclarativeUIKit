@@ -7,7 +7,6 @@
 
 import UIKit
 
-@available(iOS 15.0, *)
 public extension UISheetPresentationController {
     
     @discardableResult

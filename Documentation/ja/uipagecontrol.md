@@ -20,22 +20,17 @@
 
     func currentPageIndicatorTintColor(_ currentPageIndicatorTintColor: UIColor?) -> Self
 
-    @available(iOS 14.0, *)
     func backgroundStyle(_ backgroundStyle: UIPageControl.BackgroundStyle) -> Self
 
     @available(iOS 16.0, *)
     func direction(_ direction: UIPageControl.Direction) -> Self
 
-    @available(iOS 14.0, *)
     func allowsContinuousInteraction(_ allowsContinuousInteraction: Bool) -> Self
 
-    @available(iOS 14.0, *)
     func preferredIndicatorImage(_ preferredIndicatorImage: UIImage?) -> Self
 
-    @available(iOS 14.0, *)
     func indicator(image: UIImage?, forPage page: Int) -> Self
 
-    @available(iOS 14.0, *)
     func indicatorAllPage(image: UIImage?) -> Self
 
     @available(iOS 16.0, *)

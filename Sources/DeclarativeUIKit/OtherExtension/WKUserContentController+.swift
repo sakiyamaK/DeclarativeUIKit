@@ -20,21 +20,18 @@ public extension WKUserContentController {
         return self
     }
 
-    @available(iOS 14.0, *)
     @discardableResult
     func add(scriptMessageHandler: any WKScriptMessageHandler, contentWorld world: WKContentWorld, name: String) -> Self {
         self.add(scriptMessageHandler, contentWorld: world, name: name)
         return self
     }
 
-    @available(iOS 14.0, *)
     @discardableResult
     func add(scriptMessageHandlerWithReply: any WKScriptMessageHandlerWithReply, contentWorld: WKContentWorld, name: String) -> Self {
         self.addScriptMessageHandler(scriptMessageHandlerWithReply, contentWorld: contentWorld, name: name)
         return self
     }
 
-    @available(iOS 14.0, *)
     @discardableResult
     func remove(scriptMessageHandlerForName name: String, contentWorld: WKContentWorld) -> Self {
         self.removeScriptMessageHandler(forName: name, contentWorld: contentWorld)
@@ -47,35 +44,30 @@ public extension WKUserContentController {
         return self
     }
 
-    @available(iOS 14.0, *)
     @discardableResult
     func remove(scriptMessageHandlersFrom contentWorld: WKContentWorld) -> Self {
         self.removeAllScriptMessageHandlers(from: contentWorld)
         return self
     }
 
-    @available(iOS 14.0, *)
     @discardableResult
     func clearAllScriptMessageHandlers() -> Self {
         self.removeAllScriptMessageHandlers()
         return self
     }
 
-    @available(iOS 11.0, *)
     @discardableResult
     func add(contentRuleList: WKContentRuleList) -> Self {
         self.add(contentRuleList)
         return self
     }
 
-    @available(iOS 11.0, *)
     @discardableResult
     func remove(contentRuleList: WKContentRuleList) -> Self {
         self.remove(contentRuleList)
         return self
     }
 
-    @available(iOS 11.0, *)
     @discardableResult
     func clearAllContentRuleLists() -> Self {
         self.removeAllContentRuleLists()

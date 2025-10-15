@@ -118,21 +118,18 @@ public extension MKMapView {
         return self
     }
 
-    @available(iOS 13.0, *)
     @discardableResult
     func cameraBoundary(_ cameraBoundary: MKMapView.CameraBoundary?, animated: Bool = false) -> Self {
         self.setCameraBoundary(cameraBoundary, animated: animated)
         return self
     }
 
-    @available(iOS 13.0, *)
     @discardableResult
     func cameraZoomRange(_ cameraZoomRange: MKMapView.CameraZoomRange?, animated: Bool = false) -> Self {
         self.setCameraZoomRange(cameraZoomRange, animated: animated)
         return self
     }
 
-    @available(iOS 13.0, *)
     @discardableResult
     func pointOfInterestFilter(_ pointOfInterestFilter: MKPointOfInterestFilter?) -> Self {
         self.pointOfInterestFilter = pointOfInterestFilter

@@ -48,7 +48,6 @@ public extension UIPageControl {
     }
 
     @discardableResult
-    @available(iOS 14.0, *)
     func backgroundStyle(_ backgroundStyle: UIPageControl.BackgroundStyle) -> Self {
         self.backgroundStyle = backgroundStyle
         return self
@@ -62,27 +61,24 @@ public extension UIPageControl {
     }
 
     @discardableResult
-    @available(iOS 14.0, *)
     func allowsContinuousInteraction(_ allowsContinuousInteraction: Bool) -> Self {
         self.allowsContinuousInteraction = allowsContinuousInteraction
         return self
     }
 
     @discardableResult
-    @available(iOS 14.0, *)
     func preferredIndicatorImage(_ preferredIndicatorImage: UIImage?) -> Self {
         self.preferredIndicatorImage = preferredIndicatorImage
         return self
     }
     
     @discardableResult
-    @available(iOS 14.0, *)
     func indicator(image: UIImage?, forPage page: Int) -> Self {
         setIndicatorImage(image, forPage: page)
         return self
     }
 
-    @available(iOS 14.0, *)
+    @discardableResult
     func indicatorAllPage(image: UIImage?) -> Self {
         for page in 0..<numberOfPages {
             setIndicatorImage(image, forPage: page)

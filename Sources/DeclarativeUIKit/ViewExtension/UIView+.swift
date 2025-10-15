@@ -33,7 +33,6 @@ public extension UIView {
 
 //MARK: - Declarative method
 
-@available(iOS 15.0, *)
 public extension UIView {
     @discardableResult
     func declarative(
@@ -651,7 +650,6 @@ public extension UIView {
 }
 
 //MARK: - double components constraint
-@available(iOS 15.0, *)
 public extension UIView {
     
     @discardableResult
@@ -811,31 +809,31 @@ public extension UIView {
         self.addSubview(view)
                 
         switch position {
-        case .leadingTop(let point):
+        case .leadingTop(let point), .topLeading(let point):
             leadingConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.leading)
             topConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.top)
-        case .centerTop(let point):
+        case .centerTop(let point), .topCenter(let point):
             centerXConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.centerX)
             topConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.top)
-        case .trailingTop(let point):
+        case .trailingTop(let point), .topTrailing(let point):
             trailingConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.centerX)
             topConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.top)
-        case .leadingCenter(let point):
+        case .leadingCenter(let point), .centerLeading(let point):
             leadingConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.leading)
             topConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.top)
         case .centerCenter(let point):
             centerXConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.centerX)
             centerYConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.centerY)
-        case .trailingCenter(let point):
+        case .trailingCenter(let point), .centerTrailing(let point):
             trailingConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.centerX)
             centerYConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.centerY)
-        case .leadingBttom(let point):
+        case .leadingBottom(let point), .bottomLeading(let point):
             leadingConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.leading)
             bottomConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.bottom)
-        case .centerBottom(let point):
+        case .centerBottom(let point), .bottomCenter(let point):
             centerXConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.centerX)
             bottomConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.bottom)
-        case .trailingBottom(let point):
+        case .trailingBottom(let point), .bottomTrailing(let point):
             trailingConstraint(view: view, constant: point.x, layoutGuide: layoutGuides.centerX)
             bottomConstraint(view: view, constant: point.y, layoutGuide: layoutGuides.bottom)
         }
@@ -903,27 +901,33 @@ public extension UIView {
             view.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         }
 
-        top.constant = margin.top
-        leading.constant = margin.left
-        bottom.constant = margin.bottom
-        trailing.constant = margin.right
+        var constraints: [NSLayoutConstraint] = []
         
-        top.priority = priorities.top
-        leading.priority = priorities.leading
-        bottom.priority = priorities.bottom
-        trailing.priority = priorities.trailing
-        
-        NSLayoutConstraint.activate([
-            top, leading, trailing, bottom
-        ])
-        
+        if priorities.top.rawValue > 0 {
+            top.constant = margin.top
+            top.priority = priorities.top
+            constraints.append(top)
+        }
+        if priorities.leading.rawValue > 0 {
+            leading.constant = margin.left
+            leading.priority = priorities.leading
+            constraints.append(leading)
+        }
+        if priorities.bottom.rawValue > 0 {
+            bottom.constant = margin.bottom
+            bottom.priority = priorities.bottom
+            constraints.append(bottom)
+        }
+        if priorities.trailing.rawValue > 0 {
+            trailing.constant = margin.right
+            trailing.priority = priorities.trailing
+            constraints.append(trailing)
+        }
+
+        NSLayoutConstraint.activate(constraints)
+
         return self
     }
-}
-
-//MARK: - double components constraint
-
-public extension UIView {
 
     @discardableResult
     func edgesConstraints(
@@ -932,40 +936,13 @@ public extension UIView {
         safeAreas: UIEdgeBools,
         priorities: UIEdgePriorities
     ) -> Self {
-        view.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(view)
-        
-        let top = safeAreas.top ?
-        view.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor) :
-        view.topAnchor.constraint(equalTo: self.topAnchor)
-        
-        let leading = safeAreas.leading ?
-        view.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor) :
-        view.leadingAnchor.constraint(equalTo: self.leadingAnchor)
-        
-        let bottom = safeAreas.bottom ?
-        self.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: view.bottomAnchor) :
-        self.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        
-        let trailing = safeAreas.trailing ?
-        self.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: view.trailingAnchor) :
-        self.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        
-        top.constant = margin.top
-        leading.constant = margin.left
-        bottom.constant = margin.bottom
-        trailing.constant = margin.right
-        
-        top.priority = priorities.top
-        leading.priority = priorities.leading
-        bottom.priority = priorities.bottom
-        trailing.priority = priorities.trailing
-        
-        NSLayoutConstraint.activate([
-            top, leading, trailing, bottom
-        ])
-        
-        return self
+
+        self.edgesConstraints(view, margin: margin, layoutGuides: .init(
+            top: safeAreas.top ? .safeArea : .normal,
+            leading: safeAreas.leading ? .safeArea : .normal,
+            bottom: safeAreas.bottom ? .safeArea : .normal,
+            trailing: safeAreas.trailing ? .safeArea : .normal
+        ), priorities: priorities)
     }
 }
 
@@ -1118,7 +1095,6 @@ public extension UIView {
         return self
     }
     
-    @available(iOS 13.0, *)
     @discardableResult
     func transform3D(_ transform3D: CATransform3D) -> Self {
         self.transform3D = transform3D

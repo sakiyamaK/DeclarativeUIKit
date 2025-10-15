@@ -1,7 +1,5 @@
 # UIButtonConfiguration
 
-@available(iOS 15.0, *)
-
 ## function
 
 ### some default parameters

@@ -181,7 +181,6 @@ public extension UITextView {
         return self
     }
     
-    @available(iOS 12.0, *)
     @discardableResult
     func passwordRules(_ passwordRules: UITextInputPasswordRules?) -> Self {
         self.passwordRules = passwordRules

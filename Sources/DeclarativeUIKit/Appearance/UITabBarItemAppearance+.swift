@@ -7,7 +7,6 @@
 
 import UIKit.UITabBarAppearance
 
-@available(iOS 13.0, *)
 public extension UITabBarItemAppearance {
     
     convenience init(configureWithDefaultFor: UITabBarItemAppearance.Style) {
@@ -24,7 +23,6 @@ public extension UITabBarItemAppearance {
 }
 
 
-@available(iOS 13.0, *)
 public extension UITabBarItemAppearance {
     @discardableResult
     func titleTextAttributes(_ titleTextAttributes: [NSAttributedString.Key : Any], appearanceTypes: [UITabBarItemStateAppearanceType] = UITabBarItemStateAppearanceType.allCases) -> Self {

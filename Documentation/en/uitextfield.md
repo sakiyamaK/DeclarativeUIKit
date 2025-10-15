@@ -114,7 +114,6 @@ The following standard parameters can be written declaratively
     
     func textContentType(_ textContentType: UITextContentType) -> Self
     
-    @available(iOS 12.0, *)    
     func passwordRules(_ passwordRules: UITextInputPasswordRules?) -> Self
 ```
 

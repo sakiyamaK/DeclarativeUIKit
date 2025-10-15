@@ -144,7 +144,6 @@ public extension UIBarButtonItem {
     }
 }
 
-@available(iOS 14.0, *)
 public extension UIBarButtonItem {
     @discardableResult
     func primaryAction(_ primaryAction: UIAction?) -> Self {
@@ -153,7 +152,6 @@ public extension UIBarButtonItem {
     }
 }
 
-@available(iOS 15.0, *)
 public extension UIBarButtonItem {
     @discardableResult
     func isSelected(_ isSelected: Bool) -> Self {

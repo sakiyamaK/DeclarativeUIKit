@@ -7,7 +7,6 @@
 
 import UIKit
 
-@available(iOS 14.5, *)
 public extension UIListSeparatorConfiguration {
     @discardableResult
     func topSeparatorVisibility(_ topSeparatorVisibility: UIListSeparatorConfiguration.Visibility) -> Self {
@@ -51,7 +50,6 @@ public extension UIListSeparatorConfiguration {
         return _self
     }
 
-    @available(iOS 15.0, *)
     @available(tvOS, unavailable)
     @discardableResult
     func visualEffect(_ visualEffect: UIVisualEffect?) -> Self {

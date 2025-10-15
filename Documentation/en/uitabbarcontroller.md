@@ -60,7 +60,6 @@ Set `standardAppearance` and `scrollEdgeAppearance` of `tabBar` at the same time
 If older than `iOS 15.0`, `scrollEdgeAppearance` will not be set.
 
 ```swift
-@available(iOS 13.0, *)
 func tabBarAppearance(appearanceTypes: [UITabBarAppearanceType] = UITabBarAppearanceType.allCases, _ tabBarAppearanceBuilder: (() -> UITabBarAppearance)) -> Self
 ```
 

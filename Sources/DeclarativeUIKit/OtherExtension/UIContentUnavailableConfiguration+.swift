@@ -1,6 +1,7 @@
 import UIKit
 
 @available(iOS 17.0, *)
+@MainActor
 public extension UIContentUnavailableConfiguration {
 
     func text(_ text: String?) -> Self {
@@ -71,7 +72,7 @@ public extension UIContentUnavailableConfiguration {
         return config
     }
 
-    func button(_ buttonConfiguration: UIButton.Configuration, primaryActionHandler: @escaping UIActionHandler) -> Self {
+    func button(_ buttonConfiguration: UIButton.Configuration, primaryActionHandler:  @escaping UIActionHandler) -> Self {
         var config = self
         config.button = buttonConfiguration
         config.buttonProperties.primaryAction = UIAction(handler: primaryActionHandler)

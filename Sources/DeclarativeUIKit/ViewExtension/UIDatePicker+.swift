@@ -9,7 +9,6 @@ public extension UIDatePicker {
         return self
     }
 
-    @available(iOS 13.4, *)
     @discardableResult
     func preferredDatePickerStyle(_ style: UIDatePickerStyle) -> Self {
         self.preferredDatePickerStyle = style
@@ -58,7 +57,6 @@ public extension UIDatePicker {
         return self
     }
 
-    @available(iOS 15.0, *)
     @discardableResult
     func roundsToMinuteInterval(_ roundsToMinuteInterval: Bool) -> Self {
         self.roundsToMinuteInterval = roundsToMinuteInterval

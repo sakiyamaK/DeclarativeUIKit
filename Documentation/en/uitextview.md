@@ -93,7 +93,6 @@ You can write default parameters declarative as below.
     
     func textContentType(_ textContentType: UITextContentType) -> Self
     
-    @available(iOS 12.0, *)    
     func passwordRules(_ passwordRules: UITextInputPasswordRules?) -> Self
 ```
 

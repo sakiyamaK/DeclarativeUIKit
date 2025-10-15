@@ -60,7 +60,6 @@ func delegate(_ delegate: UITabBarControllerDelegate?) -> Self
 `iOS 15.0`より古い場合は`scrollEdgeAppearance`は設定されません
 
 ```swift
-@available(iOS 13.0, *)
 func tabBarAppearance(appearanceTypes: [UITabBarAppearanceType] = UITabBarAppearanceType.allCases, _ tabBarAppearanceBuilder: (() -> UITabBarAppearance)) -> Self
 ```
 

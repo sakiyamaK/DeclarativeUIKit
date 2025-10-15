@@ -1,7 +1,5 @@
 # UIListContentConfiguration
 
-@available(iOS 14.0, *)
-
 ## function
 
 ### some default parameters

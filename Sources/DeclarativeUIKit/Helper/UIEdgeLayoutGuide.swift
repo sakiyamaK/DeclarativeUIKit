@@ -7,13 +7,13 @@
 
 import Foundation
 
-@available(iOS 15.0, *)
+@MainActor
 public enum LayoutGuideType {
-    public static var `default`: LayoutGuideType = .safeArea
+    public static let `default`: LayoutGuideType = .safeArea
     case safeArea, margins, readableContent, keyboard, normal
 }
 
-@available(iOS 15.0, *)
+@MainActor
 public struct UIEdgeLayoutGuides {
     public var top: LayoutGuideType
     public var leading: LayoutGuideType
@@ -21,7 +21,7 @@ public struct UIEdgeLayoutGuides {
     public var trailing: LayoutGuideType
     public var centerX: LayoutGuideType
     public var centerY: LayoutGuideType
-    
+
     public init(
         top: LayoutGuideType = .default,
         leading: LayoutGuideType = .default,

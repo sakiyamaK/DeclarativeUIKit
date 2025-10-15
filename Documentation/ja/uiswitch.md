@@ -23,10 +23,8 @@
 
     func offImage(_ offImage: UIImage?) -> Self
 
-    @available(iOS 14.0, *)
     func preferredStyle(_ preferredStyle: UISwitch.Style) -> Self
 
-    @available(iOS 14.0, *)
     func title(_ title: String?) -> Self
 ```
 

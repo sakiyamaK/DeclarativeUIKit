@@ -7,7 +7,6 @@
 
 import UIKit.UIListContentConfiguration
 
-@available(iOS 14.0, *)
 public extension UIListContentConfiguration {
     @discardableResult
     func image(_ image: UIImage?) -> Self {

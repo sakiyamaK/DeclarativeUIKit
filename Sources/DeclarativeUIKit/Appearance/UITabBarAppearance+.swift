@@ -7,7 +7,6 @@
 
 import UIKit.UITabBarAppearance
 
-@available(iOS 13.0, *)
 public extension UITabBarAppearance {
 
     @discardableResult
@@ -59,7 +58,6 @@ public extension UITabBarAppearance {
     }
 }
 
-@available(iOS 13.0, *)
 public extension UITabBarAppearance {    
     @discardableResult
     func tabBarItemAppearance(appearanceTypes: [UITabBarItemAppearanceType] = UITabBarItemAppearanceType.allCases, _ layoutAppearanceBuilder: (() -> UITabBarItemAppearance)) -> Self {

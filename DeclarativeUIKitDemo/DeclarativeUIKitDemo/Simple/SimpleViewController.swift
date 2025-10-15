@@ -238,6 +238,27 @@ final class SimpleViewController: UIViewController {
                 }
             }
         }
+//        .declarative(priorities: .init(top: 0)) {
+//            UIStackView(spacing: 8) {
+//                UIView()
+//                    .backgroundColor(UIColor.red)
+//                    .height(100)
+//                UIView()
+//                    .backgroundColor(UIColor.red)
+//                    .height(100)
+//                    .declarative(priorities: .init(bottom: 0)) {
+//                        UIStackView(spacing: 8) {
+//                            UIView()
+//                                .backgroundColor(UIColor.green)
+//                                .height(3)
+//                            UIView()
+//                                .backgroundColor(UIColor.green)
+//                                .height(3)
+//                        }
+//                    }
+//
+//            }
+//        }
     }
 }
 

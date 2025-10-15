@@ -69,7 +69,6 @@
     
     func titlePositionAdjustment(_ adjustment: UIOffset, for: UIBarMetrics) -> Self
 
-  @available(iOS 15.0, *)
   func isSelected(_ isSelected: Bool) -> Self
 
   @available(iOS 16.0, *)
