@@ -1,0 +1,15 @@
+@Tutorials(name: "DeclarativeUIKit") {
+    @Intro(title: "Getting Started with DeclarativeUIKit") {
+        Learn how to build beautiful, declarative user interfaces in UIKit with a SwiftUI-like syntax.
+        
+        @Image(source: "intro.png", alt: "A collage of UI elements built with DeclarativeUIKit")
+    }
+    
+    @Chapter(name: "Basics of DeclarativeUIKit") {
+        Master the fundamentals of method chaining and result builders.
+        
+        @Image(source: "intro.png", alt: "Code snippets showing method chaining")
+        
+        @TutorialReference(tutorial: "doc:GettingStarted")
+    }
+}

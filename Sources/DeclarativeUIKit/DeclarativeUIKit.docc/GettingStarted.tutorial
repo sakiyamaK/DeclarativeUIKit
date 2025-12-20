@@ -1,0 +1,57 @@
+@Tutorial(time: 15) {
+    @Intro(title: "Getting Started") {
+        This tutorial guides you through building a simple profile view using DeclarativeUIKit. You'll learn about method chaining and stack-based layouts.
+        
+        @Image(source: "intro.png", alt: "Intro image")
+    }
+    
+    @Section(title: "Configure a Basic View") {
+        @ContentAndMedia {
+            Let's start by creating and configuring a `UILabel`. In traditional UIKit, you would set properties one by one. With DeclarativeUIKit, you can chain these calls.
+            
+            @Image(source: "intro.png", alt: "UILabel configuration")
+        }
+        
+        @Steps {
+            @Step {
+                Initialize a `UILabel` with some text.
+                @Code(name: "ProfileView.swift", file: "Step1.swift")
+            }
+            
+            @Step {
+                Chain methods to set the font and text color.
+                @Code(name: "ProfileView.swift", file: "Step2.swift")
+            }
+            
+            @Step {
+                Set the number of lines and text alignment.
+                @Code(name: "ProfileView.swift", file: "Step3.swift")
+            }
+        }
+    }
+    
+    @Section(title: "Arrange Views with Stacks") {
+        @ContentAndMedia {
+            Now let's arrange multiple views using stacks. `vStack` and `hStack` provide a SwiftUI-like syntax for `UIStackView`.
+            
+            @Image(source: "intro.png", alt: "Stack layout")
+        }
+        
+        @Steps {
+            @Step {
+                Create a vertical stack and add the title label.
+                @Code(name: "ProfileView.swift", file: "Step4.swift")
+            }
+            
+            @Step {
+                Add a horizontal stack for the stats (e.g., Followers, Following).
+                @Code(name: "ProfileView.swift", file: "Step5.swift")
+            }
+            
+            @Step {
+                Apply margins and spacing to the stack.
+                @Code(name: "ProfileView.swift", file: "Step6.swift")
+            }
+        }
+    }
+}
