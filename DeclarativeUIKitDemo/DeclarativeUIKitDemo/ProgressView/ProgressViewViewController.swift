@@ -6,7 +6,7 @@ final class ProgressViewViewController: UIViewController {
     deinit { print(#function) }
 
     private let progressView = UIProgressView()
-    private var progressTask: Task<Void, Never>? = nil
+    private var progressTask: Task<Void, Never>?
     private var progress = Progress(totalUnitCount: 10)
 
     override func viewDidLoad() {
@@ -31,7 +31,7 @@ final class ProgressViewViewController: UIViewController {
                 .addAction(.touchUpInside) { [weak self] _ in
                     self?.startProgress()
                 }
-                
+
                 UIButton(configurationBuilder: {
                     UIButton.Configuration.filled()
                         .title("Reset Progress")
@@ -67,7 +67,7 @@ final class ProgressViewViewController: UIViewController {
             }
         }
     }
-    
+
     private func resetProgress() {
         progressTask?.cancel()
         self.progress.completedUnitCount = 0

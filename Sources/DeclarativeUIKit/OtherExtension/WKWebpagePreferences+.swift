@@ -35,4 +35,3 @@ public extension WKWebpagePreferences {
         return self
     }
 }
-

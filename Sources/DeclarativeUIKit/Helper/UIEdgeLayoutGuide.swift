@@ -59,7 +59,7 @@ public struct UIEdgeLayoutGuides {
             centerY: .default
         )
     }
-    
+
     public init(horizontal: LayoutGuideType) {
         self.init(
             top: .default,

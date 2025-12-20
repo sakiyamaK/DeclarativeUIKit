@@ -20,7 +20,7 @@ final class GithubSearchPresenter {
     private weak var output: GithubSearchPresenterOutput!
     private var api: GithubAPIProtocol!
     private var githubModels: [GithubModel]
-    
+
     init(output: GithubSearchPresenterOutput, api: GithubAPIProtocol = GithubAPI.shared) {
         self.output = output
         self.api = api
@@ -30,13 +30,13 @@ final class GithubSearchPresenter {
 
 extension GithubSearchPresenter: GithubSearchPresenterInput {
     var numberOfItems: Int { githubModels.count }
-    
+
     func item(index: Int) -> GithubModel { githubModels[index] }
-    
+
     func didSelect(index: Int) {
         output.showWeb(githubModel: githubModels[index])
     }
-    
+
     func search(parameters: GithubSearchParameters) {
         guard parameters.validation else { return }
         output.update(loading: true)

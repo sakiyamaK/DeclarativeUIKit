@@ -28,7 +28,6 @@ public extension UIContentUnavailableConfiguration {
         return config
     }
 
-
     func secondaryText(_ secondaryText: String?) -> Self {
         var config = self
         config.secondaryText = secondaryText
@@ -72,7 +71,7 @@ public extension UIContentUnavailableConfiguration {
         return config
     }
 
-    func button(_ buttonConfiguration: UIButton.Configuration, primaryActionHandler:  @escaping UIActionHandler) -> Self {
+    func button(_ buttonConfiguration: UIButton.Configuration, primaryActionHandler: @escaping UIActionHandler) -> Self {
         var config = self
         config.button = buttonConfiguration
         config.buttonProperties.primaryAction = UIAction(handler: primaryActionHandler)
@@ -104,7 +103,6 @@ public extension UIContentUnavailableConfiguration {
         config.secondaryButtonProperties = secondaryButtonProperties
         return config
     }
-
 
     func background(_ background: UIBackgroundConfiguration) -> Self {
         var config = self

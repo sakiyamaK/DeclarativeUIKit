@@ -1,8 +1,7 @@
-
 import UIKit.UIDatePicker
 
 public extension UIDatePicker {
-    
+
     @discardableResult
     func datePickerMode(_ datePickerMode: UIDatePicker.Mode) -> Self {
         self.datePickerMode = datePickerMode
@@ -38,19 +37,19 @@ public extension UIDatePicker {
         self.minuteInterval = minuteInterval
         return self
     }
-    
+
     @discardableResult
     func locale(_ locale: Locale?) -> Self {
         self.locale = locale
         return self
     }
-    
+
     @discardableResult
     func calendar(_ calendar: Calendar) -> Self {
         self.calendar = calendar
         return self
     }
-    
+
     @discardableResult
     func timeZone(_ timeZone: TimeZone?) -> Self {
         self.timeZone = timeZone

@@ -8,7 +8,7 @@
 import UIKit
 
 public extension UIContextualAction {
-    
+
     @discardableResult
     func title(_ title: String?) -> Self {
         self.title = title
@@ -20,11 +20,10 @@ public extension UIContextualAction {
         self.backgroundColor = backgroundColor
         return self
     }
-    
+
     @discardableResult
     func image(_ image: UIImage?) -> Self {
         self.image = image
         return self
     }
 }
-

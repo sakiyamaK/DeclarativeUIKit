@@ -14,7 +14,7 @@ public extension UIView {
         imperative(self)
         return self
     }
-    
+
     @discardableResult
     static func imperative(_ imperative: ((Self) -> Void)) -> Self {
         Self().apply(imperative)

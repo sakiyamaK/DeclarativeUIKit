@@ -7,7 +7,7 @@
 
 import UIKit.UITextField
 
-//MARK: -
+// MARK: -
 private extension UITextField {
     @discardableResult
     func setup(attrText: NSAttributedString?) -> Self {
@@ -19,7 +19,7 @@ private extension UITextField {
         self.attributedText = attrText
         return self
     }
-    
+
     @discardableResult
     func setupPlaceholder(attrText: NSAttributedString?) -> Self {
         guard let attrText = attrText else {
@@ -32,13 +32,13 @@ private extension UITextField {
     }
 }
 
-//MARK: -
+// MARK: -
 public extension UITextField {
     convenience init(_ text: String?) {
         self.init(frame: .zero)
         self.text(text)
     }
-        
+
     convenience init(_ text: String?, _ apply: (Self) -> Void) {
         self.init(frame: .zero)
         self.text(text)
@@ -49,7 +49,7 @@ public extension UITextField {
         self.init(frame: .zero)
         self.text(text)
     }
-    
+
     convenience init(_ text: NSAttributedString?, _ apply: (Self) -> Void) {
         self.init(frame: .zero)
         self.text(text)
@@ -57,7 +57,7 @@ public extension UITextField {
     }
 }
 
-//MARK: - Declarative method
+// MARK: - Declarative method
 public extension UITextField {
 
     @discardableResult
@@ -67,18 +67,18 @@ public extension UITextField {
         }
         return self.setup(attrText: NSAttributedString(string: text))
     }
-    
+
     @discardableResult
     func text(_ attrText: NSAttributedString?) -> Self {
         return self.setup(attrText: attrText)
     }
-    
+
     @discardableResult
     func font(_ font: UIFont) -> Self {
         self.font = font
         return self
     }
-    
+
     @discardableResult
     func textColor(_ textColor: UIColor) -> Self {
         self.textColor = textColor
@@ -179,7 +179,7 @@ public extension UITextField {
 
 // MARK: - UITextInputTraits
 public extension UITextField {
-    
+
     @discardableResult
     func autocapitalizationType( _ autocapitalizationType: UITextAutocapitalizationType) -> Self {
         self.autocapitalizationType = autocapitalizationType
@@ -233,7 +233,7 @@ public extension UITextField {
         self.returnKeyType = returnKeyType
         return self
     }
-    
+
     @discardableResult
     func enablesReturnKeyAutomatically(_ enablesReturnKeyAutomatically: Bool) -> Self {
         self.enablesReturnKeyAutomatically = enablesReturnKeyAutomatically
@@ -245,13 +245,13 @@ public extension UITextField {
         self.isSecureTextEntry = isSecureTextEntry
         return self
     }
-    
+
     @discardableResult
     func textContentType(_ textContentType: UITextContentType) -> Self {
         self.textContentType = textContentType
         return self
     }
-    
+
     @discardableResult
     func passwordRules(_ passwordRules: UITextInputPasswordRules?) -> Self {
         self.passwordRules = passwordRules

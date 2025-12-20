@@ -19,9 +19,9 @@ final class TiktokHomeViewController: UIViewController {
 
 @objc private extension TiktokHomeViewController {
     func setupLayout() {
-        
+
         self.view.backgroundColor = .white
-        
+
         self.declarative(safeAreas: .init(all: false)) {
             UIImageView()
                 .backgroundColor(.gray)
@@ -29,7 +29,7 @@ final class TiktokHomeViewController: UIViewController {
                 .contentMode(.scaleAspectFill)
                 .clipsToBounds(true)
         }
-        
+
         self.declarative(reset: false) {
             UIStackView.vertical {
                 UILabel("08:27")
@@ -52,11 +52,11 @@ final class TiktokHomeViewController: UIViewController {
                     }
                     .spacing(8)
                     .centerX()
-                    
+
                     UIImageView(UIImage(systemName: "questionmark.circle")?.withTintColor(.white, renderingMode: .alwaysOriginal))
                 }
                 .alignment(.center)
-                
+
                 UIStackView.horizontal {
                     UIStackView.vertical {
                         UILabel("@hogehoge")
@@ -77,7 +77,7 @@ final class TiktokHomeViewController: UIViewController {
                     }
                     .spacing(2)
                     .bottom()
-                    
+
                     UIStackView.vertical {
                         UIView()
                             .zStack {
@@ -101,7 +101,7 @@ final class TiktokHomeViewController: UIViewController {
                                     .offset(y: 10)
                             }
                             .customSpacing(16 + 10)
-                        
+
                         UIStackView.vertical {
                             UIImageView(UIImage(systemName: "heart.fill")?.withTintColor(.white, renderingMode: .alwaysOriginal))
                                 .contentMode(.scaleAspectFit)
@@ -111,7 +111,7 @@ final class TiktokHomeViewController: UIViewController {
                                 .textColor(.white)
                         }
                         .alignment(.center)
-                        
+
                         UIStackView.vertical {
                             UIImageView(UIImage(systemName: "ellipsis.bubble")?.withTintColor(.white, renderingMode: .alwaysOriginal))
                                 .contentMode(.scaleAspectFit)
@@ -121,11 +121,11 @@ final class TiktokHomeViewController: UIViewController {
                                 .textColor(.white)
                         }
                         .alignment(.center)
-                        
+
                         UIImageView(UIImage(systemName: "arrowshape.turn.up.forward.fill")?.withTintColor(.white, renderingMode: .alwaysOriginal))
                             .size(width: 50, height: 50)
                             .contentMode(.scaleAspectFit)
-                        
+
                         UIImageView(UIImage(systemName: "questionmark.circle")?.withTintColor(.white, renderingMode: .alwaysOriginal))
                             .size(width: 50, height: 50)
                             .contentMode(.scaleAspectFit)
@@ -135,7 +135,7 @@ final class TiktokHomeViewController: UIViewController {
                 }
                 .spacing(50)
                 UIView.spacer()
-                    
+
             }
             .padding(insets: .init(top: 10, left: 16, bottom: 10, right: 16))
         }

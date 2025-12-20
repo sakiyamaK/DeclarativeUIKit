@@ -12,7 +12,7 @@ final class TwitterHomeCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.contentView.declarative {
@@ -29,7 +29,7 @@ final class TwitterHomeCell: UICollectionViewCell {
                         UILabel("hogehogeさんがリツイート")
                     }
                     .customSpacing(8)
-                    
+
                     UIStackView.horizontal {
                         UIImageView(UIImage(named: "person_01"))
                             .contentMode(.scaleAspectFill)
@@ -37,7 +37,7 @@ final class TwitterHomeCell: UICollectionViewCell {
                             .size(width: 50, height: 50)
                             .cornerRadius(25)
                             .customSpacing(8)
-                        
+
                         UIStackView.vertical {
                             UIStackView.horizontal {
                                 UILabel("長い名前だよおおおおおおおおおおお")
@@ -63,7 +63,7 @@ final class TwitterHomeCell: UICollectionViewCell {
                                     .customSpacing(8)
 
                                 UIView.spacer()
-                                
+
                                 UILabel("...")
                                     .numberOfLines(1)
                                     .font(UIFont.systemFont(ofSize: 12))
@@ -97,7 +97,7 @@ final class TwitterHomeCell: UICollectionViewCell {
                     .alignment(.top)
                 }
                 .padding(insets: .init(all: 16))
-                
+
                 UIView.divider()
             }
         }
@@ -105,39 +105,39 @@ final class TwitterHomeCell: UICollectionViewCell {
 }
 
 final class TwitterHomeViewController: UIViewController {
-    
+
     override func loadView() {
         super.loadView()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        
+
         self.view.backgroundColor = .white
-        
+
         self.declarative {
             UICollectionView {
                 UICollectionViewCompositionalLayout { _, _ -> NSCollectionLayoutSection? in
-                    
+
                     let itemSize = NSCollectionLayoutSize(
                         widthDimension: .fractionalWidth(1.0),
                         heightDimension: .estimated(100)
                     )
                     let item = NSCollectionLayoutItem(layoutSize: itemSize)
                     item.contentInsets = .zero
-                    
+
                     let groupSize = NSCollectionLayoutSize(
                         widthDimension: .fractionalWidth(1.0),
                         heightDimension: .estimated(100)
                     )
                     let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-                    
+
                     let section = NSCollectionLayoutSection(group: group)
-                    
+
                     return section
                 }
             }
             .dataSource(self)
             .registerCellClass(TwitterHomeCell.self, forCellWithReuseIdentifier: "TwitterHomeCell")
         }
-        
+
         self.declarative(reset: false) {
             UIButton(UIImage(systemName: "plus")?.withTintColor(.white, renderingMode: .alwaysOriginal))
                 .backgroundColor(.systemBlue)
@@ -154,7 +154,7 @@ extension TwitterHomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 20
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TwitterHomeCell", for: indexPath) as! TwitterHomeCell
         return cell

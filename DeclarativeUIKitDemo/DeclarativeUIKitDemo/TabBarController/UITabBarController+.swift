@@ -9,7 +9,7 @@ import UIKit
 import DeclarativeUIKit
 
 extension UITabBarController {
-    
+
     static func rootTabBarController(count: Int = 5) -> UITabBarController {
         return UITabBarController.viewControllers {
             Range(1...count).compactMap { number -> UIViewController in

@@ -7,11 +7,11 @@ struct Landmark: Codable {
   var state: String
   var description: String
   var isFavorite: Bool
-  
+
   var imageName: String
-  
+
   var coordinates: Coordinates
-  
+
   struct Coordinates: Hashable, Codable {
     var latitude: Double
     var longitude: Double

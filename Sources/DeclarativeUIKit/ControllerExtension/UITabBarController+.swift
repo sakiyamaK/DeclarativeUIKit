@@ -7,9 +7,9 @@
 
 import UIKit.UITabBarController
 
-//MARK: - Declarative method
+// MARK: - Declarative method
 public extension UITabBarController {
-    
+
     static func viewControllers(_ viewControllers: [UIViewController]) -> UITabBarController {
         UITabBarController().viewControllers(viewControllers)
     }
@@ -17,25 +17,25 @@ public extension UITabBarController {
     static func viewControllers(@ArrayUIViewControllerBuilder _ builder: () -> [UIViewController]) -> UITabBarController {
         UITabBarController().viewControllers(builder())
     }
-    
+
     @discardableResult
     func viewControllers(_ viewControllers: [UIViewController]) -> Self {
         self.viewControllers = viewControllers
         return self
     }
-    
+
     @discardableResult
     func viewControllers(@ArrayUIViewControllerBuilder _ builder: () -> [UIViewController]) -> Self {
         self.viewControllers(builder())
         return self
     }
-    
+
     @discardableResult
     func viewControllers(_ viewControllers: [UIViewController]?, animated: Bool) -> Self {
         self.setViewControllers(viewControllers, animated: animated)
         return self
     }
-    
+
     @discardableResult
     func viewControllers(@ArrayUIViewControllerBuilder _ builder: () -> [UIViewController], animated: Bool) -> Self {
         self.viewControllers(builder(), animated: animated)
@@ -47,13 +47,13 @@ public extension UITabBarController {
         self.setViewControllers(viewControllers, animated: animated)
         return self
     }
-    
+
     @discardableResult
     func viewControllers(animated: Bool, @ArrayUIViewControllerBuilder _ builder: () -> [UIViewController]) -> Self {
         self.viewControllers(builder(), animated: animated)
         return self
     }
-    
+
     @discardableResult
     func selectedViewController(_ selectedViewController: UIViewController?) -> Self {
         self.selectedViewController = selectedViewController
@@ -71,7 +71,7 @@ public extension UITabBarController {
         self.customizableViewControllers = customizableViewControllers
         return self
     }
-    
+
     @discardableResult
     func customizableViewControllers(@ArrayUIViewControllerBuilder _ builder: () -> [UIViewController]) -> Self {
         self.customizableViewControllers(builder())

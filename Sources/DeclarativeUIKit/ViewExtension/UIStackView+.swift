@@ -1,4 +1,3 @@
-import UIKit.UIStackView
 import UIKit
 
 public extension UIStackView {
@@ -48,7 +47,7 @@ public extension UIStackView {
         self.init(frame: .zero)
         self.set(axis: axis, alignment: alignment, distribution: distribution, spacing: spacing, builder)
     }
-    
+
     convenience init(axis: NSLayoutConstraint.Axis = .vertical, alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, @ArrayUIViewBuilder _ builderAsync: @escaping () async -> [UIView?] = {() in []}) async {
         self.init(frame: .zero)
         await self.set(axis: axis, alignment: alignment, distribution: distribution, spacing: spacing, builderAsync)
@@ -69,11 +68,11 @@ public extension UIStackView {
             await UIStackView(axis: .vertical, alignment: alignment, distribution: distribution, spacing: spacing, builderAsync)
         }
     }
-    
+
     static func vStack(alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, isTouchTransparency: Bool = false, @ArrayUIViewBuilder _ builder: @escaping () -> [UIView?] = {() in []}) -> UIStackView {
         UIStackView.vertical(alignment: alignment, distribution: distribution, spacing: spacing, isTouchTransparency: isTouchTransparency, builder)
     }
-    
+
     static func vStack(alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, isTouchTransparency: Bool = false, @ArrayUIViewBuilder _ builderAsync: @escaping () async -> [UIView?] = {() in []}) async -> UIStackView {
         await UIStackView.vertical(alignment: alignment, distribution: distribution, spacing: spacing, isTouchTransparency: isTouchTransparency, builderAsync)
     }
@@ -85,7 +84,7 @@ public extension UIStackView {
             UIStackView(axis: .horizontal, alignment: alignment, distribution: distribution, spacing: spacing, builder)
         }
     }
-    
+
     static func horizontal(alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, isTouchTransparency: Bool = false, @ArrayUIViewBuilder _ builderAsync: @escaping () async -> [UIView?] = {() in []}) async -> UIStackView {
         if isTouchTransparency {
             await HelperTouchTransparencyStackView(axis: .horizontal, alignment: alignment, distribution: distribution, spacing: spacing, builderAsync)
@@ -93,11 +92,11 @@ public extension UIStackView {
             await UIStackView(axis: .horizontal, alignment: alignment, distribution: distribution, spacing: spacing, builderAsync)
         }
     }
-    
+
     static func hStack(alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, isTouchTransparency: Bool = false, @ArrayUIViewBuilder _ builder: @escaping () -> [UIView?] = {() in []}) -> UIStackView {
         UIStackView.horizontal(alignment: alignment, distribution: distribution, spacing: spacing, isTouchTransparency: isTouchTransparency, builder)
     }
-    
+
     static func hStack(alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, isTouchTransparency: Bool = false, @ArrayUIViewBuilder _ builderAsync: @escaping () async -> [UIView?] = {() in []}) async -> UIStackView {
         await UIStackView.horizontal(alignment: alignment, distribution: distribution, spacing: spacing, isTouchTransparency: isTouchTransparency, builderAsync)
     }
@@ -183,7 +182,7 @@ public extension UIStackView {
     }
 }
 
-//MARK: - with superview
+// MARK: - with superview
 public extension UIStackView {
     convenience init(axis: NSLayoutConstraint.Axis = .vertical, alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, @ArrayUIViewBuilder _ builder: @escaping (UIStackView) -> [UIView?]) {
         self.init(frame: .zero)
@@ -196,7 +195,7 @@ public extension UIStackView {
             self.addArrangedSubViewHandlingHelperCustomSpacing($0)
         }
     }
-    
+
     convenience init(axis: NSLayoutConstraint.Axis = .vertical, alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, @ArrayUIViewBuilder _ builderAsync: @escaping (UIStackView) async -> [UIView?]) async {
         self.init(frame: .zero)
         self.backgroundColor = .clear
@@ -224,11 +223,11 @@ public extension UIStackView {
             await UIStackView(axis: .vertical, alignment: alignment, distribution: distribution, spacing: spacing, builderAsync)
         }
     }
-    
+
     static func vStack(alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, isTouchTransparency: Bool = false, @ArrayUIViewBuilder _ builder: @escaping (UIStackView) -> [UIView?]) -> UIStackView {
         UIStackView.vertical(alignment: alignment, distribution: distribution, spacing: spacing, isTouchTransparency: isTouchTransparency, builder)
     }
-    
+
     static func vStack(alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, isTouchTransparency: Bool = false, @ArrayUIViewBuilder _ builderAsync: @escaping (UIStackView) async -> [UIView?]) async -> UIStackView {
         await UIStackView.vertical(alignment: alignment, distribution: distribution, spacing: spacing, isTouchTransparency: isTouchTransparency, builderAsync)
     }
@@ -240,7 +239,7 @@ public extension UIStackView {
             UIStackView(axis: .horizontal, alignment: alignment, distribution: distribution, spacing: spacing, builder)
         }
     }
-    
+
     static func horizontal(alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, isTouchTransparency: Bool = false, @ArrayUIViewBuilder _ builderAsync: @escaping (UIStackView) async -> [UIView?]) async -> UIStackView {
         if isTouchTransparency {
             await HelperTouchTransparencyStackView(axis: .horizontal, alignment: alignment, distribution: distribution, spacing: spacing, builderAsync)
@@ -248,11 +247,11 @@ public extension UIStackView {
             await UIStackView(axis: .horizontal, alignment: alignment, distribution: distribution, spacing: spacing, builderAsync)
         }
     }
-    
+
     static func hStack(alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, isTouchTransparency: Bool = false, @ArrayUIViewBuilder _ builder: @escaping (UIStackView) -> [UIView?]) -> UIStackView {
         UIStackView.horizontal(alignment: alignment, distribution: distribution, spacing: spacing, isTouchTransparency: isTouchTransparency, builder)
     }
-    
+
     static func hStack(alignment: Alignment = .fill, distribution: Distribution = .fill, spacing: CGFloat = 0.0, isTouchTransparency: Bool = false, @ArrayUIViewBuilder _ builderAsync: @escaping (UIStackView) async -> [UIView?]) async -> UIStackView {
         await UIStackView.horizontal(alignment: alignment, distribution: distribution, spacing: spacing, isTouchTransparency: isTouchTransparency, builderAsync)
     }
@@ -297,25 +296,25 @@ public extension UIStackView {
 }
 
 public extension UIStackView {
-    
+
     @discardableResult
     func alignment(_ alignment: Alignment) -> Self {
         self.alignment = alignment
         return self
     }
-    
+
     @discardableResult
     func distribution(_ distribution: Distribution) -> Self {
         self.distribution = distribution
         return self
     }
-    
+
     @discardableResult
     func spacing(_ spacing: CGFloat) -> Self {
         self.spacing = spacing
         return self
     }
-    
+
     @discardableResult
     func isBaselineRelativeArrangement(_ isBaselineRelativeArrangement: Bool) -> Self {
         self.isBaselineRelativeArrangement = isBaselineRelativeArrangement
@@ -327,7 +326,7 @@ public extension UIStackView {
         self.isLayoutMarginsRelativeArrangement = isLayoutMarginsRelativeArrangement
         return self
     }
-    
+
     @discardableResult
     func margins(_ margins: NSDirectionalEdgeInsets) -> Self {
         self.isLayoutMarginsRelativeArrangement(true)

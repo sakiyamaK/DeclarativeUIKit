@@ -8,7 +8,7 @@
 import UIKit
 
 public extension UIButton.Configuration {
-    
+
     @discardableResult
     func background(_ background: UIBackgroundConfiguration) -> Self {
         var _self = self
@@ -178,7 +178,7 @@ public extension UIButton.Configuration {
         _self.titleAlignment = titleAlignment
         return _self
     }
-    
+
     @discardableResult
     func titleLineBreakMode(_ titleLineBreakMode: NSLineBreakMode) -> Self {
         var _self = self
@@ -195,10 +195,10 @@ public extension UIButton.Configuration {
 }
 
 public extension UIButton.Configuration {
-    
+
     @discardableResult
     func attributedTitle(_ attributedTitle: NSAttributedString?) -> Self {
-        guard let attributedTitle else { return self }        
+        guard let attributedTitle else { return self }
         return self.attributedTitle(AttributedString(attributedTitle))
     }
 
@@ -207,7 +207,7 @@ public extension UIButton.Configuration {
         guard let attributedTitle else { return self }
         return self.attributedTitle(NSAttributedString(attributedString: attributedTitle))
     }
-    
+
     @discardableResult
     func attributedSubtitle(_ attributedSubtitle: NSAttributedString?) -> Self {
         guard let attributedSubtitle else { return self }

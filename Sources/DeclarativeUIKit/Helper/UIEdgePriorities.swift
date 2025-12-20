@@ -7,7 +7,7 @@ public struct UIEdgePriorities {
     public var leading: UILayoutPriority = .required
     public var bottom: UILayoutPriority = .required
     public var trailing: UILayoutPriority = .required
-    
+
     /// 四隅のそれぞれの優先度を決めて初期化
     /// - Parameters:
     ///   - top: 上辺の優先度
@@ -46,13 +46,12 @@ public struct UIEdgePriorities {
         self.init(top: all, leading: all, bottom: all, trailing: all)
     }
 
-    
     /// 縦方向の優先度を決めて初期化
     /// - Parameter vertical: 縦方向の優先度
     public init(vertical: UILayoutPriority) {
         self.init(top: vertical, leading: .required, bottom: vertical, trailing: .required)
     }
-    
+
     /// 横方向の優先度を決めて初期化
     /// - Parameter vertical: 横方向の優先度
     public init(horizontal: UILayoutPriority) {

@@ -86,7 +86,6 @@ final class Simple3ViewController: UIViewController {
     }
 }
 
-
 extension Simple3ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         1

@@ -7,9 +7,9 @@
 
 import MapKit
 
-//MARK: - Declarative method
+// MARK: - Declarative method
 public extension MKMapView {
-    
+
     @discardableResult
     func mapType(_ mapType: MKMapType) -> Self {
         self.mapType = mapType
@@ -51,7 +51,7 @@ public extension MKMapView {
         self.setCamera(camera, animated: animated)
         return self
     }
-    
+
     @discardableResult
     func region(_ region: MKCoordinateRegion, animated: Bool = false) -> Self {
         self.setRegion(region, animated: animated)
@@ -99,7 +99,7 @@ public extension MKMapView {
         self.removeAnnotation(annotation)
         return self
     }
-    
+
     @discardableResult
     func select(annotation: MKAnnotation, animated: Bool = false) -> Self {
         self.selectAnnotation(annotation, animated: animated)
@@ -135,13 +135,13 @@ public extension MKMapView {
         self.pointOfInterestFilter = pointOfInterestFilter
         return self
     }
-    
+
     @discardableResult
     func showsBuildings(_ showsBuildings: Bool) -> Self {
         self.showsBuildings = showsBuildings
         return self
     }
-    
+
     @discardableResult
     func showsCompass(_ showsCompass: Bool) -> Self {
         self.showsCompass = showsCompass
@@ -159,17 +159,16 @@ public extension MKMapView {
         self.showsTraffic = showsTraffic
         return self
     }
-    
+
     @discardableResult
     func showsUserLocation(_ showsUserLocation: Bool) -> Self {
         self.showsUserLocation = showsUserLocation
         return self
     }
-    
+
     @discardableResult
     func userTrackingMode(_ userTrackingMode: MKUserTrackingMode, animated: Bool = false) -> Self {
         self.setUserTrackingMode(userTrackingMode, animated: animated)
         return self
     }
 }
-

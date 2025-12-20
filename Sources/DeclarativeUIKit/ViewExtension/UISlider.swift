@@ -8,7 +8,7 @@
 import UIKit.UISlider
 
 public extension UISlider {
-    
+
     @discardableResult
     func value(_ value: Float) -> Self {
         self.value = value

@@ -1,7 +1,7 @@
 import UIKit.UIScrollView
 
 public extension UIScrollView {
-    
+
     private func constraint(axis: NSLayoutConstraint.Axis = .vertical, margin: UIEdgeInsets = .zero, view: UIView) {
         view.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(view)
@@ -14,7 +14,7 @@ public extension UIScrollView {
         } else {
             width.priority = .init(rawValue: 1)
         }
-        
+
         NSLayoutConstraint.activate([
             view.topAnchor.constraint(equalTo: self.contentLayoutGuide.topAnchor, constant: margin.top),
             view.leftAnchor.constraint(equalTo: self.contentLayoutGuide.leftAnchor, constant: margin.left),
@@ -24,7 +24,7 @@ public extension UIScrollView {
             height
         ])
     }
-    
+
     convenience init(
         axis: NSLayoutConstraint.Axis = .vertical,
         margin: UIEdgeInsets = .zero,
@@ -35,7 +35,7 @@ public extension UIScrollView {
             self.constraint(axis: axis, margin: margin, view: view)
         }
     }
-    
+
     convenience init(
         axis: NSLayoutConstraint.Axis = .vertical,
         margin: UIEdgeInsets = .zero,
@@ -46,7 +46,7 @@ public extension UIScrollView {
             self.constraint(axis: axis, margin: margin, view: view)
         }
     }
-    
+
     static func vertical(
         margin: UIEdgeInsets = .zero,
         isTouchTransparency: Bool = false,
@@ -58,7 +58,7 @@ public extension UIScrollView {
             UIScrollView(axis: .vertical, margin: margin, builder)
         }
     }
-    
+
     static func vertical(
         margin: UIEdgeInsets = .zero,
         isTouchTransparency: Bool = false,
@@ -70,7 +70,7 @@ public extension UIScrollView {
             await UIScrollView(axis: .vertical, margin: margin, builderAsync)
         }
     }
-    
+
     static func horizontal(
         margin: UIEdgeInsets = .zero,
         isTouchTransparency: Bool = false,
@@ -136,7 +136,7 @@ public extension UIScrollView {
     }
 }
 
-//MARK: - with superview
+// MARK: - with superview
 public extension UIScrollView {
 
     convenience init(axis: NSLayoutConstraint.Axis = .vertical, margin: UIEdgeInsets = .zero, isTouchTransparency: Bool = false, _ builder: @escaping (UIView) -> UIView) {
@@ -242,26 +242,26 @@ public extension UIScrollView {
     }
 }
 
-//MARK: - Declarative Parameters
+// MARK: - Declarative Parameters
 public extension UIScrollView {
     @discardableResult
     func isScrollEnabled(_ isScrollEnabled: Bool) -> Self {
         self.isScrollEnabled = isScrollEnabled
         return self
     }
-    
+
     @discardableResult
     func showsVerticalScrollIndicator(_ showsVerticalScrollIndicator: Bool) -> Self {
         self.showsVerticalScrollIndicator = showsVerticalScrollIndicator
         return self
     }
-    
+
     @discardableResult
     func showsHorizontalScrollIndicator(_ showsHorizontalScrollIndicator: Bool) -> Self {
         self.showsHorizontalScrollIndicator = showsHorizontalScrollIndicator
         return self
     }
-    
+
     @discardableResult
     func showsScrollIndicator(_ showsScrollIndicator: Bool) -> Self {
         self.showsVerticalScrollIndicator = showsScrollIndicator
@@ -274,7 +274,7 @@ public extension UIScrollView {
         self.refreshControl = refreshControl()
         return self
     }
-    
+
     @discardableResult
     func refreshControl(_ refreshControl: UIRefreshControl) -> Self {
         self.refreshControl = refreshControl
@@ -304,13 +304,13 @@ public extension UIScrollView {
         self.contentInsetAdjustmentBehavior = contentInsetAdjustmentBehavior
         return self
     }
-    
+
     @discardableResult
     func automaticallyAdjustsScrollIndicatorInsets(_ automaticallyAdjustsScrollIndicatorInsets: Bool) -> Self {
         self.automaticallyAdjustsScrollIndicatorInsets = automaticallyAdjustsScrollIndicatorInsets
         return self
     }
-    
+
     @discardableResult
     func delegate(_ delegate: UIScrollViewDelegate?) -> Self {
         self.delegate = delegate
@@ -352,7 +352,7 @@ public extension UIScrollView {
         self.indicatorStyle = indicatorStyle
         return self
     }
-    
+
     @discardableResult
     func verticalScrollIndicatorInsets(_ verticalScrollIndicatorInsets: UIEdgeInsets) -> Self {
         self.verticalScrollIndicatorInsets = verticalScrollIndicatorInsets
@@ -370,7 +370,7 @@ public extension UIScrollView {
         self.scrollIndicatorInsets = scrollIndicatorInsets
         return self
     }
-    
+
     @discardableResult
     func decelerationRate(_ decelerationRate: UIScrollView.DecelerationRate) -> Self {
         self.decelerationRate = decelerationRate

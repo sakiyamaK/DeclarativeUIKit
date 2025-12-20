@@ -55,7 +55,7 @@ public extension WKWebViewConfiguration {
         self.defaultWebpagePreferences = preferences
         return self
     }
-    
+
     @discardableResult
     func processPool(_ processPool: WKProcessPool) -> Self {
         self.processPool = processPool

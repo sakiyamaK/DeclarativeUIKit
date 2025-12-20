@@ -4,7 +4,7 @@ public extension WKWebView {
     convenience init(configuration: WKWebViewConfiguration) {
         self.init(frame: .zero, configuration: configuration)
     }
-    
+
     convenience init(configurationBuilder: () -> WKWebViewConfiguration) {
         self.init(frame: .zero, configuration: configurationBuilder())
     }

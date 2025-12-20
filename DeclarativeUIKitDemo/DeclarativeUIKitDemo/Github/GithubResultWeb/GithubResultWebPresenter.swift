@@ -13,7 +13,7 @@ protocol GithubResultWebPresenterOutput: AnyObject {
 final class GithubResultWebPresenter {
     private weak var output: GithubResultWebPresenterOutput!
     private var githubModel: GithubModel
-    
+
     init(output: GithubResultWebPresenterOutput, githubModel: GithubModel) {
         self.output = output
         self.githubModel = githubModel

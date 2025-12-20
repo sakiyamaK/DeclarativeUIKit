@@ -14,7 +14,7 @@ public extension UICollectionLayoutListConfiguration {
         _self.showsSeparators = showsSeparators
         return _self
     }
-    
+
     @discardableResult
     func separatorConfiguration(_ separatorConfiguration: UIListSeparatorConfiguration) -> Self {
         var _self = self
@@ -54,7 +54,7 @@ public extension UICollectionLayoutListConfiguration {
         _self.footerMode = footerMode
         return _self
     }
-    
+
     @discardableResult
     func leadingSwipeActionsConfigurationProvider(
         _ leadingSwipeActionsConfigurationProvider: UICollectionLayoutListConfiguration.SwipeActionsConfigurationProvider?
@@ -72,7 +72,7 @@ public extension UICollectionLayoutListConfiguration {
         _self.trailingSwipeActionsConfigurationProvider = trailingSwipeActionsConfigurationProvider
         return _self
     }
-    
+
     @discardableResult
     func headerTopPadding(_ headerTopPadding: CGFloat?) -> Self {
         var _self = self
@@ -80,4 +80,3 @@ public extension UICollectionLayoutListConfiguration {
         return _self
     }
 }
-

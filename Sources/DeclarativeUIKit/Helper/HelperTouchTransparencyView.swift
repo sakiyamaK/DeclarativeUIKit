@@ -1,7 +1,7 @@
 import UIKit.UIView
 import UIKit.UIStackView
 
-//自身のタッチアクションは全て透過させるが子のタッチアクションは反応させる
+// 自身のタッチアクションは全て透過させるが子のタッチアクションは反応させる
 class HelperTouchTransparencyView: UIView {
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let view = super.hitTest(point, with: event)
@@ -22,4 +22,3 @@ class HelperTouchTransparencyScrollView: UIScrollView {
         return view == self ? nil : view
     }
 }
-

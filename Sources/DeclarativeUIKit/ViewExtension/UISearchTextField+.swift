@@ -27,7 +27,6 @@ public extension UISearchTextField {
         return self
     }
 
-
     @discardableResult
     func replaceTextualPortion(textRange: UITextRange, with token: UISearchToken, at tokenIndex: Int) -> Self {
         self.replaceTextualPortion(of: textRange, with: token, at: tokenIndex)

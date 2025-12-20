@@ -8,13 +8,13 @@
 import UIKit.UITabBarItem
 
 public extension UITabBarItem {
-    
+
     @discardableResult
     func selectedImage(_ selectedImage: UIImage?) -> Self {
         self.selectedImage = selectedImage
         return self
     }
-    
+
     @discardableResult
     func badgeValue(_ badgeValue: String?) -> Self {
         self.badgeValue = badgeValue
@@ -26,7 +26,7 @@ public extension UITabBarItem {
         self.titlePositionAdjustment = titlePositionAdjustment
         return self
     }
-    
+
     @discardableResult
     func badgeColor(_ badgeColor: UIColor?) -> Self {
         self.badgeColor = badgeColor
@@ -34,18 +34,18 @@ public extension UITabBarItem {
     }
 
     @discardableResult
-    func badgeTextAttributes(_ textAttributes: [NSAttributedString.Key : Any]?, for state: UIControl.State = .normal) -> Self {
+    func badgeTextAttributes(_ textAttributes: [NSAttributedString.Key: Any]?, for state: UIControl.State = .normal) -> Self {
         self.setBadgeTextAttributes(textAttributes, for: state)
         return self
     }
-    
+
     @discardableResult
-    func badgeTextAttributes(_ textAttributesBuilder: (() -> [NSAttributedString.Key : Any]?), for state: UIControl.State = .normal) -> Self {
+    func badgeTextAttributes(_ textAttributesBuilder: (() -> [NSAttributedString.Key: Any]?), for state: UIControl.State = .normal) -> Self {
         badgeTextAttributes(textAttributesBuilder(), for: state)
     }
 
     @discardableResult
-    func badgeTextAttributes(for state: UIControl.State = .normal, _ textAttributesBuilder: (() -> [NSAttributedString.Key : Any]?)) -> Self {
+    func badgeTextAttributes(for state: UIControl.State = .normal, _ textAttributesBuilder: (() -> [NSAttributedString.Key: Any]?)) -> Self {
         badgeTextAttributes(textAttributesBuilder(), for: state)
     }
 
@@ -60,7 +60,7 @@ public extension UITabBarItem {
         self.scrollEdgeAppearance = scrollEdgeAppearance
         return self
     }
-    
+
     @discardableResult
     func appearance(appearanceTypes: [UITabBarAppearanceType] = UITabBarAppearanceType.allCases, _ appearanceBuilder: ((Self) -> UITabBarAppearance)) -> Self {
         let appearance = appearanceBuilder(self)

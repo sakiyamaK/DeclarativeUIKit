@@ -13,7 +13,7 @@ public extension NSLayoutDimension {
     static func + (lhs: NSLayoutDimension, rhs: CGFloat) -> HelperConstraint {
         .init(dimension: lhs, constant: rhs)
     }
-    
+
     static func - (lhs: NSLayoutDimension, rhs: CGFloat) -> HelperConstraint {
         .init(dimension: lhs, constant: -rhs)
     }
@@ -23,7 +23,7 @@ public struct HelperConstraint {
     public var dimension: NSLayoutDimension
     public var multiplier: CGFloat = 1
     public var constant: CGFloat = 0
-        
+
     public static func * (lhs: HelperConstraint, rhs: CGFloat) -> HelperConstraint {
         var rtn = lhs
         rtn.multiplier = rhs

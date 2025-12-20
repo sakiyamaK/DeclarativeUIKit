@@ -20,7 +20,7 @@ public extension UITabBarAppearance {
         self.inlineLayoutAppearance = inlineLayoutAppearance
         return self
     }
-    
+
     @discardableResult
     func compactInlineLayoutAppearance(_ compactInlineLayoutAppearance: UITabBarItemAppearance) -> Self {
         self.compactInlineLayoutAppearance = compactInlineLayoutAppearance
@@ -58,7 +58,7 @@ public extension UITabBarAppearance {
     }
 }
 
-public extension UITabBarAppearance {    
+public extension UITabBarAppearance {
     @discardableResult
     func tabBarItemAppearance(appearanceTypes: [UITabBarItemAppearanceType] = UITabBarItemAppearanceType.allCases, _ layoutAppearanceBuilder: (() -> UITabBarItemAppearance)) -> Self {
         let layoutAppearance = layoutAppearanceBuilder()

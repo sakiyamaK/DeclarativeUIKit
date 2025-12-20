@@ -16,7 +16,7 @@ actor User {
 }
 
 final class ActorView: UIView {
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         Task {
@@ -30,16 +30,16 @@ final class ActorView: UIView {
                     }
                 }
             }
-            
+
             after()
-            
+
         }
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func after() {
         print("after")
     }
@@ -70,11 +70,11 @@ final class ActorViewController: UIViewController {
 //            .declarative {
 //                ActorView()
 //            }
-            
+
             after()
         }
     }
-    
+
     func after() {
         print("after")
     }
@@ -88,7 +88,7 @@ extension Collection where Element: Sendable {
                     await transform(element)
                 }
             }
-            
+
             var results = [T]()
             for await result in group {
                 results.append(result)
@@ -96,7 +96,7 @@ extension Collection where Element: Sendable {
             return results
         }
     }
-    
+
     func compactMapAsync<T: Sendable>(transform: @escaping @Sendable (Element) async -> T?) async -> [T] {
         await withTaskGroup(of: T?.self) { group in
             for element in self {
@@ -104,7 +104,7 @@ extension Collection where Element: Sendable {
                     await transform(element)
                 }
             }
-            
+
             var results = [T]()
             for await result in group {
                 if let result {

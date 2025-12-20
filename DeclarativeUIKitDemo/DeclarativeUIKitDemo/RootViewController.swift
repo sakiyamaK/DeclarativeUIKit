@@ -9,7 +9,7 @@ import UIKit
 import DeclarativeUIKit
 
 final class RootViewController: UIViewController {
-        
+
     override func loadView() {
         super.loadView()
 
@@ -30,7 +30,7 @@ final class RootViewController: UIViewController {
                     )
             }, primaryAction: nil)
         }
-                
+
         self
             .resetDeclarativeUIKitLayout()
             .applyView({ $0.backgroundColor = .white })
@@ -39,7 +39,7 @@ final class RootViewController: UIViewController {
             UIScrollView {
                 UIStackView {
                     UIView.spacer()
-                    
+
                     Button("レイアウトの基本")
                         .addAction(.touchUpInside, handler: {[weak self] _ in
 //                            let vc = SimpleViewController()
@@ -77,7 +77,7 @@ final class RootViewController: UIViewController {
                             self!.navigationController?.pushViewController(vc, animated: true)
                         })
                         .minWidth(200)
-                    
+
                     Button("UITabBarController")
                         .addAction(.touchUpInside, handler: {[weak self] _ in
                             let vc = UITabBarController.rootTabBarController()
@@ -98,7 +98,7 @@ final class RootViewController: UIViewController {
                             vc.inject(landmarks: ModelData.landmarks, isOn: false)
                             self!.navigationController?.pushViewController(vc, animated: true)
                         })
-                    
+
                     Button("MapView")
                         .addAction(.touchUpInside, handler: {[weak self] _ in
                             let vc = MapViewController()
@@ -152,8 +152,8 @@ final class RootViewController: UIViewController {
     }
 }
 
-//import SwiftUI
+// import SwiftUI
 //
-//#Preview {
+// #Preview {
 //    RootViewController()
-//}
+// }

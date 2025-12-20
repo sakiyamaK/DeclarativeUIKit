@@ -17,7 +17,7 @@ public extension UIAlertController {
     }
 }
 
-//MARK: - Declarative method
+// MARK: - Declarative method
 public extension UIAlertController {
     @discardableResult
     func apply(_ apply: ((Self) -> Void)) -> Self {
@@ -36,7 +36,7 @@ public extension UIAlertController {
         self.message = message
         return self
     }
-    
+
     @discardableResult
     func addAction(_ builder: (() -> UIAlertAction)) -> Self {
         self.addAction(builder())
@@ -60,7 +60,7 @@ public extension UIAlertController {
         self.preferredAction = action
         return self
     }
-    
+
     @discardableResult
     func addTextField(withHandler: @escaping ((UITextField) -> Void)) -> Self {
         guard self.preferredStyle == .alert else {

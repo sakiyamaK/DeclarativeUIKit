@@ -2,14 +2,14 @@ import UIKit
 import DeclarativeUIKit
 
 final class GithubSearchCollectionViewController: UIViewController {
-    
+
     private weak var collectionView: UICollectionView!
     private weak var activityIndicatorContianerView: UIView!
     private weak var activityIndicator: UIActivityIndicatorView!
     private weak var startStack: UIStackView!
     private weak var searchTextField: UISearchTextField!
     private weak var searchButton: UIButton!
-    
+
     private var presenter: GithubSearchPresenterInput!
     func inject(presenter: GithubSearchPresenterInput) {
         self.presenter = presenter
@@ -36,9 +36,9 @@ final class GithubSearchCollectionViewController: UIViewController {
                 }
                 .spacing(12)
                 .padding(insets: .init(horizontal: 12))
-                
+
                 UIView.divider()
-                
+
                 UICollectionView(UICollectionViewFlowLayout())
                     .delegate(self)
                     .dataSource(self)
@@ -51,7 +51,7 @@ final class GithubSearchCollectionViewController: UIViewController {
                     .offset(y: -100)
                     .assign(to: &self.activityIndicatorContianerView)
                     .isHidden(true)
-                
+
                 UIStackView.vertical {
                     UIView.spacer().height(60)
                     UILabel("検索ワードを入力してください")
@@ -78,20 +78,20 @@ extension GithubSearchCollectionViewController: GithubSearchPresenterOutput {
             self.startStack.isHidden = true
         }
     }
-    
+
     func update(githubModels: [GithubModel]) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.collectionView.reloadData()
         }
     }
-    
+
     func get(error: Error) {
         DispatchQueue.main.async {
             print(error.localizedDescription)
         }
     }
-    
+
     func showWeb(githubModel: GithubModel) {
         DispatchQueue.main.async {
             let vc = GithubSearchResultViewController()
@@ -103,12 +103,12 @@ extension GithubSearchCollectionViewController: GithubSearchPresenterOutput {
 }
 
 extension GithubSearchCollectionViewController: UICollectionViewDelegateFlowLayout {
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let githubModel = presenter.item(index: indexPath.item)
         return GithubSearchCollectionViewCell.size(width: collectionView.frame.width, github: githubModel)
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         presenter.didSelect(index: indexPath.item)
     }
@@ -118,7 +118,7 @@ extension GithubSearchCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         presenter.numberOfItems
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GithubSearchCollectionViewCell.reuseIdentifier, for: indexPath) as! GithubSearchCollectionViewCell
         let githubModel = presenter.item(index: indexPath.item)
@@ -131,29 +131,28 @@ import SwiftUI
 
 #Preview {
 
-    
     final class GithubSearchPresenterMock: GithubSearchPresenterInput {
-        
+
         private weak var output: GithubSearchPresenterOutput!
-        
+
         init(output: GithubSearchPresenterOutput) {
             self.output = output
         }
-        
+
         var numberOfItems: Int { 10 }
         func item(index: Int) -> GithubModel {
             GithubModel.sample
         }
-        
+
         func search(parameters: GithubSearchParameters) {
             print(parameters)
         }
-        
+
         func didSelect(index: Int) {
             print(index)
         }
     }
-    
+
     let vc = GithubSearchCollectionViewController()
     let presenter = GithubSearchPresenterMock(output: vc)
     vc.inject(presenter: presenter)

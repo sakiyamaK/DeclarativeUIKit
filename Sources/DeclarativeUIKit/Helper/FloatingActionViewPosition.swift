@@ -7,7 +7,7 @@
 
 import UIKit
 
-//MARK: - floating action view
+// MARK: - floating action view
 import CoreGraphics
 
 public enum FloatingActionViewPosition {

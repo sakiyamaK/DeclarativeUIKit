@@ -1,6 +1,6 @@
 import UIKit.UIImageView
 
-//MARK: -
+// MARK: -
 public extension UIImageView {
     convenience init(_ image: UIImage?) {
         self.init(frame: .zero)
@@ -14,11 +14,11 @@ public extension UIImageView {
     }
 }
 
-//MARK: - Declarative method
+// MARK: - Declarative method
 public extension UIImageView {
     @discardableResult
     func image(_ image: UIImage?) -> Self {
         self.image = image
         return self
-    }    
+    }
 }

@@ -1,13 +1,13 @@
 import UIKit.UIButton
 
-//MARK: -
+// MARK: -
 public extension UIButton {
 
     convenience init(_ title: String?, for: UIControl.State = .normal) {
         self.init(frame: .zero)
         self.title(title, for: `for`)
     }
-    
+
     convenience init(_ title: NSAttributedString?, for: UIControl.State = .normal) {
         self.init(frame: .zero)
         self.title(title, for: `for`)
@@ -37,7 +37,7 @@ public extension UIButton {
     }
 }
 
-//MARK: - Declarative method
+// MARK: - Declarative method
 public extension UIButton {
 
     @discardableResult
@@ -50,7 +50,7 @@ public extension UIButton {
         self.setTitle(title, for: `for`)
         return self
     }
-    
+
     @discardableResult
     func title(_ title: NSAttributedString?) -> Self {
         self.title(title, for: .normal)
@@ -72,7 +72,7 @@ public extension UIButton {
         self.setTitleColor(color, for: `for`)
         return self
     }
-    
+
     @discardableResult
     func titleShadowColor(_ color: UIColor?) -> Self {
         self.titleShadowColor(color, for: .normal)
@@ -116,7 +116,7 @@ public extension UIButton {
         self.setPreferredSymbolConfiguration(configuration, forImageIn: state)
         return self
     }
-    
+
     @discardableResult
     func font(_ font: UIFont?) -> Self {
         self.titleLabel?.font = font
@@ -129,26 +129,26 @@ public extension UIButton {
     func menu(_ menu: UIMenu) -> Self {
         self.menu = menu
         return self
-    }    
+    }
 }
 
 public extension UIButton {
     convenience init(configurationBuilder: (() -> UIButton.Configuration), primaryAction: UIAction?) {
         self.init(configuration: configurationBuilder(), primaryAction: primaryAction)
     }
-    
+
     @discardableResult
     func configuration(_ configuration: UIButton.Configuration) -> Self {
         self.configuration = configuration
         return self
     }
-    
+
     @discardableResult
     func configuration(_ configurationBuilder: (() -> UIButton.Configuration)) -> Self {
         self.configuration = configurationBuilder()
         return self
     }
-    
+
     @discardableResult
     func configurationUpdateHandler(_ handler: UIButton.ConfigurationUpdateHandler?) -> Self {
         self.configurationUpdateHandler = handler
@@ -156,8 +156,7 @@ public extension UIButton {
     }
 }
 
-
-//MARK: - Declarative method
+// MARK: - Declarative method
 @available(iOS, deprecated: 15.0, message: "This property is ignored when using UIButtonConfiguration")
 public extension UIButton {
     @discardableResult

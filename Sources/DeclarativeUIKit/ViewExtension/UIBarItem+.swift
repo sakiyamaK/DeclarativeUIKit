@@ -31,7 +31,7 @@ public extension UIBarItem {
         self.imageInsets = imageInsets
         return self
     }
-    
+
     @discardableResult
     func landscapeImagePhoneInsets(_ landscapeImagePhoneInsets: UIEdgeInsets) -> Self {
         self.landscapeImagePhoneInsets = landscapeImagePhoneInsets
@@ -62,5 +62,5 @@ public extension UIBarItem {
     func titleTextAttributes(_ attributes: [NSAttributedString.Key: Any]?, for: UIControl.State) -> Self {
         self.setTitleTextAttributes(attributes, for: `for`)
         return self
-    }        
+    }
 }

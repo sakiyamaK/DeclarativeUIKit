@@ -31,13 +31,13 @@ private extension UITextView {
     }
 }
 
-//MARK: -
+// MARK: -
 public extension UITextView {
     convenience init(_ text: String?) {
         self.init(frame: .zero)
         self.setup(text: text)
     }
-        
+
     convenience init(_ text: String?, _ apply: (Self) -> Void) {
         self.init(frame: .zero)
         self.setup(text: text)
@@ -48,7 +48,7 @@ public extension UITextView {
         self.init(frame: .zero)
         self.setup(attributedText: text)
     }
-    
+
     convenience init(_ text: NSAttributedString?, _ apply: (Self) -> Void) {
         self.init(frame: .zero)
         self.setup(attributedText: text)
@@ -56,7 +56,7 @@ public extension UITextView {
     }
 }
 
-//MARK: - Declarative method
+// MARK: - Declarative method
 public extension UITextView {
 
     @discardableResult
@@ -64,23 +64,23 @@ public extension UITextView {
         self.delegate = delegate
         return self
     }
-    
+
     @discardableResult
     func text(_ text: String?) -> Self {
         self.setup(text: text)
     }
-    
+
     @discardableResult
     func text(_ attributedText: NSAttributedString?) -> Self {
         self.setup(attributedText: attributedText)
     }
-    
+
     @discardableResult
     func font(_ font: UIFont) -> Self {
         self.font = font
         return self
     }
-    
+
     @discardableResult
     func textColor(_ textColor: UIColor) -> Self {
         self.textColor = textColor
@@ -92,7 +92,7 @@ public extension UITextView {
         self.textAlignment = textAlignment
         return self
     }
-    
+
     @discardableResult
     func isEditable(_ isEditable: Bool) -> Self {
         self.isEditable = isEditable
@@ -108,7 +108,7 @@ public extension UITextView {
 
 // MARK: - UITextInputTraits
 public extension UITextView {
-    
+
     @discardableResult
     func autocapitalizationType( _ autocapitalizationType: UITextAutocapitalizationType) -> Self {
         self.autocapitalizationType = autocapitalizationType
@@ -162,7 +162,7 @@ public extension UITextView {
         self.returnKeyType = returnKeyType
         return self
     }
-    
+
     @discardableResult
     func enablesReturnKeyAutomatically(_ enablesReturnKeyAutomatically: Bool) -> Self {
         self.enablesReturnKeyAutomatically = enablesReturnKeyAutomatically
@@ -174,13 +174,13 @@ public extension UITextView {
         self.isSecureTextEntry = isSecureTextEntry
         return self
     }
-    
+
     @discardableResult
     func textContentType(_ textContentType: UITextContentType) -> Self {
         self.textContentType = textContentType
         return self
     }
-    
+
     @discardableResult
     func passwordRules(_ passwordRules: UITextInputPasswordRules?) -> Self {
         self.passwordRules = passwordRules

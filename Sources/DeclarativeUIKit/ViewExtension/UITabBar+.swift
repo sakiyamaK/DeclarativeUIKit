@@ -8,7 +8,7 @@
 import UIKit.UITabBar
 
 public extension UITabBar {
-    
+
     @discardableResult
     func delegate(_ delegate: UITabBarDelegate?) -> Self {
         self.delegate = delegate
@@ -26,13 +26,13 @@ public extension UITabBar {
         self.selectedItem = selectedItem
         return self
     }
-    
+
     @discardableResult
     func items(_ items: [UITabBarItem]?, animated: Bool) -> Self {
         self.setItems(items, animated: animated)
         return self
     }
-    
+
     @discardableResult
     func barTintColor(_ barTintColor: UIColor?) -> Self {
         self.barTintColor = barTintColor
@@ -104,7 +104,7 @@ public extension UITabBar {
         self.scrollEdgeAppearance = scrollEdgeAppearance
         return self
     }
-    
+
     @discardableResult
     func tabBarAppearance(standard: UITabBarAppearance, scrollEdge: UITabBarAppearance?) -> Self {
         self.standardAppearance = standardAppearance
@@ -125,7 +125,7 @@ public extension UITabBar {
         }
         return self
     }
-    
+
     @discardableResult
     func tabBarAppearance(appearanceTypes: [UITabBarAppearanceType] = UITabBarAppearanceType.allCases, _ appearanceBuilder: (() -> UITabBarAppearance)) -> Self {
         let appearance = appearanceBuilder()
@@ -141,4 +141,3 @@ public extension UITabBar {
     }
 
 }
-

@@ -9,11 +9,11 @@ final class LandmarkRow: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-                
+
         self.contentView.declarative(priorities: .init(bottom: .defaultLow)) {
             UIStackView {
                 UIView.spacer()
-                
+
                 UIStackView.horizontal {
                     UIImageView(assign: &self.iconView)
                         .size(width: 50, height: 50)
@@ -30,19 +30,19 @@ final class LandmarkRow: UICollectionViewCell {
                 }
                 .spacing(8)
                 .alignment(.center)
-                
+
                 UIView.divider()
             }
             .spacing(10)
         }
     }
-            
+
     func configure(landmark: Landmark) {
         iconView.image = UIImage(named: landmark.imageName)
         textLabel.text = landmark.name
         starView.isHidden = !landmark.isFavorite
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

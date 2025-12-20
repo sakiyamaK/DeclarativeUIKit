@@ -10,12 +10,12 @@ import MapKit
 import DeclarativeUIKit
 
 final class MapViewController: UIViewController {
-    
+
     override func loadView() {
         super.loadView()
-        
+
         self.view.backgroundColor = .white
-        
+
         self.declarative(safeAreas: .init(all: false)) {
             MKMapView()
                 .region(
@@ -39,10 +39,9 @@ final class MapViewController: UIViewController {
         }
     }
 }
-    
+
 extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
-        
+
     }
 }
-

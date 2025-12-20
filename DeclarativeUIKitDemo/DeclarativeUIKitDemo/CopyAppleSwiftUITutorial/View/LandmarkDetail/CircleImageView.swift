@@ -2,9 +2,9 @@ import UIKit
 import DeclarativeUIKit
 
 final class CircleImageView: UIView {
-    
+
     private weak var imageView: UIImageView!
-    
+
     private let width: CGFloat = 200
     private let margin: CGFloat = 5
 
@@ -22,11 +22,11 @@ final class CircleImageView: UIView {
                 .size(width: width, height: width)
         }
     }
-    
+
     func setLandmark(_ landmark: Landmark) {
         imageView.image = UIImage(named: landmark.imageName)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

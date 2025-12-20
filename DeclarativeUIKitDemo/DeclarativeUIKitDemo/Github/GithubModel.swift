@@ -20,7 +20,7 @@ struct GithubModel: Codable {
     struct LlicenseModel: Codable {
         let name: String?
     }
-    
+
 }
 
 extension GithubModel {

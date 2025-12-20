@@ -14,4 +14,3 @@ public extension UISwipeActionsConfiguration {
         return self
     }
 }
-

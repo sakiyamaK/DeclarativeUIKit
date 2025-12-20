@@ -1,21 +1,21 @@
 import UIKit
 
 public extension UIBackgroundConfiguration {
-    
+
     @discardableResult
     func customView(_ value: UIView?) -> Self {
         var _self = self
         _self.customView = value
         return _self
     }
-    
+
     @discardableResult
     func cornerRadius(_ cornerRadius: CGFloat) -> Self {
         var _self = self
         _self.cornerRadius = cornerRadius
         return _self
     }
-    
+
     @discardableResult
     func backgroundInsets(_ value: NSDirectionalEdgeInsets) -> Self {
         var _self = self
@@ -36,7 +36,7 @@ public extension UIBackgroundConfiguration {
         _self.backgroundColor = value
         return _self
     }
-    
+
     @discardableResult
     func backgroundColorTransformer(_ value: UIConfigurationColorTransformer?) -> Self {
         var _self = self

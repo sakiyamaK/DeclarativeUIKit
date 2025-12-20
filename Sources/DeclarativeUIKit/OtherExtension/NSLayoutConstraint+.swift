@@ -39,13 +39,13 @@ public extension NSLayoutConstraint {
         self.isActive = isActive
         return self
     }
-    
+
     @discardableResult
     func priority(_ priority: UILayoutPriority) -> Self {
         self.priority = priority
         return self
     }
-    
+
     @discardableResult
     func constant(_ constant: CGFloat) -> Self {
         self.constant = constant

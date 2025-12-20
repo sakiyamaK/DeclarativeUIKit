@@ -40,7 +40,7 @@ public enum ArrayUIViewControllerBuilder {
     public static func buildBlock(_ components: Component...) -> Component {
         return Array(components.joined())
     }
-    
+
     public static func buildBlock() -> Component {
         return []
     }
@@ -61,11 +61,8 @@ public enum SingleUIViewControllerBuilder {
     public static func buildBlock(_ component: Component) -> Component {
         return component
     }
-    
+
     public static func buildBlock() -> Component? {
         return nil
     }
 }
-
-
-

@@ -33,7 +33,7 @@ public enum ArrayUIAlertActionBuilder {
     public static func buildBlock(_ components: Component...) -> Component {
         return Array(components.joined())
     }
-    
+
     public static func buildBlock() -> Component {
         return []
     }
@@ -72,7 +72,7 @@ public enum ArrayUITextFieldClosureBuilder {
     public static func buildBlock(_ components: Component...) -> Component {
         return Array(components.joined())
     }
-    
+
     public static func buildBlock() -> Component {
         return []
     }

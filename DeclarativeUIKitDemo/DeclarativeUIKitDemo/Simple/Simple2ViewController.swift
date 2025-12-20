@@ -9,17 +9,17 @@ import UIKit
 import DeclarativeUIKit
 
 final class Simple2ViewController: UIViewController {
-        
+
     private weak var button: UIButton!
     private weak var tapLabel: UILabel!
     private weak var overlapView: UIView!
     private weak var indicator: UIActivityIndicatorView!
-    
+
     override func loadView() {
         super.loadView()
-        
+
         self.view.backgroundColor = .white
-                                
+
         let Header = { (title: String) -> UIView in
             UIStackView.vertical {
                 UILabel(title)
@@ -31,7 +31,7 @@ final class Simple2ViewController: UIViewController {
                 UIView.divider()
             }
         }
-        
+
         self.declarative {
             UIStackView.vertical {
                 UIProgressView(progressViewStyle: .bar)
@@ -45,7 +45,6 @@ final class Simple2ViewController: UIViewController {
                             .contentMode(.scaleAspectFit)
                             .tintColor(.red)
                             .height(200)
-                        
 
                         if #available(iOS 14.0, *) {
                             UIButton("button")
@@ -64,13 +63,13 @@ final class Simple2ViewController: UIViewController {
                                 }
                                 .assign(to: &self.button)
                         }
-                        
+
                         UITextField()
                             .placeholder(NSAttributedString(string: "プレースホルダー", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black]))
                             .borderStyle(.line)
                             .keyboardType(.alphabet)
                             .delegate(self)
-                        
+
                         UILabel(assign: &self.tapLabel)
                             .text("タップジェスチャーのあるラベル")
                             .textAlignment(.center)
@@ -132,12 +131,12 @@ final class Simple2ViewController: UIViewController {
             }
             .spacing(20)
         }.declarative(safeAreas: .init(all: false)) {
-            //セーフエリアを無視したレイアウトをさらに上に追加
+            // セーフエリアを無視したレイアウトをさらに上に追加
             UIView.spacer()
                 .backgroundColor(.black.withAlphaComponent(0.3))
                 .assign(to: &self.overlapView)
                 .isHidden(true)
-                
+
         }
     }
 }
@@ -146,7 +145,7 @@ final class Simple2ViewController: UIViewController {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print("テキストフィールドのデリゲートだね")
     }
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
@@ -154,16 +153,16 @@ final class Simple2ViewController: UIViewController {
 }
 
 @objc private extension Simple2ViewController {
-    
+
     func tapButton(_ sender: UIButton) {
         print("ボタンをタップしたね")
         if button == sender {
             print(self.button.titleLabel?.text ?? "")
         }
-        
+
         self.overlapView.isHidden.toggle()
         self.indicator.isHidden = false
-        
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.overlapView.isHidden.toggle()
             self.indicator.isHidden = true

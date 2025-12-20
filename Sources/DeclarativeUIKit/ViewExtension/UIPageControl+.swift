@@ -8,7 +8,7 @@
 import UIKit.UIPageControl
 
 public extension UIPageControl {
-    
+
     @discardableResult
     func numberOfPages(_ numberOfPages: Int) -> Self {
         self.numberOfPages = numberOfPages
@@ -27,14 +27,13 @@ public extension UIPageControl {
         return self
     }
 
-    
     @available(iOS 17.0, *)
     @discardableResult
     func progress(_ progress: UIPageControlProgress?) -> Self {
         self.progress = progress
         return self
     }
-    
+
     @discardableResult
     func pageIndicatorTintColor(_ pageIndicatorTintColor: UIColor?) -> Self {
         self.pageIndicatorTintColor = pageIndicatorTintColor
@@ -71,7 +70,7 @@ public extension UIPageControl {
         self.preferredIndicatorImage = preferredIndicatorImage
         return self
     }
-    
+
     @discardableResult
     func indicator(image: UIImage?, forPage page: Int) -> Self {
         setIndicatorImage(image, forPage: page)
@@ -86,14 +85,13 @@ public extension UIPageControl {
         return self
     }
 
-    
     @discardableResult
     @available(iOS 16.0, *)
     func preferredCurrentPageIndicatorImage(_ preferredCurrentPageIndicatorImage: UIImage?) -> Self {
         self.preferredCurrentPageIndicatorImage = preferredCurrentPageIndicatorImage
         return self
     }
-    
+
     @discardableResult
     @available(iOS 16.0, *)
     func currentPageIndicator(image: UIImage?, forPage page: Int) -> Self {

@@ -3,7 +3,7 @@ import DeclarativeUIKit
 import MapKit
 
 final class MapView: UIView {
-        
+
     private weak var mapView: MKMapView!
 
     private static let defCoordinate = CLLocationCoordinate2D(latitude: 34.011_286, longitude: -116.166_868)
@@ -18,7 +18,7 @@ final class MapView: UIView {
             MKMapView(assign: &mapView)
         }
     }
-    
+
     func setRegion(_ coordinate: CLLocationCoordinate2D) {
         self.region = MKCoordinateRegion(
           center: coordinate,
@@ -26,7 +26,7 @@ final class MapView: UIView {
         )
         mapView.setRegion(region, animated: true)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

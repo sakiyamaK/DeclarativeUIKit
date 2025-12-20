@@ -8,22 +8,22 @@ struct GithubSearchParameters {
     enum Order: String {
         case desc, asc
     }
-    
+
     enum Sort: String {
         case star
     }
-    
+
     let searchWord: String?
     private var _searchWord: String { searchWord ?? "" }
     let sort: Sort = .star
     let order: Order = .asc
     let perPage: Int = 100
     let page: Int = 0
-    
+
     var validation: Bool {
         !_searchWord.isEmpty && perPage <= 100 && perPage > 0
     }
-    
+
     var queryParameter: String {
         "q=\(_searchWord)&sort=\(sort.rawValue)&order=\(order.rawValue)&per_page=\(perPage)&page=\(page)"
     }
@@ -49,17 +49,16 @@ protocol GithubAPIProtocol: AnyObject {
 final class GithubAPI: GithubAPIProtocol, Sendable {
     static let shared = GithubAPI()
     private init() {}
-    
+
     var decoder: JSONDecoder {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         decoder.dateDecodingStrategy = .formatted(.iso8601)
         return decoder
     }
-    
+
     func get(parameters: GithubSearchParameters,
-             completion: ((Result<[GithubModel], GithubError>) -> Void)? = nil)
-    {
+             completion: ((Result<[GithubModel], GithubError>) -> Void)? = nil) {
         guard parameters.validation else {
             completion?(.failure(.error))
             return
@@ -75,7 +74,7 @@ final class GithubAPI: GithubAPIProtocol, Sendable {
             }
             completion?(.success(models))
         })
-        
+
         task.resume()
     }
 }

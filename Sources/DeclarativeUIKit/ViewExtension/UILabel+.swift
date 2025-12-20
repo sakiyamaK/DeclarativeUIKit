@@ -1,6 +1,6 @@
 import UIKit.UILabel
 
-//MARK: -
+// MARK: -
 private extension UILabel {
     @discardableResult
     func setup(text: String?) -> Self {
@@ -25,13 +25,13 @@ private extension UILabel {
     }
 }
 
-//MARK: -
+// MARK: -
 public extension UILabel {
     convenience init(_ text: String?) {
         self.init(frame: .zero)
         self.text(text)
     }
-        
+
     convenience init(_ text: String?, _ apply: (Self) -> Void) {
         self.init(frame: .zero)
         self.text(text)
@@ -42,7 +42,7 @@ public extension UILabel {
         self.init(frame: .zero)
         self.text(text)
     }
-    
+
     convenience init(_ text: NSAttributedString?, _ apply: (Self) -> Void) {
         self.init(frame: .zero)
         self.text(text)
@@ -50,25 +50,25 @@ public extension UILabel {
     }
 }
 
-//MARK: - Declarative method
+// MARK: - Declarative method
 public extension UILabel {
 
     @discardableResult
     func text(_ text: String?) -> Self {
         self.setup(text: text)
     }
-    
+
     @discardableResult
     func text(_ attributeText: NSAttributedString?) -> Self {
         self.setup(attributeText: attributeText)
     }
-    
+
     @discardableResult
     func font(_ font: UIFont) -> Self {
         self.font = font
         return self
     }
-    
+
     @discardableResult
     func numberOfLines(_ numberOfLines: Int) -> Self {
         self.numberOfLines = numberOfLines

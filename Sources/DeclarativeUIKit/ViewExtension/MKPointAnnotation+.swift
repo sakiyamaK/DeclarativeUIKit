@@ -38,7 +38,7 @@ public extension MKPointAnnotation {
     }
 }
 
-//MARK: - Declarative method
+// MARK: - Declarative method
 public extension MKPointAnnotation {
 
     @discardableResult
@@ -52,7 +52,7 @@ public extension MKPointAnnotation {
         self.title = title
         return self
     }
-    
+
     @discardableResult
     func subtitle(_ subtitle: String) -> Self {
         self.subtitle = subtitle

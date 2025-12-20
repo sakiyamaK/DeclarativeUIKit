@@ -7,8 +7,6 @@
 
 import UIKit
 
-import UIKit
-
 public extension NSCollectionLayoutSection {
     @discardableResult
     func boundarySupplementaryItems(_ boundarySupplementaryItemsBuilder: (() -> [NSCollectionLayoutBoundarySupplementaryItem])) -> Self {

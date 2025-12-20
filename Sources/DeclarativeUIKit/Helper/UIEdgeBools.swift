@@ -6,14 +6,14 @@ public struct UIEdgeBools {
     public var leading: Bool = true
     public var bottom: Bool = true
     public var trailing: Bool = true
-    
+
     public init(top: Bool = true, leading: Bool = true, bottom: Bool = true, trailing: Bool = true) {
         self.top = top
         self.leading = leading
         self.bottom = bottom
         self.trailing = trailing
     }
-    
+
     public init(all: Bool) {
         self.init(top: all, leading: all, bottom: all, trailing: all)
     }
@@ -21,7 +21,7 @@ public struct UIEdgeBools {
     public init(vertical: Bool) {
         self.init(top: vertical, leading: true, bottom: vertical, trailing: true)
     }
-    
+
     public init(horizontal: Bool) {
         self.init(top: true, leading: horizontal, bottom: true, trailing: horizontal)
     }

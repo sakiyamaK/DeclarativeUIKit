@@ -11,12 +11,12 @@ import DeclarativeUIKit
 final class SimpleViewController: UIViewController {
 
     var label = UILabel()
-    
+
     override func loadView() {
         super.loadView()
 
         self.view.backgroundColor = .white
-        
+
         let Header = { (title: String) -> UIView in
             UIStackView.vertical {
                 UIView.spacer()
@@ -30,10 +30,10 @@ final class SimpleViewController: UIViewController {
             .spacing(10)
             .backgroundColor(.gray)
         }
-        
+
         let ScrollBlocksView = {
             UIScrollView.horizontal {
-                UIStackView.horizontal{ stackView in
+                UIStackView.horizontal { stackView in
                     UIView()
                         .apply { _ in
                             print(stackView)
@@ -59,19 +59,19 @@ final class SimpleViewController: UIViewController {
                         $0.backgroundColor = .systemRed
                     }
                     .shadow(color: .black.withAlphaComponent(0.8), radius: 10, x: 5, y: 5)
-                    
+
                     UIView()
                         .backgroundColor(.systemRed)
                         .padding()
                         .backgroundColor(.systemYellow)
                         .size(width: 100, height: 100)
-                    
+
                 }.spacing(20)
                     .padding(insets: .init(top: 20, left: 10, bottom: 20, right: 10))
             }
             .showsScrollIndicator(false)
         }
-        
+
         let ZStackView = {
             UIStackView.horizontal {
                 UIView()
@@ -86,7 +86,7 @@ final class SimpleViewController: UIViewController {
             }
             .alignment(.center)
         }
-        
+
         let Geometry = {
             UIView()
                 .backgroundColor(.red)
@@ -95,7 +95,7 @@ final class SimpleViewController: UIViewController {
                         UIView()
                             .backgroundColor(.blue)
                             .heightEqual(to: superview, constraint: superview.heightAnchor - 20)
-                        
+
                         UIView()
                             .backgroundColor(.green)
                             .widthEqual(to: superview, constraint: superview.widthAnchor * 0.4)
@@ -105,7 +105,7 @@ final class SimpleViewController: UIViewController {
                     .alignment(.center)
                 }
         }
-        
+
         let SomeViews = {
             UIStackView {
                 Array(1...10).compactMap { num -> UILabel in
@@ -141,7 +141,7 @@ final class SimpleViewController: UIViewController {
                     .assign(to: &self.label)
             }.padding(insets: .init(all: 20))
         }
-        
+
         let UIPageControlView = {
             UIStackView.vertical {
                 UIPageControl()
@@ -182,7 +182,7 @@ final class SimpleViewController: UIViewController {
                          .init(
                              icon: nil,
                              text: "bbbb"
-                         ),
+                         )
                         ]
                     )
             }
@@ -212,7 +212,7 @@ final class SimpleViewController: UIViewController {
                 .padding(insets: .init(all: 20))
             }
         }
-        
+
         self.declarative {
             UIScrollView.vertical {
                 UIStackView.vertical {
@@ -238,27 +238,27 @@ final class SimpleViewController: UIViewController {
                 }
             }
         }
-//        .declarative(priorities: .init(top: 0)) {
-//            UIStackView(spacing: 8) {
-//                UIView()
-//                    .backgroundColor(UIColor.red)
-//                    .height(100)
-//                UIView()
-//                    .backgroundColor(UIColor.red)
-//                    .height(100)
-//                    .declarative(priorities: .init(bottom: 0)) {
-//                        UIStackView(spacing: 8) {
-//                            UIView()
-//                                .backgroundColor(UIColor.green)
-//                                .height(3)
-//                            UIView()
-//                                .backgroundColor(UIColor.green)
-//                                .height(3)
-//                        }
-//                    }
-//
-//            }
-//        }
+        .declarative(priorities: .init(top: 0)) {
+            UIStackView(spacing: 8) {
+                UIView()
+                    .backgroundColor(UIColor.red)
+                    .height(100)
+                UIView()
+                    .backgroundColor(UIColor.red)
+                    .height(100)
+                    .declarative(priorities: .init(bottom: 0)) {
+                        UIStackView(spacing: 8) {
+                            UIView()
+                                .backgroundColor(UIColor.green)
+                                .height(3)
+                            UIView()
+                                .backgroundColor(UIColor.green)
+                                .height(3)
+                        }
+                    }
+
+            }
+        }
     }
 }
 

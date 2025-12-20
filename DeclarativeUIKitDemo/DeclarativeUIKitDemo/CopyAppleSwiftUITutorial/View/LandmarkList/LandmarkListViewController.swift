@@ -9,12 +9,12 @@ import UIKit
 import DeclarativeUIKit
 
 final class LandmarkListViewController: UIViewController {
-    
+
     private weak var collectionView: UICollectionView!
-    
+
     private var landmarks: [Landmark] = []
     private var isOn: Bool = false
-    
+
     private var filteredLandmarks: [Landmark] {
       landmarks.filter {
         !isOn || $0.isFavorite
@@ -25,20 +25,20 @@ final class LandmarkListViewController: UIViewController {
         self.landmarks = landmarks
         self.isOn = isOn
     }
-    
+
     override func loadView() {
         super.loadView()
-        
+
         self.view.backgroundColor = .white
-        
+
         self.navigationItem.title = "Landmarks"
-        
+
         self.declarative {
             UICollectionView {
-                UICollectionViewCompositionalLayout { (section, environment) -> NSCollectionLayoutSection? in
-                    
+                UICollectionViewCompositionalLayout { (section, _) -> NSCollectionLayoutSection? in
+
                     let height: CGFloat = 40
-                    
+
                     let itemSize = NSCollectionLayoutSize(
                         widthDimension: .fractionalWidth(1.0),
                         heightDimension: .estimated(height)
@@ -51,10 +51,10 @@ final class LandmarkListViewController: UIViewController {
                     )
                     let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
                     group.contentInsets = .init(top: 0, leading: 16, bottom: 0, trailing: 16)
-                    
+
                     let section = NSCollectionLayoutSection(group: group)
                     section.contentInsets = .init(top: 16, leading: 0, bottom: 0, trailing: 0)
-                    
+
                     return section
                 }
             }
@@ -95,7 +95,7 @@ extension LandmarkListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         filteredLandmarks.count + 1
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.row == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ToggleRow", for: indexPath) as! ToggleRow

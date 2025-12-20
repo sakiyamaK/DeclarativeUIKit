@@ -8,18 +8,18 @@
 import UIKit.UIBarAppearance
 
 public extension UIBarAppearance {
-    
+
     convenience init(configureBackgroundType: UIBarAppearanceConfigureBackgroundType) {
         self.init()
         self.configure(configureBackgroundType)
     }
-    
+
     @discardableResult
     func apply(_ apply: ((Self) -> Void)) -> Self {
         apply(self)
         return self
     }
-    
+
     @discardableResult
     func backgroundEffect(_ backgroundEffect: UIBlurEffect?) -> Self {
         self.backgroundEffect = backgroundEffect
@@ -37,7 +37,7 @@ public extension UIBarAppearance {
         self.backgroundImage = backgroundImage
         return self
     }
-    
+
     @discardableResult
     func backgroundImageContentMode(_ backgroundImageContentMode: UIView.ContentMode) -> Self {
         self.backgroundImageContentMode = backgroundImageContentMode

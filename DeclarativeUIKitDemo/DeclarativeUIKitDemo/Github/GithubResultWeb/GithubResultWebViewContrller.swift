@@ -3,21 +3,21 @@ import WebKit
 import DeclarativeUIKit
 
 final class GithubSearchResultViewController: UIViewController {
-    
+
     private weak var webView: WKWebView!
     private weak var activityIndicatorContianerView: UIView!
     private weak var activityIndicator: UIActivityIndicatorView!
-    
+
     private var presenter: GithubResultWebPresenterInput!
     func inject(presenter: GithubResultWebPresenterInput) {
         self.presenter = presenter
     }
-    
+
     override func loadView() {
         super.loadView()
-        
+
         self.view.backgroundColor = .white
-        
+
         self.declarative {
             UIStackView.vertical {
                 WKWebView().apply {
@@ -26,7 +26,7 @@ final class GithubSearchResultViewController: UIViewController {
                 }
                 .assign(to: &self.webView)
                 .isHidden(true)
-                
+
                 UIActivityIndicatorView(assign: &self.activityIndicator)
                     .apply {
                         $0.startAnimating()
@@ -38,7 +38,7 @@ final class GithubSearchResultViewController: UIViewController {
             }
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewDidLoad()
@@ -71,7 +71,7 @@ extension GithubSearchResultViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
         self.update(isLoading: true)
     }
-    
+
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         self.update(isLoading: false)
     }
@@ -80,15 +80,15 @@ extension GithubSearchResultViewController: WKNavigationDelegate {
 import SwiftUI
 
 #Preview {
-    
+
     final class GithubResultWebPresenterMock: GithubResultWebPresenterInput {
-        
+
         private weak var output: GithubResultWebPresenterOutput!
-        
+
         init(output: GithubResultWebPresenterOutput) {
             self.output = output
         }
-        
+
         func viewDidLoad() {
             guard let url = URL(string: "https://github.com/sakiyamaK/DeclarativeUIKit") else { return }
             output.load(request: URLRequest(url: url))

@@ -8,13 +8,12 @@
 import UIKit.UITabBarAppearance
 
 public extension UITabBarItemAppearance {
-    
+
     convenience init(configureWithDefaultFor: UITabBarItemAppearance.Style) {
         self.init()
         self.configure(configureWithDefaultFor)
     }
 
-    
     @discardableResult
     func configure(_ defaultFor: UITabBarItemAppearance.Style) -> Self {
         self.configureWithDefault(for: defaultFor)
@@ -22,10 +21,9 @@ public extension UITabBarItemAppearance {
     }
 }
 
-
 public extension UITabBarItemAppearance {
     @discardableResult
-    func titleTextAttributes(_ titleTextAttributes: [NSAttributedString.Key : Any], appearanceTypes: [UITabBarItemStateAppearanceType] = UITabBarItemStateAppearanceType.allCases) -> Self {
+    func titleTextAttributes(_ titleTextAttributes: [NSAttributedString.Key: Any], appearanceTypes: [UITabBarItemStateAppearanceType] = UITabBarItemStateAppearanceType.allCases) -> Self {
         for appearanceType in appearanceTypes {
             switch appearanceType {
             case .normal:
@@ -40,14 +38,14 @@ public extension UITabBarItemAppearance {
         }
         return self
     }
-    
+
     @discardableResult
-    func titleTextAttributes(_ titleTextAttributesBuilder: @escaping (() -> [NSAttributedString.Key : Any]), appearanceTypes: [UITabBarItemStateAppearanceType] = UITabBarItemStateAppearanceType.allCases) -> Self {
+    func titleTextAttributes(_ titleTextAttributesBuilder: @escaping (() -> [NSAttributedString.Key: Any]), appearanceTypes: [UITabBarItemStateAppearanceType] = UITabBarItemStateAppearanceType.allCases) -> Self {
         self.titleTextAttributes(titleTextAttributesBuilder(), appearanceTypes: appearanceTypes)
     }
-    
+
     @discardableResult
-    func titleTextAttributes(appearanceTypes: [UITabBarItemStateAppearanceType] = UITabBarItemStateAppearanceType.allCases, _ titleTextAttributesBuilder: @escaping (() -> [NSAttributedString.Key : Any])) -> Self {
+    func titleTextAttributes(appearanceTypes: [UITabBarItemStateAppearanceType] = UITabBarItemStateAppearanceType.allCases, _ titleTextAttributesBuilder: @escaping (() -> [NSAttributedString.Key: Any])) -> Self {
         self.titleTextAttributes(titleTextAttributesBuilder(), appearanceTypes: appearanceTypes)
     }
 
@@ -67,7 +65,7 @@ public extension UITabBarItemAppearance {
         }
         return self
     }
-    
+
     @discardableResult
     func titlePositionAdjustment(_ titlePositionAdjustmentBuilder: (() -> UIOffset), appearanceTypes: [UITabBarItemStateAppearanceType] = UITabBarItemStateAppearanceType.allCases) -> Self {
         titlePositionAdjustment(titlePositionAdjustmentBuilder(), appearanceTypes: appearanceTypes)
@@ -94,7 +92,7 @@ public extension UITabBarItemAppearance {
         }
         return self
     }
-    
+
     @discardableResult
     func iconColor(_ iconColorBuilder: (() -> UIColor?), appearanceTypes: [UITabBarItemStateAppearanceType] = UITabBarItemStateAppearanceType.allCases) -> Self {
         iconColor(iconColorBuilder(), appearanceTypes: appearanceTypes)
@@ -121,7 +119,7 @@ public extension UITabBarItemAppearance {
         }
         return self
     }
-    
+
     @discardableResult
     func badgePositionAdjustment(_ badgePositionAdjustmentBuilder: (() -> UIOffset), appearanceTypes: [UITabBarItemStateAppearanceType] = UITabBarItemStateAppearanceType.allCases) -> Self {
         badgePositionAdjustment(badgePositionAdjustmentBuilder(), appearanceTypes: appearanceTypes)
@@ -148,7 +146,7 @@ public extension UITabBarItemAppearance {
         }
         return self
     }
-    
+
     @discardableResult
     func badgeBackgroundColor(_ badgeBackgroundColorBuilder: (() -> UIColor?), appearanceTypes: [UITabBarItemStateAppearanceType] = UITabBarItemStateAppearanceType.allCases) -> Self {
         self.badgeBackgroundColor(badgeBackgroundColorBuilder(), appearanceTypes: appearanceTypes)
@@ -160,7 +158,7 @@ public extension UITabBarItemAppearance {
     }
 
     @discardableResult
-    func badgeTextAttributes(_ badgeTextAttributes: [NSAttributedString.Key : Any], appearanceTypes: [UITabBarItemStateAppearanceType] = UITabBarItemStateAppearanceType.allCases) -> Self {
+    func badgeTextAttributes(_ badgeTextAttributes: [NSAttributedString.Key: Any], appearanceTypes: [UITabBarItemStateAppearanceType] = UITabBarItemStateAppearanceType.allCases) -> Self {
         for appearanceType in appearanceTypes {
             switch appearanceType {
             case .normal:
@@ -175,14 +173,14 @@ public extension UITabBarItemAppearance {
         }
         return self
     }
-    
+
     @discardableResult
-    func badgeTextAttributes(_ badgeTextAttributesBuilder: (() -> [NSAttributedString.Key : Any]), appearanceTypes: [UITabBarItemStateAppearanceType] = UITabBarItemStateAppearanceType.allCases) -> Self {
+    func badgeTextAttributes(_ badgeTextAttributesBuilder: (() -> [NSAttributedString.Key: Any]), appearanceTypes: [UITabBarItemStateAppearanceType] = UITabBarItemStateAppearanceType.allCases) -> Self {
         self.badgeTextAttributes(badgeTextAttributesBuilder(), appearanceTypes: appearanceTypes)
     }
 
     @discardableResult
-    func badgeTextAttributes(appearanceTypes: [UITabBarItemStateAppearanceType] = UITabBarItemStateAppearanceType.allCases, _ badgeTextAttributesBuilder: (() -> [NSAttributedString.Key : Any])) -> Self {
+    func badgeTextAttributes(appearanceTypes: [UITabBarItemStateAppearanceType] = UITabBarItemStateAppearanceType.allCases, _ badgeTextAttributesBuilder: (() -> [NSAttributedString.Key: Any])) -> Self {
         self.badgeTextAttributes(badgeTextAttributesBuilder(), appearanceTypes: appearanceTypes)
     }
 
@@ -202,12 +200,12 @@ public extension UITabBarItemAppearance {
         }
         return self
     }
-    
+
     @discardableResult
     func badgeTitlePositionAdjustment(_ badgeTitlePositionAdjustmentBuilder: (() -> UIOffset), appearanceTypes: [UITabBarItemStateAppearanceType] = UITabBarItemStateAppearanceType.allCases) -> Self {
         badgeTitlePositionAdjustment(badgeTitlePositionAdjustmentBuilder(), appearanceTypes: appearanceTypes)
     }
-    
+
     @discardableResult
     func badgeTitlePositionAdjustment(appearanceTypes: [UITabBarItemStateAppearanceType] = UITabBarItemStateAppearanceType.allCases, _ badgeTitlePositionAdjustmentBuilder: (() -> UIOffset)) -> Self {
         badgeTitlePositionAdjustment(badgeTitlePositionAdjustmentBuilder(), appearanceTypes: appearanceTypes)
