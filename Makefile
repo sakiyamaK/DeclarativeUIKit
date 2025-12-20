@@ -25,6 +25,8 @@ publish:
 	xcrun docc process-archive transform-for-static-hosting ./.build/docc_build/Build/Products/Debug-iphoneos/DeclarativeUIKit.doccarchive \
 		--output-path ./docs \
 		--hosting-base-path DeclarativeUIKit
+	@echo '<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0; url=documentation/declarativeuikit"><script>window.location.replace("documentation/declarativeuikit")</script></head></html>' > ./docs/index.html
+	touch ./docs/.nojekyll
 	@echo "\033[32mDocumentation generated in ./docs\033[0m"
 	@echo "To publish, push the 'docs' folder to the 'main' branch or use the 'gh-pages' branch."
 
